@@ -1,0 +1,33 @@
+// CPopulationManager (CPointEntity)
+// CPointPopulatorInterface (CPointEntity)
+// CPopulatorInternalSpawnPoint (CPointEntity)
+
+// IBotController (base, ?)
+// IBotManager (base, ?)
+
+BOSS STUFF:
+CEyeballBoss
+- CHalloweenBaseBoss
+  - NextBotCombatCharacter
+  - INextBot
+CTFBaseBoss
+- NextBotCombatCharacter
+- INextBot
+CTFTankBoss
+- CTFBaseBoss
+
+TANK STUFF:
+CTFTankDestruction
+- CBaseAnimating
+CTankTargetChange
+- CPointEntity
+CTankTrainAI
+- CPointEntity
+CFuncTankTrain
+- CBaseEntity
+
+search: '.*Path.*'
+search: '.*Nav.*'
+search: '.*Behavior.*'
+search: '.*Action.*'
+search: '.*Bot.*'
