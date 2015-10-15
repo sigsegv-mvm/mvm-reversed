@@ -31,3 +31,31 @@ search: '.*Nav.*'
 search: '.*Behavior.*'
 search: '.*Action.*'
 search: '.*Bot.*'
+
+
+need header with all the enums we know of
+(from libtf2mod, source sdk const.h, etc)
+
+copy over the in-progress bot spy detection code
+(make separate dirs for the 20130214 version and the current version)
+
+create skeletons for classes:
+CUpgrades
+CMannVsMachineStats
+CMannVsMachineUpgradeManager
+CMannVsMachineUpgrades
+CTFObjectiveResource (partial)
+CTFGameRules (partial)
+CTFPlayer (partial)
+
+
+make skeleton for all NextBot AI behaviors/actions
+
+
+for spawners, need:
+- CTFBot::AttributeType
+- CTFBot::EventChangeAttributes_t
+- CTFBot::EventChangeAttributes_t::item_attributes_t
+
+
+also RE all the nb_, tf_bot_, bot_ cvars
