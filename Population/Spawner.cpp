@@ -402,7 +402,11 @@ bool CRandomChoiceSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 
 bool CMobSpawner::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	if (this->m_SubSpawner != NULL) {
+		return this->m_SubSpawner->HasEventChangeAttributes(name);
+	} else {
+		return false;
+	}
 }
 
 bool CSentryGunSpawner::HasEventChangeAttributes(const char *name) const
@@ -417,7 +421,16 @@ bool CTankSpawner::HasEventChangeAttributes(const char *name) const
 
 bool CTFBotSpawner::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	FOR_EACH_VEC(this->m_ECAttrs, i) {
+		CTFBot::EventChangeAttributes_t& ecattr = this->m_ECAttrs[i];
+		
+		const char *ecname = ecattr.m_strName.Get();
+		if (name == ecname || V_stricmp(name, ecname) == 0) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 bool CSquadSpawner::HasEventChangeAttributes(const char *name) const

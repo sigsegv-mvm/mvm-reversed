@@ -104,7 +104,6 @@ public:
 private:
 	int                 m_iCount;     // +0x08
 	IPopulationSpawner *m_SubSpawner; // +0x0c
-	// TODO 0x0c dword 0
 	// TODO 0x10 CountdownTimer
 	// TODO 0x1c CountdownTimer
 	// TODO 0x28 dword 0
@@ -170,13 +169,12 @@ public:
 	bool ParseEventChangeAttributes(KeyValues *kv);
 	
 private:
-	// TODO 0x04
-	int m_iClass;               // +0x08
-	const char *m_strClassIcon; // +0x0c
-	int m_iHealth;              // +0x10
-	float m_flScale;            // +0x14
-	float m_flAutoJumpMin;      // +0x18
-	float m_flAutoJumpMax;      // +0x1c
+	int m_iClass;            // +0x08
+	string_t m_strClassIcon; // +0x0c
+	int m_iHealth;           // +0x10
+	float m_flScale;         // +0x14
+	float m_flAutoJumpMin;   // +0x18
+	float m_flAutoJumpMax;   // +0x1c
 	// TODO 0x20: CUtlString
 	// TODO 0x24: CUtlString
 	// TODO 0x28
