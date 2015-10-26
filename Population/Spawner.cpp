@@ -144,24 +144,28 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 	
 	this->m_ECAttrs.RemoveAll();
 	
-	
-	// BEFORE THE FOREACH,
-	// it specifically searches for any Template keys
-	// then, in the foreach, it SPECIFICALLY IGNORES template keys
-	// (i.e. an empty case, no error)
-	
-	
-	// CUtlString* @ ebp-0x28: reference to this+0x20 (Name)
-	// CUtlString* @ ebp-0x2c: reference to this+0x24 (Teleport)
-	
+	/* handle the template reference (if any) before doing anything else */
+	KeyValues *kv_tref = kv->FindKey("Template");
+	if (kv_tref != NULL) {
+		const char *tname = kv_tref->GetString(NULL);
+		
+		KeyValues *kv_timpl =
+			this->m_Populator->m_PopMgr->m_kvTemplates->FindKey(tname);
+		if (kv_timpl != NULL) {
+			if (!this->Parse(kv_timpl)) {
+				return false;
+			}
+		} else {
+			Warning("Unknown Template '%s' in TFBotSpawner definition\n",
+				tname);
+		}
+	}
 	
 	FOR_EACH_SUBKEY(kv, subkey) {
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "Template") == 0) {
-				// TODO: template stuff
-				// on template KV found: call this->Parse(other_kv) and check result
-				// on failure: Warning("Unknown template etc")
+				/* skip, since we already handled templates earlier */
 			} else if (V_stricmp(name, "Class") == 0) {
 				const char *str = subkey->GetString(NULL);
 				if ((this->m_iClass = GetClassIndexFromString(str, 10)) !=

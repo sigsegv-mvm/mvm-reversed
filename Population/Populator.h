@@ -15,6 +15,10 @@ public:
 	virtual void UnpauseSpawning();
 	virtual void OnPlayerKilled(CTFPlayer *);
 	virtual bool HasEventChangeAttributes(const char *) const;
+	
+protected:
+	IPopulationSpawner *m_Spawner; // +0x04
+	CPopulationManager *m_PopMgr;  // +0x08
 };
 
 
@@ -26,6 +30,9 @@ public:
 	
 	virtual bool Parse(KeyValues *);
 	virtual void PostInitialize();
+	
+private:
+	// TODO: 0x0c+
 };
 
 
@@ -39,6 +46,9 @@ public:
 	virtual void PostInitialize();
 	virtual void Update();
 	virtual void UnpauseSpawning();
+	
+private:
+	// TODO: 0x0c+
 };
 
 
@@ -54,6 +64,9 @@ public:
 	
 	// UpdateMission(CTFBot::MissionType)
 	// UpdateMissionDestroySentries()
+	
+private:
+	// TODO: 0x0c+
 };
 
 
@@ -72,6 +85,9 @@ public:
 	// IsFinishedSpawning()
 	// OnNonSupportWavesDone()
 	// SetState(CWaveSpawnPopulator::InternalStateType)
+	
+private:
+	// TODO: 0x0c+
 };
 
 
@@ -94,4 +110,7 @@ public:
 	// IsDoneWithNonSupportWaves()
 	// WaveCompleteUpdate()
 	// WaveIntermissionUpdate()
+	
+private:
+	// TODO: 0x0c+
 };
