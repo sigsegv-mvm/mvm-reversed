@@ -7,8 +7,8 @@
 CMobSpawner::CMobSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	m_iCount     = 0;
-	m_SubSpawner = NULL;
+	this->m_iCount     = 0;
+	this->m_SubSpawner = NULL;
 	
 	// TODO
 }
@@ -16,43 +16,41 @@ CMobSpawner::CMobSpawner(IPopulator *populator)
 CSentryGunSpawner::CSentryGunSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	m_iLevel = 0;
+	this->m_iLevel = 0;
 }
 
 CTankSpawner::CTankSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	m_iHealth             = 50000;
-	m_flSpeed             = 75.0f;
-	m_strName             = "Tank";
-	m_strStartNode        = NULL;
-	m_iSkin               = 0;
-	m_OnKilledOutput      = NULL;
-	m_OnBombDroppedOutput = NULL;
+	this->m_iHealth             = 50000;
+	this->m_flSpeed             = 75.0f;
+	this->m_strName             = "Tank";
+	this->m_strStartNode        = NULL;
+	this->m_iSkin               = 0;
+	this->m_OnKilledOutput      = NULL;
+	this->m_OnBombDroppedOutput = NULL;
 }
 
 CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	// TODO
+	this->m_iClass        = TFCLASS_UNKNOWN;
+	this->m_strClassIcon  = NULL_STRING;
+	this->m_iHealth       = -1;
+	this->m_flScale       = -1.0f;
+	this->m_flAutoJumpMax = 0.0f;
+	this->m_flAutoJumpMin = 0.0f;
 	
-	m_iClass        = 0;
-	m_strClassIcon  = NULL;
-	m_iHealth       = -1;
-	m_flScale       = -1.0f;
-	m_flAutoJumpMax = 0.0f;
-	m_flAutoJumpMin = 0.0f;
-	
-	// TODO
-	
-	// there's some exception handling in here...
+	/* apparently it wasn't enough to reset this once with the default ctor,
+	 * so they reset it again here */
+	this->m_DefaultAttrs.Reset();
 }
 
 CSquadSpawner::CSquadSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	m_flFormationSize      = -1.0f;
-	m_bShouldPreserveSquad = false;
+	this->m_flFormationSize      = -1.0f;
+	this->m_bShouldPreserveSquad = false;
 }
 
 CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
@@ -135,28 +133,15 @@ bool CTankSpawner::Parse(KeyValues *kv)
 
 bool CTFBotSpawner::Parse(KeyValues *kv)
 {
-	this->m_iClass = TFCLASS_UNKNOWN;
-	this->m_strClassIcon = NULL_STRING;
-	this->m_iHealth = -1;
-	this->m_flScale = -1.0f;
+	this->m_iClass        = TFCLASS_UNKNOWN;
+	this->m_strClassIcon  = NULL_STRING;
+	this->m_iHealth       = -1;
+	this->m_flScale       = -1.0f;
 	this->m_flAutoJumpMax = 0.0f;
 	this->m_flAutoJumpMin = 0.0f;
 	
-	// CUtlString* @ ebp-0x24: reference to this+0x38 (???)
-	// gets set to "default"
+	this->m_DefaultAttrs.Reset();
 	
-	// initialize this->
-	// 0x3c
-	// 0x40
-	// 0x44
-	// 0x48
-	// 0x4c
-	// 0x50
-	
-	this->m_UnknownStrList1.RemoveAll();
-	this->m_ItemAttrs.RemoveAll();
-	this->m_CharAttrs.RemoveAll();
-	this->m_UnknownStrList2.RemoveAll();
 	this->m_ECAttrs.RemoveAll();
 	
 	
@@ -195,7 +180,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 				this->m_flScale = subkey->GetFloat(NULL);
 			} else if (V_stricmp(name, "Name") == 0) {
 				// TODO
-			} else if (V_stricmp(name, "Teleport") == 0) {
+			} else if (V_stricmp(name, "TeleportWhere") == 0) {
 				// TODO
 			} else if (V_stricmp(name, "AutoJumpMin") == 0) {
 				this->m_flAutoJumpMin = subkey->GetFloat(NULL);
@@ -546,7 +531,7 @@ bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 		}
 		
 		if (V_stricmp(name, "default") == 0) {
-			/* use default copy constructor */
+			/* use the default copy constructor */
 			this->m_DefaultAttrs = ecattr;
 		}
 	}

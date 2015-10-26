@@ -34,6 +34,7 @@ enum {
 	BOT_ATTRIBUTES_FIREIMMUNE              = (1 << 25),
 	
 	
+	BOT_RESTRICT_NONE          = 0,
 	BOT_RESTRICT_MELEEONLY     = (1 << 0),
 	BOT_RESTRICT_PRIMARYONLY   = (1 << 1),
 	BOT_RESTRICT_SECONDARYONLY = (1 << 2),
@@ -48,6 +49,28 @@ enum {
 
 struct CTFBot::EventChangeAttributes_t
 {
+	CTFBot::EventChangeAttributes_t(const char *name = "default")
+	{
+		this->Reset(name);
+	}
+	
+	void Reset(const char *name = "default")
+	{
+		this->m_strName = name;
+		
+		this->m_iSkill          = BOT_SKILL_EASY;
+		this->m_nWeaponRestrict = BOT_RESTRICT_NONE;
+		// TODO: 0x0c
+		// TODO: 0x10
+		this->m_nBotAttrs       = 0;
+		this->m_flVisionRange   = -1.0f;
+		
+		this->m_ItemNames.RemoveAll();
+		this->m_ItemAttrs.RemoveAll();
+		this->m_CharAttrs.RemoveAll();
+		this->m_Tags.RemoveAll();
+	}
+	
 	CUtlString m_strName;       // +0x00
 	int m_iSkill;               // +0x04
 	int m_nWeaponRestrict;      // +0x08
@@ -169,18 +192,14 @@ public:
 	bool ParseEventChangeAttributes(KeyValues *kv);
 	
 private:
-	int m_iClass;            // +0x08
-	string_t m_strClassIcon; // +0x0c
-	int m_iHealth;           // +0x10
-	float m_flScale;         // +0x14
-	float m_flAutoJumpMin;   // +0x18
-	float m_flAutoJumpMax;   // +0x1c
-	// TODO 0x20: CUtlString
-	// TODO 0x24: CUtlString
-	// TODO 0x28
-	// TODO 0x2c
-	// TODO 0x30
-	// TODO 0x34
+	int m_iClass;                                          // +0x08
+	string_t m_strClassIcon;                               // +0x0c
+	int m_iHealth;                                         // +0x10
+	float m_flScale;                                       // +0x14
+	float m_flAutoJumpMin;                                 // +0x18
+	float m_flAutoJumpMax;                                 // +0x1c
+	CUtlString m_strName;                                  // +0x20
+	CUtlVector<char *> m_TeleportWhere;                    // +0x24
 	CTFBot::EventChangeAttributes_t m_DefaultAttrs;        // +0x38
 	CUtlVector<CTFBot::EventChangeAttributes_t> m_ECAttrs; // +0xa4
 };
