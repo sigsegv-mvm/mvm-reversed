@@ -36,13 +36,23 @@ CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
 {
 	// TODO
 	
+	m_iClass        = 0;
+	m_strClassIcon  = NULL;
+	m_iHealth       = -1;
+	m_flScale       = -1.0f;
+	m_flAutoJumpMax = 0.0f;
+	m_flAutoJumpMin = 0.0f;
+	
+	// TODO
+	
 	// there's some exception handling in here...
 }
 
 CSquadSpawner::CSquadSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	// TODO
+	m_flFormationSize      = -1.0f;
+	m_bShouldPreserveSquad = false;
 }
 
 CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)

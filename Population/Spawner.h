@@ -203,7 +203,9 @@ public:
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
-	// TODO
+	CUtlVector<IPopulationSpawner *> m_SubSpawners; // +0x08
+	float m_flFormationSize;                        // +0x1c
+	bool m_bShouldPreserveSquad;                    // +0x20
 };
 
 
@@ -224,7 +226,9 @@ public:
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
-	// TODO
+	CUtlVector<IPopulationSpawner *> m_SubSpawners; // +0x08
+	// 0x1c CUtlVector<int> spawn history perhaps
+	// 0x30 dword seed or something
 };
 
 
