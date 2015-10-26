@@ -239,7 +239,21 @@ bool CSquadSpawner::Parse(KeyValues *kv)
 
 bool CRandomChoiceSpawner::Parse(KeyValues *kv)
 {
-	// TODO
+	FOR_EACH_SUBKEY(kv, subkey) {
+		const char *name = subkey->GetName();
+		if (strlen(name) > 0) {
+			IPopulationSpawner *spawner =
+				IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
+			if (spawner != NULL) {
+				this->m_SubSpawners.AddToTail(spawner);
+			} else {
+				Warning("Unknown attribute '%s' in RandomChoice definition.\n",
+					name);
+			}
+		}
+	}
+	
+	return true;
 }
 
 
