@@ -308,7 +308,7 @@ int IPopulationSpawner::GetClass(int index)
 
 int CTFBotSpawner::GetClass(int index)
 {
-	// TODO
+	return this->m_iClass;
 }
 
 int CSquadSpawner::GetClass(int index)
