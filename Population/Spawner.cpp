@@ -142,15 +142,12 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 	// 0x48
 	// 0x4c
 	// 0x50
-	// 0x60
 	
+	this->m_UnknownStrList1.RemoveAll();
 	this->m_ItemAttrs.RemoveAll();
-	
-	// initialize this->
-	// 0x88
-	// 0x9c
-	
-	this->m_Attrs.RemoveAll();
+	this->m_CharAttrs.RemoveAll();
+	this->m_UnknownStrList2.RemoveAll();
+	this->m_ECAttrs.RemoveAll();
 	
 	
 	// BEFORE THE FOREACH,
@@ -446,15 +443,28 @@ bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 		return true;
 	}
 	
-	// ebp+0x28: ptr to this->m_ItemAttrs
-	// ebp+0x2c: ptr to CUtlString @ this+0x38
-	// ebp+0x30: ptr to CUtlStringList @ this+0x54
-	
 	FOR_EACH_SUBKEY(kv, subkey) {
+		const char *name = subkey->GetName();
 		
+		this->m_ECAttrs.AddToTail();
+		CTFBot::EventChangeAttributes_t& ecattr = this->m_ECAttrs.Tail();
+		ecattr.m_strName = name;
+		
+		FOR_EACH_SUBKEY(subkey, subsubkey) {
+			if (!ParseDynamicAttributes(ecattr, subsubkey)) {
+				Warning("TFBotSpawner EventChangeAttributes: Failed to parse event '%s' with unknown attribute '%s'\n",
+					subkey->GetName(), subsubkey->GetName());
+				return false;
+			}
+		}
+		
+		if (V_stricmp(name, "default") == 0) {
+			/* use default copy constructor */
+			this->m_DefaultAttrs = ecattr;
+		}
 	}
 	
-	// TODO
+	return true;
 }
 
 

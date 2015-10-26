@@ -46,10 +46,9 @@ enum {
 };
 
 
-/* sizeof: ??? */
 struct CTFBot::EventChangeAttributes_t
 {
-	CUtlString ???              // +0x00
+	CUtlString m_strName;       // +0x00
 	int m_iSkill;               // +0x04
 	int m_nWeaponRestrict;      // +0x08
 	// TODO: 0x0c
@@ -60,8 +59,6 @@ struct CTFBot::EventChangeAttributes_t
 	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0x30
 	CUtlVector<static_attrib_t> m_CharAttrs; // +0x44
 	CUtlStringList m_Tags;  // +0x58
-	// TODO: 0x6c (?)
-	// ...
 };
 
 struct CTFBot::EventChangeAttributes_t::item_attributes_t
@@ -182,18 +179,8 @@ private:
 	// TODO 0x2c
 	// TODO 0x30
 	// TODO 0x34
-	// TODO 0x38: CUtlString
-	// TODO 0x3c
-	// TODO 0x40
-	// TODO 0x44
-	// TODO 0x48
-	// TODO 0x4c
-	// TODO 0x50
-	// TODO 0x54: CUtlStringList (sizeof: 0x14)
-	CUtlVector<CTFBot::EventChangeAttributes_t> m_Attrs; // +0x68
-	CUtlVector<static_attrib_t> m_StaticAttrs; // +0x7c
-	// TODO 0x90: CUtlStringList (sizeof: 0x14)
-	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0xa4
+	CTFBot::EventChangeAttributes_t m_DefaultAttrs;        // +0x38
+	CUtlVector<CTFBot::EventChangeAttributes_t> m_ECAttrs; // +0xa4
 };
 
 
