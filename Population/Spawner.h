@@ -104,7 +104,11 @@ public:
 private:
 	int                 m_iCount;     // +0x08
 	IPopulationSpawner *m_SubSpawner; // +0x0c
-	// TODO
+	// TODO 0x0c dword 0
+	// TODO 0x10 CountdownTimer
+	// TODO 0x1c CountdownTimer
+	// TODO 0x28 dword 0
+	// TODO 0x2c dword 0
 };
 
 

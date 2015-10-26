@@ -433,7 +433,58 @@ bool CRandomChoiceSpawner::HasEventChangeAttributes(const char *name) const
 
 IPopulationSpawner *IPopulationSpawner::ParseSpawner(IPopulator *populator, KeyValues *kv)
 {
-	// TODO
+	const char *name = kv->GetName();
+	if (strlen(name) <= 0) {
+		return NULL;
+	}
+	
+	IPopulationSpawner* spawner;
+	if (V_stricmp(name, "TFBot") == 0) {
+		spawner = new CTFBotSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading TFBot spawner definition\n");
+		}
+	} else if (V_stricmp(name, "Tank") == 0) {
+		spawner = new TankSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading Tank spawner definition\n");
+		}
+	} else if (V_stricmp(name, "SentryGun") == 0) {
+		spawner = new CSentryGunSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading SentryGun spawner definition\n");
+		}
+	} else if (V_stricmp(name, "Squad") == 0) {
+		spawner = new CSquadSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading Squad spawner definition\n");
+		}
+	} else if (V_stricmp(name, "Mob") == 0) {
+		spawner = new CMobSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading Mob spawner definition\n");
+		}
+	} else if (V_stricmp(name, "RandomChoice") == 0) {
+		spawner = new CRandomChoiceSpawner(this);
+		if (spawner->Parse(populator)) {
+			return spawner;
+		} else {
+			Warning("Warning reading RandomChoice spawner definition\n");
+		}
+	}
+	
+	delete spawner;
+	return NULL;
 }
 
 
