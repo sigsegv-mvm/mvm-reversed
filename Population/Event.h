@@ -4,32 +4,12 @@
  */
 
 
-struct Event
+struct EventInfo
 {
-	CFmtStrN<256> target;
-	CFmtStrN<256> action;
+	CFmtStrN<256> target; // +0x000
+	CFmtStrN<256> action; // +0x10c
 };
 
 
-Event *ParseEvent(KeyValues *kv)
-{
-	Event *event = new Event();
-	
-	FOR_EACH_SUBKEY(kv, subkey) {
-		const char *name = subkey->GetName();
-		if (strlen(name) > 0) {
-			if (V_stricmp(name, "Target") == 0) {
-				event->target.sprintf(subkey->GetString(NULL));
-			} else if (V_stricmp(name, "Action") == 0) {
-				event->action.sprintf(subkey->GetString(NULL));
-			} else {
-				Warning("Unknown field '%s' in WaveSpawn event definition.\n",
-					subkey->GetString(NULL));
-				delete event;
-				return NULL;
-			}
-		}
-	}
-	
-	return event;
-}
+EventInfo *ParseEvent(KeyValues *kv);
+void FireEvent(EventInfo *info, const char *name);

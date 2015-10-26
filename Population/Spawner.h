@@ -143,8 +143,8 @@ private:
 	CUtlString m_strName;             // +0x10
 	CUtlString m_strStartNode;        // +0x14
 	int        m_iSkin;               // +0x18
-	Event     *m_OnKilledOutput;      // +0x1c
-	Event     *m_OnBombDroppedOutput; // +0x20
+	EventInfo *m_OnKilledOutput;      // +0x1c
+	EventInfo *m_OnBombDroppedOutput; // +0x20
 };
 
 
