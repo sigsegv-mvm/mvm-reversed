@@ -458,8 +458,10 @@ bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 }
 
 
-/* weird calling convention: attr in eax, kv in edx */
-bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv)
+// fastcall
+// eax: ecattr
+// edx: kv
+bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *kv)
 {
 	const char *name = kv->GetName();
 	
@@ -467,13 +469,13 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 		const char *val = kv->GetString(NULL);
 		
 		if (V_stricmp(val, "Easy") == 0) {
-			attr.m_iSkill = BOT_SKILL_EASY;
+			ecattr.m_iSkill = BOT_SKILL_EASY;
 		} else if (V_stricmp(val, "Normal") == 0) {
-			attr.m_iSkill = BOT_SKILL_NORMAL;
+			ecattr.m_iSkill = BOT_SKILL_NORMAL;
 		} else if (V_stricmp(val, "Hard") == 0) {
-			attr.m_iSkill = BOT_SKILL_HARD;
+			ecattr.m_iSkill = BOT_SKILL_HARD;
 		} else if (V_stricmp(val, "Expert") == 0) {
-			attr.m_iSkill = BOT_SKILL_EXPERT;
+			ecattr.m_iSkill = BOT_SKILL_EXPERT;
 		} else {
 			Warning("TFBotSpawner: Invalid skill '%s'\n", val);
 			return false;
@@ -486,11 +488,11 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 		const char *val = kv->GetString(NULL);
 		
 		if (V_stricmp(val, "MeleeOnly") == 0) {
-			attr.m_nWeaponRestrict = BOT_RESTRICT_MELEEONLY;
+			ecattr.m_nWeaponRestrict = BOT_RESTRICT_MELEEONLY;
 		} else if (V_stricmp(val, "PrimaryOnly") == 0) {
-			attr.m_nWeaponRestrict = BOT_RESTRICT_PRIMARYONLY;
+			ecattr.m_nWeaponRestrict = BOT_RESTRICT_PRIMARYONLY;
 		} else if (V_stricmp(val, "SecondaryOnly") == 0) {
-			attr.m_nWeaponRestrict = BOT_RESTRICT_SECONDARYONLY;
+			ecattr.m_nWeaponRestrict = BOT_RESTRICT_SECONDARYONLY;
 		} else {
 			Warning("TFBotSpawner: Invalid weapon restriction '%s'\n", val);
 			return false;
@@ -504,7 +506,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 		
 		if (V_stricmp(val, "Mobber") == 0 ||
 			V_stricmp(val, "Push") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
 		} else {
 			Warning("TFBotSpawner: invalid behavior modifier '%s'\n", val);
 			return false;
@@ -514,17 +516,17 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 	}
 	
 	if (V_stricmp(name, "MaxVisionRange") == 0) {
-		attr.m_flVisionRange = kv->GetFloat(NULL);
+		ecattr.m_flVisionRange = kv->GetFloat(NULL);
 		return true;
 	}
 	
 	if (V_stricmp(name, "Item") == 0) {
-		attr.m_ItemNames.CopyAndAddToTail(kv->GetString(NULL));
+		ecattr.m_ItemNames.CopyAndAddToTail(kv->GetString(NULL));
 		return true;
 	}
 	
 	if (V_stricmp(name, "Tag") == 0) {
-		attr.m_Tags.CopyAndAddToTail(kv->GetString(NULL));
+		ecattr.m_Tags.CopyAndAddToTail(kv->GetString(NULL));
 		return true;
 	}
 	
@@ -532,51 +534,51 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 		const char *val = kv->GetString(NULL);
 		
 		if (V_stricmp(val, "RemoveOnDeath") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_REMOVEONDEATH;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_REMOVEONDEATH;
 		} else if (V_stricmp(val, "Aggressive") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
 		} else if (V_stricmp(val, "SuppressFire") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_SUPPRESSFIRE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_SUPPRESSFIRE;
 		} else if (V_stricmp(val, "DisableDodge") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_DISABLEDODGE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_DISABLEDODGE;
 		} else if (V_stricmp(val, "BecomeSpectatorOnDeath") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_BECOMESPECTATORONDEATH;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BECOMESPECTATORONDEATH;
 		} else if (V_stricmp(val, "RetainBuildings") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_RETAINBUILDINGS;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_RETAINBUILDINGS;
 		} else if (V_stricmp(val, "SpawnWithFullCharge") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE;
 		} else if (V_stricmp(val, "AlwaysCrit") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSCRIT;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSCRIT;
 		} else if (V_stricmp(val, "IgnoreEnemies") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREENEMIES;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREENEMIES;
 		} else if (V_stricmp(val, "HoldFireUntilFullReload") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD;
 		} else if (V_stricmp(val, "AlwaysFireWeapon") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSFIREWEAPON;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSFIREWEAPON;
 		} else if (V_stricmp(val, "TeleportToHint") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_TELEPORTTOHINT;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_TELEPORTTOHINT;
 		} else if (V_stricmp(val, "MiniBoss") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_MINIBOSS;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_MINIBOSS;
 		} else if (V_stricmp(val, "UseBossHealthBar") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_USEBOSSHEALTHBAR;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_USEBOSSHEALTHBAR;
 		} else if (V_stricmp(val, "IgnoreFlag") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREFLAG;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREFLAG;
 		} else if (V_stricmp(val, "AutoJump") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_AUTOJUMP;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AUTOJUMP;
 		} else if (V_stricmp(val, "AirChargeOnly") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_AIRCHARGEONLY;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AIRCHARGEONLY;
 		} else if (V_stricmp(val, "VaccinatorBullets") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBULLETS;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBULLETS;
 		} else if (V_stricmp(val, "VaccinatorBlast") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBLAST;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBLAST;
 		} else if (V_stricmp(val, "VaccinatorFire") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORFIRE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORFIRE;
 		} else if (V_stricmp(val, "BulletImmune") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_BULLETIMMUNE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BULLETIMMUNE;
 		} else if (V_stricmp(val, "BlastImmune") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_BLASTIMMUNE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BLASTIMMUNE;
 		} else if (V_stricmp(val, "FireImmune") == 0) {
-			attr.m_nAttributes |= BOT_ATTRIBUTES_FIREIMMUNE;
+			ecattr.m_nAttributes |= BOT_ATTRIBUTES_FIREIMMUNE;
 		} else {
 			Warning("TFBotSpawner: Invalid attribute '%s'\n", val);
 			return false;
@@ -586,16 +588,122 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv
 	}
 	
 	if (V_stricmp(name, "CharacterAttributes") == 0) {
-		CUtlVector<static_attrib_t> v1;
-		CUtlVector<static_attrib_t> v2;
+		CUtlVector<static_attrib_t> attrs;
 		
 		FOR_EACH_SUBKEY(kv, subkey) {
+			static_attrib_t attr;
+			CUtlVectorAutoPurge<CUtlString> errors;
 			
+			if (attr.BInitFromKV_SingleLine("CharacterAttributes",
+				subkey, &errors, true)) {
+				attrs.AddToHead(attr);
+			} else {
+				FOR_EACH_VEC(errors, i) {
+					Warning("TFBotSpawner: attribute error: '%s'\n",
+						errors[i].Get());
+				}
+			}
 		}
+		
+		FOR_EACH_VEC(attrs, i) {
+			static_attrib_t& attr_new = attrs[i];
+			
+			/* if the same character attribute is specified again, find the
+			 * existing entry and overwrite the value */
+			bool found_old = false;
+			FOR_EACH_VEC(ecattr.m_CharAttrs, j) {
+				static_attrib_t& attr_old = ecattr.m_CharAttrs[j];
+				
+				if (attr_new.m_iAttrIndex == attr_old.m_iAttrIndex) {
+					attr_old.m_Value = attr_new.m_Value;
+					
+					found_old = true;
+					break;
+				}
+			}
+			
+			if (!found_old) {
+				ecattr.m_CharAttrs.AddToHead(attr_new);
+			}
+		}
+		
+		return true;
 	}
 	
 	if (V_stricmp(name, "ItemAttributes") == 0) {
+		const char *item_name = NULL;
+		CUtlVector<static_attrib_t> attrs;
 		
+		FOR_EACH_SUBKEY(kv, subkey) {
+			if (V_stricmp(subkey->GetName(NULL), "ItemName") == 0) {
+				if (item_name == NULL) {
+					item_name = subkey->GetString(NULL);
+				} else {
+					Warning("TFBotSpawner: \"ItemName\" field specified multiple times ('%s' / '%s').\n",
+						item_name, subkey->GetString(NULL));
+				}
+			} else {
+				static_attrib_t attr;
+				CUtlVectorAutoPurge<CUtlString> errors;
+				
+				if (attr.BInitFromKV_SingleLine("ItemAttributes",
+					subkey, &errors, true)) {
+					attrs.AddToHead(attr);
+				} else {
+					FOR_EACH_VEC(errors, i) {
+						Warning("TFBotSpawner: attribute error: '%s'\n",
+							errors[i].Get());
+					}
+				}
+			}
+		}
+		
+		if (item_name == NULL) {
+			Warning("TFBotSpawner: need to specify ItemName in ItemAttributes.\n");
+		} else {
+			FOR_EACH_VEC(attrs, i) {
+				static_attrib_t& attr_new = attrs[i];
+				
+				/* check if we already have an attr list for this item */
+				bool found_item_old = false;
+				FOR_EACH_VEC(ecattr.m_ItemAttrs, j) {
+					CTFBot::EventChangeAttributes_t::item_attributes_t& item_old = ecattr.m_ItemAttrs[j];
+					
+					if (V_stricmp(item_old.strItemName, item_name) == 0) {
+						/* check if we already have an attr list entry for this
+						 * attribute on this item */
+						bool found_attr_old = false;
+						FOR_EACH_VEC(item_old.m_Attrs, k) {
+							static_attrib_t& attr_old = item_old.m_Attrs[k];
+							
+							if (attr_new.m_iAttrIndex == attr_old.m_iAttrIndex) {
+								attr_old.m_Value = attr_new.m_Value;
+								
+								found_attr_old = true;
+								break;
+							}
+						}
+						
+						if (!found_attr_old) {
+							item_old.m_Attrs.AddToHead(attr_new);
+						}
+						
+						found_item_old = true;
+						break;
+					}
+				}
+				
+				if (!found_item_old) {
+					CTFBot::EventChangeAttributes_t::item_attributes_t item_new;
+					item_new.m_strItemName = item_name;
+					item_new.m_Attrs.AddToHead(attr_new);
+					
+					ecattr.m_ItemAttrs.AddToTail(item_new);
+				}
+			}
+		}
+		
+		return true;
 	}
 	
 	return false;

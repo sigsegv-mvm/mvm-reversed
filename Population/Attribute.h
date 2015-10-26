@@ -63,10 +63,3 @@ struct static_attrib_t
 	unsigned short m_iAttrIndex;    // +0x00
 	attribute_data_union_t m_Value; // +0x04
 };
-
-
-struct CTFBot::EventChangeAttributes_t::item_attributes_t
-{
-	CUtlString m_strName;                        // +0x00
-	CCopyableUtlVector<static_attrib_t> m_Attrs; // +0x04
-};

@@ -57,14 +57,17 @@ struct CTFBot::EventChangeAttributes_t
 	int m_nAttributes;          // +0x14
 	float m_flVisionRange;      // +0x18
 	CUtlStringList m_ItemNames; // +0x1c
-	// TODO: 0x2c
 	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0x30
-	// TODO: 0x40
 	CUtlVector<static_attrib_t> m_CharAttrs; // +0x44
-	// TODO: 0x54
 	CUtlStringList m_Tags;  // +0x58
-	// TODO: 0x68
+	// TODO: 0x6c (?)
 	// ...
+};
+
+struct CTFBot::EventChangeAttributes_t::item_attributes_t
+{
+	CUtlString m_strItemName;                    // +0x00
+	CCopyableUtlVector<static_attrib_t> m_Attrs; // +0x04
 };
 
 
@@ -188,12 +191,9 @@ private:
 	// TODO 0x50
 	// TODO 0x54: CUtlStringList (sizeof: 0x14)
 	CUtlVector<CTFBot::EventChangeAttributes_t> m_Attrs; // +0x68
-	// TODO 0x78
 	CUtlVector<static_attrib_t> m_StaticAttrs; // +0x7c
-	// TODO 0x8c
 	// TODO 0x90: CUtlStringList (sizeof: 0x14)
 	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0xa4
-	// TODO 0xb4
 };
 
 
@@ -239,4 +239,4 @@ private:
 };
 
 
-bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& attr, KeyValues *kv);
+bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *kv);
