@@ -170,7 +170,9 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 				const char *str = subkey->GetString(NULL);
 				if ((this->m_iClass = GetClassIndexFromString(str, 10)) !=
 					TFCLASS_UNKNOWN) {
-					// TODO
+					if (this->m_strName.IsEmpty()) {
+						this->m_strName = str;
+					}
 				} else {
 					Warning("TFBotSpawner: Invalid class '%s'\n", str);
 					return false;
@@ -183,9 +185,9 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 			} else if (V_stricmp(name, "Scale") == 0) {
 				this->m_flScale = subkey->GetFloat(NULL);
 			} else if (V_stricmp(name, "Name") == 0) {
-				// TODO
+				this->m_strName = subkey->GetString(NULL);
 			} else if (V_stricmp(name, "TeleportWhere") == 0) {
-				// TODO
+				this->m_TeleportWhere.AddToHead(strdup(subkey->GetString(NULL)));
 			} else if (V_stricmp(name, "AutoJumpMin") == 0) {
 				this->m_flAutoJumpMin = subkey->GetFloat(NULL);
 			} else if (V_stricmp(name, "AutoJumpMax") == 0) {
@@ -197,7 +199,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 						return false;
 					}
 				} else {
-					if (!ParseDynamicAttributes(/* TODO */)) {
+					if (!ParseDynamicAttributes(this->m_DefaultAttrs, subkey)) {
 						Warning("TFBotSpawner: Unknown field '%s'\n", name);
 						return false;
 					}
