@@ -580,7 +580,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		
 		if (V_stricmp(val, "Mobber") == 0 ||
 			V_stricmp(val, "Push") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AGGRESSIVE;
 		} else {
 			Warning("TFBotSpawner: invalid behavior modifier '%s'\n", val);
 			return false;
@@ -608,51 +608,51 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		const char *val = kv->GetString(NULL);
 		
 		if (V_stricmp(val, "RemoveOnDeath") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_REMOVEONDEATH;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_REMOVEONDEATH;
 		} else if (V_stricmp(val, "Aggressive") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AGGRESSIVE;
 		} else if (V_stricmp(val, "SuppressFire") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_SUPPRESSFIRE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_SUPPRESSFIRE;
 		} else if (V_stricmp(val, "DisableDodge") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_DISABLEDODGE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_DISABLEDODGE;
 		} else if (V_stricmp(val, "BecomeSpectatorOnDeath") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BECOMESPECTATORONDEATH;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BECOMESPECTATORONDEATH;
 		} else if (V_stricmp(val, "RetainBuildings") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_RETAINBUILDINGS;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_RETAINBUILDINGS;
 		} else if (V_stricmp(val, "SpawnWithFullCharge") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE;
 		} else if (V_stricmp(val, "AlwaysCrit") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSCRIT;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_ALWAYSCRIT;
 		} else if (V_stricmp(val, "IgnoreEnemies") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREENEMIES;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_IGNOREENEMIES;
 		} else if (V_stricmp(val, "HoldFireUntilFullReload") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD;
 		} else if (V_stricmp(val, "AlwaysFireWeapon") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_ALWAYSFIREWEAPON;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_ALWAYSFIREWEAPON;
 		} else if (V_stricmp(val, "TeleportToHint") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_TELEPORTTOHINT;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_TELEPORTTOHINT;
 		} else if (V_stricmp(val, "MiniBoss") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_MINIBOSS;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_MINIBOSS;
 		} else if (V_stricmp(val, "UseBossHealthBar") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_USEBOSSHEALTHBAR;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_USEBOSSHEALTHBAR;
 		} else if (V_stricmp(val, "IgnoreFlag") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_IGNOREFLAG;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_IGNOREFLAG;
 		} else if (V_stricmp(val, "AutoJump") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AUTOJUMP;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AUTOJUMP;
 		} else if (V_stricmp(val, "AirChargeOnly") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_AIRCHARGEONLY;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AIRCHARGEONLY;
 		} else if (V_stricmp(val, "VaccinatorBullets") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBULLETS;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORBULLETS;
 		} else if (V_stricmp(val, "VaccinatorBlast") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORBLAST;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORBLAST;
 		} else if (V_stricmp(val, "VaccinatorFire") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_VACCINATORFIRE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORFIRE;
 		} else if (V_stricmp(val, "BulletImmune") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BULLETIMMUNE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BULLETIMMUNE;
 		} else if (V_stricmp(val, "BlastImmune") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_BLASTIMMUNE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BLASTIMMUNE;
 		} else if (V_stricmp(val, "FireImmune") == 0) {
-			ecattr.m_nAttributes |= BOT_ATTRIBUTES_FIREIMMUNE;
+			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_FIREIMMUNE;
 		} else {
 			Warning("TFBotSpawner: Invalid attribute '%s'\n", val);
 			return false;

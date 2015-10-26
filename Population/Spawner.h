@@ -53,7 +53,7 @@ struct CTFBot::EventChangeAttributes_t
 	int m_nWeaponRestrict;      // +0x08
 	// TODO: 0x0c
 	// TODO: 0x10
-	int m_nAttributes;          // +0x14
+	int m_nBotAttrs;            // +0x14
 	float m_flVisionRange;      // +0x18
 	CUtlStringList m_ItemNames; // +0x1c
 	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0x30
