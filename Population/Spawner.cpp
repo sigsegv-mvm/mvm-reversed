@@ -257,32 +257,32 @@ bool CRandomChoiceSpawner::Parse(KeyValues *kv)
 }
 
 
-bool CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }
 
-bool CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }
 
-bool CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }
 
-bool CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }
 
-bool CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }
 
-bool CRandomChoiceSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> v, int i)
+bool CRandomChoiceSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
 {
 	// TODO
 }

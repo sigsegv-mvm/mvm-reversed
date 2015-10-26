@@ -97,7 +97,7 @@ public:
 	virtual ~IPopulationSpawner() {}
 	
 	virtual bool Parse(KeyValues *kv) = 0;
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int) = 0;
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *) = 0;
 	virtual bool IsWhereRequired();
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
@@ -121,7 +121,7 @@ public:
 	virtual ~CMobSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
@@ -141,7 +141,7 @@ public:
 	virtual ~CSentryGunSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
@@ -156,7 +156,7 @@ public:
 	virtual ~CTankSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual bool IsWhereRequired();
 	virtual string_t GetClassIcon(int);
 	virtual int GetHealth(int);
@@ -181,7 +181,7 @@ public:
 	virtual ~CTFBotSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual int GetClass(int index);
 	virtual string_t GetClassIcon(int);
 	virtual int GetHealth(int);
@@ -212,7 +212,7 @@ public:
 	virtual ~CSquadSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
 	virtual string_t GetClassIcon(int);
@@ -235,7 +235,7 @@ public:
 	virtual ~CRandomChoiceSpawner();
 	
 	virtual bool Parse(KeyValues *kv);
-	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>>, int);
+	virtual bool Spawn(const Vector&, CUtlVector<CHandle<CBaseEntity>> *);
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
 	virtual string_t GetClassIcon(int);
