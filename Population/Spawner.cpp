@@ -445,12 +445,25 @@ bool CTFBotSpawner::HasEventChangeAttributes(const char *name) const
 
 bool CSquadSpawner::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	FOR_EACH_VEC(this->m_SubSpawners, i) {
+		if (this->m_SubSpawners[i]->HasEventChangeAttributes(name)) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 bool CRandomChoiceSpawner::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	/* weird: this function still recurses over the sub-spawners, yet it always
+	 * returns false regardless */
+	
+	FOR_EACH_VEC(this->m_SubSpawners, i) {
+		(void)this->m_SubSpawners[i]->HasEventChangeAttributes(name);
+	}
+	
+	return false;
 }
 
 
