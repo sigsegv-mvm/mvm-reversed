@@ -15,7 +15,7 @@ bool CEconItemAttributeDefinition::BInitFromKV(KeyValues *kv, CUtlVector<CUtlStr
 }
 
 
-bool static_attrib_t::BInitFromKV_SingleLine(/* TODO */)
+bool static_attrib_t::BInitFromKV_SingleLine(const char *context, KeyValues *kv, CUtlVector<CUtlString> *errors, bool integer)
 {
 	// TODO
 }
