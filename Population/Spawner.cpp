@@ -65,19 +65,21 @@ bool CMobSpawner::Parse(KeyValues *kv)
 	FOR_EACH_SUBKEY(kv, subkey) {
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
-			IPopulationSpawner *spawner;
-			
 			if (V_stricmp(name, "Count") == 0) {
 				this->m_iCount = subkey->GetInt(NULL);
-			} else if ((spawner = IPopulationSpawner::ParseSpawner(this->m_Populator, subkey)) != NULL) {
-				if (this->m_SubSpawner == NULL) {
-					this->m_SubSpawner = spawner;
-				} else {
-					Warning("CMobSpawner: Duplicate spawner encountered - discarding!\n");
-					delete spawner;
-				}
 			} else {
-				Warning("Unknown attribute '%s' in Mob definition.\n", name);
+				IPopulationSpawner *spawner =
+					IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
+				if (spawner != NULL) {
+					if (this->m_SubSpawner == NULL) {
+						this->m_SubSpawner = spawner;
+					} else {
+						Warning("CMobSpawner: Duplicate spawner encountered - discarding!\n");
+						delete spawner;
+					}
+				} else {
+					Warning("Unknown attribute '%s' in Mob definition.\n", name);
+				}
 			}
 		}
 	}
@@ -213,7 +215,26 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 
 bool CSquadSpawner::Parse(KeyValues *kv)
 {
-	// TODO
+	FOR_EACH_SUBKEY(kv, subkey) {
+		const char *name = subkey->GetName();
+		if (strlen(name) > 0) {
+			if (V_stricmp(name, "FormationSize") == 0) {
+				this->m_flFormationSize = subkey->GetFloat(NULL);
+			} else if (V_stricmp(name, "ShouldPreserveSquad") == 0) {
+				this->m_bShouldPreserveSquad = subkey->GetBool(NULL);
+			} else {
+				IPopulationSpawner *spawner =
+					IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
+				if (spawner != NULL) {
+					this->m_SubSpawners.AddToTail(spawner);
+				} else {
+					Warning("Unknown attribute '%s' in Mob definition.\n", name);
+				}
+			}
+		}
+	}
+	
+	return true;
 }
 
 bool CRandomChoiceSpawner::Parse(KeyValues *kv)
