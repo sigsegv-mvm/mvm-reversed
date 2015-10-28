@@ -1029,7 +1029,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		
 		FOR_EACH_SUBKEY(kv, subkey) {
 			static_attrib_t attr;
-			CUtlVectorAutoPurge<CUtlString> errors;
+			CUtlVector<CUtlString> errors;
 			
 			if (attr.BInitFromKV_SingleLine("CharacterAttributes",
 				subkey, &errors, true)) {
@@ -1081,7 +1081,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 				}
 			} else {
 				static_attrib_t attr;
-				CUtlVectorAutoPurge<CUtlString> errors;
+				CUtlVector<CUtlString> errors;
 				
 				if (attr.BInitFromKV_SingleLine("ItemAttributes",
 					subkey, &errors, true)) {

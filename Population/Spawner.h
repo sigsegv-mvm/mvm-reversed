@@ -231,9 +231,9 @@ public:
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
-	CUtlVector<IPopulationSpawner *> m_SubSpawners; // +0x08
-	float m_flFormationSize;                        // +0x1c
-	bool m_bShouldPreserveSquad;                    // +0x20
+	CUtlVectorAutoPurge<IPopulationSpawner *> m_SubSpawners; // +0x08
+	float m_flFormationSize;                                 // +0x1c
+	bool m_bShouldPreserveSquad;                             // +0x20
 };
 
 
@@ -256,9 +256,9 @@ public:
 private:
 	void GenerateRandomIndexes(int index);
 	
-	CUtlVector<IPopulationSpawner *> m_SubSpawners; // +0x08
-	CUtlVector<int> m_Indexes;                      // +0x1c
-	int m_iSpawned;                                 // +0x30
+	CUtlVectorAutoPurge<IPopulationSpawner *> m_SubSpawners; // +0x08
+	CUtlVector<int> m_Indexes;                               // +0x1c
+	int m_iSpawned;                                          // +0x30
 };
 
 
