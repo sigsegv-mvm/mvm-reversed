@@ -4,8 +4,8 @@
  */
 
 
-// TODO: type name for this?
-enum {
+enum CTFBot::AttributeType
+{
 	BOT_ATTRIBUTES_REMOVEONDEATH           = (1 << 0),
 	BOT_ATTRIBUTES_AGGRESSIVE              = (1 << 1),
 	// 4?
@@ -32,18 +32,25 @@ enum {
 	BOT_ATTRIBUTES_BULLETIMMUNE            = (1 << 23),
 	BOT_ATTRIBUTES_BLASTIMMUNE             = (1 << 24),
 	BOT_ATTRIBUTES_FIREIMMUNE              = (1 << 25),
-	
-	
-	BOT_RESTRICT_NONE          = 0,
-	BOT_RESTRICT_MELEEONLY     = (1 << 0),
-	BOT_RESTRICT_PRIMARYONLY   = (1 << 1),
-	BOT_RESTRICT_SECONDARYONLY = (1 << 2),
-	
-	
+};
+
+
+enum CTFBot::DifficultyType
+{
 	BOT_SKILL_EASY   = 0,
 	BOT_SKILL_NORMAL = 1,
 	BOT_SKILL_HARD   = 2,
 	BOT_SKILL_EXPERT = 3,
+};
+
+
+// TODO: type name for this?
+enum
+{
+	BOT_RESTRICT_NONE          = 0,
+	BOT_RESTRICT_MELEEONLY     = (1 << 0),
+	BOT_RESTRICT_PRIMARYONLY   = (1 << 1),
+	BOT_RESTRICT_SECONDARYONLY = (1 << 2),
 };
 
 
