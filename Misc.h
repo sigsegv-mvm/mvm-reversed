@@ -32,7 +32,7 @@ public:
 private:
 	CUtlVector<CHandle<CTFBot>> m_Members; // +0x04
 	CHandle<CTFBot> m_hLeader;             // +0x18
-	// 0x1c float -1.0
+	float m_flFormationSize;               // +0x1c
 	bool m_bShouldPreserveSquad;           // +0x20
 };
 

@@ -380,21 +380,65 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			gpGlobals->curtime);
 	}
 	
-	int spawned = 0;
-	
-	int squad_size = this->m_SubSpawners.Count();
-	if (GetGlobalTeam(TEAM_SPECTATOR)->GetNumPlayers() >= squad_size) {
-		CTFBotSquad *squad = new CTFBotSquad();
-		if (squad != NULL) {
-			// TODO
-		}
-		
-		// TODO
+	if (GetGlobalTeam(TEAM_SPECTATOR)->GetNumPlayers() <
+		this->m_SubSpawners.Count()) {
+		return 0;
 	}
 	
-	// TODO
+	CUtlVector<CHandle<CBaseEntity>> spawned;
 	
-	return spawned;
+	bool failed = false;
+	FOR_EACH_VEC(this->m_SubSpawners, i) {
+		IPopulationSpawner *spawner = this->m_SubSpawners[i];
+		if (!spawner->Spawn(where, spawned)) {
+			failed = true;
+			break;
+		}
+	}
+	
+	if (failed) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CSquadSpawner: %3.2f: Unable to spawn entire squad\n",
+				gpGlobals->curtime);
+		}
+		
+		FOR_EACH_VEC(spawned, i) {
+			CBaseEntity *ent = *(spawned[i]);
+			if (ent != NULL && ent->IsPlayer()) {
+				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
+				player->ChangeTeam(TEAM_SPECTATOR, false, true);
+			} else {
+				UTIL_Remove(ent);
+			}
+		}
+		
+		return 0;
+	}
+	
+	CTFBotSquad *squad = new CTFBotSquad();
+	if (squad != NULL) {
+		squad->m_flFormationSize      = this->m_flFormationSize;
+		squad->m_bShouldPreserveSquad = this->m_bShouldPreserveSquad;
+		
+		FOR_EACH_VEC(spawned, i) {
+			CBaseEntity *ent = *(spawned[i]);
+			if (ent != NULL && ent->IsPlayer()) {
+				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
+				
+				/* CTFBot::GetBotType() returns 1337, no joke */
+				if (player->IsBotOfType(1337)) {
+					CTFBot *bot = static_cast<CTFBot *>(player);
+					bot->JoinSquad(squad);
+				}
+			}
+		}
+	}
+	
+	if (ents != NULL) {
+		ents->AddVectorToTail(spawned);
+	}
+	
+	return 1;
 }
 
 int CRandomChoiceSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
