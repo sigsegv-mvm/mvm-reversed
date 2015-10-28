@@ -208,7 +208,7 @@ private:
 	float m_flAutoJumpMin;                                 // +0x18
 	float m_flAutoJumpMax;                                 // +0x1c
 	CUtlString m_strName;                                  // +0x20
-	CUtlVectorAutoPurge<char *> m_TeleportWhere;           // +0x24
+	CUtlStringList m_TeleportWhere;                        // +0x24
 	CTFBot::EventChangeAttributes_t m_DefaultAttrs;        // +0x38
 	CUtlVector<CTFBot::EventChangeAttributes_t> m_ECAttrs; // +0xa4
 };

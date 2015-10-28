@@ -76,7 +76,6 @@ CTankSpawner::~CTankSpawner()
 
 CTFBotSpawner::~CTFBotSpawner()
 {
-	// TODO
 }
 
 CSquadSpawner::~CSquadSpawner()
@@ -217,7 +216,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 			} else if (V_stricmp(name, "Name") == 0) {
 				this->m_strName = subkey->GetString(NULL);
 			} else if (V_stricmp(name, "TeleportWhere") == 0) {
-				this->m_TeleportWhere.AddToHead(strdup(subkey->GetString(NULL)));
+				this->m_TeleportWhere.CopyAndAddToTail(subkey->GetString(NULL));
 			} else if (V_stricmp(name, "AutoJumpMin") == 0) {
 				this->m_flAutoJumpMin = subkey->GetFloat(NULL);
 			} else if (V_stricmp(name, "AutoJumpMax") == 0) {
