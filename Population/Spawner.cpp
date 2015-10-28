@@ -58,6 +58,36 @@ CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
 }
 
 
+CMobSpawner::~CMobSpawner()
+{
+	if (m_SubSpawner != NULL) {
+		delete m_SubSpawner;
+	}
+}
+
+CSentryGunSpawner::~CSentryGunSpawner()
+{
+}
+
+CTankSpawner::~CTankSpawner()
+{
+	/* likely bug: the EventInfo members were new'd, but are not delete'd */
+}
+
+CTFBotSpawner::~CTFBotSpawner()
+{
+	// TODO
+}
+
+CSquadSpawner::~CSquadSpawner()
+{
+}
+
+CRandomChoiceSpawner::~CRandomChoiceSpawner()
+{
+}
+
+
 bool CMobSpawner::Parse(KeyValues *kv)
 {
 	FOR_EACH_SUBKEY(kv, subkey) {
