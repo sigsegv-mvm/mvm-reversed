@@ -4,7 +4,7 @@
  */
 
 
-class CPopulationManager : ???
+class CPopulationManager : public CPointEntity, public CGameEventListener
 {
 public:
 	// TODO

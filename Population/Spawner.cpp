@@ -34,7 +34,7 @@ CTankSpawner::CTankSpawner(IPopulator *populator)
 CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	this->m_iClass        = TFCLASS_UNKNOWN;
+	this->m_iClass        = TF_CLASS_UNKNOWN;
 	this->m_strClassIcon  = NULL_STRING;
 	this->m_iHealth       = -1;
 	this->m_flScale       = -1.0f;
@@ -56,7 +56,7 @@ CSquadSpawner::CSquadSpawner(IPopulator *populator)
 CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
-	// TODO
+	this->m_iSpawned = 0;
 }
 
 
@@ -135,7 +135,7 @@ bool CTankSpawner::Parse(KeyValues *kv)
 
 bool CTFBotSpawner::Parse(KeyValues *kv)
 {
-	this->m_iClass        = TFCLASS_UNKNOWN;
+	this->m_iClass        = TF_CLASS_UNKNOWN;
 	this->m_strClassIcon  = NULL_STRING;
 	this->m_iHealth       = -1;
 	this->m_flScale       = -1.0f;
@@ -171,7 +171,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 			} else if (V_stricmp(name, "Class") == 0) {
 				const char *str = subkey->GetString(NULL);
 				if ((this->m_iClass = GetClassIndexFromString(str, 10)) !=
-					TFCLASS_UNKNOWN) {
+					TF_CLASS_UNKNOWN) {
 					if (this->m_strName.IsEmpty()) {
 						this->m_strName = str;
 					}
@@ -257,34 +257,100 @@ bool CRandomChoiceSpawner::Parse(KeyValues *kv)
 }
 
 
-bool CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
+int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
+{
+	if (this->m_SubSpawner == NULL) {
+		return 0;
+	}
+	
+	for (int i = 0; i < this->m_iCount; ++i) {
+		if (!this->m_SubSpawner->Spawn(where, ents)) {
+			return 0;
+		}
+	}
+	
+	return 1;
+}
+
+int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
+{
+	CBaseEntity *sentry = CreateEntityByName("obj_sentrygun", -1);
+	if (sentry == NULL) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CSentryGunSpawner: %3.2f: Failed to create obj_sentrygun\n",
+				gpGlobals->curtime);
+		}
+		
+		return 0;
+	}
+	
+	sentry->SetAbsOrigin(where);
+	sentry->SetAbsAngles(vec3_angle);
+	sentry->Spawn();
+	sentry->ChangeTeam(TF_TEAM_BLU);
+	
+	/* undocumented: CBaseObject+0x9e4 */
+	sentry->m_iUpgradeLevelDesired = this->m_iLevel + 1;
+	
+	sentry->InitializeMapPlacedObject();
+	
+	if (ents != NULL) {
+		ents.AddToTail(sentry->GetRefEHandle());
+	}
+	
+	return 1;
+}
+
+int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
 	// TODO
 }
 
-bool CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
+int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
 	// TODO
 }
 
-bool CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
+int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
+	VPROF_BUDGET("CSquadSpawner::Spawn", "NextBot");
+	
+	if (tf_populator_debug.GetBool()) {
+		DevMsg("CSquadSpawner: %3.2f: <<<< Spawning Squad >>>>\n",
+			gpGlobals->curtime);
+	}
+	
+	int spawned = 0;
+	
+	int squad_size = this->m_SubSpawners.Count();
+	if (GetGlobalTeam(TEAM_SPECTATOR)->GetNumPlayers() >= squad_size) {
+		CTFBotSquad *squad = new CTFBotSquad();
+		if (squad != NULL) {
+			// TODO
+		}
+		
+		// TODO
+	}
+	
 	// TODO
+	
+	return spawned;
 }
 
-bool CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
+int CRandomChoiceSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	// TODO
-}
-
-bool CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
-{
-	// TODO
-}
-
-bool CRandomChoiceSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *v)
-{
-	// TODO
+	int spawned = 0;
+	
+	if (!this->m_SubSpawners.IsEmpty()) {
+		this->GenerateRandomIndexes(this->m_iSpawned);
+		
+		IPopulationSpawner *spawner = this->m_SubSpawners[this->m_iSpawned];
+		spawned = spawner->Spawn(where, ents);
+		
+		++this->m_iSpawned;
+	}
+	
+	return spawned;
 }
 
 
@@ -327,12 +393,36 @@ int CTFBotSpawner::GetClass(int index)
 
 int CSquadSpawner::GetClass(int index)
 {
-	// TODO
+	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
+		return TF_CLASS_UNKNOWN;
+	}
+	
+	index %= this->m_SubSpawners.Count();
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	
+	if (!spawner->IsVarious()) {
+		return spawner->GetClass(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return TF_CLASS_UNKNOWN;
+	}
 }
 
 int CRandomChoiceSpawner::GetClass(int index)
 {
-	// TODO
+	if (index < 0) {
+		return TF_CLASS_UNKNOWN;
+	}
+	
+	this->GenerateRandomIndexes(index);
+	
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	if (!spawner->IsVarious()) {
+		return spawner->GetClass(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return TF_CLASS_UNKNOWN;
+	}
 }
 
 
@@ -348,17 +438,45 @@ string_t CTankSpawner::GetClassIcon(int index)
 
 string_t CTFBotSpawner::GetClassIcon(int index)
 {
-	// TODO
+	if (!this->m_strClassIcon) {
+		return AllocPooledString(g_aRawPlayerClassNamesShort[this->m_iClass]);
+	} else {
+		return this->m_strClassIcon;
+	}
 }
 
 string_t CSquadSpawner::GetClassIcon(int index)
 {
-	// TODO
+	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
+		return NULL_STRING;
+	}
+	
+	index %= this->m_SubSpawners.Count();
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	
+	if (!spawner->IsVarious()) {
+		return spawner->GetClassIcon(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return NULL_STRING;
+	}
 }
 
 string_t CRandomChoiceSpawner::GetClassIcon(int index)
 {
-	// TODO
+	if (index < 0) {
+		return NULL_STRING;
+	}
+	
+	this->GenerateRandomIndexes(index);
+	
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	if (!spawner->IsVarious()) {
+		return spawner->GetClassIcon(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return NULL_STRING;
+	}
 }
 
 
@@ -379,12 +497,36 @@ int CTFBotSpawner::GetHealth(int index)
 
 int CSquadSpawner::GetHealth(int index)
 {
-	// TODO
+	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
+		return 0;
+	}
+	
+	index %= this->m_SubSpawners.Count();
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	
+	if (!spawner->IsVarious()) {
+		return spawner->GetHealth(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return 0;
+	}
 }
 
 int CRandomChoiceSpawner::GetHealth(int index)
 {
-	// TODO
+	if (index < 0) {
+		return 0;
+	}
+	
+	this->GenerateRandomIndexes(index);
+	
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	if (!spawner->IsVarious()) {
+		return spawner->GetHealth(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return 0;
+	}
 }
 
 
@@ -400,18 +542,41 @@ bool CTankSpawner::IsMiniBoss()
 
 bool CTFBotSpawner::IsMiniBoss()
 {
-	// TODO
-	// returns byte at this+0x283c (probably player->m_Shared.m_bIsMiniBoss or however that's accessed)
+	return ((this->m_DefaultAttrs.m_nBotAttrs & BOT_ATTRIBUTES_MINIBOSS) != 0);
 }
 
 bool CSquadSpawner::IsMiniBoss()
 {
-	// TODO
+	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
+		return false;
+	}
+	
+	index %= this->m_SubSpawners.Count();
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	
+	if (!spawner->IsVarious()) {
+		return spawner->IsMiniBoss(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return false;
+	}
 }
 
 bool CRandomChoiceSpawner::IsMiniBoss()
 {
-	// TODO
+	if (index < 0) {
+		return false;
+	}
+	
+	this->GenerateRandomIndexes(index);
+	
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	if (!spawner->IsVarious()) {
+		return spawner->IsMiniBoss(-1);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return false;
+	}
 }
 
 
@@ -422,17 +587,43 @@ bool IPopulationSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 
 bool CTFBotSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 {
-	// TODO
+	return ((this->m_DefaultAttrs.m_nBotAttrs & attr) != 0);
 }
 
 bool CSquadSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 {
-	// TODO
+	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
+		return false;
+	}
+	
+	index %= this->m_SubSpawners.Count();
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	
+	if (!spawner->IsVarious()) {
+		/* likely bug: passing index thru to the sub-spawner (rather than -1) */
+		return spawner->HasAttribute(attr, index);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return false;
+	}
 }
 
 bool CRandomChoiceSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 {
-	// TODO
+	if (index < 0) {
+		return false;
+	}
+	
+	this->GenerateRandomIndexes(index);
+	
+	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	if (!spawner->IsVarious()) {
+		/* likely bug: passing index thru to the sub-spawner (rather than -1) */
+		return spawner->HasAttribute(attr, index);
+	} else {
+		DevWarning("Nested complex spawner types... need a method for counting these.");
+		return false;
+	}
 }
 
 
@@ -578,6 +769,25 @@ bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 	}
 	
 	return true;
+}
+
+
+void CRandomChoiceSpawner::GenerateRandomIndexes(int index)
+{
+	/* ensure that m_Indexes has been random generated at least enough so that
+	 * an access to m_Indexes[index] can succeed */
+	
+	int size_before = this->m_Indexes.Count();
+	int size_wanted = (index + 1);
+	
+	int size_growby = size_wanted - size_before;
+	if (size_growby > 0) {
+		this->m_Indexes.AddMultipleToTail(size_growby);
+		
+		for (int i = size_before; i < size_wanted; ++i) {
+			this->m_Indexes[i] = RandomInt(0, this->m_SubSpawners.Count() - 1);
+		}
+	}
 }
 
 
