@@ -302,7 +302,7 @@ int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *en
 
 int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	CBaseEntity *sentry = CreateEntityByName("obj_sentrygun", -1);
+	CBaseEntity *sentry = CreateEntityByName("obj_sentrygun");
 	if (sentry == NULL) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CSentryGunSpawner: %3.2f: Failed to create obj_sentrygun\n",
@@ -331,7 +331,40 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 
 int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	// TODO
+	CBaseEntity *tank = CreateEntityByName("tank_boss");
+	if (tank == NULL) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CTankSpawner: %3.2f: Failed to create base_boss\n",
+				gpGlobals->curtime);
+		}
+		
+		return 0;
+	}
+	
+	tank->SetAbsOrigin(where);
+	tank->SetAbsAngles(vec3_angle);
+	tank->m_iBossHealth = (int)((float)this->m_iHealth *
+		g_pPopulationManager->GetHealthMultiplier(true));
+	tank->m_flBossSpeed = this->m_flSpeed;
+	tank->m_iName = MAKE_STRING(this->m_strName.Get());
+	tank->SetSkin(this->m_iSkin);
+	tank->SetStartingPathTrackNode(this->m_strStartNode.GetForModify());
+	tank->Spawn();
+	
+	if (this->m_OnKilledOutput != NULL) {
+		/* implicit member-by-member copy of the EventInfo struct */
+		tank->m_OnKilledOutput = *this->m_OnKilledOutput;
+	}
+	if (this->m_OnBombDroppedOutput != NULL) {
+		/* implicit member-by-member copy of the EventInfo struct */
+		tank->m_OnBombDroppedOutput = *this->m_OnBombDroppedOutput;
+	}
+	
+	if (ents != NULL) {
+		ents.AddToTail(tank->GetRefEHandle());
+	}
+	
+	return 1;
 }
 
 int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
