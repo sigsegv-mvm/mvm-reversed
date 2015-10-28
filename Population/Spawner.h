@@ -125,12 +125,14 @@ public:
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
-	int                 m_iCount;     // +0x08
+	int m_iCount;                     // +0x08
 	IPopulationSpawner *m_SubSpawner; // +0x0c
-	// TODO 0x10 CountdownTimer
-	// TODO 0x1c CountdownTimer
-	// TODO 0x28 dword 0
-	// TODO 0x2c dword 0
+	
+	/* none of this stuff is used by any of the code */
+	CountdownTimer m_UnusedTimer1;    // +0x10
+	CountdownTimer m_UnusedTimer2;    // +0x1c
+	int m_UnusedDword1;               // +0x28
+	int m_UnusedDword2;               // +0x2c
 };
 
 
@@ -164,11 +166,11 @@ public:
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
-	int        m_iHealth;             // +0x08
-	float      m_flSpeed;             // +0x0c
+	int m_iHealth;                    // +0x08
+	float m_flSpeed;                  // +0x0c
 	CUtlString m_strName;             // +0x10
 	CUtlString m_strStartNode;        // +0x14
-	int        m_iSkin;               // +0x18
+	int m_iSkin;                      // +0x18
 	EventInfo *m_OnKilledOutput;      // +0x1c
 	EventInfo *m_OnBombDroppedOutput; // +0x20
 };

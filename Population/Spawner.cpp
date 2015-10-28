@@ -9,8 +9,6 @@ CMobSpawner::CMobSpawner(IPopulator *populator)
 {
 	this->m_iCount     = 0;
 	this->m_SubSpawner = NULL;
-	
-	// TODO
 }
 
 CSentryGunSpawner::CSentryGunSpawner(IPopulator *populator)
