@@ -1,0 +1,3 @@
+vtable for CFindMostInjuredNeighbor
+
++0x0000:  00c3bc40  CFindMostInjuredNeighbor::Inspect(CKnownEntity const&)

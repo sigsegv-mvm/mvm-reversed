@@ -1,0 +1,3 @@
+vtable for IHasOwner
+
++0x0000:  00000000  (null)

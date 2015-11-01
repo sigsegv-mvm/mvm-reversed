@@ -1,0 +1,7 @@
+vtable for IResponseSystem
+
++0x0000:  0098bde0  IResponseSystem::~IResponseSystem()
++0x0004:  0098c160  IResponseSystem::~IResponseSystem()
++0x0008:  00000000  (null)
++0x000c:  00000000  (null)
++0x0010:  00000000  (null)

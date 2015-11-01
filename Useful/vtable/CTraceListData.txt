@@ -1,0 +1,3 @@
+vtable for CTraceListData
+
++0x0000:  0095b8a0  CTraceListData::EnumElement(IHandleEntity*)

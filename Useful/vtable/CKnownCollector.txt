@@ -1,0 +1,3 @@
+vtable for CKnownCollector
+
++0x0000:  00c3c850  CKnownCollector::Inspect(CKnownEntity const&)

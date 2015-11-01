@@ -1,0 +1,4 @@
+vtable for CRagdollAnimatedFriction
+
++0x0000:  00704b10  CRagdollAnimatedFriction::ParseKeyValue(void*, char const*, char const*)
++0x0004:  00704b00  CRagdollAnimatedFriction::SetDefaults(void*)

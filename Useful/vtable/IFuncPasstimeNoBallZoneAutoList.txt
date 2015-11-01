@@ -1,0 +1,4 @@
+vtable for IFuncPasstimeNoBallZoneAutoList
+
++0x0000:  00cc5930  IFuncPasstimeNoBallZoneAutoList::~IFuncPasstimeNoBallZoneAutoList()
++0x0004:  00cc58c0  IFuncPasstimeNoBallZoneAutoList::~IFuncPasstimeNoBallZoneAutoList()

@@ -1,0 +1,5 @@
+vtable for IPositionWatcher
+
++0x0000:  0073d990  IPositionWatcher::~IPositionWatcher()
++0x0004:  0073da00  IPositionWatcher::~IPositionWatcher()
++0x0008:  00000000  (null)
