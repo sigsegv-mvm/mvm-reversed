@@ -11,6 +11,7 @@ class CDisableVision : public IVision
 };
 
 
+// sizeof: 0xf0
 class CTFBotVision : public IVision
 {	
 };

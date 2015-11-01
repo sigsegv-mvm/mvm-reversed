@@ -51,6 +51,7 @@ class PlayerLocomotion : public ILocomotion
 {
 };
 
+// sizeof: 0xa4
 class CTFBotLocomotion : public PlayerLocomotion
 {
 };

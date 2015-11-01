@@ -31,6 +31,7 @@ class PlayerBody : public IBody
 {
 };
 
+// sizeof: 0xc8
 class CTFBotBody : public PlayerBody
 {
 };
