@@ -8,7 +8,7 @@ CMobSpawner::CMobSpawner(IPopulator *populator)
 	: m_Populator(populator)
 {
 	this->m_iCount     = 0;
-	this->m_SubSpawner = NULL;
+	this->m_SubSpawner = nullptr;
 }
 
 CSentryGunSpawner::CSentryGunSpawner(IPopulator *populator)
@@ -23,10 +23,10 @@ CTankSpawner::CTankSpawner(IPopulator *populator)
 	this->m_iHealth             = 50000;
 	this->m_flSpeed             = 75.0f;
 	this->m_strName             = "Tank";
-	this->m_strStartNode        = NULL;
+	this->m_strStartNode        = nullptr;
 	this->m_iSkin               = 0;
-	this->m_OnKilledOutput      = NULL;
-	this->m_OnBombDroppedOutput = NULL;
+	this->m_OnKilledOutput      = nullptr;
+	this->m_OnBombDroppedOutput = nullptr;
 }
 
 CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
@@ -60,8 +60,8 @@ CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
 
 CMobSpawner::~CMobSpawner()
 {
-	if (m_SubSpawner != NULL) {
-		delete m_SubSpawner;
+	if (this->m_SubSpawner != nullptr) {
+		delete this->m_SubSpawner;
 	}
 }
 
@@ -93,12 +93,12 @@ bool CMobSpawner::Parse(KeyValues *kv)
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "Count") == 0) {
-				this->m_iCount = subkey->GetInt(NULL);
+				this->m_iCount = subkey->GetInt(nullptr);
 			} else {
 				IPopulationSpawner *spawner =
 					IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
-				if (spawner != NULL) {
-					if (this->m_SubSpawner == NULL) {
+				if (spawner != nullptr) {
+					if (this->m_SubSpawner == nullptr) {
 						this->m_SubSpawner = spawner;
 					} else {
 						Warning("CMobSpawner: Duplicate spawner encountered - discarding!\n");
@@ -120,7 +120,7 @@ bool CSentryGunSpawner::Parse(KeyValues *kv)
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "Level") == 0) {
-				this->m_iLevel = subkey->GetInt(NULL);
+				this->m_iLevel = subkey->GetInt(nullptr);
 			} else {
 				Warning("Invalid attribute '%s' in SentryGun definition\n", name);
 				return false;
@@ -137,15 +137,15 @@ bool CTankSpawner::Parse(KeyValues *kv)
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "Health") == 0) {
-				this->m_iHealth = subkey->GetInt(NULL);
+				this->m_iHealth = subkey->GetInt(nullptr);
 			} else if (V_stricmp(name, "Speed") == 0) {
-				this->m_flSpeed = subkey->GetFloat(NULL);
+				this->m_flSpeed = subkey->GetFloat(nullptr);
 			} else if (V_stricmp(name, "Name") == 0) {
-				this->m_strName = subkey->GetString(NULL);
+				this->m_strName = subkey->GetString(nullptr);
 			} else if (V_stricmp(name, "Skin") == 0) {
-				this->m_iSkin = subkey->GetInt(NULL);
+				this->m_iSkin = subkey->GetInt(nullptr);
 			} else if (V_stricmp(name, "StartingPathTrackNode") == 0) {
-				this->m_strStartNode = subkey->GetString(NULL);
+				this->m_strStartNode = subkey->GetString(nullptr);
 			} else if (V_stricmp(name, "OnKilledOutput") == 0) {
 				this->m_OnKilledOutput = ParseEvent(subkey);
 			} else if (V_stricmp(name, "OnBombDroppedOutput") == 0) {
@@ -175,12 +175,12 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 	
 	/* handle the template reference (if any) before doing anything else */
 	KeyValues *kv_tref = kv->FindKey("Template");
-	if (kv_tref != NULL) {
-		const char *tname = kv_tref->GetString(NULL);
+	if (kv_tref != nullptr) {
+		const char *tname = kv_tref->GetString(nullptr);
 		
 		KeyValues *kv_timpl =
 			this->m_Populator->m_PopMgr->m_kvTemplates->FindKey(tname);
-		if (kv_timpl != NULL) {
+		if (kv_timpl != nullptr) {
 			if (!this->Parse(kv_timpl)) {
 				return false;
 			}
@@ -196,7 +196,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 			if (V_stricmp(name, "Template") == 0) {
 				/* skip, since we already handled templates earlier */
 			} else if (V_stricmp(name, "Class") == 0) {
-				const char *str = subkey->GetString(NULL);
+				const char *str = subkey->GetString(nullptr);
 				if ((this->m_iClass = GetClassIndexFromString(str, 10)) !=
 					TF_CLASS_UNKNOWN) {
 					if (this->m_strName.IsEmpty()) {
@@ -208,19 +208,19 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 				}
 			} else if (V_stricmp(name, "ClassIcon") == 0) {
 				this->m_strClassIcon =
-					STRING(AllocPooledString(subkey->GetString(NULL)));
+					STRING(AllocPooledString(subkey->GetString(nullptr)));
 			} else if (V_stricmp(name, "Health") == 0) {
-				this->m_iHealth = subkey->GetInt(NULL);
+				this->m_iHealth = subkey->GetInt(nullptr);
 			} else if (V_stricmp(name, "Scale") == 0) {
-				this->m_flScale = subkey->GetFloat(NULL);
+				this->m_flScale = subkey->GetFloat(nullptr);
 			} else if (V_stricmp(name, "Name") == 0) {
-				this->m_strName = subkey->GetString(NULL);
+				this->m_strName = subkey->GetString(nullptr);
 			} else if (V_stricmp(name, "TeleportWhere") == 0) {
-				this->m_TeleportWhere.CopyAndAddToTail(subkey->GetString(NULL));
+				this->m_TeleportWhere.CopyAndAddToTail(subkey->GetString(nullptr));
 			} else if (V_stricmp(name, "AutoJumpMin") == 0) {
-				this->m_flAutoJumpMin = subkey->GetFloat(NULL);
+				this->m_flAutoJumpMin = subkey->GetFloat(nullptr);
 			} else if (V_stricmp(name, "AutoJumpMax") == 0) {
-				this->m_flAutoJumpMax = subkey->GetFloat(NULL);
+				this->m_flAutoJumpMax = subkey->GetFloat(nullptr);
 			} else {
 				if (V_stricmp(name, "EventChangeAttributes") == 0) {
 					if (!this->ParseEventChangeAttributes(subkey)) {
@@ -246,13 +246,13 @@ bool CSquadSpawner::Parse(KeyValues *kv)
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "FormationSize") == 0) {
-				this->m_flFormationSize = subkey->GetFloat(NULL);
+				this->m_flFormationSize = subkey->GetFloat(nullptr);
 			} else if (V_stricmp(name, "ShouldPreserveSquad") == 0) {
-				this->m_bShouldPreserveSquad = subkey->GetBool(NULL);
+				this->m_bShouldPreserveSquad = subkey->GetBool(nullptr);
 			} else {
 				IPopulationSpawner *spawner =
 					IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
-				if (spawner != NULL) {
+				if (spawner != nullptr) {
 					this->m_SubSpawners.AddToTail(spawner);
 				} else {
 					Warning("Unknown attribute '%s' in Mob definition.\n", name);
@@ -271,7 +271,7 @@ bool CRandomChoiceSpawner::Parse(KeyValues *kv)
 		if (strlen(name) > 0) {
 			IPopulationSpawner *spawner =
 				IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
-			if (spawner != NULL) {
+			if (spawner != nullptr) {
 				this->m_SubSpawners.AddToTail(spawner);
 			} else {
 				Warning("Unknown attribute '%s' in RandomChoice definition.\n",
@@ -286,7 +286,7 @@ bool CRandomChoiceSpawner::Parse(KeyValues *kv)
 
 int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	if (this->m_SubSpawner == NULL) {
+	if (this->m_SubSpawner == nullptr) {
 		return 0;
 	}
 	
@@ -302,7 +302,7 @@ int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *en
 int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
 	CBaseEntity *sentry = CreateEntityByName("obj_sentrygun");
-	if (sentry == NULL) {
+	if (sentry == nullptr) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CSentryGunSpawner: %3.2f: Failed to create obj_sentrygun\n",
 				gpGlobals->curtime);
@@ -321,7 +321,7 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 	
 	sentry->InitializeMapPlacedObject();
 	
-	if (ents != NULL) {
+	if (ents != nullptr) {
 		ents.AddToTail(sentry->GetRefEHandle());
 	}
 	
@@ -331,7 +331,7 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
 	CBaseEntity *tank = CreateEntityByName("tank_boss");
-	if (tank == NULL) {
+	if (tank == nullptr) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CTankSpawner: %3.2f: Failed to create base_boss\n",
 				gpGlobals->curtime);
@@ -350,16 +350,16 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 	tank->SetStartingPathTrackNode(this->m_strStartNode.GetForModify());
 	tank->Spawn();
 	
-	if (this->m_OnKilledOutput != NULL) {
+	if (this->m_OnKilledOutput != nullptr) {
 		/* implicit member-by-member copy of the EventInfo struct */
 		tank->m_OnKilledOutput = *this->m_OnKilledOutput;
 	}
-	if (this->m_OnBombDroppedOutput != NULL) {
+	if (this->m_OnBombDroppedOutput != nullptr) {
 		/* implicit member-by-member copy of the EventInfo struct */
 		tank->m_OnBombDroppedOutput = *this->m_OnBombDroppedOutput;
 	}
 	
-	if (ents != NULL) {
+	if (ents != nullptr) {
 		ents.AddToTail(tank->GetRefEHandle());
 	}
 	
@@ -404,7 +404,7 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		FOR_EACH_VEC(spawned, i) {
 			CBaseEntity *ent = *(spawned[i]);
-			if (ent != NULL && ent->IsPlayer()) {
+			if (ent != nullptr && ent->IsPlayer()) {
 				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
 				player->ChangeTeam(TEAM_SPECTATOR, false, true);
 			} else {
@@ -416,13 +416,13 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 	}
 	
 	CTFBotSquad *squad = new CTFBotSquad();
-	if (squad != NULL) {
+	if (squad != nullptr) {
 		squad->m_flFormationSize      = this->m_flFormationSize;
 		squad->m_bShouldPreserveSquad = this->m_bShouldPreserveSquad;
 		
 		FOR_EACH_VEC(spawned, i) {
 			CBaseEntity *ent = *(spawned[i]);
-			if (ent != NULL && ent->IsPlayer()) {
+			if (ent != nullptr && ent->IsPlayer()) {
 				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
 				
 				/* CTFBot::GetBotType() returns 1337, no joke */
@@ -434,7 +434,7 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		}
 	}
 	
-	if (ents != NULL) {
+	if (ents != nullptr) {
 		ents->AddVectorToTail(spawned);
 	}
 	
@@ -733,7 +733,7 @@ bool CRandomChoiceSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 
 bool CMobSpawner::HasEventChangeAttributes(const char *name) const
 {
-	if (this->m_SubSpawner != NULL) {
+	if (this->m_SubSpawner != nullptr) {
 		return this->m_SubSpawner->HasEventChangeAttributes(name);
 	} else {
 		return false;
@@ -792,7 +792,7 @@ IPopulationSpawner *IPopulationSpawner::ParseSpawner(IPopulator *populator, KeyV
 {
 	const char *name = kv->GetName();
 	if (strlen(name) <= 0) {
-		return NULL;
+		return nullptr;
 	}
 	
 	IPopulationSpawner* spawner;
@@ -841,13 +841,13 @@ IPopulationSpawner *IPopulationSpawner::ParseSpawner(IPopulator *populator, KeyV
 	}
 	
 	delete spawner;
-	return NULL;
+	return nullptr;
 }
 
 
 bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 {
-	if (kv == NULL) {
+	if (kv == nullptr) {
 		return true;
 	}
 	
@@ -903,7 +903,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	const char *name = kv->GetName();
 	
 	if (V_stricmp(name, "Skill") == 0) {
-		const char *val = kv->GetString(NULL);
+		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "Easy") == 0) {
 			ecattr.m_iSkill = BOT_SKILL_EASY;
@@ -922,7 +922,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	}
 	
 	if (V_stricmp(name, "WeaponRestrictions") == 0) {
-		const char *val = kv->GetString(NULL);
+		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "MeleeOnly") == 0) {
 			ecattr.m_nWeaponRestrict = BOT_RESTRICT_MELEEONLY;
@@ -939,7 +939,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	}
 	
 	if (V_stricmp(name, "BehaviorModifiers") == 0) {
-		const char *val = kv->GetString(NULL);
+		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "Mobber") == 0 ||
 			V_stricmp(val, "Push") == 0) {
@@ -953,22 +953,22 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	}
 	
 	if (V_stricmp(name, "MaxVisionRange") == 0) {
-		ecattr.m_flVisionRange = kv->GetFloat(NULL);
+		ecattr.m_flVisionRange = kv->GetFloat(nullptr);
 		return true;
 	}
 	
 	if (V_stricmp(name, "Item") == 0) {
-		ecattr.m_ItemNames.CopyAndAddToTail(kv->GetString(NULL));
+		ecattr.m_ItemNames.CopyAndAddToTail(kv->GetString(nullptr));
 		return true;
 	}
 	
 	if (V_stricmp(name, "Tag") == 0) {
-		ecattr.m_Tags.CopyAndAddToTail(kv->GetString(NULL));
+		ecattr.m_Tags.CopyAndAddToTail(kv->GetString(nullptr));
 		return true;
 	}
 	
 	if (V_stricmp(name, "Attributes") == 0) {
-		const char *val = kv->GetString(NULL);
+		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "RemoveOnDeath") == 0) {
 			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_REMOVEONDEATH;
@@ -1068,16 +1068,16 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	}
 	
 	if (V_stricmp(name, "ItemAttributes") == 0) {
-		const char *item_name = NULL;
+		const char *item_name = nullptr;
 		CUtlVector<static_attrib_t> attrs;
 		
 		FOR_EACH_SUBKEY(kv, subkey) {
-			if (V_stricmp(subkey->GetName(NULL), "ItemName") == 0) {
-				if (item_name == NULL) {
-					item_name = subkey->GetString(NULL);
+			if (V_stricmp(subkey->GetName(nullptr), "ItemName") == 0) {
+				if (item_name == nullptr) {
+					item_name = subkey->GetString(nullptr);
 				} else {
 					Warning("TFBotSpawner: \"ItemName\" field specified multiple times ('%s' / '%s').\n",
-						item_name, subkey->GetString(NULL));
+						item_name, subkey->GetString(nullptr));
 				}
 			} else {
 				static_attrib_t attr;
@@ -1095,7 +1095,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 			}
 		}
 		
-		if (item_name == NULL) {
+		if (item_name == nullptr) {
 			Warning("TFBotSpawner: need to specify ItemName in ItemAttributes.\n");
 		} else {
 			FOR_EACH_VEC(attrs, i) {

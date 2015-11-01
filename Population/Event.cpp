@@ -14,14 +14,14 @@ EventInfo *ParseEvent(KeyValues *kv)
 		const char *name = subkey->GetName();
 		if (strlen(name) > 0) {
 			if (V_stricmp(name, "Target") == 0) {
-				info->target.sprintf(subkey->GetString(NULL));
+				info->target.sprintf(subkey->GetString(nullptr));
 			} else if (V_stricmp(name, "Action") == 0) {
-				info->action.sprintf(subkey->GetString(NULL));
+				info->action.sprintf(subkey->GetString(nullptr));
 			} else {
 				Warning("Unknown field '%s' in WaveSpawn event definition.\n",
-					subkey->GetString(NULL));
+					subkey->GetString(nullptr));
 				delete info;
-				return NULL;
+				return nullptr;
 			}
 		}
 	}
@@ -34,16 +34,16 @@ EventInfo *ParseEvent(KeyValues *kv)
 // edx: name
 void FireEvent(EventInfo *info, const char *name)
 {
-	if (info == NULL) {
+	if (info == nullptr) {
 		return;
 	}
 	
 	const char *target = info->target.Get();
 	const char *action = info->action.Get();
 	
-	CBaseEntity *ent = gEntList->FindEntityByName(NULL, target);
-	if (ent != NULL) {
-		g_EventQueue->AddEvent(ent, action, 0.0f, NULL, NULL);
+	CBaseEntity *ent = gEntList->FindEntityByName(nullptr, target);
+	if (ent != nullptr) {
+		g_EventQueue->AddEvent(ent, action, 0.0f, nullptr, nullptr);
 	} else {
 		Warning("WaveSpawnPopulator: Can't find target entity '%s' for %s\n",
 			target, name);

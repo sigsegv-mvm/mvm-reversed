@@ -113,7 +113,7 @@ public:
 	// TODO
 	bool IsPveModeControlled(CBaseEntity *ent)
 	{
-		return (ent != NULL && this->m_bPlayingMannVsMachine &&
+		return (ent != nullptr && this->m_bPlayingMannVsMachine &&
 			ent->GetTeamNumber() == TF_TEAM_BLU);
 	}
 	// TODO
