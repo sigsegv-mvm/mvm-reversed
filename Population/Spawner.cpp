@@ -368,6 +368,277 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 
 int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
+	static CHandle<CBaseEntity> g_internalSpawnPoint;
+	
+	VPROF_BUDGET("CTFBotSpawner::Spawn", "NextBot");
+	
+	CTFNavArea *area = TheNavMesh->GetNavArea(where, 120.0f);
+	if ((area->m_nAttributes & NO_SPAWNING) != 0) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CTFBotSpawner: %3.2f: *** Tried to spawn in a NO_SPAWNING area at (%f, %f, %f)\n",
+				gpGlobals->curtime, where.x, where.y, where.z);
+		}
+		
+		return 0;
+	}
+	
+	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine &&
+		g_pGameRules->m_iRoundState != GR_STATE_RND_RUNNING) {
+		return 0;
+	}
+	
+	Vector where_modified = where;
+	
+	bool is_space = false;
+	for (float dz = 0.0f; dz < 18.0f; dz += 4.0f) {
+		/* bug: should probably be adding dz here, not 18.0f every time */
+		where_modified.z = where.z + 18.0f;
+		
+		if (IsSpaceToSpawnHere(where_modified)) {
+			is_space = true;
+			break;
+		}
+	}
+	
+	if (!is_space) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CTFBotSpawner: %3.2f: *** No space to spawn at (%f, %f, %f)\n",
+				gpGlobals->curtime, where.x, where.y, where.z);
+		}
+		
+		return 0;
+	}
+	
+	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine &&
+		this->m_iClass == TF_CLASS_ENGINEER &&
+		(this->m_DefaultAttrs.m_nBotAttrs & BOT_ATTRIBUTES_TELEPORTTOHINT) != 0 &&
+		!CTFBotMvMEngineerHintFinder::FindHint(true, false, nullptr)) {
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("CTFBotSpawner: %3.2f: *** No teleporter hint for engineer\n",
+				gpGlobals->curtime);
+		}
+		
+		return 0;
+	}
+	
+	CTeam *team_spec = GetGlobalTeam(TEAM_SPECTATOR);
+	/* bug: should be using the initial number of spectators; by constantly
+	 * updating the count, which will be decreasing, as we increment i, we may
+	 * end up spawning less bots than we actually should be able to */
+	for (int i = 0; i < team_spec->GetNumPlayers(); ++i) {
+		CBasePlayer *player = team_spec->GetPlayer(i);
+		if (!player->IsBot()) {
+			continue;
+		}
+		
+		CTFBot *bot = static_cast<CTFBot *>(team_spec->GetPlayer(i));
+		
+		// TODO: bot offset 0x2b14 dword = 0
+		
+		bot->RemovePlayerAttributes(false);
+		
+		if (*g_internalSpawnPoint == nullptr) {
+			CBaseEntity *spawnpoint =
+				CreateEntityByName("populator_internal_spawn_point");
+			
+			g_internalSpawnPoint = spawnpoint;
+			(*g_internalSpawnPoint)->Spawn();
+		}
+		
+		// TODO: "TFBot" fallback string logic
+		// from MAKE_STRING(this->m_strName.Get())
+		// set const char *name accordingly
+		
+		engine->SetFakeClientConVarValue(bot->edict(), "name", name);
+		
+		(*g_internalSpawnPoint)->SetAbsOrigin(where_modified);
+		(*g_internalSpawnPoint)->SetLocalAngles(vec3_angle);
+		bot->SetSpawnPoint(*g_internalSpawnPoint);
+		
+		bot->ChangeTeam((g_pGameRules->m_bPlayingMannVsMachine ?
+			TF_TEAM_BLU : TF_TEAM_RED), false, true);
+		
+		// TODO bot offset 0x9c0 byte = 0
+		
+		bot->HandleCommand_JoinClass(GetPlayerClassData(this->m_iClass)->m_szClassName);
+		
+		bot->m_PlayerClass.m_iszClassIcon = STRING(this->GetClassIcon(-1));
+		
+		// TODO: CTFBot:: funcs:
+		// AddEventChangeAttributes
+		// GetEventChangeAttributes
+		// OnEventChangeAttributes
+		
+		/* possible bug: doesn't purge old array members? */
+		bot->m_ECAttrs.SetSize(0);
+		FOR_EACH_VEC(this->m_ECAttrs, i) {
+			bot->AddEventChangeAttributes(this->m_ECAttrs[i]);
+		}
+		
+		if (g_pPopulationManager->IsInEndlessWaves()) {
+			g_pPopulationManager->EndlessSetAttributesForBot(bot);
+		}
+		
+		FOR_EACH_VEC(this->m_TeleportWhere, i) {
+			bot->m_TeleportWhere.CopyAndAddToTail(this->m_TeleportWhere[i]);
+		}
+		
+		if (this->HasAttribute(BOT_ATTRIBUTES_MINIBOSS)) {
+			bot->m_bIsMiniBoss = true;
+		}
+		if (this->HasAttribute(BOT_ATTRIBUTES_USEBOSSHEALTHBAR) {
+			bot->m_bUseBossHealthBor = true;
+		}
+		
+		if (this->HasAttribute(BOT_ATTRIBUTES_AUTOJUMP) {
+			bot->m_flAutoJumpMin = this->m_flAutoJumpMin;
+			bot->m_flAutoJumpMax = this->m_flAutoJumpMax;
+		}
+		
+		if (this->HasAttribute(BOT_ATTRIBUTES_BULLETIMMUNE)) {
+			bot->m_Shared.AddCond(TF_COND_BULLET_IMMUNE, -1.0f, nullptr);
+		}
+		if (this->HasAttribute(BOT_ATTRIBUTES_BLASTIMMUNE)) {
+			bot->m_Shared.AddCond(TF_COND_BLAST_IMMUNE, -1.0f, nullptr);
+		}
+		if (this->HasAttribute(BOT_ATTRIBUTES_FIREIMMUNE)) {
+			bot->m_Shared.AddCond(TF_COND_FIRE_IMMUNE, -1.0f, nullptr);
+		}
+		
+		if (g_pGameRules->m_bPlayingMannVsMachine) {
+			bot->m_nCurrency = 0;
+		}
+		
+		if (this->m_iClass = TF_CLASS_SPY) {
+			CUtlVector<CTFPlayer *> blu_players;
+			CollectPlayers<CTFPlayer>(&blu_players, TF_TEAM_BLU, true, false);
+			
+			int num_spies = 0;
+			FOR_EACH_VEC(blu_players, i) {
+				if (blu_players[i]->IsPlayerClass(TF_CLASS_SPY)) {
+					++num_spies;
+				}
+			}
+			
+			IGameEvent *event =
+				gameeventmanager->CreateEvent("mvm_mission_update");
+			if (event != nullptr) {
+				event->SetInt("class", TF_CLASS_SPY);
+				event->SetInt("count", num_spies);
+				
+				gameeventmanager->FireEvent(event);
+			}
+		}
+		
+		bot->m_flScale = this->m_flScale;
+		
+		float scale = this->m_flScale;
+		if (scale < 0.0f) {
+			scale = 1.0f;
+		}
+		bot->SetModelScale(scale);
+		
+		float health = (float)this->m_iHealth;
+		if (health < 0.0f) {
+			health = (float)bot->GetMaxHealth();
+		}
+		health *= g_pPopulationManager->GetHealthMultiplier(false);
+		bot->ModifyMaxHealth((int)health, true, true);
+		
+		bot->StartIdleSound();
+		
+		if (g_pGameRules->m_bPlayingMannVsMachine &&
+			bot->GetTeamNumber() == TF_TEAM_BLU) {
+			// TODO: determine for sure what is at CMissionPopulator+0x30
+			// before we finish this block
+			// (romevision stuff)
+		}
+		
+		// TODO: what is at CPopulationManager+0x6d0?
+		// (ecattr stuff)
+		
+		CCaptureFlag *flag = bot->GetFlagToFetch();
+		if (flag != nullptr) {
+			bot->SetFlagTarget(flag);
+		}
+		
+		if ((bot->m_nBotAttrs & BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE) != 0) {
+			// TODO: slot enum
+			CBaseCombatWeapon *w_secondary = bot->Weapon_GetSlot(1);
+			if (w_secondary != nullptr) {
+				CWeaponMedigun *w_medigun =
+					dynamic_cast<CWeaponMedigun *>(w_secondary);
+				if (w_medigun != nullptr) {
+					w_medigun->AddCharge(1.00f);
+				}
+			}
+			
+			bot->m_Shared.SetRageMeter(100.0f);
+		}
+		
+		int model_class = bot->m_PlayerClass.m_iClass;
+		// TODO: find out what's at CPopulationManager+1650?
+		// presumably it's the EventPopfile value
+		// TODO: holiday enum
+		if (this->m_Populator->m_Popmgr->??? == 1 && TF_IsHolidayActive(10)) {
+			bot->m_nSkin = 4;
+			
+			CFmtStrN<256> zombie_soul_name("Zombie %s",
+				g_aRawPlayerClassNamesShort[model_class]);
+			bot->AddItem(*zombie_soul_name);
+		} else {
+			if (model_class <= TF_CLASS_SPY) {
+				const char *model      = g_szBotModels[model_class];
+				const char *model_boss = g_szBotBossModels[model_class];
+				
+				if ((this->m_flScale >= tf_mvm_miniboss_scale.GetFloat() ||
+					bot->IsMiniBoss()) &&
+					g_pFullFileSystem->FileExists(model_boss)) {
+					bot->PlayerClass.SetCustomModel(model_boss, true);
+					bot->UpdateModel();
+					bot->SetBloodColor(-1);
+				} else if (g_pFullFileSystem->FileExists(model, true)) {
+					bot->PlayerClass.SetCustomModel(model, true);
+					bot->UpdateModel();
+					bot->SetBloodColor(-1);
+				}
+			}
+		}
+		
+		if (ents != nullptr) {
+			ents.AddToTail(bot->GetRefEHandle());
+		}
+		
+		if (g_pGameRules->m_bPlayingMannVsMachine && bot->IsMiniBoss) {
+			g_pGameRules->HaveAllPlayersSpeakConceptIfAllowed(
+				TLK_MVM_GIANT_CALLOUT, TF_TEAM_RED);
+		}
+		
+		if (tf_populator_debug.GetBool()) {
+			DevMsg("%3.2f: Spawned TFBot '%s'\n",
+				gpGlobals->curtime, name);
+		}
+		
+		return 1;
+	}
+	
+	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine) {
+		CUtlVector<CTFPlayer *> mvm_bots;
+		CPopulationManager::CollectMvMBots(&mvm_bots);
+		
+		if (mvm_bots.Count() > 21) {
+			if (tf_populator_debug.GetBool()) {
+				DevMsg("CTFBotSpawner: %3.2f: *** Can't spawn. Max number invaders already spawned.\n",
+					gpGlobals->curtime);
+			}
+			
+			if (mvm_bots.Count() != 22) {
+				CUtlVector<CTFPlayer *> 
+				// TODO
+			}
+		}
+	}
+	
 	// TODO
 }
 
@@ -1144,4 +1415,10 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 	}
 	
 	return false;
+}
+
+
+bool CTFBotMvMEngineerHintFinder::FindHint(bool b1, bool b2, CHandle<CTFBotHintEngineerNest> *hint)
+{
+	// TODO
 }

@@ -123,3 +123,129 @@ private:
 	bool m_bPlayingMannVsMachine; // +0x96a
 	// TODO
 };
+
+
+// TODO:
+// INextBotPlayerInput
+
+
+class CTFPlayer : public CBaseMultiplayerPlayer, public IHasAttributes,
+	public IInventoryUpdateListener
+{
+public:
+	// TODO
+	
+private:
+	// TODO
+	int m_nCurrency;          // +0x2838 NETPROP DT_TFLocalPlayerExclusive
+	bool m_bIsMiniBoss;       // +0x283c NETPROP DT_TFPlayer
+	// TODO
+	bool m_bUseBossHealthBar; // +0x296c NETPROP DT_TFPlayer
+	// TODO
+};
+
+
+template <class T>
+class NextBotPlayer : public T, public INextBot, public INextBotPlayerInput
+{
+public:
+	// TODO
+	
+private:
+	// TODO
+};
+
+
+class CTFBot : public NextBotPlayer<CTFPlayer>, public CGameEventListener
+{
+public:
+	// TODO
+	
+private:
+	// base class layout
+	// +0x0000 - NextBotPlayer<CTFPlayer>
+	// +0x0000   - CTFPlayer
+	// +0x0000     - CBaseMultiplayerPlayer
+	// +0x0000       - CAI_ExpresserHost<CBasePlayer>
+	// +0x0000         - CBasePlayer
+	// +0x0000           - CBaseCombatCharacter
+	// +0x0000             - CBaseFlex
+	// +0x0000               - CBaseAnimatingOverlay
+	// +0x0000                 - CBaseAnimating
+	// +0x0000                   - CBaseEntity
+	// +0x0000                     - IServerEntity
+	// +0x0000                       - IServerUnknown
+	// +0x0000                         - IHandleEntity
+	// +0x1100         - CAI_ExpresserSink
+	// +0x114c     - IHasAttributes
+	// +0x1150     - IInventoryUpdateListener
+	// +0x1150       - GCSDK::ISharedObjectListener
+	// +0x29d0   - INextBot
+	// +0x29d0     - INextBotEventResponder
+	// +0x2a30 - INextBotPlayerInput
+	// +0x2adc - CGameEventListener
+	
+	// 0x0000-0x0014: IHandleEntity/IServerUnknown/IServerEntity
+	// 0x0014-0x0368: CBaseEntity
+	// 0x0368-0x0488: CBaseAnimating/CBaseAnimatingOverlay
+	// 0x0488-0x067c: CBaseFlex
+	// 0x0680-0x0850: CBaseCombatCharacter
+	// 0x0858-0x1100: CBasePlayer
+	// 0x1100-0x114c: CBaseMultiplayerPlayer
+	// 0x114c-0x1150: IHasAttributes
+	
+	// 0x1164: CTFPlayer: CAttributeManager
+	// 0x11c4: CTFPlayer: CTFPlayerInventory
+	// 0x1964: CTFPlayer: CTFPlayerShared
+	// 0x24c4: CTFPlayer: CEconItemView
+	// 0x26ec: CTFPlayer: CTFPlayerClass
+	
+	// 0x2a3c: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a54: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a60: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a6c: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a78: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a84: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a90: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2a9c: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2aa8: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2ab4: NextBotPlayer<CTFPlayer>: CountdownTimer
+	// 0x2ac0: NextBotPlayer<CTFPlayer>: CountdownTimer
+	
+	// 0x2ae4: CTFBot: CTFBot::CTFBotIntention*
+	// 0x2ae8: CTFBot: CTFBotLocomotion*
+	// 0x2aec: CTFBot: CTFBotBody*
+	// 0x2af0: CTFBot: CTFBotVision*
+	
+	// 0x2af4: CTFBot: CountdownTimer
+	// 0x2b04: CTFBot: CountdownTimer
+	
+	CTFBot::AttributeType m_nBotAttrs; // +0x2b14
+	
+	// 0x2bb8: CTFBot: CountdownTimer
+	// 0x2be8: CTFBot: CountdownTimer
+	
+	float m_flScale; // +0x2bf4
+	
+	// 0x2c04: CTFBot: CUtlString
+	
+	// TODO: 0x2c54
+	CUtlStringList m_TeleportWhere; // +0x2c58
+	// TODO: 0x2c6c
+	float m_flAutoJumpMin; // +0x2c70
+	float m_flAutoJumpMax; // +0x2c74
+	// TODO: 0x2c78
+	// TODO: 0x2c7c
+	// TODO: 0x2c80
+	// TODO: 0x2c84
+	CUtlVector<CTFBot::EventChangeAttributes_t> m_ECAttrs; // +0x2c88
+	// TODO: 0x2c9c
+	
+	// 0x2c1c: CTFBot: CountdownTimer
+	// 0x2c40: CTFBot: CountdownTimer
+	
+	
+	// 0x2c78: CTFBot: CountdownTimer
+	
+	// TODO
+};
