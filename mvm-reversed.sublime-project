@@ -2,13 +2,14 @@
 	"folders":
 	[
 		{
+			"file_exclude_patterns":
+			[
+				"*.id*",
+				"*.nam",
+				"*.til"
+			],
 			"follow_symlinks": true,
-			"path": "S:\\tf2\\tf\\bin\\dump\\vtable"
-		},
-		{
-			"follow_symlinks": true,
-			"path": "G:\\TF2\\mvm-reversed",
-			"file_exclude_patterns": ["*.id*", "*.nam", "*.til"]
+			"path": "G:\\TF2\\mvm-reversed"
 		}
 	]
 }
