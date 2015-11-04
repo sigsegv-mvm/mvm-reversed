@@ -2,11 +2,10 @@
 	"folders":
 	[
 		{
-			"file_exclude_patterns":
+			"folder_exclude_patterns":
 			[
-				"*.id*",
-				"*.nam",
-				"*.til"
+				"Binaries",
+				"IDA",
 			],
 			"follow_symlinks": true,
 			"path": "G:\\TF2\\mvm-reversed"
