@@ -1,4 +1,3 @@
 *.sublime-workspace
-*.id*
-*.til
-*.nam
+IDA/
+Binaries/
