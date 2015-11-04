@@ -1,5 +1,5 @@
 /* reverse engineering by sigsegv
- * based on server_srv.so version 20151006
+ * based on TF2 version 20151002
  * Population: item schema attributes
  */
 
