@@ -260,3 +260,40 @@ private:
 	
 	// TODO
 };
+
+
+class CSpawnLocation
+{
+public:
+	enum // TODO: name?
+	{
+		WHERE_TEAMSPAWN = 0,
+		WHERE_AHEAD     = 1,
+		WHERE_BEHIND    = 2,
+		WHERE_ANYWHERE  = 3,
+	};
+	
+	CSpawnLocation()
+	{
+		this->m_iWhere = WHERE_TEAMSPAWN;
+	}
+	
+	bool Parse(KeyValues *kv)
+	{
+		
+	}
+	
+	CTFNavArea *SelectSpawnArea()
+	{
+		
+	}
+	
+	bool FindSpawnLocation(Vector& vec)
+	{
+		
+	}
+	
+private:
+	int m_iWhere;                              // +0x00
+	CUtlVector<CHandle<CBaseEntity>> m_Spawns; // +0x04
+};
