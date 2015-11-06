@@ -7,7 +7,7 @@
 class CPopulationManager : public CPointEntity, public CGameEventListener
 {
 public:
-	// TODO
+	// TODO: get list of all functions (virtual first, then non-virtual)
 	
 private:
 	// TODO

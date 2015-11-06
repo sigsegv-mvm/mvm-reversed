@@ -73,3 +73,6 @@ MAKE SURE THAT CUtlVector includes:
 
 LOOK AT https://github.com/SteamDatabase/GameTracking/blob/master/BuildbotPaths/tf/server.txt
 for pretty much ALL of the relevant source code file paths
+
+classes that are in osx server.dylib but not in linux server_srv.so:
+- CAmmoFilter

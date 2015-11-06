@@ -54,3 +54,11 @@ class IPathCost
 class NextBotManager
 {
 };
+
+
+// derived from INextBotFilter:
+// CHealthFilter
+// CAmmoFilter (only in osx server classgraph)
+
+// derived from INextBotEntityFilter:
+// CUsefulHealTargetFilter
