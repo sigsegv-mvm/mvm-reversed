@@ -101,16 +101,16 @@ struct CTFBot::EventChangeAttributes_t::item_attributes_t
 class IPopulationSpawner
 {
 public:
-	virtual ~IPopulationSpawner() {}
+	virtual ~IPopulationSpawner();
 	
 	virtual bool Parse(KeyValues *kv) = 0;
 	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) = 0;
 	virtual bool IsWhereRequired();
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int);
-	virtual int GetHealth(int);
-	virtual bool IsMiniBoss(int);
+	virtual string_t GetClassIcon(int index);
+	virtual int GetHealth(int index);
+	virtual bool IsMiniBoss(int index);
 	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
 	virtual bool HasEventChangeAttributes(const char *name) const = 0;
 	
@@ -167,9 +167,9 @@ public:
 	virtual bool Parse(KeyValues *kv);
 	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
 	virtual bool IsWhereRequired();
-	virtual string_t GetClassIcon(int);
-	virtual int GetHealth(int);
-	virtual bool IsMiniBoss();
+	virtual string_t GetClassIcon(int index);
+	virtual int GetHealth(int index);
+	virtual bool IsMiniBoss(int index);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
 private:
@@ -192,9 +192,9 @@ public:
 	virtual bool Parse(KeyValues *kv);
 	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
 	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int);
-	virtual int GetHealth(int);
-	virtual bool IsMiniBoss();
+	virtual string_t GetClassIcon(int index);
+	virtual int GetHealth(int index);
+	virtual bool IsMiniBoss(int index);
 	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
@@ -224,9 +224,9 @@ public:
 	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int);
-	virtual int GetHealth(int);
-	virtual bool IsMiniBoss();
+	virtual string_t GetClassIcon(int index);
+	virtual int GetHealth(int index);
+	virtual bool IsMiniBoss(int index);
 	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	
@@ -247,9 +247,9 @@ public:
 	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
 	virtual bool IsVarious();
 	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int);
-	virtual int GetHealth(int);
-	virtual bool IsMiniBoss();
+	virtual string_t GetClassIcon(int index);
+	virtual int GetHealth(int index);
+	virtual bool IsMiniBoss(int index);
 	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
 	virtual bool HasEventChangeAttributes(const char *name) const;
 	

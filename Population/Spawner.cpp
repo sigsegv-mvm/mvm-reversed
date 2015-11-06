@@ -58,6 +58,10 @@ CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
 }
 
 
+IPopulationSpawner::~IPopulationSpawner()
+{
+}
+
 CMobSpawner::~CMobSpawner()
 {
 	if (this->m_SubSpawner != nullptr) {
@@ -609,7 +613,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			ents.AddToTail(bot->GetRefEHandle());
 		}
 		
-		if (g_pGameRules->m_bPlayingMannVsMachine && bot->IsMiniBoss) {
+		if (g_pGameRules->m_bPlayingMannVsMachine && bot->IsMiniBoss()) {
 			g_pGameRules->HaveAllPlayersSpeakConceptIfAllowed(
 				TLK_MVM_GIANT_CALLOUT, TF_TEAM_RED);
 		}
@@ -905,22 +909,22 @@ int CRandomChoiceSpawner::GetHealth(int index)
 }
 
 
-bool IPopulationSpawner::IsMiniBoss()
+bool IPopulationSpawner::IsMiniBoss(int index)
 {
 	return false;
 }
 
-bool CTankSpawner::IsMiniBoss()
+bool CTankSpawner::IsMiniBoss(int index)
 {
 	return true;
 }
 
-bool CTFBotSpawner::IsMiniBoss()
+bool CTFBotSpawner::IsMiniBoss(int index)
 {
 	return ((this->m_DefaultAttrs.m_nBotAttrs & BOT_ATTRIBUTES_MINIBOSS) != 0);
 }
 
-bool CSquadSpawner::IsMiniBoss()
+bool CSquadSpawner::IsMiniBoss(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
 		return false;
@@ -937,7 +941,7 @@ bool CSquadSpawner::IsMiniBoss()
 	}
 }
 
-bool CRandomChoiceSpawner::IsMiniBoss()
+bool CRandomChoiceSpawner::IsMiniBoss(int index)
 {
 	if (index < 0) {
 		return false;
