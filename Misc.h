@@ -159,6 +159,17 @@ private:
 class CTFBot : public NextBotPlayer<CTFPlayer>, public CGameEventListener
 {
 public:
+	enum MissionType
+	{
+		// TODO: 0
+		// TODO: 1
+		MISSION_DESTROY_SENTRIES = 2,
+		MISSION_SNIPER           = 3,
+		MISSION_SPY              = 4,
+		MISSION_ENGINEER         = 5,
+		// TODO: 6
+	};
+	
 	// TODO
 	
 private:
