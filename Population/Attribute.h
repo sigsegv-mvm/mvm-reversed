@@ -15,16 +15,16 @@ class ISchemaAttributeType
 public:
 	virtual ~ISchemaAttributeType();
 	
-	??? GetTypeUniqueIdentifier();
-	??? LoadEconAttributeValue(CEconItem *, CEconItemAttributeDefinition const*, attribute_data_union_t const&);
-	??? ConvertEconAttributeValueToByteStream(attribute_data_union_t const&, std::string *);
-	??? BConvertStringToEconAttributeValue(CEconItemAttributeDefinition const*, const char *, attribute_data_union_t *, bool);
-	??? ConvertEconAttributeValueToString(CEconItemAttributeDefinition const*, attribute_data_union_t const&, std::string *);
-	??? LoadByteStreamToEconAttributeValue(CEconItem *, CEconItemAttributeDefinition const*, std::string const&);
-	??? InitializeNewEconAttributeValue(attribute_data_union_t *);
-	??? UnloadEconAttributeValue(attribute_data_union_t *);
-	??? OnIterateAttributeValue(IEconItemAttributeIterator *, CEconItemAttributeDefinition const*, attribute_data_union_t const&);
-	??? BSupportsGameplayModificationAndNetworking();
+	UNKNOWN GetTypeUniqueIdentifier();
+	UNKNOWN LoadEconAttributeValue(CEconItem *, CEconItemAttributeDefinition const*, attribute_data_union_t const&);
+	UNKNOWN ConvertEconAttributeValueToByteStream(attribute_data_union_t const&, std::string *);
+	UNKNOWN BConvertStringToEconAttributeValue(CEconItemAttributeDefinition const*, const char *, attribute_data_union_t *, bool);
+	UNKNOWN ConvertEconAttributeValueToString(CEconItemAttributeDefinition const*, attribute_data_union_t const&, std::string *);
+	UNKNOWN LoadByteStreamToEconAttributeValue(CEconItem *, CEconItemAttributeDefinition const*, std::string const&);
+	UNKNOWN InitializeNewEconAttributeValue(attribute_data_union_t *);
+	UNKNOWN UnloadEconAttributeValue(attribute_data_union_t *);
+	UNKNOWN OnIterateAttributeValue(IEconItemAttributeIterator *, CEconItemAttributeDefinition const*, attribute_data_union_t const&);
+	UNKNOWN BSupportsGameplayModificationAndNetworking();
 };
 
 

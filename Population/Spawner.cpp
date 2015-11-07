@@ -4,21 +4,26 @@
  */
 
 
-CMobSpawner::CMobSpawner(IPopulator *populator)
+IPopulationSpawner::IPopulationSpawner(IPopulator *populator)
 	: m_Populator(populator)
+{
+}
+
+CMobSpawner::CMobSpawner(IPopulator *populator)
+	: IPopulationSpawner(populator)
 {
 	this->m_iCount     = 0;
 	this->m_SubSpawner = nullptr;
 }
 
 CSentryGunSpawner::CSentryGunSpawner(IPopulator *populator)
-	: m_Populator(populator)
+	: IPopulationSpawner(populator)
 {
 	this->m_iLevel = 0;
 }
 
 CTankSpawner::CTankSpawner(IPopulator *populator)
-	: m_Populator(populator)
+	: IPopulationSpawner(populator)
 {
 	this->m_iHealth             = 50000;
 	this->m_flSpeed             = 75.0f;
@@ -30,9 +35,9 @@ CTankSpawner::CTankSpawner(IPopulator *populator)
 }
 
 CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
-	: m_Populator(populator)
+	: IPopulationSpawner(populator)
 {
-	this->m_iClass        = TF_CLASS_UNKNOWN;
+	this->m_iClass        = TF_CLASS_UNDEFINED;
 	this->m_strClassIcon  = NULL_STRING;
 	this->m_iHealth       = -1;
 	this->m_flScale       = -1.0f;
@@ -45,14 +50,14 @@ CTFBotSpawner::CTFBotSpawner(IPopulator *populator)
 }
 
 CSquadSpawner::CSquadSpawner(IPopulator *populator)
-	: m_Populator(populator)
+	: IPopulationSpawner(populator)
 {
 	this->m_flFormationSize      = -1.0f;
 	this->m_bShouldPreserveSquad = false;
 }
 
 CRandomChoiceSpawner::CRandomChoiceSpawner(IPopulator *populator)
-	: m_Populator(populator)
+	: IPopulationSpawner(populator)
 {
 	this->m_iSpawned = 0;
 }
@@ -166,7 +171,7 @@ bool CTankSpawner::Parse(KeyValues *kv)
 
 bool CTFBotSpawner::Parse(KeyValues *kv)
 {
-	this->m_iClass        = TF_CLASS_UNKNOWN;
+	this->m_iClass        = TF_CLASS_UNDEFINED;
 	this->m_strClassIcon  = NULL_STRING;
 	this->m_iHealth       = -1;
 	this->m_flScale       = -1.0f;
@@ -202,7 +207,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 			} else if (V_stricmp(name, "Class") == 0) {
 				const char *str = subkey->GetString(nullptr);
 				if ((this->m_iClass = GetClassIndexFromString(str, 10)) !=
-					TF_CLASS_UNKNOWN) {
+					TF_CLASS_UNDEFINED) {
 					if (this->m_strName.IsEmpty()) {
 						this->m_strName = str;
 					}
@@ -212,7 +217,7 @@ bool CTFBotSpawner::Parse(KeyValues *kv)
 				}
 			} else if (V_stricmp(name, "ClassIcon") == 0) {
 				this->m_strClassIcon =
-					STRING(AllocPooledString(subkey->GetString(nullptr)));
+					AllocPooledString(subkey->GetString(nullptr));
 			} else if (V_stricmp(name, "Health") == 0) {
 				this->m_iHealth = subkey->GetInt(nullptr);
 			} else if (V_stricmp(name, "Scale") == 0) {
@@ -305,8 +310,8 @@ int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *en
 
 int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	CBaseEntity *sentry = CreateEntityByName("obj_sentrygun");
-	if (sentry == nullptr) {
+	CBaseEntity *ent = CreateEntityByName("obj_sentrygun");
+	if (ent == nullptr) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CSentryGunSpawner: %3.2f: Failed to create obj_sentrygun\n",
 				gpGlobals->curtime);
@@ -314,6 +319,8 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 		
 		return 0;
 	}
+	
+	CObjectSentrygun *sentry = static_cast<CObjectSentrygun *>(ent);
 	
 	sentry->SetAbsOrigin(where);
 	sentry->SetAbsAngles(vec3_angle);
@@ -326,7 +333,7 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 	sentry->InitializeMapPlacedObject();
 	
 	if (ents != nullptr) {
-		ents.AddToTail(sentry->GetRefEHandle());
+		ents->AddToTail(sentry->GetRefEHandle());
 	}
 	
 	return 1;
@@ -334,8 +341,8 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 
 int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents)
 {
-	CBaseEntity *tank = CreateEntityByName("tank_boss");
-	if (tank == nullptr) {
+	CBaseEntity *ent = CreateEntityByName("tank_boss");
+	if (ent == nullptr) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CTankSpawner: %3.2f: Failed to create base_boss\n",
 				gpGlobals->curtime);
@@ -344,12 +351,14 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 		return 0;
 	}
 	
+	CTFTankBoss *tank = static_cast<CTFTankBoss *>(ent);
+	
 	tank->SetAbsOrigin(where);
 	tank->SetAbsAngles(vec3_angle);
 	tank->m_iBossHealth = (int)((float)this->m_iHealth *
 		g_pPopulationManager->GetHealthMultiplier(true));
 	tank->m_flBossSpeed = this->m_flSpeed;
-	tank->m_iName = MAKE_STRING(this->m_strName.Get());
+	tank->SetName(MAKE_STRING(this->m_strName.Get()));
 	tank->SetSkin(this->m_iSkin);
 	tank->SetStartingPathTrackNode(this->m_strStartNode.GetForModify());
 	tank->Spawn();
@@ -364,7 +373,7 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 	}
 	
 	if (ents != nullptr) {
-		ents.AddToTail(tank->GetRefEHandle());
+		ents->AddToTail(tank->GetRefEHandle());
 	}
 	
 	return 1;
@@ -376,7 +385,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 	
 	VPROF_BUDGET("CTFBotSpawner::Spawn", "NextBot");
 	
-	CTFNavArea *area = TheNavMesh->GetNavArea(where, 120.0f);
+	CNavArea *area = TheNavMesh->GetNavArea(where, 120.0f);
 	if ((area->m_nAttributes & NO_SPAWNING) != 0) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CTFBotSpawner: %3.2f: *** Tried to spawn in a NO_SPAWNING area at (%f, %f, %f)\n",
@@ -415,7 +424,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 	
 	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine &&
 		this->m_iClass == TF_CLASS_ENGINEER &&
-		(this->m_DefaultAttrs.m_nBotAttrs & BOT_ATTRIBUTES_TELEPORTTOHINT) != 0 &&
+		(this->m_DefaultAttrs.m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0 &&
 		!CTFBotMvMEngineerHintFinder::FindHint(true, false, nullptr)) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("CTFBotSpawner: %3.2f: *** No teleporter hint for engineer\n",
@@ -446,7 +455,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 				CreateEntityByName("populator_internal_spawn_point");
 			
 			g_internalSpawnPoint = spawnpoint;
-			(*g_internalSpawnPoint)->Spawn();
+			g_internalSpawnPoint->Spawn();
 		}
 		
 		// TODO: "TFBot" fallback string logic
@@ -455,9 +464,9 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		engine->SetFakeClientConVarValue(bot->edict(), "name", name);
 		
-		(*g_internalSpawnPoint)->SetAbsOrigin(where_modified);
-		(*g_internalSpawnPoint)->SetLocalAngles(vec3_angle);
-		bot->SetSpawnPoint(*g_internalSpawnPoint);
+		g_internalSpawnPoint->SetAbsOrigin(where_modified);
+		g_internalSpawnPoint->SetLocalAngles(vec3_angle);
+		bot->SetSpawnPoint(g_internalSpawnPoint);
 		
 		bot->ChangeTeam((g_pGameRules->m_bPlayingMannVsMachine ?
 			TF_TEAM_BLU : TF_TEAM_RED), false, true);
@@ -487,25 +496,25 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			bot->m_TeleportWhere.CopyAndAddToTail(this->m_TeleportWhere[i]);
 		}
 		
-		if (this->HasAttribute(BOT_ATTRIBUTES_MINIBOSS)) {
+		if (this->HasAttribute(CTFBot::AttributeType::MINIBOSS, -1)) {
 			bot->m_bIsMiniBoss = true;
 		}
-		if (this->HasAttribute(BOT_ATTRIBUTES_USEBOSSHEALTHBAR) {
+		if (this->HasAttribute(CTFBot::AttributeType::USEBOSSHEALTHBAR, -1)) {
 			bot->m_bUseBossHealthBor = true;
 		}
 		
-		if (this->HasAttribute(BOT_ATTRIBUTES_AUTOJUMP) {
+		if (this->HasAttribute(CTFBot::AttributeType::AUTOJUMP, -1)) {
 			bot->m_flAutoJumpMin = this->m_flAutoJumpMin;
 			bot->m_flAutoJumpMax = this->m_flAutoJumpMax;
 		}
 		
-		if (this->HasAttribute(BOT_ATTRIBUTES_BULLETIMMUNE)) {
+		if (this->HasAttribute(CTFBot::AttributeType::BULLETIMMUNE, -1)) {
 			bot->m_Shared.AddCond(TF_COND_BULLET_IMMUNE, -1.0f, nullptr);
 		}
-		if (this->HasAttribute(BOT_ATTRIBUTES_BLASTIMMUNE)) {
+		if (this->HasAttribute(CTFBot::AttributeType::BLASTIMMUNE, -1)) {
 			bot->m_Shared.AddCond(TF_COND_BLAST_IMMUNE, -1.0f, nullptr);
 		}
-		if (this->HasAttribute(BOT_ATTRIBUTES_FIREIMMUNE)) {
+		if (this->HasAttribute(CTFBot::AttributeType::FIREIMMUNE, -1)) {
 			bot->m_Shared.AddCond(TF_COND_FIRE_IMMUNE, -1.0f, nullptr);
 		}
 		
@@ -513,7 +522,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			bot->m_nCurrency = 0;
 		}
 		
-		if (this->m_iClass = TF_CLASS_SPY) {
+		if (this->m_iClass == TF_CLASS_SPY) {
 			CUtlVector<CTFPlayer *> blu_players;
 			CollectPlayers<CTFPlayer>(&blu_players, TF_TEAM_BLU, true, false);
 			
@@ -566,7 +575,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			bot->SetFlagTarget(flag);
 		}
 		
-		if ((bot->m_nBotAttrs & BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE) != 0) {
+		if ((bot->m_nBotAttrs & CTFBot::AttributeType::SPAWNWITHFULLCHARGE) != 0) {
 			// TODO: slot enum
 			CBaseCombatWeapon *w_secondary = bot->Weapon_GetSlot(1);
 			if (w_secondary != nullptr) {
@@ -601,7 +610,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 					bot->PlayerClass.SetCustomModel(model_boss, true);
 					bot->UpdateModel();
 					bot->SetBloodColor(-1);
-				} else if (g_pFullFileSystem->FileExists(model, true)) {
+				} else if (g_pFullFileSystem->FileExists(model)) {
 					bot->PlayerClass.SetCustomModel(model, true);
 					bot->UpdateModel();
 					bot->SetBloodColor(-1);
@@ -610,7 +619,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		}
 		
 		if (ents != nullptr) {
-			ents.AddToTail(bot->GetRefEHandle());
+			ents->AddToTail(bot->GetRefEHandle());
 		}
 		
 		if (g_pGameRules->m_bPlayingMannVsMachine && bot->IsMiniBoss()) {
@@ -678,7 +687,7 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		}
 		
 		FOR_EACH_VEC(spawned, i) {
-			CBaseEntity *ent = *(spawned[i]);
+			CBaseEntity *ent = spawned[i];
 			if (ent != nullptr && ent->IsPlayer()) {
 				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
 				player->ChangeTeam(TEAM_SPECTATOR, false, true);
@@ -696,7 +705,7 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		squad->m_bShouldPreserveSquad = this->m_bShouldPreserveSquad;
 		
 		FOR_EACH_VEC(spawned, i) {
-			CBaseEntity *ent = *(spawned[i]);
+			CBaseEntity *ent = spawned[i];
 			if (ent != nullptr && ent->IsPlayer()) {
 				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
 				
@@ -773,7 +782,7 @@ int CTFBotSpawner::GetClass(int index)
 int CSquadSpawner::GetClass(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return TF_CLASS_UNKNOWN;
+		return TF_CLASS_UNDEFINED;
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -783,14 +792,14 @@ int CSquadSpawner::GetClass(int index)
 		return spawner->GetClass(-1);
 	} else {
 		DevWarning("Nested complex spawner types... need a method for counting these.");
-		return TF_CLASS_UNKNOWN;
+		return TF_CLASS_UNDEFINED;
 	}
 }
 
 int CRandomChoiceSpawner::GetClass(int index)
 {
 	if (index < 0) {
-		return TF_CLASS_UNKNOWN;
+		return TF_CLASS_UNDEFINED;
 	}
 	
 	this->GenerateRandomIndexes(index);
@@ -800,7 +809,7 @@ int CRandomChoiceSpawner::GetClass(int index)
 		return spawner->GetClass(-1);
 	} else {
 		DevWarning("Nested complex spawner types... need a method for counting these.");
-		return TF_CLASS_UNKNOWN;
+		return TF_CLASS_UNDEFINED;
 	}
 }
 
@@ -921,7 +930,7 @@ bool CTankSpawner::IsMiniBoss(int index)
 
 bool CTFBotSpawner::IsMiniBoss(int index)
 {
-	return ((this->m_DefaultAttrs.m_nBotAttrs & BOT_ATTRIBUTES_MINIBOSS) != 0);
+	return ((this->m_DefaultAttrs.m_nBotAttrs & CTFBot::AttributeType::MINIBOSS) != 0);
 }
 
 bool CSquadSpawner::IsMiniBoss(int index)
@@ -1028,7 +1037,7 @@ bool CTankSpawner::HasEventChangeAttributes(const char *name) const
 bool CTFBotSpawner::HasEventChangeAttributes(const char *name) const
 {
 	FOR_EACH_VEC(this->m_ECAttrs, i) {
-		CTFBot::EventChangeAttributes_t& ecattr = this->m_ECAttrs[i];
+		const CTFBot::EventChangeAttributes_t& ecattr = this->m_ECAttrs[i];
 		
 		const char *ecname = ecattr.m_strName.Get();
 		if (name == ecname || V_stricmp(name, ecname) == 0) {
@@ -1072,43 +1081,43 @@ IPopulationSpawner *IPopulationSpawner::ParseSpawner(IPopulator *populator, KeyV
 	
 	IPopulationSpawner* spawner;
 	if (V_stricmp(name, "TFBot") == 0) {
-		spawner = new CTFBotSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CTFBotSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading TFBot spawner definition\n");
 		}
 	} else if (V_stricmp(name, "Tank") == 0) {
-		spawner = new TankSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CTankSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading Tank spawner definition\n");
 		}
 	} else if (V_stricmp(name, "SentryGun") == 0) {
-		spawner = new CSentryGunSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CSentryGunSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading SentryGun spawner definition\n");
 		}
 	} else if (V_stricmp(name, "Squad") == 0) {
-		spawner = new CSquadSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CSquadSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading Squad spawner definition\n");
 		}
 	} else if (V_stricmp(name, "Mob") == 0) {
-		spawner = new CMobSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CMobSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading Mob spawner definition\n");
 		}
 	} else if (V_stricmp(name, "RandomChoice") == 0) {
-		spawner = new CRandomChoiceSpawner(this);
-		if (spawner->Parse(populator)) {
+		spawner = new CRandomChoiceSpawner(populator);
+		if (spawner->Parse(kv)) {
 			return spawner;
 		} else {
 			Warning("Warning reading RandomChoice spawner definition\n");
@@ -1181,13 +1190,13 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "Easy") == 0) {
-			ecattr.m_iSkill = BOT_SKILL_EASY;
+			ecattr.m_iSkill = CTFBot::DifficultyType::EASY;
 		} else if (V_stricmp(val, "Normal") == 0) {
-			ecattr.m_iSkill = BOT_SKILL_NORMAL;
+			ecattr.m_iSkill = CTFBot::DifficultyType::NORMAL;
 		} else if (V_stricmp(val, "Hard") == 0) {
-			ecattr.m_iSkill = BOT_SKILL_HARD;
+			ecattr.m_iSkill = CTFBot::DifficultyType::HARD;
 		} else if (V_stricmp(val, "Expert") == 0) {
-			ecattr.m_iSkill = BOT_SKILL_EXPERT;
+			ecattr.m_iSkill = CTFBot::DifficultyType::EXPERT;
 		} else {
 			Warning("TFBotSpawner: Invalid skill '%s'\n", val);
 			return false;
@@ -1200,11 +1209,11 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "MeleeOnly") == 0) {
-			ecattr.m_nWeaponRestrict = BOT_RESTRICT_MELEEONLY;
+			ecattr.m_nWeaponRestrict = CTFBot::WeaponRestriction::MELEEONLY;
 		} else if (V_stricmp(val, "PrimaryOnly") == 0) {
-			ecattr.m_nWeaponRestrict = BOT_RESTRICT_PRIMARYONLY;
+			ecattr.m_nWeaponRestrict = CTFBot::WeaponRestriction::PRIMARYONLY;
 		} else if (V_stricmp(val, "SecondaryOnly") == 0) {
-			ecattr.m_nWeaponRestrict = BOT_RESTRICT_SECONDARYONLY;
+			ecattr.m_nWeaponRestrict = CTFBot::WeaponRestriction::SECONDARYONLY;
 		} else {
 			Warning("TFBotSpawner: Invalid weapon restriction '%s'\n", val);
 			return false;
@@ -1218,7 +1227,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		
 		if (V_stricmp(val, "Mobber") == 0 ||
 			V_stricmp(val, "Push") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::AGGRESSIVE;
 		} else {
 			Warning("TFBotSpawner: invalid behavior modifier '%s'\n", val);
 			return false;
@@ -1246,51 +1255,51 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		const char *val = kv->GetString(nullptr);
 		
 		if (V_stricmp(val, "RemoveOnDeath") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_REMOVEONDEATH;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::REMOVEONDEATH;
 		} else if (V_stricmp(val, "Aggressive") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AGGRESSIVE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::AGGRESSIVE;
 		} else if (V_stricmp(val, "SuppressFire") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_SUPPRESSFIRE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::SUPPRESSFIRE;
 		} else if (V_stricmp(val, "DisableDodge") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_DISABLEDODGE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::DISABLEDODGE;
 		} else if (V_stricmp(val, "BecomeSpectatorOnDeath") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BECOMESPECTATORONDEATH;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::BECOMESPECTATORONDEATH;
 		} else if (V_stricmp(val, "RetainBuildings") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_RETAINBUILDINGS;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::RETAINBUILDINGS;
 		} else if (V_stricmp(val, "SpawnWithFullCharge") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::SPAWNWITHFULLCHARGE;
 		} else if (V_stricmp(val, "AlwaysCrit") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_ALWAYSCRIT;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::ALWAYSCRIT;
 		} else if (V_stricmp(val, "IgnoreEnemies") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_IGNOREENEMIES;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::IGNOREENEMIES;
 		} else if (V_stricmp(val, "HoldFireUntilFullReload") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::HOLDFIREUNTILFULLRELOAD;
 		} else if (V_stricmp(val, "AlwaysFireWeapon") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_ALWAYSFIREWEAPON;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::ALWAYSFIREWEAPON;
 		} else if (V_stricmp(val, "TeleportToHint") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_TELEPORTTOHINT;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::TELEPORTTOHINT;
 		} else if (V_stricmp(val, "MiniBoss") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_MINIBOSS;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::MINIBOSS;
 		} else if (V_stricmp(val, "UseBossHealthBar") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_USEBOSSHEALTHBAR;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::USEBOSSHEALTHBAR;
 		} else if (V_stricmp(val, "IgnoreFlag") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_IGNOREFLAG;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::IGNOREFLAG;
 		} else if (V_stricmp(val, "AutoJump") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AUTOJUMP;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::AUTOJUMP;
 		} else if (V_stricmp(val, "AirChargeOnly") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_AIRCHARGEONLY;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::AIRCHARGEONLY;
 		} else if (V_stricmp(val, "VaccinatorBullets") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORBULLETS;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::VACCINATORBULLETS;
 		} else if (V_stricmp(val, "VaccinatorBlast") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORBLAST;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::VACCINATORBLAST;
 		} else if (V_stricmp(val, "VaccinatorFire") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_VACCINATORFIRE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::VACCINATORFIRE;
 		} else if (V_stricmp(val, "BulletImmune") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BULLETIMMUNE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::BULLETIMMUNE;
 		} else if (V_stricmp(val, "BlastImmune") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_BLASTIMMUNE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::BLASTIMMUNE;
 		} else if (V_stricmp(val, "FireImmune") == 0) {
-			ecattr.m_nBotAttrs |= BOT_ATTRIBUTES_FIREIMMUNE;
+			ecattr.m_nBotAttrs |= CTFBot::AttributeType::FIREIMMUNE;
 		} else {
 			Warning("TFBotSpawner: Invalid attribute '%s'\n", val);
 			return false;
@@ -1347,7 +1356,7 @@ bool ParseDynamicAttributes(CTFBot::EventChangeAttributes_t& ecattr, KeyValues *
 		CUtlVector<static_attrib_t> attrs;
 		
 		FOR_EACH_SUBKEY(kv, subkey) {
-			if (V_stricmp(subkey->GetName(nullptr), "ItemName") == 0) {
+			if (V_stricmp(subkey->GetName(), "ItemName") == 0) {
 				if (item_name == nullptr) {
 					item_name = subkey->GetString(nullptr);
 				} else {

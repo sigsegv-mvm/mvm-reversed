@@ -7,6 +7,7 @@
 class IPopulator
 {
 public:
+	IPopulator(CPopulationManager *popmgr);
 	virtual ~IPopulator();
 	
 	virtual bool Parse(KeyValues *kv) = 0;
@@ -108,7 +109,7 @@ public:
 	int GetCurrencyAmountPerDeath();
 	
 private:
-	static int m_reservedPlayerSlotCount = ???;
+	//static int m_reservedPlayerSlotCount = ???;
 	
 	// +0x00c CSpawnLocation
 	// +0x024 TotalCount dword 0

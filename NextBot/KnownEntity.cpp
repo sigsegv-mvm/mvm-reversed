@@ -33,15 +33,16 @@ void CKnownEntity::Destroy()
 
 void CKnownEntity::UpdatePosition()
 {
-	CBaseEntity *ent = *this->m_Entity;
+	CBaseEntity *ent = this->m_Entity;
 	if (ent == nullptr) {
 		return;
 	}
 	this->m_Position = ent->GetAbsOrigin();
 	
 	CNavArea *area = nullptr;
-	if ((*this->m_Entity).IsCombatCharacter()) {
-		area = (*this->m_Entity).GetLastKnownArea();
+	if (this->m_Entity->IsCombatCharacter()) {
+		CBaseCombatCharacter *cbcc = static_cast<CBaseCombatCharacter *>(this->m_Entity.Get());
+		area = cbcc->GetLastKnownArea();
 	}
 	this->m_NavArea = area;
 	
@@ -50,10 +51,10 @@ void CKnownEntity::UpdatePosition()
 
 CBaseEntity *CKnownEntity::GetEntity() const
 {
-	return *this->m_Entity;
+	return this->m_Entity;
 }
 
-Vector *CKnownEntity::GetLastKnownPosition() const
+const Vector *CKnownEntity::GetLastKnownPosition() const
 {
 	return &this->m_Position;
 }
@@ -63,7 +64,7 @@ bool CKnownEntity::HasLastKnownPositionBeenSeen() const
 	return this->m_bLastKnownPosWasSeen;
 }
 
-void CKnownEntity::MarkLastKnownPositionAsSeen() const
+void CKnownEntity::MarkLastKnownPositionAsSeen()
 {
 	this->m_bLastKnownPosWasSeen = true;
 }
@@ -142,7 +143,7 @@ bool CKnownEntity::IsObsolete() const
 
 bool CKnownEntity::operator==(const CKnownEntity& that) const
 {
-	return (this->GetEntity() != null && that.GetEntity() != null &&
+	return (this->GetEntity() != nullptr && that.GetEntity() != nullptr &&
 		this->GetEntity() == that.GetEntity());
 }
 

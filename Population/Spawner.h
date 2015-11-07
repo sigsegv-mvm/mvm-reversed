@@ -4,103 +4,10 @@
  */
 
 
-enum CTFBot::AttributeType
-{
-	BOT_ATTRIBUTES_REMOVEONDEATH           = (1 << 0),
-	BOT_ATTRIBUTES_AGGRESSIVE              = (1 << 1),
-	// 4?
-	BOT_ATTRIBUTES_SUPPRESSFIRE            = (1 << 3),
-	BOT_ATTRIBUTES_DISABLEDODGE            = (1 << 4),
-	BOT_ATTRIBUTES_BECOMESPECTATORONDEATH  = (1 << 5),
-	// 6?
-	BOT_ATTRIBUTES_RETAINBUILDINGS         = (1 << 7),
-	BOT_ATTRIBUTES_SPAWNWITHFULLCHARGE     = (1 << 8),
-	BOT_ATTRIBUTES_ALWAYSCRIT              = (1 << 9),
-	BOT_ATTRIBUTES_IGNOREENEMIES           = (1 << 10),
-	BOT_ATTRIBUTES_HOLDFIREUNTILFULLRELOAD = (1 << 11),
-	// 12?
-	BOT_ATTRIBUTES_ALWAYSFIREWEAPON        = (1 << 13),
-	BOT_ATTRIBUTES_TELEPORTTOHINT          = (1 << 14),
-	BOT_ATTRIBUTES_MINIBOSS                = (1 << 15),
-	BOT_ATTRIBUTES_USEBOSSHEALTHBAR        = (1 << 16),
-	BOT_ATTRIBUTES_IGNOREFLAG              = (1 << 17),
-	BOT_ATTRIBUTES_AUTOJUMP                = (1 << 18),
-	BOT_ATTRIBUTES_AIRCHARGEONLY           = (1 << 19),
-	BOT_ATTRIBUTES_VACCINATORBULLETS       = (1 << 20),
-	BOT_ATTRIBUTES_VACCINATORBLAST         = (1 << 21),
-	BOT_ATTRIBUTES_VACCINATORFIRE          = (1 << 22),
-	BOT_ATTRIBUTES_BULLETIMMUNE            = (1 << 23),
-	BOT_ATTRIBUTES_BLASTIMMUNE             = (1 << 24),
-	BOT_ATTRIBUTES_FIREIMMUNE              = (1 << 25),
-};
-
-
-enum CTFBot::DifficultyType
-{
-	BOT_SKILL_EASY   = 0,
-	BOT_SKILL_NORMAL = 1,
-	BOT_SKILL_HARD   = 2,
-	BOT_SKILL_EXPERT = 3,
-};
-
-
-// TODO: type name for this?
-enum
-{
-	BOT_RESTRICT_NONE          = 0,
-	BOT_RESTRICT_MELEEONLY     = (1 << 0),
-	BOT_RESTRICT_PRIMARYONLY   = (1 << 1),
-	BOT_RESTRICT_SECONDARYONLY = (1 << 2),
-};
-
-
-struct CTFBot::EventChangeAttributes_t
-{
-	CTFBot::EventChangeAttributes_t(const char *name = "default")
-	{
-		this->Reset(name);
-	}
-	
-	void Reset(const char *name = "default")
-	{
-		this->m_strName = name;
-		
-		this->m_iSkill          = BOT_SKILL_EASY;
-		this->m_nWeaponRestrict = BOT_RESTRICT_NONE;
-		// TODO: 0x0c
-		// TODO: 0x10
-		this->m_nBotAttrs       = 0;
-		this->m_flVisionRange   = -1.0f;
-		
-		this->m_ItemNames.RemoveAll();
-		this->m_ItemAttrs.RemoveAll();
-		this->m_CharAttrs.RemoveAll();
-		this->m_Tags.RemoveAll();
-	}
-	
-	CUtlString m_strName;       // +0x00
-	int m_iSkill;               // +0x04
-	int m_nWeaponRestrict;      // +0x08
-	// TODO: 0x0c
-	// TODO: 0x10
-	CTFBot::AttributeType m_nBotAttrs; // +0x14
-	float m_flVisionRange;      // +0x18
-	CUtlStringList m_ItemNames; // +0x1c
-	CUtlVector<CTFBot::EventChangeAttributes_t::item_attributes_t> m_ItemAttrs; // +0x30
-	CUtlVector<static_attrib_t> m_CharAttrs; // +0x44
-	CUtlStringList m_Tags;  // +0x58
-};
-
-struct CTFBot::EventChangeAttributes_t::item_attributes_t
-{
-	CUtlString m_strItemName;                    // +0x00
-	CCopyableUtlVector<static_attrib_t> m_Attrs; // +0x04
-};
-
-
 class IPopulationSpawner
 {
 public:
+	IPopulationSpawner(IPopulator *populator);
 	virtual ~IPopulationSpawner();
 	
 	virtual bool Parse(KeyValues *kv) = 0;

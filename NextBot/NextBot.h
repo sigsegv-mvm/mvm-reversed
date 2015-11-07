@@ -9,10 +9,10 @@ class INextBotComponent : public INextBotEventResponder
 public:
 	virtual ~INextBotComponent();
 	
-	virtual ??? Reset();
-	virtual ??? Update() = 0;
-	virtual ??? Upkeep();
-	virtual ??? GetBot() const;
+	virtual UNKNOWN Reset();
+	virtual UNKNOWN Update() = 0;
+	virtual UNKNOWN Upkeep();
+	virtual UNKNOWN GetBot() const;
 	
 protected:
 	// TODO
@@ -22,13 +22,20 @@ private:
 };
 
 
-// TODO: enum NextBotDebugType
-// TODO: INextBot::NextBotDebugLineType
+enum NextBotDebugType
+{
+	// TODO
+};
 
 
 class INextBot : public INextBotEventResponder
 {
 public:
+	enum NextBotDebugLineType
+	{
+		// TODO
+	};
+	
 	INextBot();
 	virtual ~INextBot();
 	
@@ -36,66 +43,66 @@ public:
 	virtual INextBotEventResponder *FirstContainedResponder() const;
 	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const;
 	
-	virtual ??? Reset();
-	virtual ??? Update();
-	virtual ??? Upkeep();
+	virtual UNKNOWN Reset();
+	virtual UNKNOWN Update();
+	virtual UNKNOWN Upkeep();
 	
-	virtual ??? IsRemovedOnReset() const;
+	virtual UNKNOWN IsRemovedOnReset() const;
 	
-	virtual ??? GetEntity() const = 0;
-	virtual ??? GetNextBotCombatCharacter() const;
+	virtual UNKNOWN GetEntity() const = 0;
+	virtual UNKNOWN GetNextBotCombatCharacter() const;
 	
-	virtual ??? GetLocomotionInterface() const;
-	virtual ??? GetBodyInterface() const;
-	virtual ??? GetIntentionInterface() const;
-	virtual ??? GetVisionInterface() const;
+	virtual UNKNOWN GetLocomotionInterface() const;
+	virtual UNKNOWN GetBodyInterface() const;
+	virtual UNKNOWN GetIntentionInterface() const;
+	virtual UNKNOWN GetVisionInterface() const;
 	
-	virtual ??? SetPosition(const Vector& v1);
-	virtual ??? GetPosition() const;
+	virtual UNKNOWN SetPosition(const Vector& v1);
+	virtual UNKNOWN GetPosition() const;
 	
-	virtual ??? IsEnemy(const CBaseEntity *ent) const;
-	virtual ??? IsFriend(const CBaseEntity *ent) const;
-	virtual ??? IsSelf(const CBaseEntity *ent) const;
+	virtual UNKNOWN IsEnemy(const CBaseEntity *ent) const;
+	virtual UNKNOWN IsFriend(const CBaseEntity *ent) const;
+	virtual UNKNOWN IsSelf(const CBaseEntity *ent) const;
 	
-	virtual ??? IsAbleToClimbOnto(const CBaseEntity *ent) const;
-	virtual ??? IsAbleToBreak(const CBaseEntity *ent) const;
-	virtual ??? IsAbleToBlockMovementOf(const INextBot *nextbot) const;
+	virtual UNKNOWN IsAbleToClimbOnto(const CBaseEntity *ent) const;
+	virtual UNKNOWN IsAbleToBreak(const CBaseEntity *ent) const;
+	virtual UNKNOWN IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
-	virtual ??? ShouldTouch(const CBaseEntity *ent) const;
+	virtual UNKNOWN ShouldTouch(const CBaseEntity *ent) const;
 	
-	virtual ??? IsImmobile() const;
-	virtual ??? GetImmobileDuration() const;
-	virtual ??? ClearImmobileStatus();
-	virtual ??? GetImmobileSpeedThreshold() const;
+	virtual UNKNOWN IsImmobile() const;
+	virtual UNKNOWN GetImmobileDuration() const;
+	virtual UNKNOWN ClearImmobileStatus();
+	virtual UNKNOWN GetImmobileSpeedThreshold() const;
 	
-	virtual ??? GetCurrentPath() const;
-	virtual ??? SetCurrentPath(const PathFollower *follower);
-	virtual ??? NotifyPathDestruction(const PathFollower *follower);
+	virtual UNKNOWN GetCurrentPath() const;
+	virtual UNKNOWN SetCurrentPath(const PathFollower *follower);
+	virtual UNKNOWN NotifyPathDestruction(const PathFollower *follower);
 	
-	virtual ??? IsRangeLessThan(CBaseEntity *ent, float f1) const;
-	virtual ??? IsRangeLessThan(const Vector& v1, float f1) const;
-	virtual ??? IsRangeGreaterThan(CBaseEntity *ent, float f1) const;
-	virtual ??? IsRangeGreaterThan(const Vector& v1, float f1) const;
+	virtual UNKNOWN IsRangeLessThan(CBaseEntity *ent, float f1) const;
+	virtual UNKNOWN IsRangeLessThan(const Vector& v1, float f1) const;
+	virtual UNKNOWN IsRangeGreaterThan(CBaseEntity *ent, float f1) const;
+	virtual UNKNOWN IsRangeGreaterThan(const Vector& v1, float f1) const;
 	
-	virtual ??? GetRangeTo(CBaseEntity *ent) const;
-	virtual ??? GetRangeTo(const Vector& v1) const;
-	virtual ??? GetRangeSquaredTo(CBaseEntity *ent) const;
-	virtual ??? GetRangeSquaredTo(const Vector& v1) const;
+	virtual UNKNOWN GetRangeTo(CBaseEntity *ent) const;
+	virtual UNKNOWN GetRangeTo(const Vector& v1) const;
+	virtual UNKNOWN GetRangeSquaredTo(CBaseEntity *ent) const;
+	virtual UNKNOWN GetRangeSquaredTo(const Vector& v1) const;
 	
-	virtual ??? IsDebugging(unsigned int i1) const;
-	virtual ??? GetDebugIdentifier() const;
-	virtual ??? IsDebugFilterMatch(const char *s1) const;
-	virtual ??? DisplayDebugText(const char *s1) const;
+	virtual UNKNOWN IsDebugging(unsigned int i1) const;
+	virtual UNKNOWN GetDebugIdentifier() const;
+	virtual UNKNOWN IsDebugFilterMatch(const char *s1) const;
+	virtual UNKNOWN DisplayDebugText(const char *s1) const;
 	
-	??? BeginUpdate();
-	??? EndUpdate();
+	UNKNOWN BeginUpdate();
+	UNKNOWN EndUpdate();
 	
-	??? DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
+	UNKNOWN DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
 	
-	??? GetDebugHistory(unsigned int, CUtlVector<const INextBot::NextBotDebugLineType *> *) const;
-	??? ResetDebugHistory();
+	UNKNOWN GetDebugHistory(unsigned int, CUtlVector<const INextBot::NextBotDebugLineType *> *) const;
+	UNKNOWN ResetDebugHistory();
 	
-	??? RegisterComponent(INextBotComponent *component);
+	UNKNOWN RegisterComponent(INextBotComponent *component);
 	
 protected:
 	// TODO
@@ -114,9 +121,9 @@ public:
 	// TODO
 	
 	/* INextBot overrides */
-	virtual ??? OnNavAreaChanged(CNavArea *area1, CNavArea *area2);
-	virtual ??? GetEntity() const;
-	virtual ??? GetNextBotCombatCharacter() const;
+	virtual void OnNavAreaChanged(CNavArea *area1, CNavArea *area2);
+	virtual UNKNOWN GetEntity() const;
+	virtual UNKNOWN GetNextBotCombatCharacter() const;
 	
 	// TODO: non-virtual functions
 	
@@ -126,95 +133,6 @@ protected:
 private:
 	// TODO
 };
-
-
-class INextBotPlayerInput
-{
-public:
-	virtual ??? PressFireButton(float f1) = 0;
-	virtual ??? ReleaseFireButton() = 0;
-	virtual ??? PressAltFireButton(float f1) = 0;
-	virtual ??? ReleaseAltFireButton() = 0;
-	virtual ??? PressMeleeButton(float f1) = 0;
-	virtual ??? ReleaseMeleeButton() = 0;
-	virtual ??? PressUseButton(float f1) = 0;
-	virtual ??? ReleaseUseButton() = 0;
-	virtual ??? PressReloadButton(float f1) = 0;
-	virtual ??? ReleaseReloadButton() = 0;
-	virtual ??? PressForwardButton(float f1) = 0;
-	virtual ??? ReleaseForwardButton() = 0;
-	virtual ??? PressBackwardButton(float f1) = 0;
-	virtual ??? ReleaseBackwardButton() = 0;
-	virtual ??? PressLeftButton(float f1) = 0;
-	virtual ??? ReleaseLeftButton() = 0;
-	virtual ??? PressRightButton(float f1) = 0;
-	virtual ??? ReleaseRightButton() = 0;
-	virtual ??? PressJumpButton(float f1) = 0;
-	virtual ??? ReleaseJumpButton() = 0;
-	virtual ??? PressCrouchButton(float f1) = 0;
-	virtual ??? ReleaseCrouchButton() = 0;
-	virtual ??? PressWalkButton(float f1) = 0;
-	virtual ??? ReleaseWalkButton() = 0;
-	virtual ??? SetButtonScale(float f1, float f2) = 0;
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-
-template<class T> class NextBotPlayer : public T, public INextBot, public INextBotPlayerInput
-{
-public:
-	virtual ~NextBotPlayer();
-	
-	/* T overrides */
-	// TODO
-	
-	/* INextBot overrides */
-	virtual ??? OnNavAreaChanged(CNavArea *area1, CNavArea *area2);
-	virtual ??? Update();
-	virtual ??? IsRemovedOnReset() const;
-	virtual ??? GetEntity() const;
-	
-	/* INextBotPlayerInput overrides */
-	virtual ??? PressFireButton(float f1);
-	virtual ??? ReleaseFireButton();
-	virtual ??? PressAltFireButton(float f1);
-	virtual ??? ReleaseAltFireButton();
-	virtual ??? PressMeleeButton(float f1);
-	virtual ??? ReleaseMeleeButton();
-	virtual ??? PressUseButton(float f1);
-	virtual ??? ReleaseUseButton();
-	virtual ??? PressReloadButton(float f1);
-	virtual ??? ReleaseReloadButton();
-	virtual ??? PressForwardButton(float f1);
-	virtual ??? ReleaseForwardButton();
-	virtual ??? PressBackwardButton(float f1);
-	virtual ??? ReleaseBackwardButton();
-	virtual ??? PressLeftButton(float f1);
-	virtual ??? ReleaseLeftButton();
-	virtual ??? PressRightButton(float f1);
-	virtual ??? ReleaseRightButton();
-	virtual ??? PressJumpButton(float f1);
-	virtual ??? ReleaseJumpButton();
-	virtual ??? PressCrouchButton(float f1);
-	virtual ??? ReleaseCrouchButton();
-	virtual ??? PressWalkButton(float f1);
-	virtual ??? ReleaseWalkButton();
-	virtual ??? SetButtonScale(float f1, float f2);
-	
-	// TODO: non-virtual functions
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-template<> class NextBotPlayer<CTFPlayer>;
 
 
 class INextBotEntityFilter
@@ -262,11 +180,3 @@ private:
 
 // derived from INextBotEntityFilter:
 // CUsefulHealTargetFilter
-
-
-struct ActionResults
-{
-	// result enum code
-	// next action (if any)
-	// descriptive message
-};

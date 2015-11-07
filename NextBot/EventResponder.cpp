@@ -4,7 +4,7 @@
  */
 
 
-~INextBotEventResponder::INextBotEventResponder()
+INextBotEventResponder::~INextBotEventResponder()
 {
 }
 

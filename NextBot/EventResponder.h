@@ -13,7 +13,7 @@
 class INextBotEventResponder
 {
 public:
-	enum MoveToFailureType
+	enum class MoveToFailureType : int
 	{
 		// not sure if these are 100% valid (they're from CImprovLocomotor)
 		FAIL_INVALID_PATH = 0,

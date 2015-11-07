@@ -4,8 +4,13 @@
  */
 
 
-CRandomPlacementPopulator::CRandomPlacementPopulator(CPopulationManager *popmgr)
+IPopulator::IPopulator(CPopulationManager *popmgr)
 	: m_PopMgr(popmgr)
+{
+}
+
+CRandomPlacementPopulator::CRandomPlacementPopulator(CPopulationManager *popmgr)
+	: IPopulator(popmgr)
 {
 	this->m_iCount = 0;
 	this->m_flMinimumSeparation = 0.0f;
@@ -13,14 +18,14 @@ CRandomPlacementPopulator::CRandomPlacementPopulator(CPopulationManager *popmgr)
 }
 
 CPeriodicSpawnPopulator::CPeriodicSpawnPopulator(CPopulationManager *popmgr)
-	: m_PopMgr(popmgr)
+	: IPopulator(popmgr)
 {
 	this->m_flMinInterval = 30.0f;
 	this->m_flMaxInterval = 30.0f;
 }
 
 CMissionPopulator::CMissionPopulator(CPopulationManager *popmgr)
-	: m_PopMgr(popmgr)
+	: IPopulator(popmgr)
 {
 	// TODO
 	this->m_flInitialCooldown  = 0.0f;
@@ -32,13 +37,13 @@ CMissionPopulator::CMissionPopulator(CPopulationManager *popmgr)
 }
 
 CWaveSpawnPopulator::CWaveSpawnPopulator(CPopulationManager *popmgr)
-	: m_PopMgr(popmgr)
+	: IPopulator(popmgr)
 {
 	// TODO
 }
 
 CWave::CWave(CPopulationManager *popmgr)
-	: m_PopMgr(popmgr)
+	: IPopulator(popmgr)
 {
 	// TODO
 }
@@ -94,13 +99,13 @@ bool CMissionPopulator::Parse(KeyValues *kv)
 			if (V_stricmp(name, "Objective") == 0) {
 				if (V_stricmp(subkey->GetString(nullptr), "DestroySentries") == 0 ||
 					V_stricmp(subkey->GetString(nullptr), "SeekAndDestroy") == 0) {
-					this->m_Objective = MISSION_DESTROY_SENTRIES;
+					this->m_Objective = CTFBot::MissionType::DESTROY_SENTRIES;
 				} else if (V_stricmp(subkey->GetString(nullptr), "Sniper") == 0) {
-					this->m_Objective = MISSION_SNIPER;
+					this->m_Objective = CTFBot::MissionType::SNIPER;
 				} else if (V_stricmp(subkey->GetString(nullptr), "Spy") == 0) {
-					this->m_Objective = MISSION_SPY;
+					this->m_Objective = CTFBot::MissionType::SPY;
 				} else if (V_stricmp(subkey->GetString(nullptr), "Engineer") == 0) {
-					this->m_Objective = MISSION_ENGINEER;
+					this->m_Objective = CTFBot::MissionType::ENGINEER;
 				} else {
 					Warning("Invalid mission '%s'\n", subkey->GetString(nullptr));
 					return false;
@@ -143,16 +148,16 @@ bool CWave::Parse(KeyValues *kv)
 }
 
 
-void IPopulator::PostInitialize(KeyValues *kv)
+void IPopulator::PostInitialize()
 {
 }
 
-void CRandomPlacementPopulator::PostInitialize(KeyValues *kv)
+void CRandomPlacementPopulator::PostInitialize()
 {
 	// TODO
 }
 
-void CPeriodicSpawnPopulator::PostInitialize(KeyValues *kv)
+void CPeriodicSpawnPopulator::PostInitialize()
 {
 	// TODO
 }
@@ -189,11 +194,6 @@ void CWave::Update()
 
 void IPopulator::UnpauseSpawning()
 {
-}
-
-void CRandomPlacementPopulator::UnpauseSpawning()
-{
-	// TODO
 }
 
 void CPeriodicSpawnPopulator::UnpauseSpawning()

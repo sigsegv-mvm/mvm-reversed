@@ -41,9 +41,9 @@ void FireEvent(EventInfo *info, const char *name)
 	const char *target = info->target.Get();
 	const char *action = info->action.Get();
 	
-	CBaseEntity *ent = gEntList->FindEntityByName(nullptr, target);
+	CBaseEntity *ent = gEntList.FindEntityByName(nullptr, target);
 	if (ent != nullptr) {
-		g_EventQueue->AddEvent(ent, action, 0.0f, nullptr, nullptr);
+		g_EventQueue.AddEvent(ent, action, 0.0f, nullptr, nullptr);
 	} else {
 		Warning("WaveSpawnPopulator: Can't find target entity '%s' for %s\n",
 			target, name);

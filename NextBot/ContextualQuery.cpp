@@ -6,27 +6,27 @@
 
 QueryResponse IContextualQuery::ShouldPickUp(const INextBot *nextbot, CBaseEntity *ent) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 QueryResponse IContextualQuery::ShouldHurry(const INextBot *nextbot) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 QueryResponse IContextualQuery::ShouldRetreat(const INextBot *nextbot) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 QueryResponse IContextualQuery::ShouldAttack(const INextBot *nextbot, const CKnownEntity *known) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 QueryResponse IContextualQuery::IsHindrance(const INextBot *nextbot, CBaseEntity *ent) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 Vector IContextualQuery::SelectTargetPoint(const INextBot *nextbot, const CBaseCombatCharacter *who) const
@@ -36,7 +36,7 @@ Vector IContextualQuery::SelectTargetPoint(const INextBot *nextbot, const CBaseC
 
 QueryResponse IContextualQuery::IsPositionAllowed(const INextBot *nextbot, const Vector& v1) const
 {
-	return QUERY_DONTCARE;
+	return QueryResponse::DONTCARE;
 }
 
 const CKnownEntity *IContextualQuery::SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *who, const CKnownEntity *known1, const CKnownEntity *known2) const

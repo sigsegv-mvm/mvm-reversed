@@ -13,7 +13,7 @@ public:
 	virtual void Destroy();
 	virtual void UpdatePosition();
 	virtual CBaseEntity *GetEntity() const;
-	virtual Vector *GetLastKnownPosition() const;
+	virtual const Vector *GetLastKnownPosition() const;
 	virtual bool HasLastKnownPositionBeenSeen() const;
 	virtual void MarkLastKnownPositionAsSeen();
 	virtual CNavArea *GetLastKnownArea() const;
