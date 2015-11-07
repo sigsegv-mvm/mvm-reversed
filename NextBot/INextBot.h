@@ -15,10 +15,8 @@ public:
 	INextBot();
 	virtual ~INextBot();
 	
-	/* INextBotEventResponder overrides */
 	virtual INextBotEventResponder *FirstContainedResponder() const override;
 	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const override;
-	
 	
 	virtual void Reset();
 	virtual void Update();
@@ -70,7 +68,6 @@ public:
 	virtual char *GetDebugIdentifier() const;
 	virtual bool IsDebugFilterMatch(const char *s1) const;
 	virtual void DisplayDebugText(const char *s1) const;
-	
 	
 	bool BeginUpdate();
 	void EndUpdate();
