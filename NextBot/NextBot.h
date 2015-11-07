@@ -4,24 +4,6 @@
  */
 
 
-class INextBotComponent : public INextBotEventResponder
-{
-public:
-	virtual ~INextBotComponent();
-	
-	virtual UNKNOWN Reset();
-	virtual UNKNOWN Update() = 0;
-	virtual UNKNOWN Upkeep();
-	virtual UNKNOWN GetBot() const;
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-
 enum NextBotDebugType
 {
 	// TODO
