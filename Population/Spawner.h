@@ -127,9 +127,9 @@ public:
 	CMobSpawner(IPopulator *populator);
 	virtual ~CMobSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	int m_iCount;                     // +0x08
@@ -149,9 +149,9 @@ public:
 	CSentryGunSpawner(IPopulator *populator);
 	virtual ~CSentryGunSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	int m_iLevel; // +0x08
@@ -164,13 +164,13 @@ public:
 	CTankSpawner(IPopulator *populator);
 	virtual ~CTankSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual bool IsWhereRequired();
-	virtual string_t GetClassIcon(int index);
-	virtual int GetHealth(int index);
-	virtual bool IsMiniBoss(int index);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual bool IsWhereRequired() override;
+	virtual string_t GetClassIcon(int index) override;
+	virtual int GetHealth(int index) override;
+	virtual bool IsMiniBoss(int index) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	int m_iHealth;                    // +0x08
@@ -189,14 +189,14 @@ public:
 	CTFBotSpawner(IPopulator *populator);
 	virtual ~CTFBotSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int index);
-	virtual int GetHealth(int index);
-	virtual bool IsMiniBoss(int index);
-	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual int GetClass(int index) override;
+	virtual string_t GetClassIcon(int index) override;
+	virtual int GetHealth(int index) override;
+	virtual bool IsMiniBoss(int index) override;
+	virtual bool HasAttribute(CTFBot::AttributeType attr, int index) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	bool ParseEventChangeAttributes(KeyValues *kv);
@@ -220,15 +220,15 @@ public:
 	CSquadSpawner(IPopulator *populator);
 	virtual ~CSquadSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual bool IsVarious();
-	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int index);
-	virtual int GetHealth(int index);
-	virtual bool IsMiniBoss(int index);
-	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual bool IsVarious() override;
+	virtual int GetClass(int index) override;
+	virtual string_t GetClassIcon(int index) override;
+	virtual int GetHealth(int index) override;
+	virtual bool IsMiniBoss(int index) override;
+	virtual bool HasAttribute(CTFBot::AttributeType attr, int index) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	CUtlVectorAutoPurge<IPopulationSpawner *> m_SubSpawners; // +0x08
@@ -243,15 +243,15 @@ public:
 	CRandomChoiceSpawner(IPopulator *populator);
 	virtual ~CRandomChoiceSpawner();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents);
-	virtual bool IsVarious();
-	virtual int GetClass(int index);
-	virtual string_t GetClassIcon(int index);
-	virtual int GetHealth(int index);
-	virtual bool IsMiniBoss(int index);
-	virtual bool HasAttribute(CTFBot::AttributeType attr, int index);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual int Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *ents) override;
+	virtual bool IsVarious() override;
+	virtual int GetClass(int index) override;
+	virtual string_t GetClassIcon(int index) override;
+	virtual int GetHealth(int index) override;
+	virtual bool IsMiniBoss(int index) override;
+	virtual bool HasAttribute(CTFBot::AttributeType attr, int index) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 private:
 	void GenerateRandomIndexes(int index);

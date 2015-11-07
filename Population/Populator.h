@@ -28,8 +28,8 @@ public:
 	CRandomPlacementPopulator(CPopulationManager *popmgr);
 	virtual ~CRandomPlacementPopulator();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual void PostInitialize();
+	virtual bool Parse(KeyValues *kv) override;
+	virtual void PostInitialize() override;
 	
 private:
 	int m_iCount;                // +0x0c
@@ -44,10 +44,10 @@ public:
 	CPeriodicSpawnPopulator(CPopulationManager *popmgr);
 	virtual ~CPeriodicSpawnPopulator();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual void PostInitialize();
-	virtual void Update();
-	virtual void UnpauseSpawning();
+	virtual bool Parse(KeyValues *kv) override;
+	virtual void PostInitialize() override;
+	virtual void Update() override;
+	virtual void UnpauseSpawning() override;
 	
 private:
 	CSpawnLocation m_Where; // +0x0c
@@ -63,9 +63,9 @@ public:
 	CMissionPopulator(CPopulationManager *popmgr);
 	virtual ~CMissionPopulator();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual void Update();
-	virtual void UnpauseSpawning();
+	virtual bool Parse(KeyValues *kv) override;
+	virtual void Update() override;
+	virtual void UnpauseSpawning() override;
 	
 	bool UpdateMission(CTFBot::MissionType mtype);
 	bool UpdateMissionDestroySentries();
@@ -95,9 +95,9 @@ public:
 	CWaveSpawnPopulator(CPopulationManager *popmgr);
 	virtual ~CWaveSpawnPopulator();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual void Update();
-	virtual void OnPlayerKilled(CTFPlayer *player);
+	virtual bool Parse(KeyValues *kv) override;
+	virtual void Update() override;
+	virtual void OnPlayerKilled(CTFPlayer *player) override;
 	
 	bool IsFinishedSpawning();
 	void OnNonSupportWavesDone();
@@ -155,10 +155,10 @@ public:
 	CWave(CPopulationManager *popmgr);
 	virtual ~CWave();
 	
-	virtual bool Parse(KeyValues *kv);
-	virtual void Update();
-	virtual void OnPlayerKilled(CTFPlayer *player);
-	virtual bool HasEventChangeAttributes(const char *name) const;
+	virtual bool Parse(KeyValues *kv) override;
+	virtual void Update() override;
+	virtual void OnPlayerKilled(CTFPlayer *player) override;
+	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
 	bool IsDoneWithNonSupportWaves();
 	void ForceFinish();
