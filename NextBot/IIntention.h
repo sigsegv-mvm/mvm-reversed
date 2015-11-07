@@ -24,6 +24,10 @@ public:
 	
 protected:
 	// TODO
+	
+	// INextBotEventResponder vtable @ +0x00
+	// IContextualQuery vtable @ +0x14
+	
 };
 
 

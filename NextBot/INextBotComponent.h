@@ -19,4 +19,5 @@ protected:
 	int m_Dword04;       // +0x04
 	float m_flTime1;     // +0x08
 	INextBot *m_NextBot; // +0x0c
+	// 0x10 ???
 };
