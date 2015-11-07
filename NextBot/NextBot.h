@@ -22,69 +22,71 @@ public:
 	virtual ~INextBot();
 	
 	/* INextBotEventResponder overrides */
-	virtual INextBotEventResponder *FirstContainedResponder() const;
-	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const;
+	virtual INextBotEventResponder *FirstContainedResponder() const override;
+	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const override;
 	
-	virtual UNKNOWN Reset();
-	virtual UNKNOWN Update();
-	virtual UNKNOWN Upkeep();
 	
-	virtual UNKNOWN IsRemovedOnReset() const;
+	virtual void Reset();
+	virtual void Update();
+	virtual void Upkeep();
+	
+	virtual bool IsRemovedOnReset() const;
 	
 	virtual UNKNOWN GetEntity() const = 0;
-	virtual UNKNOWN GetNextBotCombatCharacter() const;
+	virtual NextBotCombatCharacter *GetNextBotCombatCharacter() const;
 	
-	virtual UNKNOWN GetLocomotionInterface() const;
-	virtual UNKNOWN GetBodyInterface() const;
-	virtual UNKNOWN GetIntentionInterface() const;
-	virtual UNKNOWN GetVisionInterface() const;
+	virtual ILocomotion *GetLocomotionInterface() const;
+	virtual IBody *GetBodyInterface() const;
+	virtual IIntention *GetIntentionInterface() const;
+	virtual IVision *GetVisionInterface() const;
 	
-	virtual UNKNOWN SetPosition(const Vector& v1);
-	virtual UNKNOWN GetPosition() const;
+	virtual bool SetPosition(const Vector& v1);
+	virtual Vector& GetPosition() const;
 	
-	virtual UNKNOWN IsEnemy(const CBaseEntity *ent) const;
-	virtual UNKNOWN IsFriend(const CBaseEntity *ent) const;
-	virtual UNKNOWN IsSelf(const CBaseEntity *ent) const;
+	virtual bool IsEnemy(const CBaseEntity *ent) const;
+	virtual bool IsFriend(const CBaseEntity *ent) const;
+	virtual bool IsSelf(const CBaseEntity *ent) const;
 	
-	virtual UNKNOWN IsAbleToClimbOnto(const CBaseEntity *ent) const;
-	virtual UNKNOWN IsAbleToBreak(const CBaseEntity *ent) const;
-	virtual UNKNOWN IsAbleToBlockMovementOf(const INextBot *nextbot) const;
+	virtual bool IsAbleToClimbOnto(const CBaseEntity *ent) const;
+	virtual bool IsAbleToBreak(const CBaseEntity *ent) const;
+	virtual bool IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
-	virtual UNKNOWN ShouldTouch(const CBaseEntity *ent) const;
+	virtual bool ShouldTouch(const CBaseEntity *ent) const;
 	
-	virtual UNKNOWN IsImmobile() const;
-	virtual UNKNOWN GetImmobileDuration() const;
-	virtual UNKNOWN ClearImmobileStatus();
-	virtual UNKNOWN GetImmobileSpeedThreshold() const;
+	virtual bool IsImmobile() const;
+	virtual float GetImmobileDuration() const;
+	virtual void ClearImmobileStatus();
+	virtual float GetImmobileSpeedThreshold() const;
 	
-	virtual UNKNOWN GetCurrentPath() const;
-	virtual UNKNOWN SetCurrentPath(const PathFollower *follower);
-	virtual UNKNOWN NotifyPathDestruction(const PathFollower *follower);
+	virtual PathFollower *GetCurrentPath() const;
+	virtual void SetCurrentPath(const PathFollower *follower);
+	virtual void NotifyPathDestruction(const PathFollower *follower);
 	
-	virtual UNKNOWN IsRangeLessThan(CBaseEntity *ent, float f1) const;
-	virtual UNKNOWN IsRangeLessThan(const Vector& v1, float f1) const;
-	virtual UNKNOWN IsRangeGreaterThan(CBaseEntity *ent, float f1) const;
-	virtual UNKNOWN IsRangeGreaterThan(const Vector& v1, float f1) const;
+	virtual bool IsRangeLessThan(CBaseEntity *ent, float f1) const;
+	virtual bool IsRangeLessThan(const Vector& v1, float f1) const;
+	virtual bool IsRangeGreaterThan(CBaseEntity *ent, float f1) const;
+	virtual bool IsRangeGreaterThan(const Vector& v1, float f1) const;
 	
-	virtual UNKNOWN GetRangeTo(CBaseEntity *ent) const;
-	virtual UNKNOWN GetRangeTo(const Vector& v1) const;
-	virtual UNKNOWN GetRangeSquaredTo(CBaseEntity *ent) const;
-	virtual UNKNOWN GetRangeSquaredTo(const Vector& v1) const;
+	virtual float GetRangeTo(CBaseEntity *ent) const;
+	virtual float GetRangeTo(const Vector& v1) const;
+	virtual float GetRangeSquaredTo(CBaseEntity *ent) const;
+	virtual float GetRangeSquaredTo(const Vector& v1) const;
 	
-	virtual UNKNOWN IsDebugging(unsigned int i1) const;
-	virtual UNKNOWN GetDebugIdentifier() const;
-	virtual UNKNOWN IsDebugFilterMatch(const char *s1) const;
-	virtual UNKNOWN DisplayDebugText(const char *s1) const;
+	virtual bool IsDebugging(unsigned int i1) const;
+	virtual char *GetDebugIdentifier() const;
+	virtual bool IsDebugFilterMatch(const char *s1) const;
+	virtual void DisplayDebugText(const char *s1) const;
 	
-	UNKNOWN BeginUpdate();
-	UNKNOWN EndUpdate();
 	
-	UNKNOWN DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
+	bool BeginUpdate();
+	void EndUpdate();
 	
-	UNKNOWN GetDebugHistory(unsigned int, CUtlVector<const INextBot::NextBotDebugLineType *> *) const;
-	UNKNOWN ResetDebugHistory();
+	void DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
 	
-	UNKNOWN RegisterComponent(INextBotComponent *component);
+	void GetDebugHistory(unsigned int, CUtlVector<const INextBot::NextBotDebugLineType *> *) const;
+	void ResetDebugHistory();
+	
+	void RegisterComponent(INextBotComponent *component);
 	
 protected:
 	// TODO
