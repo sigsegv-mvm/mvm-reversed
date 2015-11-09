@@ -74,7 +74,7 @@ public:
 	
 	void DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
 	
-	void GetDebugHistory(unsigned int, CUtlVector<const NextBotDebugLineType *> *) const;
+	void GetDebugHistory(unsigned int i1, CUtlVector<const NextBotDebugLineType *> *v1) const;
 	void ResetDebugHistory();
 	
 	void RegisterComponent(INextBotComponent *component);

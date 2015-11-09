@@ -1,3 +1,8 @@
+#define COLOR_WHITE    Color(255, 255, 255, 255)
+#define COLOR_LTYELLOW Color(255, 255, 150, 255)
+#define COLOR_LTGREEN  Color(150, 255, 150, 255)
+#define COLOR_GREEN    Color(  0, 255,   0, 255)
+#define COLOR_RED      COlor(255,   0,   0, 255)
 
 
 class CTFBotSquad : public INextBotEventResponder
