@@ -4,19 +4,6 @@
  */
 
 
-#define Continue() \
-	return {   ActionTransition::CONTINUE,        nullptr,   nullptr }
-
-#define ChangeTo(_nextaction, _reason) \
-	return {  ActionTransition::CHANGE_TO,  (_nextaction), (_reason) }
-
-#define SuspendFor(_nextaction, _reason) \
-	return { ActionTransition::SUSPEND_FOR, (_nextaction), (_reason) }
-
-#define Done(_reason) \
-	return {        ActionTransition::DONE,       nullptr, (_reason) }
-
-
 enum class ActionTransition : int
 {
 	CONTINUE    = 0,
@@ -42,6 +29,42 @@ struct ActionResult
 	ActionTransition transition;
 	Action<T> *action;
 	const char *reason;
+	
+	static ActionResult<T> Continue()
+	{
+		return {
+			.transition = ActionTransition::CONTINUE,
+			.action     = nullptr,
+			.reason     = nullptr,
+		};
+	}
+	
+	static ActionResult<T> ChangeTo(Action<T> *next, const char *why)
+	{
+		return {
+			.transition = ActionTransition::CHANGE_TO,
+			.action     = next,
+			.reason     = why,
+		};
+	}
+	
+	static ActionResult<T> SuspendFor(Action<T> *next, const char *why)
+	{
+		return {
+			.transition = ActionTransition::SUSPEND_FOR,
+			.action     = next,
+			.reason     = why,
+		};
+	}
+	
+	static ActionResult<T> Done(const char *why)
+	{
+		return {
+			.transition = ActionTransition::DONE,
+			.action     = nullptr,
+			.reason     = why,
+		};
+	}
 };
 
 
@@ -49,6 +72,46 @@ template<class T>
 struct EventDesiredResult : public ActionResult<T>
 {
 	ResultSeverity severity;
+	
+	static EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			.transition = ActionTransition::CONTINUE,
+			.action     = nullptr,
+			.reason     = nullptr,
+			.severity   = level,
+		};
+	}
+	
+	static EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			.transition = ActionTransition::CHANGE_TO,
+			.action     = next,
+			.reason     = why,
+			.severity   = level,
+		};
+	}
+	
+	static EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			.transition = ActionTransition::SUSPEND_FOR,
+			.action     = next,
+			.reason     = why,
+			.severity   = level,
+		};
+	}
+	
+	static EventDesiredResult<T> Done(const char *why, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			.transition = ActionTransition::DONE,
+			.action     = nullptr,
+			.reason     = why,
+			.severity   = level,
+		};
+	}
 };
 
 
@@ -238,7 +301,7 @@ public:
 	ActionResult<T> InvokeOnResume(T *actor, Behavior<T> *behavior, Action<T> *action);
 	Action<T> *InvokeOnSuspend(T *actor, Behavior<T> *behavior, Action<T> *action);
 	
-	char *BuildDecoratedName(char *s1, const Action<T> *action) const;
+	char *BuildDecoratedName(char buf[256], const Action<T> *action) const;
 	char *DebugString() const;
 	void PrintStateToConsole() const;
 	
@@ -251,8 +314,8 @@ private:
 	Action<T> *m_ActionSuspendedUs; // +0x18
 	T *m_Actor;                     // +0x1c
 	EventDesiredResult<T> m_Result; // +0x20
-	// +30 byte 0 (InvokeOnEnd only does stuff if set to TRUE)
-	// +31 byte 0
+	bool m_bStarted;                // +0x30
+	bool m_bSuspended;              // +0x31
 };
 
 template<> class Action<CBotNPCArcher>;
