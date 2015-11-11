@@ -29,7 +29,7 @@ public:
 	
 private:
 	Action<T> *m_MainAction;                    // +0x08
-	CFmtStrN<32> m_StrUnknown;                  // +0x0c
+	CFmtStrN<32> m_StrName;                     // +0x0c
 	T *m_Actor;                                 // +0x38
 	CUtlVectorAutoPurge<Action<T> *> m_Actions; // +0x3c
 };
@@ -44,8 +44,3 @@ template<> class Behavior<CSimpleBot>;
 template<> class Behavior<CTFBot>;
 template<> class Behavior<CTFRobotDestruction_Robot>;
 template<> class Behavior<CZombie>;
-
-
-// before these things, we need to get a skeleton for Action<>
-// TODO: dredge up the constructor from where it's been inlined (corroborate with osx server.dylib)
-// TODO: take a look at the dtor to see what it's doing other than just auto-destructing stuff
