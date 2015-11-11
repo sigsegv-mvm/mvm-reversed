@@ -9,7 +9,8 @@ class IVision : public INextBotComponent
 public:
 	class IForEachKnownEntity
 	{
-		// TODO
+	public:
+		virtual bool Inspect(const CKnownEntity& known) = 0;
 	};
 	
 	enum class FieldOfViewCheckType : int
@@ -24,13 +25,13 @@ public:
 	virtual void Update() override;
 	
 	virtual bool ForEachKnownEntity(IForEachKnownEntity& functor);
-	virtual void CollectKnownEntities(CUtlVector<CKnownEntity> *ents);
-	virtual const CKnownEntity& GetPrimaryKnownThreat(bool b1) const;
-	virtual float GetTimeSinceVisible(int i1) const;
-	virtual const CKnownEntity& GetClosestKnown(int i1) const;
+	virtual void CollectKnownEntities(CUtlVector<CKnownEntity> *knowns);
+	virtual const CKnownEntity *GetPrimaryKnownThreat(bool b1) const;
+	virtual float GetTimeSinceVisible(int index) const;
+	virtual const CKnownEntity *GetClosestKnown(int i1) const;
 	virtual int GetKnownCount(int i1, bool b1, float f1) const;
-	virtual const CKnownEntity& GetClosestKnown(const INextBotEntityFilter& filter) const;
-	virtual const CKnownEntity& GetKnown(const CBaseEntity *ent) const;
+	virtual const CKnownEntity *GetClosestKnown(const INextBotEntityFilter& filter) const;
+	virtual const CKnownEntity *GetKnown(const CBaseEntity *ent) const;
 	virtual void AddKnownEntity(CBaseEntity *ent);
 	virtual void ForgetEntity(CBaseEntity *ent);
 	virtual void ForgetAllKnownEntities();
@@ -52,14 +53,13 @@ public:
 	virtual bool IsLookingAt(const CBaseCombatCharacter *who, float f1) const;
 	
 protected:
-	// TODO
-};
-
-class IVision : public INextBotComponent
-{
-
-	
-	// TODO
+	// 0x14 CountdownTimer
+	float m_flFOV;        // +0x20
+	float m_flCosHalfFOV; // +0x24
+	CUtlVector<CKnownEntity> m_KnownEntities; // +0x28
+	// 0x3c dword -1
+	// 0x40
+	IntervalTimer m_Timers[32];
 };
 
 

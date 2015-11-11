@@ -5,7 +5,7 @@
 
 
 template<class T> Behavior<T>::Behavior(Action<T> *mainaction)
-	: m_MainAction(mainaction), m_StrName("%s", "")
+	: m_MainAction(mainaction), m_strName("%s", "")
 {
 	this->m_Actor = nullptr;
 }
@@ -290,7 +290,7 @@ template<class T> void Behavior<T>::Update(T *actor, float f1)
 	if (this->m_MainAction != nullptr && actor->IsDebugging(1)) {
 		CFmtStrN<256> fmtstr;
 		actor->DisplayDebugText(fmtstr.sprintf("%s: %s",
-			this->m_StrName.m_szBuf, this->m_MainAction->DebugString()))
+			this->m_strName.m_szBuf, this->m_MainAction->DebugString()))
 	}
 	
 	this->m_Actions.PurgeAndDeleteElements();

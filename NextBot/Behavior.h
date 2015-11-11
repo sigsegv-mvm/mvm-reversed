@@ -29,7 +29,7 @@ public:
 	
 private:
 	Action<T> *m_MainAction;                    // +0x08
-	CFmtStrN<32> m_StrName;                     // +0x0c
+	CFmtStrN<32> m_strName;                     // +0x0c
 	T *m_Actor;                                 // +0x38
 	CUtlVectorAutoPurge<Action<T> *> m_Actions; // +0x3c
 };
