@@ -1,5 +1,6 @@
 #include <string>
 #include <type_traits>
+#include <functional>
 
 #include <networkvar.h>
 #include <game/server/cbase.h>
@@ -111,9 +112,9 @@ extern char *g_aRawPlayerClassNamesShort[];
 
 
 
-#include "NextBot/KnownEntity.h"
-#include "NextBot/EventResponder.h"
-#include "NextBot/NextBot.h"
+#include "NextBot/CKnownEntity.h"
+#include "NextBot/IEventResponder.h"
+#include "NextBot/INextBot.h"
 #include "NextBot/NextBotPlayer.h"
 #include "Population/Attribute.h"
 #include "CTFBot/CTFBot.h"
@@ -131,11 +132,11 @@ inline CTFBot::AttributeType operator&(CTFBot::AttributeType lhs, CTFBot::Attrib
 }
 
 
-#include "NextBot/ContextualQuery.h"
-#include "NextBot/Vision.h"
-#include "NextBot/Locomotion.h"
-//#include "NextBot/Intention.h"
-#include "NextBot/Body.h"
+#include "NextBot/IContextualQuery.h"
+#include "NextBot/IVision.h"
+#include "NextBot/ILocomotion.h"
+//#include "NextBot/IIntention.h"
+#include "NextBot/IBody.h"
 #include "NextBot/Behavior.h"
 #include "NextBot/Action.h"
 #include "Population/Event.h"

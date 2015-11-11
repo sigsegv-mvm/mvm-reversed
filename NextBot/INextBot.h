@@ -85,3 +85,8 @@ protected:
 private:
 	// TODO
 };
+
+
+// TODO: for IsDebugging(): enum
+// 1   BEHAVIOR
+// 128 EVENTS

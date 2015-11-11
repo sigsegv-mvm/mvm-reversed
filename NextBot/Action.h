@@ -10,7 +10,7 @@ enum class ActionTransition : int
 	CHANGE_TO   = 1,
 	SUSPEND_FOR = 2,
 	DONE        = 3,
-	CONTINUE2   = 4, // why? who knows
+	SUSTAIN     = 4,
 };
 
 
@@ -163,7 +163,7 @@ template<class T>
 class Action : public INextBotEventResponder, public IContextualQuery
 {
 public:
-	Action(/* TODO ??? */);
+	Action();
 	virtual ~Action();
 	
 	/* INextBotEventResponder overrides */
@@ -291,7 +291,7 @@ public:
 	virtual bool IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
 	
-	void StorePendingEventResult(const EventDesiredResult<T>& result, const char *s1);
+	void StorePendingEventResult(const EventDesiredResult<T>& result, const char *event);
 	Action<T> *ApplyResult(T *actor, Behavior<T> *behavior, ActionResult<T> result);
 	
 	ActionResult<T> InvokeOnStart(T *actor, Behavior<T> *behavior, Action<T> *action1, Action<T> *action2);
@@ -304,6 +304,8 @@ public:
 	char *BuildDecoratedName(char buf[256], const Action<T> *action) const;
 	char *DebugString() const;
 	void PrintStateToConsole() const;
+	
+	void HandleEvent(const char *name, const std::function<EventDesiredResult<T> (Action<T> *, T *)>& handler);
 	
 	
 private:
