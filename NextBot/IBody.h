@@ -40,9 +40,9 @@ public:
 	virtual float GetHeadAimTrackingInterval() const;
 	virtual void ClearPendingAimReply();
 	virtual float GetMaxHeadAngularVelocity() const;
-	virtual UNKNOWN StartActivity(Activity a1, unsigned int i1);
-	virtual UNKNOWN SelectAnimationSequence(Activity a1) const;
-	virtual UNKNOWN GetActivity() const;
+	virtual bool StartActivity(Activity a1, unsigned int i1);
+	virtual int SelectAnimationSequence(Activity a1) const;
+	virtual Activity GetActivity() const;
 	virtual bool IsActivity(Activity a1) const;
 	virtual bool HasActivityType(unsigned int i1) const;
 	virtual void SetDesiredPosture(PostureType posture);

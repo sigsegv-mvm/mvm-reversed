@@ -4,9 +4,16 @@
  */
 
 
+bool IgnoreActorsTraceFilterFunction(IHandleEntity *pHandleEntity, int contentsMask);
+
 class NextBotTraceFilterIgnoreActors : public CTraceFilterSimple
 {
-	// TODO
+public:
+	NextBotTraceFilterIgnoreActors(CBaseEntity *ent)
+		: CTraceFilterSimple(ent, COLLISION_GROUP_NONE,
+			IgnoreActorsTraceFilterFunction)
+	{
+	}
 };
 
 
@@ -22,9 +29,16 @@ class NextBotTraversableTraceFilter : public CTraceFilterSimple
 };
 
 
+bool VisionTraceFilterFunction(IHandleEntity *pHandleEntity, int contentsMask);
+
 class NextBotVisionTraceFilter : public CTraceFilterSimple
 {
-	// TODO
+public:
+	NextBotVisionTraceFilter(CBaseEntity *ent)
+		: CTraceFilterSimple(ent, COLLISION_GROUP_NONE,
+			VisionTraceFilterFunction)
+	{
+	}
 };
 
 

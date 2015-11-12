@@ -81,9 +81,6 @@ public:
 	
 protected:
 	// TODO
-	
-private:
-	// TODO
 };
 
 

@@ -45,6 +45,12 @@ private:
 	// TODO
 };
 
+class CUsefulHealTargetFilter : INextBotEntityFilter
+{
+public:
+	// TODO
+};
+
 
 class INextBotFilter
 {
@@ -55,6 +61,18 @@ protected:
 	// TODO
 	
 private:
+	// TODO
+};
+
+class CHealthFilter : INextBotFilter
+{
+public:
+	// TODO
+};
+
+class CAmmoFilter : INextBotFilter
+{
+public:
 	// TODO
 };
 
@@ -70,11 +88,3 @@ protected:
 private:
 	// TODO
 };
-
-
-// derived from INextBotFilter:
-// CHealthFilter
-// CAmmoFilter (only in osx server classgraph)
-
-// derived from INextBotEntityFilter:
-// CUsefulHealTargetFilter

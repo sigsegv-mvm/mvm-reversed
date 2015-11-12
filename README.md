@@ -1,6 +1,8 @@
 ## What is this
 This is a project to reverse-engineer the MvM-related parts of Team Fortress 2. I go through the binaries, one function at a time, and attempt to turn the raw x86 assembly code into the C++ code that would have originally been used to program the game.
 
+There is no intention for this project to be compileable, but I do intend for the source code to be fully valid. I'm using C++11 and C++14 features, because I can.
+
 Things that are not related to MvM, especially including things that can be found in the public Source SDK, are omitted.
 
 This project is currently based on the October 2, 2015 revision of Team Fortress 2.

@@ -109,7 +109,11 @@ const CKnownEntity *IVision::GetKnown(const CBaseEntity *ent) const
 
 void IVision::AddKnownEntity(CBaseEntity *ent)
 {
-	// TODO
+	CKnownEntity known(ent);
+	
+	if (!this->m_KnownEntities.HasElement(known)) {
+		this->m_KnownEntities.AddToTail(known);
+	}
 }
 
 void IVision::ForgetEntity(CBaseEntity *ent)
@@ -155,12 +159,47 @@ float IVision::GetMinRecognizeTime() const
 
 bool IVision::IsAbleToSee(CBaseEntity *ent, FieldOfViewCheckType ctype, Vector *v1) const
 {
-	// TODO
+	VPROF_BUDGET("IVision::IsAbleToSee", "NextBotExpensive");
+	
+	if (this->GetBot()->IsRangeGreaterThan(ent, this->GetMaxVisionRange()) ||
+		this->GetBot()->GetEntity()->IsHiddenByFog(ent)) {
+		return false;
+	}
+	
+	if (ctype == FieldOfViewCheckType::USE_FOV && !this->IsInFieldOfView(ent)) {
+		return false;
+	}
+	
+	CBaseCombatCharacter *ent_cc = ent->MyCombatCharacterPointer();
+	if (ent_cc != nullptr) {
+		CTFNavArea *lastknown_ent  = ent_cc->GetLastKnownArea();
+		CTFNavArea *lastknown_this =
+			this->GetBot()->GetEntity()->GetLastKnownArea();
+			
+		if (lastknown_ent != nullptr && lastknown_this != nullptr &&
+			!lastknown_this->IsPotentiallyVisible(lastknown_ent)) {
+			return false;
+		}
+	}
+	
+	return (this->IsLineOfSightClearToEntity(ent, nullptr) &&
+		this->IsVisibleEntityNoticed(ent));
 }
 
 bool IVision::IsAbleToSee(const Vector& vec, FieldOfViewCheckType ctype) const
 {
-	// TODO
+	VPROF_BUDGET("IVision::IsAbleToSee", "NextBotExpensive");
+	
+	if (this->GetBot()->IsRangeGreaterThan(vec, this->GetMaxVisionRange()) ||
+		this->GetBot()->GetEntity()->IsHiddenByFog(vec)) {
+		return false;
+	}
+	
+	if (ctype == FieldOfViewCheckType::USE_FOV && !this->IsInFieldOfView(vec)) {
+		return false;
+	}
+	
+	return this->IsLineOfSightClear(vec);
 }
 
 bool IVision::IsIgnored(CBaseEntity *ent) const
@@ -205,20 +244,54 @@ void IVision::SetFieldOfView(float fov)
 
 bool IVision::IsLineOfSightClear(const Vector& v1) const
 {
-	// TODO
+	VPROF_BUDGET("IVision::IsLineOfSightClear", "NextBot");
+	VPROF_INCREMENT_COUNTER("IVision::IsLineOfSightClear", 1);
+	
+	NextBotVisionTraceFilter filter(this->GetBot()->GetEntity());
+	trace_t trace;
+	
+	UTIL_TraceLine(this->GetBot()->GetBodyInterface->GetEyePosition(),
+		v1, MASK_VISIBLE_AND_NPCS, &filter, &trace);
+	
+	return (trace.fraction >= 1.0f && !trace.startsolid);
 }
 
 bool IVision::IsLineOfSightClearToEntity(const CBaseEntity *ent, Vector *v1) const
 {
-	// TODO
+	VPROF_BUDGET("IVision::IsLineOfSightClearToEntity", "NextBot");
+	
+	NextBotTraceFilterIgnoreActors filter(ent);
+	trace_t trace;
+	
+	UTIL_TraceLine(this->GetBot()->GetBodyInterface()->GetEyePosition(),
+		ent->WorldSpaceCenter(), MASK_VISIBLE_AND_NPCS, &filter, &trace);
+	
+	if (trace.fraction < 1.0f || trace.allsolid || trace.startsolid) {
+		UTIL_TraceLine(this->GetBot()->GetBodyInterface()->GetEyePosition(),
+			ent->EyePosition(), MASK_VISIBLE_AND_NPCS, &filter, &trace);
+		
+		if (trace.fraction < 1.0f || trace.allsolid || trace.startsolid) {
+			UTIL_TraceLine(this->GetBot()->GetBodyInterface()->GetEyePosition(),
+				ent->GetAbsOrigin(), MASK_VISIBLE_AND_NPCS, &filter, &trace);
+		}
+	}
+	
+	if (v1 != nullptr) {
+		v1 = trace.endpos;
+	}
+	
+	return (trace.fraction >= 1.0f && !trace.startsolid);
 }
 
-bool IVision::IsLookingAt(const Vector& v1, float f1) const
+bool IVision::IsLookingAt(const Vector& v1, float cos_half_fov) const
 {
-	// TODO
+	Vector *view_vec = this->GetBot()->GetBodyInterface()->GetViewVector();
+	Vector *eye_pos  = this->GetBot()->GetBodyInterface()->GetEyePosition();
+	
+	return PointWithinViewAngle(eye_pos, v1, view_vec, cos_half_fov);
 }
 
-bool IVision::IsLookingAt(const CBaseCombatCharacter *who, float f1) const
+bool IVision::IsLookingAt(const CBaseCombatCharacter *who, float cos_half_fov) const
 {
-	return this->IsLookingAt(who->EyePosition(), f1);
+	return this->IsLookingAt(who->EyePosition(), cos_half_fov);
 }

@@ -36,7 +36,7 @@ public:
 	virtual void SetSpeedLimit(float limit);
 	virtual float GetSpeedLimit() const;
 	virtual bool IsOnGround() const;
-	virtual UNKNOWN GetGround() const;
+	virtual CBaseEntity *GetGround() const;
 	virtual Vector& GetGroundNormal() const;
 	virtual float GetGroundSpeed() const;
 	virtual Vector& GetGroundMotionVector() const;
@@ -50,7 +50,7 @@ public:
 	virtual QAngle& GetDesiredLean() const;
 	virtual bool IsAbleToJumpAcrossGaps() const;
 	virtual bool IsAbleToClimb() const;
-	virtual UNKNOWN GetFeet() const;
+	virtual Vector& GetFeet() const;
 	virtual float GetStepHeight() const;
 	virtual float GetMaxJumpHeight() const;
 	virtual float GetDeathDropHeight() const;

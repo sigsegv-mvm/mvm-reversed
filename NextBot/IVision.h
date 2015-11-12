@@ -15,7 +15,8 @@ public:
 	
 	enum class FieldOfViewCheckType : int
 	{
-		// TODO
+		USE_FOV       = 0,
+		DISREGARD_FOV = 1,
 	};
 	
 	IVision(INextBot *nextbot);
@@ -49,8 +50,8 @@ public:
 	virtual void SetFieldOfView(float fov);
 	virtual bool IsLineOfSightClear(const Vector& v1) const;
 	virtual bool IsLineOfSightClearToEntity(const CBaseEntity *ent, Vector *v1) const;
-	virtual bool IsLookingAt(const Vector& v1, float f1) const;
-	virtual bool IsLookingAt(const CBaseCombatCharacter *who, float f1) const;
+	virtual bool IsLookingAt(const Vector& v1, float cos_half_fov) const;
+	virtual bool IsLookingAt(const CBaseCombatCharacter *who, float cos_half_fov) const;
 	
 protected:
 	// 0x14 CountdownTimer
