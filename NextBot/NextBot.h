@@ -33,50 +33,6 @@ private:
 };
 
 
-class INextBotEntityFilter
-{
-public:
-	// TODO
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-class CUsefulHealTargetFilter : INextBotEntityFilter
-{
-public:
-	// TODO
-};
-
-
-class INextBotFilter
-{
-public:
-	// TODO
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-class CHealthFilter : INextBotFilter
-{
-public:
-	// TODO
-};
-
-class CAmmoFilter : INextBotFilter
-{
-public:
-	// TODO
-};
-
-
 class NextBotManager
 {
 public:
