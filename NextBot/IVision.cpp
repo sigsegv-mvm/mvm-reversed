@@ -5,28 +5,41 @@
 
 
 IVision::IVision(INextBot *nextbot)
+	: INextBotComponent(nextbot)
 {
-	// TODO
+	this->Reset();
 }
 
 IVision::~IVision()
 {
-	// TODO
 }
 
 
 void IVision::Reset()
 {
-	// TODO
+	INextBotComponent::Reset();
 	
 	this->m_KnownEntities.RemoveAll();
+	this->m_flLastUpdate = 0.0f;
+	this->m_hPrimaryThreat = nullptr;
 	
-	// TODO
+	this->SetFieldOfView(this->GetDefaultFieldOfView());
+	
+	for (int i = 0; i < 32; ++i) {
+		this->m_Timers[i].Invalidate();
+	}
 }
 
 void IVision::Update()
 {
-	// TODO
+	VPROF_BUDGET("IVision::Update", "NextBotExpensive");
+	
+	if (nb_blind.GetBool()) {
+		this->m_KnownEntities.RemoveAll();
+	} else {
+		this->UpdateKnownEntities();
+		this->m_flLastUpdate = gpGlobals->curtime;
+	}
 }
 
 
@@ -56,15 +69,60 @@ void IVision::CollectKnownEntities(CUtlVector<CKnownEntity> *knowns)
 	knowns->AddVectorToTail(this->m_KnownEntities);
 }
 
-const CKnownEntity *IVision::GetPrimaryKnownThreat(bool b1) const
+const CKnownEntity *IVision::GetPrimaryKnownThreat(bool only_recently_visible) const
 {
-	// TODO
+	if (this->m_KnownEntities.IsEmpty()) {
+		return nullptr;
+	}
+	
+	const CKnownEntity *threat = nullptr;
+	FOR_EACH_VEC(this->m_KnownEntities, i) {
+		const CKnownEntity& known = this->m_KnownEntities[i];
+		
+		if (known.IsObsolete()) {
+			continue;
+		}
+		
+		if (known.GetTimeSinceBecameKnown() < this->GetMinRecognizeTime()) {
+			continue;
+		}
+		
+		if (this->IsIgnored(known.GetEntity()) ||
+			!this->GetBot()->IsEnemy(known.GetEntity())) {
+			continue;
+		}
+		
+		if (only_recently_visible && !known.IsVisibleRecently()) {
+			continue;
+		}
+		
+		if (threat == nullptr) {
+			threat = &known;
+		} else {
+			threat = this->GetBot()->GetIntentionInterface()->SelectMoreDangerousThreat(this->GetBot(),
+				this->GetBot()->GetEntity(), threat, &known);
+		}
+	}
+	
+	if (threat != nullptr) {
+		this->m_hPrimaryThreat = threat->GetEntity();
+	} else {
+		this->m_hPrimaryThreat = nullptr;
+	}
+	
+	return threat;
 }
 
 float IVision::GetTimeSinceVisible(int index) const
 {
 	if (index == -2) {
-		// TODO
+		for (int i = 0; i < 32; ++i) {
+			IntervalTimer *timer = this->m_Timers + i;
+			if (timer->IsLessThen(1e+10f) && timer->HasStarted()) {
+				/* this code doesn't make any sense, it's probably unfinished */
+			}
+		}
+		return 1e+10f;
 	} else if (index < 32) {
 		return this->m_Timers[index].GetElapsedTime();
 	} else {
@@ -72,19 +130,103 @@ float IVision::GetTimeSinceVisible(int index) const
 	}
 }
 
-const CKnownEntity *IVision::GetClosestKnown(int i1) const
+const CKnownEntity *IVision::GetClosestKnown(int teamnum) const
 {
-	// TODO
+	CKnownEntity *closest = nullptr;
+	float dist = 1e+9f;
+	
+	Vector& pos_me = this->GetBot()->GetPosition();
+	
+	FOR_EACH_VEC(this->m_KnownEntities, i) {
+		const CKnownEntity& known = this->m_KnownEntities[i];
+		
+		if (known.IsObsolete()) {
+			continue;
+		}
+		
+		if (known.GetTimeSinceBecameKnown() < this->GetMinRecognizeTime()) {
+			continue;
+		}
+		
+		if (teamnum != TEAM_ANY &&
+			(teamnum != known.GetEntity->GetTeamNumber())) {
+			continue;
+		}
+		
+		Vector& pos_them = known.GetLastKnownPosition();
+		if (pos_me.DistTo(pos_them) < dist) {
+			dist = pos_me.DistTo(pos_them);
+			closest = &known;
+		}
+	}
+	
+	return closest;
 }
 
-int IVision::GetKnownCount(int i1, bool b1, float f1) const
+int IVision::GetKnownCount(int teamnum, bool only_recently_visible, float range) const
 {
-	// TODO
+	int count = 0;
+	
+	FOR_EACH_VEC(this->m_KnownEntities, i) {
+		CKnownEntity& known = this->m_KnownEntities[i];
+		
+		if (known.IsObsolete()) {
+			continue;
+		}
+		
+		if (known.GetTimeSinceBecameKnown() < this->GetMinRecognizeTime()) {
+			continue;
+		}
+		
+		if (teamnum != TEAM_ANY &&
+			(teamnum != known.GetEntity->GetTeamNumber())) {
+			continue;
+		}
+		
+		if (only_recently_visible && !known.IsVisibleRecently()) {
+			continue;
+		}
+		
+		if (range >= 0.0f) {
+			if (this->GetBot()->IsRangeLessThan(known.GetLastKnownPosition(), range)) {
+				++count;
+			}
+		}
+	}
+	
+	return count;
 }
 
 const CKnownEntity *IVision::GetClosestKnown(const INextBotEntityFilter& filter) const
 {
-	// TODO
+	CKnownEntity *closest = nullptr;
+	float dist = 1e+9f;
+	
+	Vector& pos_me = this->GetBot()->GetPosition();
+	
+	FOR_EACH_VEC(this->m_KnownEntities, i) {
+		const CKnownEntity& known = this->m_KnownEntities[i];
+		
+		if (known.IsObsolete()) {
+			continue;
+		}
+		
+		if (known.GetTimeSinceBecameKnown() < this->GetMinRecognizeTime()) {
+			continue;
+		}
+		
+		if (!filter.IsAllowed(known.GetEntity())) {
+			continue;
+		}
+		
+		Vector& pos_them = known.GetLastKnownPosition();
+		if (pos_me.DistTo(pos_them) < dist) {
+			dist = pos_me.DistTo(pos_them);
+			closest = &known;
+		}
+	}
+	
+	return closest;
 }
 
 const CKnownEntity *IVision::GetKnown(const CBaseEntity *ent) const
@@ -94,7 +236,7 @@ const CKnownEntity *IVision::GetKnown(const CBaseEntity *ent) const
 	}
 	
 	FOR_EACH_VEC(this->m_KnownEntities, i) {
-		CKnownEntity& known = this->m_KnownEntities[i];
+		const CKnownEntity& known = this->m_KnownEntities[i];
 		
 		if (known.GetEntity() != nullptr) {
 			CBaseEntity *k_ent = known.GetEntity();
@@ -294,4 +436,174 @@ bool IVision::IsLookingAt(const Vector& v1, float cos_half_fov) const
 bool IVision::IsLookingAt(const CBaseCombatCharacter *who, float cos_half_fov) const
 {
 	return this->IsLookingAt(who->EyePosition(), cos_half_fov);
+}
+
+
+void IVision::UpdateKnownEntities()
+{
+	VPROF_BUDGET("IVision::UpdateKnownEntities", "NextBot");
+	
+	CUtlVector<CBaseEntity *> vec_maybe_visible;
+	this->CollectPotentiallyVisibleEntities(&vec_maybe_visible);
+	
+	CUtlVector<CBaseEntity *> vec_visble;
+	
+	FOR_EACH_VEC(vec_maybe_visible, i) {
+		VPROF_BUDGET("IVision::UpdateKnownEntities( collect visible )", "NextBot");
+		
+		CBaseEntity *ent = vec_maybe_visible[i];
+		if (ent == nullptr) {
+			continue;
+		}
+		
+		if (this->IsIgnored(ent) || !ent->IsAlive()) {
+			continue;
+		}
+		
+		if (ent == this->GetBot()->GetEntity() ||
+			!this->IsAbleToSee(ent, FieldOfViewCheckType::USE_FOV, nullptr)) {
+			continue;
+		}
+		
+		vec_visible.AddToTail(ent);
+	}
+	
+	{
+		VPROF_BUDGET("IVision::UpdateKnownEntities( update status )", "NextBot");
+		
+		FOR_EACH_VEC(this->m_KnownEntities, i) {
+			CKnownEntity& known = this->m_KnownEntities[i];
+			
+			if (known.GetEntity() == nullptr || known.IsObsolete()) {
+				this->m_KnownEntities.Remove(i);
+				--i;
+				continue;
+			}
+			
+			bool known_is_visible = false;
+			FOR_EACH_VEC(vec_visible, j) {
+				if (ENTINDEX(known.GetEntity()) == ENTINDEX(vec_visible[j])) {
+					known_is_visible = true;
+					break;
+				}
+			}
+			
+			if (known_is_visible) {
+				known.UpdatePosition();
+				known.UpdateVisibilityStatus(true);
+				
+				if (known.GetTimeSinceBecameVisible() >= this->GetMinRecognizeTime()) {
+					if ((this->m_flLastUpdate - known.GetTimeWhenBecameVisible()) <= this->GetMinRecognizeTime()) {
+						// TODO: enum
+						if (this->GetBot()->IsDebugging(0x20)) {
+							ConColorMsg(COLOR_GREEN, "%3.2f: %s caught sight of %s(#%d)\n",
+								gpGlobals->curtime, this->GetBot->GetDebugIdentifier(),
+								known.GetEntity()->GetClassname(), ENTINDEX(known.GetEntity());
+							
+							NDebugOverlay::Line(this->GetBot()->GetBodyInterface()->GetEyePosition(),
+								known.GetLastKnownPosition(), 255, 255, 0, false, 0.2f);
+						}
+						
+						this->GetBot()->OnSight(known.GetEntity());
+					}
+				}
+				
+				this->m_Timers[known.GetEntity()->GetTeamNumber()].Start(0.0f);
+			} else {
+				if (known.IsVisibleInFOVNow()) {
+					known.UpdateVisibilityStatus(false);
+					
+					// TODO: enum
+					if (this->GetBot()->IsDebugging(0x20)) {
+						ConColorMsg(COLOR_RED, "%3.2f: %s lost sight of %s(#%d)\n",
+							gpGlobals->curtime, this->GetBot->GetDebugIdentifier(),
+							known.GetEntity()->GetClassname(), ENTINDEX(known.GetEntity());
+					}
+					
+					this->GetBot()->OnLostSight(known.GetEntity());
+				}
+				
+				if (!known.HastLastKnownPositionBeenSeen() &&
+					this->IsAbleToSee(known.GetLastKnownPosition(),
+						FieldOfViewCheckType::USE_FOV)) {
+					known.MarkLastKnownPositionAsSeen();
+				}
+			}
+		}
+	}
+	
+	{
+		VPROF_BUDGET("IVision::UpdateKnownEntities( new recognizes )", "NextBot");
+		
+		FOR_EACH_VEC(vec_visible, i) {
+			CBaseEntity *visible = vec_visible[i];
+			
+			bool visible_already_known = false;
+			FOR_EACH_VEC(this->m_KnownEntities, j) {
+				CKnownEntity& known = this->m_KnownEntities[j];
+				
+				if (known.GetEntity() == visible) {
+					visible_already_known = true;
+					break;
+				}
+			}
+			
+			if (visible_already_known) {
+				continue;
+			}
+			
+			CKnownEntity k_new(visible);
+			k_new.UpdateVisibilityStatus(true);
+			this->m_KnownEntities.AddToTail(k_new);
+		}
+	}
+	
+	if (nb_debug_known_entities.GetBool()) {
+		CBasePlayer *host = UTIL_GetListenServerHost();
+		if (host != nullptr) {
+			CBaseEntity *spec_target = host->GetObserverTarget();
+			if (this->GetBot()->IsSelf(spec_target)) {
+				CUtlVector<CKnownEntity> vec_known;
+				this->CollectKnownEntities(&vec_known);
+				
+				FOR_EACH_VEC(vec_known, i) {
+					CKnownEntity& known = vec_known[i];
+					
+					bool is_friend = this->GetBot()->IsFriend(known.GetEntity());
+					bool is_recognized = (known.GetTimeSinceBecameKnown() >= this->GetMinRecognizeTime());
+					bool is_visible_now = known.IsVisibleInFOVNow();
+					
+					float width;
+					bool bright;
+					
+					if (is_recognized) {
+						if (is_visible_now) {
+							width = 5.0f;
+							bright = true;
+						} else {
+							width = 2.0f;
+							bright = false;
+						}
+					} else {
+						width = 1.0f;
+						bright = false;
+					}
+					
+					if (is_friend) {
+						r = 0;
+						g = (bright ? 255 : 100);
+						b = 0;
+					} else {
+						r = (bright ? 255 : 100);
+						g = 0;
+						b = 0;
+					}
+					
+					NDebugOverlay::HorzArrow(this->GetEntity()->GetAbsOrigin(),
+						known.GetLastKnownPosition(), width,
+						r, g, b, 255, true, 0.0f);
+				}
+			}
+		}
+	}
 }

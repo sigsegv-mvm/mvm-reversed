@@ -20,7 +20,7 @@ INextBotComponent::~INextBotComponent()
 void INextBotComponent::Reset()
 {
 	this->m_Dword04 = 0;
-	this->m_flTime1 = gpGlobals->curtime;
+	this->m_flTickInterval = gpGlobals->interval_per_tick;
 }
 
 void INextBotComponent::Upkeep()

@@ -27,10 +27,10 @@ public:
 	
 	virtual bool ForEachKnownEntity(IForEachKnownEntity& functor);
 	virtual void CollectKnownEntities(CUtlVector<CKnownEntity> *knowns);
-	virtual const CKnownEntity *GetPrimaryKnownThreat(bool b1) const;
+	virtual const CKnownEntity *GetPrimaryKnownThreat(bool only_recently_visible) const;
 	virtual float GetTimeSinceVisible(int index) const;
-	virtual const CKnownEntity *GetClosestKnown(int i1) const;
-	virtual int GetKnownCount(int i1, bool b1, float f1) const;
+	virtual const CKnownEntity *GetClosestKnown(int teamnum) const;
+	virtual int GetKnownCount(int teamnum, bool only_recently_visible, float range) const;
 	virtual const CKnownEntity *GetClosestKnown(const INextBotEntityFilter& filter) const;
 	virtual const CKnownEntity *GetKnown(const CBaseEntity *ent) const;
 	virtual void AddKnownEntity(CBaseEntity *ent);
@@ -53,14 +53,16 @@ public:
 	virtual bool IsLookingAt(const Vector& v1, float cos_half_fov) const;
 	virtual bool IsLookingAt(const CBaseCombatCharacter *who, float cos_half_fov) const;
 	
+	void UpdateKnownEntities();
+	
 protected:
-	// 0x14 CountdownTimer
-	float m_flFOV;        // +0x20
-	float m_flCosHalfFOV; // +0x24
+	CountdownTimer m_Timer1;                  // +0x14
+	float m_flFOV;                            // +0x20
+	float m_flCosHalfFOV;                     // +0x24
 	CUtlVector<CKnownEntity> m_KnownEntities; // +0x28
-	// 0x3c dword -1
-	// 0x40
-	IntervalTimer m_Timers[32];
+	CHandle<CBaseEntity> m_hPrimaryThreat;    // +0x3c
+	float m_flLastUpdate;                     // +0x40
+	IntervalTimer m_Timers[32];               // +0x44
 };
 
 

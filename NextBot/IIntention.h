@@ -21,13 +21,6 @@ public:
 	virtual Vector SelectTargetPoint(const INextBot *nextbot, const CBaseCombatCharacter *them) const override;
 	virtual QueryResponse IsPositionAllowed(const INextBot *nextbot, const Vector& v1) const override;
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
-	
-protected:
-	// TODO
-	
-	// INextBotEventResponder vtable @ +0x00
-	// IContextualQuery vtable @ +0x14
-	
 };
 
 
