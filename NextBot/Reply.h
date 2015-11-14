@@ -6,31 +6,44 @@
 
 class INextBotReply
 {
-	// TODO
+public:
+	enum class FailureReason : int
+	{
+		// TODO
+	};
+	
+	virtual void OnSuccess(INextBot *nextbot);
+	virtual void OnFail(INextBot *nextbot, FailureReason reason);
 };
 
 
 class PressFireButtonReply : public INextBotReply
 {
-	// TODO
+public:
+	virtual void OnSuccess(INextBot *nextbot) override;
 };
 
 class PressAltFireButtonReply : public INextBotReply
 {
-	// TODO
+public:
+	virtual void OnSuccess(INextBot *nextbot) override;
 };
 
 class PressAltFireButtonIfValidBuildPositionReply : public INextBotReply
 {
-	// TODO
+public:
+	virtual void OnSuccess(INextBot *nextbot) override;
 };
 
 class PressJumpButtonReply : public INextBotReply
 {
-	// TODO
+public:
+	virtual void OnSuccess(INextBot *nextbot) override;
 };
 
 class PlaceStickyBombReply : public INextBotReply
 {
-	// TODO
+public:
+	virtual void OnSuccess(INextBot *nextbot) override;
+	virtual void OnFail(INextBot *nextbot, FailureReason reason) override;
 };
