@@ -15,6 +15,9 @@ public:
 	ILocomotion(INextBot *nextbot);
 	virtual ~ILocomotion();
 	
+	virtual void OnLeaveGround(CBaseEntity *ent) override;
+	virtual void OnLandOnGround(CBaseEntity *ent) override;
+	
 	virtual void Reset() override;
 	virtual void Update() override;
 	
@@ -77,6 +80,18 @@ public:
 	
 protected:
 	// TODO
+	
+	// 14: Vector motion vector
+	// 20: Vector ground motion vector
+	// 2c: float speed
+	// 30: float ground speed
+	// 34: byte is stuck
+	// 38: float -1
+	// 3c: CountdownTimer
+	// 48: 
+	// 4c: 
+	// 50: 
+	// 54: float -1
 };
 
 
