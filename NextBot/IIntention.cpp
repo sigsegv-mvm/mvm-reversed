@@ -64,23 +64,29 @@ QueryResponse IIntention::IsHindrance(const INextBot *nextbot, CBaseEntity *it) 
 
 Vector IIntention::SelectTargetPoint(const INextBot *nextbot, const CBaseCombatCharacter *them) const
 {
-	Vector vec;
-	
-	if (this->FirstContainedResponder() != nullptr) {
-		FOR_EACH_RESPONDER {
-			IContextualQuery *q = dynamic_cast<IContextualQuery *>(responder);
-			if (q != nullptr) {
-				vec = q->SelectTargetPoint(nextbot, them);
-				if (vec != vec3_origin) {
-					break;
-				}
+	FOR_EACH_RESPONDER {
+		IContextualQuery *q = dynamic_cast<IContextualQuery *>(responder);
+		if (q != nullptr) {
+			Vector vec = q->SelectTargetPoint(nextbot, them);
+			if (vec != vec3_origin) {
+				return vec;
 			}
 		}
-		
-		return vec;
-	} else {
-		// TODO
 	}
+	
+	Vector v_world_mins;
+	Vector v_world_maxs;
+	them->CollisionProp()->WorldSpaceAABB(&v_world_mins, &v_world_maxs);
+	
+	Vector& v_abs_origin = them->GetAbsOrigin();
+	
+	float dz = (v_world_maxs.z - v_world_mins.z) * 0.7f;
+	
+	return {
+		.x = v_abs_origin.x,
+		.y = v_abs_origin.y,
+		.z = v_abs_origin.z + dz,
+	};
 }
 
 QueryResponse IIntention::IsPositionAllowed(const INextBot *nextbot, const Vector& v1) const
@@ -90,5 +96,36 @@ QueryResponse IIntention::IsPositionAllowed(const INextBot *nextbot, const Vecto
 
 const CKnownEntity *IIntention::SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const
 {
-	// TODO
+	bool obselete1 = (known1 == nullptr || known1->IsObsolete());
+	bool obselete2 = (known2 == nullptr || known2->IsObsolete());
+	
+	if (obsolete1 && obsolete2) {
+		return nullptr;
+	} else if (obsolete1) {
+		return known2;
+	} else if (obsolete2) {
+		return known1;
+	}
+	
+	FOR_EACH_RESPONDER {
+		IContextualQuery *q = dynamic_cast<IContextualQuery *>(responder);
+		if (q != nullptr) {
+			const CKnownEntity *known = q->SelectMoreDangerousThreat(nextbot, them known1, known2);
+			if (known != nullptr) {
+				return known;
+			}
+		}
+	}
+	
+	const Vector *k1_lastknownpos = known1->GetLastKnownPosition();
+	float k1_dpos_squared = k1_lastknownpos.DistToSqr(known1->GetAbsOrigin());
+	
+	const Vector *k2_lastknownpos = known2->GetLastKnownPosition();
+	float k2_dpos_squared = k2_lastknownpos.DistToSqr(known2->GetAbsOrigin());
+	
+	if (k2_dpos_squared > k1_dpos_squared) {
+		return known1;
+	} else {
+		return known2;
+	}
 }
