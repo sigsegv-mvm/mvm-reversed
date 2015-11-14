@@ -9,7 +9,10 @@ class IBody : public INextBotComponent
 public:
 	enum class LookAtPriorityType : int
 	{
-		// TODO
+		BORING      = 0,
+		INTERESTING = 1,
+		IMPORTANT   = 2,
+		CRITICAL    = 3,
 	};
 	
 	enum class PostureType : int
@@ -28,10 +31,10 @@ public:
 	virtual void Reset() override;
 	virtual void Update() override;
 	
-	virtual bool SetPosition(const Vector& v1);
+	virtual bool SetPosition(const Vector& pos);
 	virtual Vector& GetEyePosition() const;
 	virtual Vector& GetViewVector() const;
-	virtual void AimHeadTowards(const Vector& v1, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *s1);
+	virtual void AimHeadTowards(const Vector& vec, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *s1);
 	virtual void AimHeadTowards(CBaseEntity *ent, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *s1);
 	virtual bool IsHeadAimingOnTarget() const;
 	virtual bool IsHeadSteady() const;
@@ -60,13 +63,10 @@ public:
 	virtual float GetHullHeight() const;
 	virtual float GetStandHullHeight() const;
 	virtual float GetCrouchHullHeight() const;
-	virtual float& GetHullMins() const;
-	virtual float& GetHullMaxs() const;
+	virtual Vector& GetHullMins() const;
+	virtual Vector& GetHullMaxs() const;
 	virtual unsigned int GetSolidMask() const;
 	virtual int GetCollisionGroup() const;
-	
-protected:
-	// TODO
 };
 
 
