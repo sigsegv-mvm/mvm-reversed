@@ -395,7 +395,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		return 0;
 	}
 	
-	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine &&
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() &&
 		g_pGameRules->m_iRoundState != GR_STATE_RND_RUNNING) {
 		return 0;
 	}
@@ -422,7 +422,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		return 0;
 	}
 	
-	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine &&
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() &&
 		this->m_iClass == TF_CLASS_ENGINEER &&
 		(this->m_DefaultAttrs.m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0 &&
 		!CTFBotMvMEngineerHintFinder::FindHint(true, false, nullptr)) {
@@ -468,7 +468,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		g_internalSpawnPoint->SetLocalAngles(vec3_angle);
 		bot->SetSpawnPoint(g_internalSpawnPoint);
 		
-		bot->ChangeTeam((g_pGameRules->m_bPlayingMannVsMachine ?
+		bot->ChangeTeam((TFGameRules()->IsMannVsMachineMode() ?
 			TF_TEAM_BLU : TF_TEAM_RED), false, true);
 		
 		// TODO bot offset 0x9c0 byte = 0
@@ -518,7 +518,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			bot->m_Shared.AddCond(TF_COND_FIRE_IMMUNE, -1.0f, nullptr);
 		}
 		
-		if (g_pGameRules->m_bPlayingMannVsMachine) {
+		if (TFGameRules()->IsMannVsMachineMode()) {
 			bot->m_nCurrency = 0;
 		}
 		
@@ -560,7 +560,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		bot->StartIdleSound();
 		
-		if (g_pGameRules->m_bPlayingMannVsMachine &&
+		if (TFGameRules()->IsMannVsMachineMode() &&
 			bot->GetTeamNumber() == TF_TEAM_BLU) {
 			// TODO: determine for sure what is at CMissionPopulator+0x30
 			// before we finish this block
@@ -622,8 +622,8 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			ents->AddToTail(bot->GetRefEHandle());
 		}
 		
-		if (g_pGameRules->m_bPlayingMannVsMachine && bot->IsMiniBoss()) {
-			g_pGameRules->HaveAllPlayersSpeakConceptIfAllowed(
+		if (TFGameRules()->IsMannVsMachineMode() && bot->IsMiniBoss()) {
+			TFGameRules()->HaveAllPlayersSpeakConceptIfAllowed(
 				TLK_MVM_GIANT_CALLOUT, TF_TEAM_RED);
 		}
 		
@@ -635,7 +635,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		return 1;
 	}
 	
-	if (g_pGameRules != nullptr && g_pGameRules->m_bPlayingMannVsMachine) {
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode()) {
 		CUtlVector<CTFPlayer *> mvm_bots;
 		CPopulationManager::CollectMvMBots(&mvm_bots);
 		
