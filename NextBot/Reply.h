@@ -29,7 +29,7 @@ public:
 	virtual void OnSuccess(INextBot *nextbot) override;
 };
 
-class PressAltFireButtonIfValidBuildPositionReply : public INextBotReply
+class PressFireButtonIfValidBuildPositionReply : public INextBotReply
 {
 public:
 	virtual void OnSuccess(INextBot *nextbot) override;
