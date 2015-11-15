@@ -1,41 +1,37 @@
-
-
+/* reverse engineering by sigsegv
+ * based on TF2 version 20151007a
+ * NextBot: player wrapper class
+ */
 
 
 class INextBotPlayerInput
 {
 public:
-	virtual UNKNOWN PressFireButton(float f1) = 0;
-	virtual UNKNOWN ReleaseFireButton() = 0;
-	virtual UNKNOWN PressAltFireButton(float f1) = 0;
-	virtual UNKNOWN ReleaseAltFireButton() = 0;
-	virtual UNKNOWN PressMeleeButton(float f1) = 0;
-	virtual UNKNOWN ReleaseMeleeButton() = 0;
-	virtual UNKNOWN PressUseButton(float f1) = 0;
-	virtual UNKNOWN ReleaseUseButton() = 0;
-	virtual UNKNOWN PressReloadButton(float f1) = 0;
-	virtual UNKNOWN ReleaseReloadButton() = 0;
-	virtual UNKNOWN PressForwardButton(float f1) = 0;
-	virtual UNKNOWN ReleaseForwardButton() = 0;
-	virtual UNKNOWN PressBackwardButton(float f1) = 0;
-	virtual UNKNOWN ReleaseBackwardButton() = 0;
-	virtual UNKNOWN PressLeftButton(float f1) = 0;
-	virtual UNKNOWN ReleaseLeftButton() = 0;
-	virtual UNKNOWN PressRightButton(float f1) = 0;
-	virtual UNKNOWN ReleaseRightButton() = 0;
-	virtual UNKNOWN PressJumpButton(float f1) = 0;
-	virtual UNKNOWN ReleaseJumpButton() = 0;
-	virtual UNKNOWN PressCrouchButton(float f1) = 0;
-	virtual UNKNOWN ReleaseCrouchButton() = 0;
-	virtual UNKNOWN PressWalkButton(float f1) = 0;
-	virtual UNKNOWN ReleaseWalkButton() = 0;
-	virtual UNKNOWN SetButtonScale(float f1, float f2) = 0;
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
+	virtual void PressFireButton(float duration) = 0;
+	virtual void ReleaseFireButton() = 0;
+	virtual void PressAltFireButton(float duration) = 0;
+	virtual void ReleaseAltFireButton() = 0;
+	virtual void PressMeleeButton(float duration) = 0;
+	virtual void ReleaseMeleeButton() = 0;
+	virtual void PressUseButton(float duration) = 0;
+	virtual void ReleaseUseButton() = 0;
+	virtual void PressReloadButton(float duration) = 0;
+	virtual void ReleaseReloadButton() = 0;
+	virtual void PressForwardButton(float duration) = 0;
+	virtual void ReleaseForwardButton() = 0;
+	virtual void PressBackwardButton(float duration) = 0;
+	virtual void ReleaseBackwardButton() = 0;
+	virtual void PressLeftButton(float duration) = 0;
+	virtual void ReleaseLeftButton() = 0;
+	virtual void PressRightButton(float duration) = 0;
+	virtual void ReleaseRightButton() = 0;
+	virtual void PressJumpButton(float duration) = 0;
+	virtual void ReleaseJumpButton() = 0;
+	virtual void PressCrouchButton(float duration) = 0;
+	virtual void ReleaseCrouchButton() = 0;
+	virtual void PressWalkButton(float duration) = 0;
+	virtual void ReleaseWalkButton() = 0;
+	virtual void SetButtonScale(float forward, float side) = 0;
 };
 
 
@@ -43,50 +39,84 @@ template<class T>
 class NextBotPlayer : public T, public INextBot, public INextBotPlayerInput
 {
 public:
+	NextBotPlayer();
 	virtual ~NextBotPlayer();
 	
 	/* T overrides */
-	// TODO
+	virtual void Spawn() override;
+	virtual void Event_Killed(const CTakeDamageInfo& info) override;
+	virtual INextBot *MyNextBotPointer() override;
+	virtual bool IsNetClient() const override;
+	virtual void Touch(CBaseEntity *pOther) override;
+	virtual void PhysicsSimulate() override;
+	virtual void HandleAnimEvent(animevent_t *pEvent) override;
+	virtual void Weapon_Equip(CBaseCombatWeapon *pWeapon) override;
+	virtual void Weapon_Drop(CBaseCombatWeapon *pWeapon, const Vector *pVecTarget = nullptr, const Vector *pVelocity = nullptr) override;
+	virtual int OnTakeDamage_Alive(const CTakeDamageInfo& info) override;
+	virtual int OnTakeDamage_Dying(const CTakeDamageInfo& info) override;
+	virtual void OnNavAreaChanged(CNavArea *enteredArea, CNavArea *leftArea) override;
+	virtual bool IsFakeClient() const override;
+	virtual CBaseEntity *EntSelectSpawnPoint() override;
+	virtual bool IsBot() const override;
 	
 	/* INextBot overrides */
-	virtual void OnNavAreaChanged(CNavArea *area1, CNavArea *area2);
-	virtual UNKNOWN Update();
-	virtual UNKNOWN IsRemovedOnReset() const;
-	virtual UNKNOWN GetEntity() const;
+	virtual void Update() override;
+	virtual bool IsRemovedOnReset() const override;
+	virtual CBaseEntity *GetEntity() const override;
 	
 	/* INextBotPlayerInput overrides */
-	virtual UNKNOWN PressFireButton(float f1);
-	virtual UNKNOWN ReleaseFireButton();
-	virtual UNKNOWN PressAltFireButton(float f1);
-	virtual UNKNOWN ReleaseAltFireButton();
-	virtual UNKNOWN PressMeleeButton(float f1);
-	virtual UNKNOWN ReleaseMeleeButton();
-	virtual UNKNOWN PressUseButton(float f1);
-	virtual UNKNOWN ReleaseUseButton();
-	virtual UNKNOWN PressReloadButton(float f1);
-	virtual UNKNOWN ReleaseReloadButton();
-	virtual UNKNOWN PressForwardButton(float f1);
-	virtual UNKNOWN ReleaseForwardButton();
-	virtual UNKNOWN PressBackwardButton(float f1);
-	virtual UNKNOWN ReleaseBackwardButton();
-	virtual UNKNOWN PressLeftButton(float f1);
-	virtual UNKNOWN ReleaseLeftButton();
-	virtual UNKNOWN PressRightButton(float f1);
-	virtual UNKNOWN ReleaseRightButton();
-	virtual UNKNOWN PressJumpButton(float f1);
-	virtual UNKNOWN ReleaseJumpButton();
-	virtual UNKNOWN PressCrouchButton(float f1);
-	virtual UNKNOWN ReleaseCrouchButton();
-	virtual UNKNOWN PressWalkButton(float f1);
-	virtual UNKNOWN ReleaseWalkButton();
-	virtual UNKNOWN SetButtonScale(float f1, float f2);
+	virtual void PressFireButton(float duration) override;
+	virtual void ReleaseFireButton() override;
+	virtual void PressAltFireButton(float duration) override;
+	virtual void ReleaseAltFireButton() override;
+	virtual void PressMeleeButton(float duration) override;
+	virtual void ReleaseMeleeButton() override;
+	virtual void PressUseButton(float duration) override;
+	virtual void ReleaseUseButton() override;
+	virtual void PressReloadButton(float duration) override;
+	virtual void ReleaseReloadButton() override;
+	virtual void PressForwardButton(float duration) override;
+	virtual void ReleaseForwardButton() override;
+	virtual void PressBackwardButton(float duration) override;
+	virtual void ReleaseBackwardButton() override;
+	virtual void PressLeftButton(float duration) override;
+	virtual void ReleaseLeftButton() override;
+	virtual void PressRightButton(float duration) override;
+	virtual void ReleaseRightButton() override;
+	virtual void PressJumpButton(float duration) override;
+	virtual void ReleaseJumpButton() override;
+	virtual void PressCrouchButton(float duration) override;
+	virtual void ReleaseCrouchButton() override;
+	virtual void PressWalkButton(float duration) override;
+	virtual void ReleaseWalkButton() override;
+	virtual void SetButtonScale(float forward, float side) override;
 	
-	// TODO: non-virtual functions
+	virtual void SetSpawnPoint(CBaseEntity *ent);
+	virtual bool IsDormantWhenDead() const;
+	virtual void OnMainActivityComplete(Activity a1, Activity a2);
+	virtual void OnMainActivityInterrupted(Activity a1, Activity a2);
+	virtual void AvoidPlayers(CUserCmd *usercmd);
+	
+	float GetDistanceBetween(CBaseEntity *ent) const;
 	
 protected:
-	// TODO
-	
-private:
-	// TODO
+	int m_nBotButtons;                  // +0x2a34
+	int m_nBotButtonsOld;               // +0x2a38
+	CountdownTimer m_ctFire;            // +0x2a3c
+	CountdownTimer m_ctAltFire;         // +0x2a48
+	CountdownTimer m_ctUse;             // +0x2a54
+	CountdownTimer m_ctReload;          // +0x2a60
+	CountdownTimer m_ctForward;         // +0x2a6c
+	CountdownTimer m_ctBackward;        // +0x2a78
+	CountdownTimer m_ctLeft;            // +0x2a84
+	CountdownTimer m_ctRight;           // +0x2a90
+	CountdownTimer m_ctJump;            // +0x2a9c
+	CountdownTimer m_ctCrouch;          // +0x2aa8
+	CountdownTimer m_ctWalk;            // +0x2ab4
+	CountdownTimer m_ctScale;           // +0x2ac0
+	IntervalTimer  m_itBurning;         // +0x2acc
+	float m_flButtonScaleForward;       // +0x2ad0
+	float m_flButtonScaleSide;          // +0x2ad4
+	CHandle<CBaseEntity> m_hSpawnPoint; // +0x2ad8
 };
 //template<> class NextBotPlayer<CTFPlayer>;

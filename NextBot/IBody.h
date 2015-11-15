@@ -18,6 +18,8 @@ public:
 	enum class PostureType : int
 	{
 		// TODO
+		CROUCH = 1,
+		// TODO
 	};
 	
 	enum class ArousalType : int
