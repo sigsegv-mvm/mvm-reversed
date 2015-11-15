@@ -25,8 +25,8 @@ public:
 	
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
-	UNKNOWN GetWho() const;
-	UNKNOWN SetWho(CBaseEntity *who);
+	CBaseEntity *GetWho() const;
+	void SetWho(CBaseEntity *who);
 	
 private:
 	// TODO

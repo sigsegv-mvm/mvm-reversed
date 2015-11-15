@@ -17,7 +17,7 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
-	UNKNOWN DetonateStickiesWhenSet(CTFBot *actor, CTFPipebombLauncher *launcher) const;
+	void DetonateStickiesWhenSet(CTFBot *actor, CTFPipebombLauncher *launcher) const;
 	
 private:
 	// TODO

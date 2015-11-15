@@ -29,9 +29,9 @@ public:
 	virtual EventDesiredResult<CTFBot> OnTerritoryCaptured(CTFBot *actor, int i1) override;
 	virtual EventDesiredResult<CTFBot> OnTerritoryLost(CTFBot *actor, int i1) override;
 	
-	UNKNOWN IsPointThreatened(CTFBot *actor);
+	bool IsPointThreatened(CTFBot *actor);
 	UNKNOWN SelectAreaToDefendFrom(CTFBot *actor);
-	UNKNOWN WillBlockCapture(CTFBot *actor) const;
+	bool WillBlockCapture(CTFBot *actor) const;
 	
 private:
 	// TODO

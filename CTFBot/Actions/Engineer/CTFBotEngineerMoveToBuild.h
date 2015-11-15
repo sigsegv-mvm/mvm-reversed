@@ -23,8 +23,8 @@ public:
 	
 	virtual EventDesiredResult<CTFBot> OnTerritoryLost(CTFBot *actor, int i1) override;
 	
-	UNKNOWN CollectBuildAreas(CTFBot *actor);
-	UNKNOWN SelectBuildLocation(CTFBot *actor);
+	void CollectBuildAreas(CTFBot *actor);
+	void SelectBuildLocation(CTFBot *actor);
 	
 private:
 	// TODO

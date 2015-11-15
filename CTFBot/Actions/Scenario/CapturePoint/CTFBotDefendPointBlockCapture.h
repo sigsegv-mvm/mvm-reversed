@@ -30,7 +30,7 @@ public:
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
-	UNKNOWN IsPointSafe(CTFBot *actor);
+	bool IsPointSafe(CTFBot *actor);
 	
 private:
 	// TODO

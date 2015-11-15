@@ -20,9 +20,9 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
-	UNKNOWN ShouldAdvanceNestSpot(CTFBot *actor);
-	UNKNOWN TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor);
-	UNKNOWN TryToDetonateStaleNest();
+	bool ShouldAdvanceNestSpot(CTFBot *actor);
+	void TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor);
+	void TryToDetonateStaleNest();
 	
 private:
 	// TODO

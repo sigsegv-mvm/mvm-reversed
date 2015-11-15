@@ -31,7 +31,7 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 	UNKNOWN ChooseGoalArea(CTFBot *actor);
-	UNKNOWN RecomputeSeekPath(CTFBot *actor);
+	void RecomputeSeekPath(CTFBot *actor);
 	
 private:
 	// TODO

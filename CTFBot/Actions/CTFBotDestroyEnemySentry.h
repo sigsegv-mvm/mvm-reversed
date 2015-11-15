@@ -22,9 +22,9 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
-	UNKNOWN ComputeCornerAttackSpot(CTFBot *actor);
-	UNKNOWN ComputeSafeAttackSpot(CTFBot *actor);
-	UNKNOWN IsPossible(CTFBot *actor);
+	void ComputeCornerAttackSpot(CTFBot *actor);
+	void ComputeSafeAttackSpot(CTFBot *actor);
+	bool IsPossible(CTFBot *actor);
 	
 private:
 	// TODO

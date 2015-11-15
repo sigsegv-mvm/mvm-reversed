@@ -21,7 +21,7 @@ public:
 	virtual ActionResult<CTFBot> OnStart(CTFBot *actor, Action<CTFBot> *action) override;
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
 	
-	UNKNOWN IsTeleporterAvailable() const;
+	bool IsTeleporterAvailable() const;
 	
 private:
 	// TODO

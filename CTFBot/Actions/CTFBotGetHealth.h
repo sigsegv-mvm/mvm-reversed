@@ -25,7 +25,7 @@ public:
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	
-	UNKNOWN IsPossible(CTFBot *actor);
+	bool IsPossible(CTFBot *actor);
 	
 private:
 	// TODO

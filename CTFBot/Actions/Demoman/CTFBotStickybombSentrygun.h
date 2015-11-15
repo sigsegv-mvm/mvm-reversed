@@ -25,7 +25,7 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
-	UNKNOWN IsAimOnTarget(CTFBot *actor, float f1, float f2, float f3);
+	bool IsAimOnTarget(CTFBot *actor, float f1, float f2, float f3);
 	
 private:
 	// TODO

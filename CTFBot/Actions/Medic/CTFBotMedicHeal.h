@@ -31,10 +31,10 @@ public:
 	virtual QueryResponse IsHindrance(const INextBot *nextbot, CBaseEntity *it) const override;
 	
 	UNKNOWN ComputeFollowPosition(CTFBot *actor);
-	UNKNOWN IsGoodUberTarget(CTFPlayer *player) const;
-	UNKNOWN IsReadyToDeployUber(const CWeaponMedigun *medigun) const;
-	UNKNOWN IsStable(CTFPlayer *player) const;
-	UNKNOWN IsVisibleToEnemy(CTFBot *actor, const Vector& v1) const;
+	bool IsGoodUberTarget(CTFPlayer *player) const;
+	bool IsReadyToDeployUber(const CWeaponMedigun *medigun) const;
+	bool IsStable(CTFPlayer *player) const;
+	bool IsVisibleToEnemy(CTFBot *actor, const Vector& v1) const;
 	UNKNOWN SelectPatient(CTFBot *actor, CTFPlayer *player);
 	
 private:

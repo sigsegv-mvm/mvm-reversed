@@ -26,7 +26,7 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	virtual QueryResponse IsHindrance(const INextBot *nextbot, CBaseEntity *it) const override;
 	
-	UNKNOWN AreAllDangerousSentriesSapped(CTFBot *actor) const;
+	bool AreAllDangerousSentriesSapped(CTFBot *actor) const;
 	
 private:
 	// TODO
