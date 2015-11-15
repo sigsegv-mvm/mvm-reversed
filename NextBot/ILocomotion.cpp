@@ -42,12 +42,12 @@ void ILocomotion::Update()
 
 float ILocomotion::Approach(const Vector& v1, float f1)
 {
-	// TODO
+	this->m_itUnknown.Start();
 }
 
 float ILocomotion::DriveTo(const Vector& v1)
 {
-	// TODO
+	this->m_itUnknown.Start();
 }
 
 bool ILocomotion::ClimbUpToLedge(const Vector& v1, const Vector& v2, const CBaseEntity *ent)
@@ -139,12 +139,12 @@ Vector& ILocomotion::GetGroundNormal() const
 
 float ILocomotion::GetGroundSpeed() const
 {
-	// TODO
+	return this->m_flGroundSpeed;
 }
 
 Vector& ILocomotion::GetGroundMotionVector() const
 {
-	// TODO
+	return this->m_vecGroundMotion;
 }
 
 void ILocomotion::ClimbLadder(const CNavLadder *ladder, const CNavArea *area)
@@ -240,12 +240,12 @@ Vector& ILocomotion::GetVelocity() const
 
 float ILocomotion::GetSpeed() const
 {
-	// TODO
+	return this->m_flSpeed;
 }
 
 Vector& ILocomotion::GetMotionVector() const
 {
-	// TODO
+	return this->m_vecMotion;
 }
 
 bool ILocomotion::IsAreaTraversable(const CNavArea *area) const
@@ -260,17 +260,73 @@ float ILocomotion::GetTraversableSlopeLimit() const
 
 bool ILocomotion::IsPotentiallyTraversable(const Vector& v1, const Vector& v2, TraverseWhenType ttype, float *f1) const
 {
+	VPROF_BUDGET("Locomotion::IsPotentiallyTraversable", "NextBotExpensive");
+	
+	float dz = v2->z - v2->z;
+	if (dz > this->GetMaxJumpHeight() + 0.1f) {
+		Vector dv = v2 - v1;
+		float dv_len_sqr = dv.LengthSqr();
+		float dv_len_inv = 1.0f / fsqrt(dv_len_sqr);
+		
+		if ((dv_len_inv * ((3.0f - ((dv_len_inv * dv_len_inv) * dv_len_sqr)) *
+			0.5f)) * dz > this->GetTraversableSlopeLimit()) {
+			if (f1 != nullptr) {
+				*f1 = 0.0f;
+			}
+			return false;
+		}
+	}
+	
+	NextBotTraversableTraceFilter filter(this->GetBot()->GetEntity());
+	
 	// TODO
 }
 
 bool ILocomotion::HasPotentialGap(const Vector& v1, const Vector& v2, float *f1) const
 {
+	VPROF_BUDGET("Locomotion::HasPotentialGap", "NextBot");
+	
 	// TODO
 }
 
 bool ILocomotion::IsGap(const Vector& v1, const Vector& v2) const
 {
-	// TODO
+	VPROF_BUDGET("Locomotion::IsGap", "NextBotSpiky");
+	
+	unsigned int mask;
+	IBody *body = this->GetBot()->GetBodyInterface();
+	if (body != nullptr) {
+		mask = body->GetSolidMask();
+	} else {
+		mask = MASK_PLAYERSOLID;
+	}
+	
+	NextBotTraceFilterIgnoreActors filter(this->GetBot()->GetEntity());
+	
+	Vector v_start = v1;
+	Vector v_end   = {
+		.x = v1.x,
+		.y = v1.y,
+		.z = v1.z + this->GetStepHeight(),
+	};
+	Vector v_mins = {
+		.x = 0.0f,
+		.y = 0.0f,
+		.z = 0.0f,
+	};
+	Vector v_maxs = {
+		.x = 1.0f,
+		.y = 1.0f,
+		.z = 1.0f,
+	};
+	
+	Ray_t ray;
+	ray.Init(v_start, v_end, v_mins, v_maxs);
+	
+	trace_t trace;
+	enginetrace->TraceRay(ray, mask, &filter, &trace);
+	
+	return (trace.fraction < 1.0 && !trace.startsolid);
 }
 
 bool ILocomotion::IsEntityTraversable(CBaseEntity *ent, TraverseWhenType ttype) const
@@ -280,22 +336,43 @@ bool ILocomotion::IsEntityTraversable(CBaseEntity *ent, TraverseWhenType ttype) 
 
 bool ILocomotion::IsStuck() const
 {
-	// TODO
+	return this->m_bIsStuck;
 }
 
 float ILocomotion::GetStuckDuration() const
 {
-	// TODO
+	if (this->IsStuck()) {
+		return this->m_itStuck.GetElapsedTime();
+	} else {
+		return 0.0f;
+	}
 }
 
 void ILocomotion::ClearStuckStatus(char const *s1)
 {
-	// TODO
+	if (this->IsStuck()) {
+		this->m_bIsStuck = false;
+		this->OnUnStuck();
+	}
+	
+	this->m_vecStuck = this->GetFeet();
+	
+	this->m_itStuck.Start();
+	
+	// TODO: enum
+	if (this->GetBot()->IsDebugging(0x10)) {
+		DevMsg("%3.2f: ClearStuckStatus: %s %s\n",
+			gpGlobals->curtime, this->GetBot()->GetDebugIdentifier(), s1);
+	}
 }
 
 bool ILocomotion::IsAttemptingToMove() const
 {
-	// TODO
+	if (this->m_itUnknown.HasStarted()) {
+		return this->m_itUnknown.IsLessThen(0.25f);
+	} else {
+		return false;
+	}
 }
 
 bool ILocomotion::ShouldCollideWith(const CBaseEntity *ent) const
@@ -310,5 +387,10 @@ void ILocomotion::AdjustPosture(const Vector& v1)
 
 void ILocomotion::StuckMonitor()
 {
-	// TODO
+	if (this->m_itUnknown.IsGreaterThen(0.25f)) {
+		this->m_vecStuck = this->GetFeet();
+		this->m_itStuck.Start();
+	} else {
+		// TODO
+	}
 }

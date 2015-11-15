@@ -79,19 +79,15 @@ public:
 	virtual void StuckMonitor();
 	
 protected:
-	// TODO
-	
-	// 14: Vector motion vector
-	// 20: Vector ground motion vector
-	// 2c: float speed
-	// 30: float ground speed
-	// 34: byte is stuck
-	// 38: float -1
-	// 3c: CountdownTimer
-	// 48: 
-	// 4c: 
-	// 50: 
-	// 54: float -1
+	Vector m_vecMotion;         // +0x14
+	Vector m_vecGroundMotion;   // +0x20
+	float m_flSpeed;            // +0x2c
+	float m_flGroundSpeed;      // +0x30
+	bool m_bIsStuck;            // +0x34
+	IntervalTimer m_itStuck;    // +0x38
+	CountdownTimer m_ctUnknown; // +0x3c
+	Vector m_vecStuck;          // +0x48
+	IntervalTimer m_itUnknown;  // +0x54
 };
 
 
