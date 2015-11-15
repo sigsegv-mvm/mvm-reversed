@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0xd810 (sizeof base: 0x9014)
 /* unusual: this is derived from CTFBotAttack, not Action<CTFBot> directly */
 class CTFBotAttackFlagDefenders : public CTFBotAttack
 {

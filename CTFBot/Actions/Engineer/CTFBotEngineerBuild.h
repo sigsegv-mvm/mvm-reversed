@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x34
 class CTFBotEngineerBuild : public Action<CTFBot>
 {
 public:
@@ -24,7 +25,4 @@ public:
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
-	
-private:
-	// TODO
 };

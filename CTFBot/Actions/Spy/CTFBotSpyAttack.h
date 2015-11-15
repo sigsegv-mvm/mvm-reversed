@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4854
 class CTFBotSpyAttack : public Action<CTFBot>
 {
 public:

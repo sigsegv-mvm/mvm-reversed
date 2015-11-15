@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4810
 class CTFBotGetHealth : public Action<CTFBot>
 {
 public:

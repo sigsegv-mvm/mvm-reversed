@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4850
 class CTFBotMissionSuicideBomber : public Action<CTFBot>
 {
 public:

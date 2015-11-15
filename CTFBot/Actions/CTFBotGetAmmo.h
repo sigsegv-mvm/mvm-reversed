@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4810
 class CTFBotGetAmmo : public Action<CTFBot>
 {
 public:

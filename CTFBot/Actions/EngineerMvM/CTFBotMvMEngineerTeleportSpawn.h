@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x48
 class CTFBotMvMEngineerTeleportSpawn : public Action<CTFBot>
 {
 public:

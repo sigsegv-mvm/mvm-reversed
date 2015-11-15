@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4828
 class CTFBotMvMEngineerBuildSentryGun : public Action<CTFBot>
 {
 public:

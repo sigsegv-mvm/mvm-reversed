@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x482c
 class CTFBotRetreatToCover : public Action<CTFBot>
 {
 public:

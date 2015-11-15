@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4820
 class CTFBotPayloadBlock : public Action<CTFBot>
 {
 public:

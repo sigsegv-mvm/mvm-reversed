@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x7c
 class CTFBotTacticalMonitor : public Action<CTFBot>
 {
 public:

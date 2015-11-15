@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x904c
 class CTFBotEscortFlagCarrier : public Action<CTFBot>
 {
 public:

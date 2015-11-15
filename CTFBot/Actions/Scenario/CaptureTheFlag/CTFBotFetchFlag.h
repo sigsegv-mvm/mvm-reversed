@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4814
 class CTFBotFetchFlag : public Action<CTFBot>
 {
 public:

@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4824
 class CTFBotMvMEngineerBuildTeleportExit : public Action<CTFBot>
 {
 public:

@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x58
 class CTFBotPrepareStickybombTrap : public Action<CTFBot>
 {
 public:

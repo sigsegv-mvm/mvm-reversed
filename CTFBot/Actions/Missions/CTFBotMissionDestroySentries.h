@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO (>=0x38)
 class CTFBotMissionDestroySentries : public Action<CTFBot>
 {
 public:

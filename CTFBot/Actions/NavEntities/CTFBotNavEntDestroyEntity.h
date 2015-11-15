@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO (>=0x4818)
 class CTFBotNavEntDestroyEntity : public Action<CTFBot>
 {
 public:

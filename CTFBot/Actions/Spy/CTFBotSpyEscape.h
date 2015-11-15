@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO
 class CTFBotSpyEscape : public Action<CTFBot>
 {
 public:

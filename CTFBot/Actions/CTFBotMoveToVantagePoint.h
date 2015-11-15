@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO
 class CTFBotMoveToVantagePoint : public Action<CTFBot>
 {
 public:

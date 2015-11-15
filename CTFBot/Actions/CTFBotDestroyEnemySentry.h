@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x482c
 class CTFBotDestroyEnemySentry : public Action<CTFBot>
 {
 public:

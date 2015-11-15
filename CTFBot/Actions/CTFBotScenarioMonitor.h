@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4c
 class CTFBotScenarioMonitor : public Action<CTFBot>
 {
 public:

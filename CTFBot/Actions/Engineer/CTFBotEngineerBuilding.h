@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4870
 class CTFBotEngineerBuilding : public Action<CTFBot>
 {
 public:

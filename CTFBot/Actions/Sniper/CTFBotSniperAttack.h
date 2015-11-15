@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO
 class CTFBotSniperAttack : public Action<CTFBot>
 {
 public:

@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x481c
 class CTFBotDefendPointBlockCapture : public Action<CTFBot>
 {
 public:

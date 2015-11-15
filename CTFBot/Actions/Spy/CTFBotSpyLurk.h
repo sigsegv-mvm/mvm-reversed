@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x40
 class CTFBotSpyLurk : public Action<CTFBot>
 {
 public:

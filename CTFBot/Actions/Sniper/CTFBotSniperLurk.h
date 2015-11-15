@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x485c
 class CTFBotSniperLurk : public Action<CTFBot>
 {
 public:

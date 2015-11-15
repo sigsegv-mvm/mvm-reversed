@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO
 class CTFBotApproachObject : public Action<CTFBot>
 {
 public:

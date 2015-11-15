@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x44
 class CTFBotSpyLeaveSpawnRoom : public Action<CTFBot>
 {
 public:

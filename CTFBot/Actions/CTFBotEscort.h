@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: TODO (>=0x4824)
 class CTFBotEscort : public Action<CTFBot>
 {
 public:

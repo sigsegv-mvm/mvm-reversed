@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4848
 class CTFBotEngineerMoveToBuild : public Action<CTFBot>
 {
 public:

@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x50
 class CTFBotTaunt : public Action<CTFBot>
 {
 public:

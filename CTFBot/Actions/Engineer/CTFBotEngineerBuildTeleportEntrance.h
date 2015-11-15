@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4808
 class CTFBotEngineerBuildTeleportEntrance : public Action<CTFBot>
 {
 public:

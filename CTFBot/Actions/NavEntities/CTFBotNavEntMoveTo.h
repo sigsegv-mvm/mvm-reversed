@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4834
 class CTFBotNavEntMoveTo : public Action<CTFBot>
 {
 public:

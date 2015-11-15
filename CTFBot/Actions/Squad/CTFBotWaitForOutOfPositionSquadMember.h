@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x40
 class CTFBotWaitForOutOfPositionSquadMember : public Action<CTFBot>
 {
 public:

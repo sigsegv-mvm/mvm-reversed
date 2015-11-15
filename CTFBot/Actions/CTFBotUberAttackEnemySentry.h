@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4818
 class CTFBotUberAttackEnemySentry : public Action<CTFBot>
 {
 public:

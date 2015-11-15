@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4834
 class CTFBotInfiltrate : public Action<CTFBot>
 {
 public:

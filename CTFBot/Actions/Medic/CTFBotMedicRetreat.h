@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4814
 class CTFBotMedicRetreat : public Action<CTFBot>
 {
 public:

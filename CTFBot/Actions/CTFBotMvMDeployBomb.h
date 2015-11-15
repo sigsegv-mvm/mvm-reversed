@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4c
 class CTFBotMvMDeployBomb : public Action<CTFBot>
 {
 public:

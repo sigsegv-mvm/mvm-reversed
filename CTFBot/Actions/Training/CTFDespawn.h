@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x34
 class CTFDespawn : public Action<CTFBot>
 {
 public:
@@ -14,7 +15,4 @@ public:
 	virtual const char *GetName() const override;
 	
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
-	
-private:
-	// TODO
 };

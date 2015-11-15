@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4834
 class CTFBotDeliverFlag : public Action<CTFBot>
 {
 public:

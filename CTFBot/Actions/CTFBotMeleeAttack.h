@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4838
 class CTFBotMeleeAttack : public Action<CTFBot>
 {
 public:

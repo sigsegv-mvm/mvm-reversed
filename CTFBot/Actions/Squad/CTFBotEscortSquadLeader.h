@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x905c
 class CTFBotEscortSquadLeader : public Action<CTFBot>
 {
 public:

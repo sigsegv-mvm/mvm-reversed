@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4868
 class CTFBotMvMEngineerIdle : public Action<CTFBot>
 {
 public:

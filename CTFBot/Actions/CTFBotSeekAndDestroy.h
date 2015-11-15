@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4828
 class CTFBotSeekAndDestroy : public Action<CTFBot>
 {
 public:

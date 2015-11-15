@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4818
 class CTFBotPushToCapturePoint : public Action<CTFBot>
 {
 public:

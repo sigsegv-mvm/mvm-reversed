@@ -5,6 +5,7 @@
  */
 
 
+// sizeof: 0x4838
 class CTFBotPayloadGuard : public Action<CTFBot>
 {
 public:
