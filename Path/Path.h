@@ -1,14 +1,7 @@
 /* reverse engineering by sigsegv
  * based on TF2 version 20151007a
- * NextBot: pathfinding
+ * Pathfinding: path
  */
-
-
-class IPathCost
-{
-public:
-	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const = 0;
-};
 
 
 class Path
@@ -89,65 +82,3 @@ protected:
 private:
 	// TODO
 };
-
-
-class PathFollower : public Path
-{
-public:
-	PathFollower(/* TODO */);
-	virtual ~PathFollower();
-	
-	virtual UNKNOWN GetCurrentGoal() const override;
-	
-	virtual UNKNOWN Invalidate() override;
-	
-	virtual UNKNOWN Draw(const Segment *seg) const override;
-	
-	virtual UNKNOWN OnPathChanged(INextBot *nextbot, ResultType rtype) override;
-	
-	virtual UNKNOWN Update(INextBot *nextbot);
-	virtual UNKNOWN SetMinLookAheadDistance(float f1);
-	virtual UNKNOWN GetHindrance() const;
-	virtual UNKNOWN IsDiscontinuityAhead(INextBot *nextbot, SegmentType stype, float f1) const;
-	
-	UNKNOWN Climbing(INextBot *nextbot, const Segment *seg, const Vector& v1, const Vector& v2, float f1);
-	UNKNOWN JumpOverGaps(INextBOt *nextbot, const Segment *seg, const Vector& v1, const Vector& v2, float f1);
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-
-class ChasePath : public PathFollower
-{
-public:
-	ChasePath(/* TODO */);
-	virtual ~ChasePath();
-	
-	virtual UNKNOWN Invalidate() override;
-	
-	virtual UNKNOWN Update(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost, Vector *v1);
-	virtual UNKNOWN GetLeadRadius() const;
-	virtual UNKNOWN GetMaxPathLength() const;
-	virtual UNKNOWN PredictSubjectPosition(INextBot *nextbot, CBaseEntity *ent) const;
-	virtual UNKNOWN IsRepathNeeded(INextBot *nextbot, CBaseEntity *ent) const;
-	virtual UNKNOWN GetLifetime() const;
-	
-	UNKNOWN RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost, Vector *v1);
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};
-
-
-// TODO: IPathOpenGoalSelector
-// TODO: NavDirType
-// TODO: CTFPathFollower
-// TODO: CTFBotPathCost
-// TODO: CTFPlayertPathCost
