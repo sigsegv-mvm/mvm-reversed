@@ -1,4 +1,0 @@
-vtable for CAmmoDef
-
-+0x0000:  0061a550  CAmmoDef::~CAmmoDef()
-+0x0004:  0061a590  CAmmoDef::~CAmmoDef()

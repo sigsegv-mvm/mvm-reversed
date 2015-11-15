@@ -1,8 +1,0 @@
-vtable for IRecipientFilter
-
-+0x0000:  007172f0  IRecipientFilter::~IRecipientFilter()
-+0x0004:  00717500  IRecipientFilter::~IRecipientFilter()
-+0x0008:  00000000  (null)
-+0x000c:  00000000  (null)
-+0x0010:  00000000  (null)
-+0x0014:  00000000  (null)

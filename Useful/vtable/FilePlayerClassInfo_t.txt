@@ -1,3 +1,0 @@
-vtable for FilePlayerClassInfo_t
-
-+0x0000:  006f5910  FilePlayerClassInfo_t::Parse(KeyValues*, char const*)

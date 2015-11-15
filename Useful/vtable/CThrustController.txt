@@ -1,3 +1,0 @@
-vtable for CThrustController
-
-+0x0000:  00b42f20  CThrustController::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)

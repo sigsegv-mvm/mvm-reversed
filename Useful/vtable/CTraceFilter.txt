@@ -1,4 +1,0 @@
-vtable for CTraceFilter
-
-+0x0000:  00000000  (null)
-+0x0004:  0061fa80  CTraceFilter::GetTraceType() const

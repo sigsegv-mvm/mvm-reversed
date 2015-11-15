@@ -1,3 +1,0 @@
-vtable for CFlaggedEntitiesEnum
-
-+0x0000:  00e51550  CFlaggedEntitiesEnum::EnumElement(IHandleEntity*)

@@ -1,3 +1,0 @@
-vtable for CHeadlessHatmanPathCost
-
-+0x0000:  00cf7590  CHeadlessHatmanPathCost::operator()(CNavArea*, CNavArea*, CNavLadder const*, CFuncElevator const*, float) const

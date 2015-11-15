@@ -1,4 +1,0 @@
-vtable for ITFFlameEntityAutoList
-
-+0x0000:  00851980  ITFFlameEntityAutoList::~ITFFlameEntityAutoList()
-+0x0004:  008519f0  ITFFlameEntityAutoList::~ITFFlameEntityAutoList()

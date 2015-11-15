@@ -1,3 +1,0 @@
-vtable for (anonymous namespace)::CPlayerInfoManager_V1
-
-+0x0000:  00b7e910  (anonymous namespace)::CPlayerInfoManager_V1::GetPlayerInfo(edict_t*)

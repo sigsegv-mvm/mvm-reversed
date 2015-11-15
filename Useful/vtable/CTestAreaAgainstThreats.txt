@@ -1,3 +1,0 @@
-vtable for CTestAreaAgainstThreats
-
-+0x0000:  00c72020  CTestAreaAgainstThreats::Inspect(CKnownEntity const&)

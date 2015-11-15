@@ -1,4 +1,0 @@
-vtable for ICaptureFlagAutoList
-
-+0x0000:  00734e40  ICaptureFlagAutoList::~ICaptureFlagAutoList()
-+0x0004:  00734eb0  ICaptureFlagAutoList::~ICaptureFlagAutoList()

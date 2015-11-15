@@ -1,3 +1,0 @@
-vtable for CUtlNoEscConversion
-
-+0x0000:  00e8ccf0  CUtlNoEscConversion::FindConversion(char const*, int*)

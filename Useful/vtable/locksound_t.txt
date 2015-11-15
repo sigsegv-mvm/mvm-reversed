@@ -1,3 +1,0 @@
-vtable for locksound_t
-
-+0x0000:  00b97980  locksound_t::GetDataDescMap()

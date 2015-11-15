@@ -5,7 +5,6 @@
 			"folder_exclude_patterns":
 			[
 				"Binaries",
-				"IDA",
 			],
 			"follow_symlinks": true,
 			"path": "G:\\TF2\\mvm-reversed"

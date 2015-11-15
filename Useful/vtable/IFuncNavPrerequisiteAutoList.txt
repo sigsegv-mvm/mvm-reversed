@@ -1,4 +1,0 @@
-vtable for IFuncNavPrerequisiteAutoList
-
-+0x0000:  00aef910  IFuncNavPrerequisiteAutoList::~IFuncNavPrerequisiteAutoList()
-+0x0004:  00aef8a0  IFuncNavPrerequisiteAutoList::~IFuncNavPrerequisiteAutoList()

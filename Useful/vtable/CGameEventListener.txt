@@ -1,5 +1,0 @@
-vtable for CGameEventListener
-
-+0x0000:  005e7b70  CGameEventListener::~CGameEventListener()
-+0x0004:  005ea460  CGameEventListener::~CGameEventListener()
-+0x0008:  00000000  (null)

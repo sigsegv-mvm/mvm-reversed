@@ -1,4 +1,0 @@
-vtable for IWatcherCallback
-
-+0x0000:  0073d450  IWatcherCallback::~IWatcherCallback()
-+0x0004:  0073da20  IWatcherCallback::~IWatcherCallback()

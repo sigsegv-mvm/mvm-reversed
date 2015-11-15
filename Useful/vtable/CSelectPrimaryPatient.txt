@@ -1,3 +1,0 @@
-vtable for CSelectPrimaryPatient
-
-+0x0000:  00c3bf10  CSelectPrimaryPatient::Inspect(CKnownEntity const&)

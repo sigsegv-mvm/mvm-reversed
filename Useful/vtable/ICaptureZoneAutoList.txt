@@ -1,4 +1,0 @@
-vtable for ICaptureZoneAutoList
-
-+0x0000:  00cbdc90  ICaptureZoneAutoList::~ICaptureZoneAutoList()
-+0x0004:  00cbdc20  ICaptureZoneAutoList::~ICaptureZoneAutoList()

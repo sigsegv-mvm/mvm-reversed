@@ -1,5 +1,0 @@
-vtable for CServerReplayImp
-
-+0x0000:  00a721c0  CServerReplayImp::~CServerReplayImp()
-+0x0004:  00a721d0  CServerReplayImp::~CServerReplayImp()
-+0x0008:  00a72210  CServerReplayImp::UploadOgsData(KeyValues*, bool)

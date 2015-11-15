@@ -1,3 +1,0 @@
-vtable for CFmtStrN<1024, false>
-
-+0x0000:  0067c840  CFmtStrN<1024, false>::InitQuietTruncation()

@@ -1,3 +1,0 @@
-vtable for CDefaultAccessor
-
-+0x0000:  00e79240  CDefaultAccessor::RegisterConCommandBase(ConCommandBase*)

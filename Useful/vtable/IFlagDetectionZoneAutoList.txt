@@ -1,4 +1,0 @@
-vtable for IFlagDetectionZoneAutoList
-
-+0x0000:  00cbdd00  IFlagDetectionZoneAutoList::~IFlagDetectionZoneAutoList()
-+0x0004:  00cbdbb0  IFlagDetectionZoneAutoList::~IFlagDetectionZoneAutoList()

@@ -1,3 +1,0 @@
-vtable for CConstantForceController
-
-+0x0000:  00b5db30  CConstantForceController::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)

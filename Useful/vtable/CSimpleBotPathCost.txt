@@ -1,3 +1,0 @@
-vtable for CSimpleBotPathCost
-
-+0x0000:  00b14cc0  CSimpleBotPathCost::operator()(CNavArea*, CNavArea*, CNavLadder const*, CFuncElevator const*, float) const

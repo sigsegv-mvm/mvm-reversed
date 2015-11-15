@@ -1,4 +1,0 @@
-vtable for CPlayerLocalData
-
-+0x0000:  00b809e0  CPlayerLocalData::NetworkStateChanged()
-+0x0004:  00b809f0  CPlayerLocalData::NetworkStateChanged(void*)

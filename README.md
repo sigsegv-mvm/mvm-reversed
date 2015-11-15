@@ -5,7 +5,7 @@ There is no intention for this project to be compileable, but I do intend for th
 
 Things that are not related to MvM, especially including things that can be found in the public Source SDK, are omitted.
 
-This project is currently based on the October 2, 2015 revision of Team Fortress 2.
+This project is currently based on the 20151007a revision of Team Fortress 2 (October 7, 2015 @ 00:35:00 UTC).
 
 ## Goals
 * Better understanding of how the NextBot AI system works

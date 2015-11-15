@@ -1,3 +1,0 @@
-vtable for CTriggerTraceEnum
-
-+0x0000:  00906630  CTriggerTraceEnum::EnumEntity(IHandleEntity*)

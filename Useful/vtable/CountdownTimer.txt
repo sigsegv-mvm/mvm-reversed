@@ -1,3 +1,0 @@
-vtable for CountdownTimer
-
-+0x0000:  0089f0d0  CountdownTimer::Now() const

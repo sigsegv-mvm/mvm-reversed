@@ -1,3 +1,0 @@
-vtable for IPartitionEnumerator
-
-+0x0000:  00000000  (null)

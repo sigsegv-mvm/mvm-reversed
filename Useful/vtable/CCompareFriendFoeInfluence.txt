@@ -1,3 +1,0 @@
-vtable for CCompareFriendFoeInfluence
-
-+0x0000:  00c650f0  CCompareFriendFoeInfluence::Inspect(CKnownEntity const&)

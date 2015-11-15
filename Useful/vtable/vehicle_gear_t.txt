@@ -1,3 +1,0 @@
-vtable for vehicle_gear_t
-
-+0x0000:  00e5fa30  vehicle_gear_t::GetDataDescMap()

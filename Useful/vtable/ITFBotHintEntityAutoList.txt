@@ -1,4 +1,0 @@
-vtable for ITFBotHintEntityAutoList
-
-+0x0000:  00c7ce80  ITFBotHintEntityAutoList::~ITFBotHintEntityAutoList()
-+0x0004:  00c7cef0  ITFBotHintEntityAutoList::~ITFBotHintEntityAutoList()

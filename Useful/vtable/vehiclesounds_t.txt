@@ -1,3 +1,0 @@
-vtable for vehiclesounds_t
-
-+0x0000:  00e5fa50  vehiclesounds_t::GetDataDescMap()

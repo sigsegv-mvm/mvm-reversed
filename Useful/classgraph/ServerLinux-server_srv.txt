@@ -10074,12 +10074,12 @@
  |   |   2: +001150 public
  |   |   |  [+] IInventoryUpdateListener
  |   |   |   |  [-] GCSDK::ISharedObjectListener
- |   1: +0029b4 public
+ |   1: +0029d0 public
  |   |  [+] INextBot
  |   |   |  [-] INextBotEventResponder
- |   2: +002a14 public
+ |   2: +002a30 public
  |   |  [-] INextBotPlayerInput
- 1: +002ac0 public
+ 1: +002adc public
  |  [+] CGameEventListener
  |   |  [-] IGameEventListener2
 
@@ -20879,10 +20879,10 @@
  |   2: +001150 public
  |   |  [+] IInventoryUpdateListener
  |   |   |  [-] GCSDK::ISharedObjectListener
- 1: +0029b4 public
+ 1: +0029d0 public
  |  [+] INextBot
  |   |  [-] INextBotEventResponder
- 2: +002a14 public
+ 2: +002a30 public
  |  [-] INextBotPlayerInput
 
 [+] NextBotTraceFilterIgnoreActors
