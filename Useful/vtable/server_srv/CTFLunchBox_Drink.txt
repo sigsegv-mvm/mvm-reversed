@@ -454,12 +454,12 @@ CTFLunchBox_Drink
 +0x070c:  00835b40  CTFWeaponBase::CanInspect() const
 +0x0710:  0086a270  CTFLunchBox_Drink::DropAllowed()
 +0x0714:  fffffb78  (unknown)
-+0x0718:  011062e4  CTFLunchBox_Drink
++0x0718:  011062e4  typeinfo for CTFLunchBox_Drink
 +0x071c:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0720:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0724:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0728:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x072c:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0730:  fffff95c  (unknown)
-+0x0734:  011062e4  CTFLunchBox_Drink
++0x0734:  011062e4  typeinfo for CTFLunchBox_Drink
 +0x0738:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

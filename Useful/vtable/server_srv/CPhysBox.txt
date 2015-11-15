@@ -225,7 +225,7 @@ CPhysBox
 +0x0378:  00b56210  CPhysBox::HasPreferredCarryAnglesForPlayer(CBasePlayer*)
 +0x037c:  00b5c6a0  CPhysBox::PreferredCarryAngles()
 +0x0380:  fffffca0  (unknown)
-+0x0384:  0119f8e0  CPhysBox
++0x0384:  0119f8e0  typeinfo for CPhysBox
 +0x0388:  00a66370  non-virtual thunk to CBreakable::SetDmgModBullet(float)
 +0x038c:  00a663a0  non-virtual thunk to CBreakable::SetDmgModClub(float)
 +0x0390:  00a663d0  non-virtual thunk to CBreakable::SetDmgModExplosive(float)
@@ -257,7 +257,7 @@ CPhysBox
 +0x03f8:  00a666c0  non-virtual thunk to CBreakable::SetBasePropData(string_t)
 +0x03fc:  00a666f0  non-virtual thunk to CBreakable::GetBasePropData()
 +0x0400:  fffffc9c  (unknown)
-+0x0404:  0119f8e0  CPhysBox
++0x0404:  0119f8e0  typeinfo for CPhysBox
 +0x0408:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x040c:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0410:  00b59b70  non-virtual thunk to CPhysBox::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

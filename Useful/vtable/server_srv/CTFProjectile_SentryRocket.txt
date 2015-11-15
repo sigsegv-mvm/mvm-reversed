@@ -239,10 +239,10 @@ CTFProjectile_SentryRocket
 +0x03b0:  00e243f0  CTFProjectile_Rocket::GetScorer()
 +0x03b4:  007489e0  CTFProjectile_Rocket::GetAssistant()
 +0x03b8:  fffffb78  (unknown)
-+0x03bc:  012040c4  CTFProjectile_SentryRocket
++0x03bc:  012040c4  typeinfo for CTFProjectile_SentryRocket
 +0x03c0:  00dafca0  non-virtual thunk to CTFProjectile_SentryRocket::~CTFProjectile_SentryRocket()
 +0x03c4:  00dafce0  non-virtual thunk to CTFProjectile_SentryRocket::~CTFProjectile_SentryRocket()
 +0x03c8:  fffffb40  (unknown)
-+0x03cc:  012040c4  CTFProjectile_SentryRocket
++0x03cc:  012040c4  typeinfo for CTFProjectile_SentryRocket
 +0x03d0:  00e243e0  non-virtual thunk to CTFProjectile_Rocket::GetScorer()
 +0x03d4:  007489d0  non-virtual thunk to CTFProjectile_Rocket::GetAssistant()

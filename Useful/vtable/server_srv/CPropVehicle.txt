@@ -223,7 +223,7 @@ CPropVehicle
 +0x0370:  00e5f3b0  CPropVehicle::GetUprightStrength()
 +0x0374:  00e5f3c0  CPropVehicle::GetUprightTime()
 +0x0378:  fffffb78  (unknown)
-+0x037c:  0121f0a0  CPropVehicle
++0x037c:  0121f0a0  typeinfo for CPropVehicle
 +0x0380:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0384:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0388:  00e5d220  non-virtual thunk to CPropVehicle::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

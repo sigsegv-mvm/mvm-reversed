@@ -93,7 +93,7 @@ CZombieSpecialAttack
 +0x0168:  00d29330  Action<CZombie>::OnLose(CZombie*)
 +0x016c:  00d29360  Action<CZombie>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011f09a0  CZombieSpecialAttack
++0x0174:  011f09a0  typeinfo for CZombieSpecialAttack
 +0x0178:  00d38e90  non-virtual thunk to CZombieSpecialAttack::~CZombieSpecialAttack()
 +0x017c:  00d38ec0  non-virtual thunk to CZombieSpecialAttack::~CZombieSpecialAttack()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

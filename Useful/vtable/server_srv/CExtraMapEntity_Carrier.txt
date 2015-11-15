@@ -222,6 +222,6 @@ CExtraMapEntity_Carrier
 +0x036c:  00d7f480  CExtraMapEntity::ShouldAnimate()
 +0x0370:  00d7ea30  CExtraMapEntity::Precache_Internal()
 +0x0374:  fffffb78  (unknown)
-+0x0378:  011fc144  CExtraMapEntity_Carrier
++0x0378:  011fc144  typeinfo for CExtraMapEntity_Carrier
 +0x037c:  00d7f6e0  non-virtual thunk to CExtraMapEntity_Carrier::~CExtraMapEntity_Carrier()
 +0x0380:  00d7f5a0  non-virtual thunk to CExtraMapEntity_Carrier::~CExtraMapEntity_Carrier()

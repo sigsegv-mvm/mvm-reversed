@@ -32,12 +32,12 @@ CAchievementMgr
 +0x0074:  0060a0c0  CAchievementMgr::WereCheatsEverOn()
 +0x0078:  006087c0  CAchievementMgr::FireGameEvent(IGameEvent*)
 +0x007c:  fffffff4  (unknown)
-+0x0080:  010978c0  CAchievementMgr
++0x0080:  010978c0  typeinfo for CAchievementMgr
 +0x0084:  0060b0a0  non-virtual thunk to CAchievementMgr::~CAchievementMgr()
 +0x0088:  0060b2d0  non-virtual thunk to CAchievementMgr::~CAchievementMgr()
 +0x008c:  006087b0  non-virtual thunk to CAchievementMgr::FireGameEvent(IGameEvent*)
 +0x0090:  ffffffec  (unknown)
-+0x0094:  010978c0  CAchievementMgr
++0x0094:  010978c0  typeinfo for CAchievementMgr
 +0x0098:  00606570  non-virtual thunk to CAchievementMgr::GetAchievementByIndex(int)
 +0x009c:  00606920  non-virtual thunk to CAchievementMgr::GetAchievementByID(int)
 +0x00a0:  006065b0  non-virtual thunk to CAchievementMgr::GetAchievementCount()

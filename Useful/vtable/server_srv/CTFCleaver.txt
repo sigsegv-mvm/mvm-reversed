@@ -485,12 +485,12 @@ CTFCleaver
 +0x0788:  00865dd0  CTFCleaver::ShouldSpeakWhenFiring()
 +0x078c:  008643b0  CTFCleaver::CreateJarProjectile(Vector const&, QAngle const&, Vector const&, Vector const&, CBaseCombatCharacter*, CTFWeaponInfo const&)
 +0x0790:  fffffb78  (unknown)
-+0x0794:  011024e8  CTFCleaver
++0x0794:  011024e8  typeinfo for CTFCleaver
 +0x0798:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x079c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x07a0:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07a4:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07a8:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07ac:  fffff95c  (unknown)
-+0x07b0:  011024e8  CTFCleaver
++0x07b0:  011024e8  typeinfo for CTFCleaver
 +0x07b4:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

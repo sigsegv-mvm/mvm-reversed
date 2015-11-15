@@ -489,23 +489,23 @@ CTFCompoundBow
 +0x0798:  0084ef90  CTFCompoundBow::GetCurrentCharge()
 +0x079c:  0084f2a0  CTFCompoundBow::LowerBow()
 +0x07a0:  fffffb78  (unknown)
-+0x07a4:  010fb0dc  CTFCompoundBow
++0x07a4:  010fb0dc  typeinfo for CTFCompoundBow
 +0x07a8:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x07ac:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x07b0:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07b4:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07b8:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07bc:  fffff95c  (unknown)
-+0x07c0:  010fb0dc  CTFCompoundBow
++0x07c0:  010fb0dc  typeinfo for CTFCompoundBow
 +0x07c4:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x07c8:  fffff824  (unknown)
-+0x07cc:  010fb0dc  CTFCompoundBow
++0x07cc:  010fb0dc  typeinfo for CTFCompoundBow
 +0x07d0:  00850220  non-virtual thunk to CTFPipebombLauncher::CanCharge()
 +0x07d4:  00850240  non-virtual thunk to CTFPipebombLauncher::GetChargeBeginTime()
 +0x07d8:  0084f8b0  non-virtual thunk to CTFCompoundBow::GetChargeMaxTime()
 +0x07dc:  0084ef80  non-virtual thunk to CTFCompoundBow::GetCurrentCharge()
 +0x07e0:  fffff820  (unknown)
-+0x07e4:  010fb0dc  CTFCompoundBow
++0x07e4:  010fb0dc  typeinfo for CTFCompoundBow
 +0x07e8:  006eb510  IEntityListener::OnEntityCreated(CBaseEntity*)
 +0x07ec:  006eb520  IEntityListener::OnEntitySpawned(CBaseEntity*)
 +0x07f0:  006eb530  IEntityListener::OnEntityDeleted(CBaseEntity*)

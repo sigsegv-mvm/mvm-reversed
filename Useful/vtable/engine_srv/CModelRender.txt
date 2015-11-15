@@ -27,6 +27,6 @@ CModelRender
 +0x0060:  0013b9c0  CModelRender::AddColoredDecal(unsigned short, Ray_t const&, Vector const&, int, int, Color, bool, int)
 +0x0064:  00138220  CModelRender::GetItemName(unsigned int, void const*, char*, unsigned int)
 +0x0068:  fffffffc  (unknown)
-+0x006c:  00243720  CModelRender
++0x006c:  00243720  typeinfo for CModelRender
 +0x0070:  0013c8d0  CManagedDataCacheClient<CColorMeshData, colormeshparams_t, CColorMeshData*>::HandleCacheNotification(DataCacheNotification_t const&)
 +0x0074:  00138210  non-virtual thunk to CModelRender::GetItemName(unsigned int, void const*, char*, unsigned int)

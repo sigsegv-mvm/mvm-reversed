@@ -407,7 +407,7 @@ CBaseObject
 +0x0650:  00d8f150  CBaseObject::DetermineAnimation()
 +0x0654:  00d93be0  CBaseObject::DeterminePlaybackRate()
 +0x0658:  fffff7b0  (unknown)
-+0x065c:  01200ae0  CBaseObject
++0x065c:  01200ae0  typeinfo for CBaseObject
 +0x0660:  00731ee0  non-virtual thunk to CBaseObject::GetNumBuildPoints() const
 +0x0664:  00731fb0  non-virtual thunk to CBaseObject::GetBuildPoint(int, Vector&, QAngle&)
 +0x0668:  00732080  non-virtual thunk to CBaseObject::GetBuildPointAttachmentIndex(int) const
@@ -420,10 +420,10 @@ CBaseObject
 +0x0684:  007c9ac0  non-virtual thunk to CBaseObject::ShouldCheckForMovement()
 +0x0688:  007321b0  non-virtual thunk to CBaseObject::FindObjectOnBuildPoint(CBaseObject*)
 +0x068c:  fffff7ac  (unknown)
-+0x0690:  01200ae0  CBaseObject
++0x0690:  01200ae0  typeinfo for CBaseObject
 +0x0694:  007c9a70  non-virtual thunk to CBaseObject::GetScorer()
 +0x0698:  007c9aa0  non-virtual thunk to CBaseObject::GetAssistant()
 +0x069c:  fffff7a8  (unknown)
-+0x06a0:  01200ae0  CBaseObject
++0x06a0:  01200ae0  typeinfo for CBaseObject
 +0x06a4:  007ddff0  non-virtual thunk to CBaseObject::~CBaseObject()
 +0x06a8:  007de860  non-virtual thunk to CBaseObject::~CBaseObject()

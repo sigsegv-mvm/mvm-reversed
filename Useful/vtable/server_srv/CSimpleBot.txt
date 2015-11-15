@@ -330,7 +330,7 @@ CSimpleBot
 +0x051c:  00b13ce0  CSimpleBot::GetIntentionInterface() const
 +0x0520:  00b13d00  CSimpleBot::GetLocomotionInterface() const
 +0x0524:  fffff7b0  (unknown)
-+0x0528:  011946e0  CSimpleBot
++0x0528:  011946e0  typeinfo for CSimpleBot
 +0x052c:  00b13800  non-virtual thunk to CSimpleBot::~CSimpleBot()
 +0x0530:  00b138b0  non-virtual thunk to CSimpleBot::~CSimpleBot()
 +0x0534:  00817480  INextBot::FirstContainedResponder() const

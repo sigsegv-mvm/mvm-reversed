@@ -93,7 +93,7 @@ CTFBotEscortSquadLeader
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011cafa4  CTFBotEscortSquadLeader
++0x0174:  011cafa4  typeinfo for CTFBotEscortSquadLeader
 +0x0178:  00c5df40  non-virtual thunk to CTFBotEscortSquadLeader::~CTFBotEscortSquadLeader()
 +0x017c:  00c5dff0  non-virtual thunk to CTFBotEscortSquadLeader::~CTFBotEscortSquadLeader()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

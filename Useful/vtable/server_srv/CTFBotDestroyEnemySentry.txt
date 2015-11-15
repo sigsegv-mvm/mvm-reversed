@@ -96,7 +96,7 @@ CTFBotDestroyEnemySentry
 +0x0174:  00c65640  CTFBotDestroyEnemySentry::ShouldRetreat(INextBot const*) const
 +0x0178:  00c65660  CTFBotDestroyEnemySentry::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x017c:  fffffffc  (unknown)
-+0x0180:  011cc264  CTFBotDestroyEnemySentry
++0x0180:  011cc264  typeinfo for CTFBotDestroyEnemySentry
 +0x0184:  00c69c80  non-virtual thunk to CTFBotDestroyEnemySentry::~CTFBotDestroyEnemySentry()
 +0x0188:  00c69e20  non-virtual thunk to CTFBotDestroyEnemySentry::~CTFBotDestroyEnemySentry()
 +0x018c:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -192,5 +192,5 @@ CRotorWashShooter
 +0x02f4:  00a20d10  CEnvShooter::CreateGib()
 +0x02f8:  00a233a0  CRotorWashShooter::DoWashPush(float, Vector const&)
 +0x02fc:  fffffc54  (unknown)
-+0x0300:  01160a80  CRotorWashShooter
++0x0300:  01160a80  typeinfo for CRotorWashShooter
 +0x0304:  00a23390  non-virtual thunk to CRotorWashShooter::DoWashPush(float, Vector const&)

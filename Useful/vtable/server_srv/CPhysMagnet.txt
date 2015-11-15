@@ -219,5 +219,5 @@ CPhysMagnet
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  00b56f50  CPhysMagnet::ConstraintBroken(IPhysicsConstraint*)
 +0x0368:  fffffb78  (unknown)
-+0x036c:  0119f940  CPhysMagnet
++0x036c:  0119f940  typeinfo for CPhysMagnet
 +0x0370:  00b56f40  non-virtual thunk to CPhysMagnet::ConstraintBroken(IPhysicsConstraint*)

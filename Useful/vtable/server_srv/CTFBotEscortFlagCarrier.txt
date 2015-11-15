@@ -93,7 +93,7 @@ CTFBotEscortFlagCarrier
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c83b8  CTFBotEscortFlagCarrier
++0x0174:  011c83b8  typeinfo for CTFBotEscortFlagCarrier
 +0x0178:  00c4c9f0  non-virtual thunk to CTFBotEscortFlagCarrier::~CTFBotEscortFlagCarrier()
 +0x017c:  00c4cab0  non-virtual thunk to CTFBotEscortFlagCarrier::~CTFBotEscortFlagCarrier()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

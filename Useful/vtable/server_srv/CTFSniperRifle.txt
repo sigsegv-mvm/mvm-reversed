@@ -484,12 +484,12 @@ CTFSniperRifle
 +0x0784:  0088ccb0  CTFSniperRifle::GetBuffType()
 +0x0788:  008891e0  CTFSniperRifle::Zoom()
 +0x078c:  fffffb78  (unknown)
-+0x0790:  0111c448  CTFSniperRifle
++0x0790:  0111c448  typeinfo for CTFSniperRifle
 +0x0794:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0798:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x079c:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07a0:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07a4:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07a8:  fffff95c  (unknown)
-+0x07ac:  0111c448  CTFSniperRifle
++0x07ac:  0111c448  typeinfo for CTFSniperRifle
 +0x07b0:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

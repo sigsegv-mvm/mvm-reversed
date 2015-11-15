@@ -19,13 +19,13 @@ CCollisionEvent
 +0x0040:  00b316b0  CCollisionEvent::ObjectWake(IPhysicsObject*)
 +0x0044:  00b31650  CCollisionEvent::ObjectSleep(IPhysicsObject*)
 +0x0048:  fffffffc  (unknown)
-+0x004c:  0119bae0  CCollisionEvent
++0x004c:  0119bae0  typeinfo for CCollisionEvent
 +0x0050:  00b31700  non-virtual thunk to CCollisionEvent::ShouldCollide(IPhysicsObject*, IPhysicsObject*, void*, void*)
 +0x0054:  00b37060  non-virtual thunk to CCollisionEvent::ShouldSolvePenetration(IPhysicsObject*, IPhysicsObject*, void*, void*, float)
 +0x0058:  00b382e0  non-virtual thunk to CCollisionEvent::ShouldFreezeObject(IPhysicsObject*)
 +0x005c:  00b3a2c0  non-virtual thunk to CCollisionEvent::AdditionalCollisionChecksThisTick(int)
 +0x0060:  00b31210  non-virtual thunk to CCollisionEvent::ShouldFreezeContacts(IPhysicsObject**, int)
 +0x0064:  fffffff8  (unknown)
-+0x0068:  0119bae0  CCollisionEvent
++0x0068:  0119bae0  typeinfo for CCollisionEvent
 +0x006c:  00b316a0  non-virtual thunk to CCollisionEvent::ObjectWake(IPhysicsObject*)
 +0x0070:  00b31640  non-virtual thunk to CCollisionEvent::ObjectSleep(IPhysicsObject*)

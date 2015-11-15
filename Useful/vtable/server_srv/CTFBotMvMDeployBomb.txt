@@ -94,7 +94,7 @@ CTFBotMvMDeployBomb
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c70260  CTFBotMvMDeployBomb::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011cd790  CTFBotMvMDeployBomb
++0x0178:  011cd790  typeinfo for CTFBotMvMDeployBomb
 +0x017c:  00c70c40  non-virtual thunk to CTFBotMvMDeployBomb::~CTFBotMvMDeployBomb()
 +0x0180:  00c70c70  non-virtual thunk to CTFBotMvMDeployBomb::~CTFBotMvMDeployBomb()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

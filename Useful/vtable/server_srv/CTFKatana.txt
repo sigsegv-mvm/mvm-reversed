@@ -469,17 +469,17 @@ CTFKatana
 +0x0748:  0088d780  CTFKatana::OnDecapitation(CTFPlayer*)
 +0x074c:  0088d170  CTFDecapitationMeleeWeaponBase::FireGameEvent(IGameEvent*)
 +0x0750:  fffffb78  (unknown)
-+0x0754:  0111e204  CTFKatana
++0x0754:  0111e204  typeinfo for CTFKatana
 +0x0758:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x075c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0760:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0764:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0768:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x076c:  fffff95c  (unknown)
-+0x0770:  0111e204  CTFKatana
++0x0770:  0111e204  typeinfo for CTFKatana
 +0x0774:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x0778:  fffff804  (unknown)
-+0x077c:  0111e204  CTFKatana
++0x077c:  0111e204  typeinfo for CTFKatana
 +0x0780:  0088df40  non-virtual thunk to CTFKatana::~CTFKatana()
 +0x0784:  0088e210  non-virtual thunk to CTFKatana::~CTFKatana()
 +0x0788:  0088d160  non-virtual thunk to CTFDecapitationMeleeWeaponBase::FireGameEvent(IGameEvent*)

@@ -494,17 +494,17 @@ CTFSpellBook
 +0x07ac:  007448d0  CTFSpellBook::CreateSpellRocket(Vector const&, QAngle const&, Vector const&, Vector const&, CBaseCombatCharacter*, CTFWeaponInfo const&)
 +0x07b0:  007447e0  CTFSpellBook::CreateSpellJar(Vector const&, QAngle const&, Vector const&, Vector const&, CBaseCombatCharacter*, CTFWeaponInfo const&)
 +0x07b4:  fffffb78  (unknown)
-+0x07b8:  010c6dec  CTFSpellBook
++0x07b8:  010c6dec  typeinfo for CTFSpellBook
 +0x07bc:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x07c0:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x07c4:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07c8:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07cc:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07d0:  fffff95c  (unknown)
-+0x07d4:  010c6dec  CTFSpellBook
++0x07d4:  010c6dec  typeinfo for CTFSpellBook
 +0x07d8:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x07dc:  fffff820  (unknown)
-+0x07e0:  010c6dec  CTFSpellBook
++0x07e0:  010c6dec  typeinfo for CTFSpellBook
 +0x07e4:  00891a00  non-virtual thunk to CTFThrowable::CanCharge()
 +0x07e8:  00891930  non-virtual thunk to CTFThrowable::GetChargeBeginTime()
 +0x07ec:  0088ec40  non-virtual thunk to CTFThrowable::GetChargeMaxTime()

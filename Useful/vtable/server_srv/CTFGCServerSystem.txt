@@ -36,7 +36,7 @@ CTFGCServerSystem
 +0x0084:  005e2450  CTFGCServerSystem::ShouldHibernate()
 +0x0088:  005e33b0  CTFGCServerSystem::FireGameEvent(IGameEvent*)
 +0x008c:  fffffcf4  (unknown)
-+0x0090:  010931c0  CTFGCServerSystem
++0x0090:  010931c0  typeinfo for CTFGCServerSystem
 +0x0094:  005e7070  non-virtual thunk to CTFGCServerSystem::SOCreated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
 +0x0098:  005e7bc0  non-virtual thunk to CTFGCServerSystem::PreSOUpdate(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x009c:  005e7010  non-virtual thunk to CTFGCServerSystem::SOUpdated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
@@ -45,13 +45,13 @@ CTFGCServerSystem
 +0x00a8:  005e7c00  non-virtual thunk to CTFGCServerSystem::SOCacheSubscribed(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x00ac:  005e7c20  non-virtual thunk to CTFGCServerSystem::SOCacheUnsubscribed(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x00b0:  fffffcf0  (unknown)
-+0x00b4:  010931c0  CTFGCServerSystem
++0x00b4:  010931c0  typeinfo for CTFGCServerSystem
 +0x00b8:  005e2410  non-virtual thunk to CTFGCServerSystem::HasLobby() const
 +0x00bc:  005e3530  non-virtual thunk to CTFGCServerSystem::SteamIDAllowedToConnect(CSteamID const&) const
 +0x00c0:  005e7240  non-virtual thunk to CTFGCServerSystem::UpdateServerDetails()
 +0x00c4:  005e2440  non-virtual thunk to CTFGCServerSystem::ShouldHibernate()
 +0x00c8:  fffffcec  (unknown)
-+0x00cc:  010931c0  CTFGCServerSystem
++0x00cc:  010931c0  typeinfo for CTFGCServerSystem
 +0x00d0:  005e3c00  non-virtual thunk to CTFGCServerSystem::~CTFGCServerSystem()
 +0x00d4:  005e3e40  non-virtual thunk to CTFGCServerSystem::~CTFGCServerSystem()
 +0x00d8:  005e33a0  non-virtual thunk to CTFGCServerSystem::FireGameEvent(IGameEvent*)

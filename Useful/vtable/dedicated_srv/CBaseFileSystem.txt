@@ -151,7 +151,7 @@ CBaseFileSystem
 +0x0250:  00000000  
 +0x0254:  0006e7d0  CBaseFileSystem::FS_GetSectorSize(_IO_FILE*)
 +0x0258:  fffffffc  (unknown)
-+0x025c:  001cd1b4  CBaseFileSystem
++0x025c:  001cd1b4  typeinfo for CBaseFileSystem
 +0x0260:  0005e650  non-virtual thunk to CBaseFileSystem::Read(void*, int, void*)
 +0x0264:  00063700  non-virtual thunk to CBaseFileSystem::Write(void const*, int, void*)
 +0x0268:  0005e600  non-virtual thunk to CBaseFileSystem::Open(char const*, char const*, char const*)

@@ -11,7 +11,7 @@ CEventLog
 +0x0020:  00a4c450  CEventLog::PrintTeamEvent(IGameEvent*)
 +0x0024:  00a4c460  CEventLog::PrintOtherEvent(IGameEvent*)
 +0x0028:  fffffff8  (unknown)
-+0x002c:  0116c8e0  CEventLog
++0x002c:  0116c8e0  typeinfo for CEventLog
 +0x0030:  0064c720  CBaseGameSystem::Name()
 +0x0034:  00a4cc40  non-virtual thunk to CEventLog::Init()
 +0x0038:  0064c740  CBaseGameSystem::PostInit()

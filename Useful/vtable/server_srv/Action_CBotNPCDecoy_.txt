@@ -93,7 +93,7 @@ Action<CBotNPCDecoy>
 +0x0168:  00ca7720  Action<CBotNPCDecoy>::OnLose(CBotNPCDecoy*)
 +0x016c:  00ca7750  Action<CBotNPCDecoy>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011d8180  Action<CBotNPCDecoy>
++0x0174:  011d8180  typeinfo for Action<CBotNPCDecoy>
 +0x0178:  00ca6e60  non-virtual thunk to Action<CBotNPCDecoy>::~Action()
 +0x017c:  00ca7cf0  non-virtual thunk to Action<CBotNPCDecoy>::~Action()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

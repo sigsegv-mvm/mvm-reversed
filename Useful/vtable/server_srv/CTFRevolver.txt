@@ -478,12 +478,12 @@ CTFRevolver
 +0x076c:  00841770  CTFWeaponBaseGun::ShouldRemoveDisguiseOnPrimaryAttack() const
 +0x0770:  00748780  CTFWeaponBaseGun::ShouldRemoveInvisibilityOnPrimaryAttack() const
 +0x0774:  fffffb78  (unknown)
-+0x0778:  01113068  CTFRevolver
++0x0778:  01113068  typeinfo for CTFRevolver
 +0x077c:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0780:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0784:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0788:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x078c:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0790:  fffff95c  (unknown)
-+0x0794:  01113068  CTFRevolver
++0x0794:  01113068  typeinfo for CTFRevolver
 +0x0798:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

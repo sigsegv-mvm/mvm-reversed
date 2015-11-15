@@ -96,7 +96,7 @@ CTFBotSniperLurk
 +0x0174:  00c52ff0  CTFBotSniperLurk::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0178:  00c53260  CTFBotSniperLurk::ShouldRetreat(INextBot const*) const
 +0x017c:  fffffffc  (unknown)
-+0x0180:  011c97e4  CTFBotSniperLurk
++0x0180:  011c97e4  typeinfo for CTFBotSniperLurk
 +0x0184:  00c55310  non-virtual thunk to CTFBotSniperLurk::~CTFBotSniperLurk()
 +0x0188:  00c553a0  non-virtual thunk to CTFBotSniperLurk::~CTFBotSniperLurk()
 +0x018c:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

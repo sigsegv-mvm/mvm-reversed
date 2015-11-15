@@ -56,7 +56,7 @@ CBotNPCDecoy::CBotNPCDecoyIntention
 +0x00d4:  005e95d0  IIntention::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00d8:  00af67e0  IIntention::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00dc:  ffffffec  (unknown)
-+0x00e0:  011d7348  CBotNPCDecoy::CBotNPCDecoyIntention
++0x00e0:  011d7348  typeinfo for CBotNPCDecoy::CBotNPCDecoyIntention
 +0x00e4:  00ca5fe0  non-virtual thunk to CBotNPCDecoy::CBotNPCDecoyIntention::~CBotNPCDecoyIntention()
 +0x00e8:  00ca6040  non-virtual thunk to CBotNPCDecoy::CBotNPCDecoyIntention::~CBotNPCDecoyIntention()
 +0x00ec:  005e98c0  non-virtual thunk to IIntention::ShouldPickUp(INextBot const*, CBaseEntity*) const

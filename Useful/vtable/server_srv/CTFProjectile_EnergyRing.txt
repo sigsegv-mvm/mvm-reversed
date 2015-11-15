@@ -240,10 +240,10 @@ CTFProjectile_EnergyRing
 +0x03b4:  00805d50  CTFProjectile_EnergyRing::ImpactTeamPlayer(CTFPlayer*)
 +0x03b8:  00805d60  CTFProjectile_EnergyRing::GetDamageCustom()
 +0x03bc:  fffffb78  (unknown)
-+0x03c0:  010e40f0  CTFProjectile_EnergyRing
++0x03c0:  010e40f0  typeinfo for CTFProjectile_EnergyRing
 +0x03c4:  00805db0  non-virtual thunk to CTFProjectile_EnergyRing::~CTFProjectile_EnergyRing()
 +0x03c8:  00805df0  non-virtual thunk to CTFProjectile_EnergyRing::~CTFProjectile_EnergyRing()
 +0x03cc:  fffffb68  (unknown)
-+0x03d0:  010e40f0  CTFProjectile_EnergyRing
++0x03d0:  010e40f0  typeinfo for CTFProjectile_EnergyRing
 +0x03d4:  00803850  non-virtual thunk to CTFBaseProjectile::GetScorer()
 +0x03d8:  00804ac0  non-virtual thunk to CTFBaseProjectile::GetAssistant()

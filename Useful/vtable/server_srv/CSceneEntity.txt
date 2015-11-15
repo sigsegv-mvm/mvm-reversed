@@ -241,7 +241,7 @@ CSceneEntity
 +0x03b8:  00bbc270  CSceneEntity::FindNamedEntity(char const*, CBaseEntity*, bool, bool)
 +0x03bc:  00bb96e0  CSceneEntity::FindNamedEntityClosest(char const*, CBaseEntity*, bool, bool, char const*)
 +0x03c0:  fffffca0  (unknown)
-+0x03c4:  011b2b20  CSceneEntity
++0x03c4:  011b2b20  typeinfo for CSceneEntity
 +0x03c8:  00bb8ae0  non-virtual thunk to CSceneEntity::StartEvent(float, CChoreoScene*, CChoreoEvent*)
 +0x03cc:  00bb8740  non-virtual thunk to CSceneEntity::EndEvent(float, CChoreoScene*, CChoreoEvent*)
 +0x03d0:  00bb8470  non-virtual thunk to CSceneEntity::ProcessEvent(float, CChoreoScene*, CChoreoEvent*)

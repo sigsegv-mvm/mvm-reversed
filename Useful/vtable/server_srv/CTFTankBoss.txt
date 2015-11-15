@@ -335,7 +335,7 @@ CTFTankBoss
 +0x0530:  00d6e860  CTFTankBoss::SetSkin(int)
 +0x0534:  00d6e7a0  CTFTankBoss::GetBodyInterface() const
 +0x0538:  fffff7b0  (unknown)
-+0x053c:  011f81b4  CTFTankBoss
++0x053c:  011f81b4  typeinfo for CTFTankBoss
 +0x0540:  00d6c1b0  non-virtual thunk to CTFTankBoss::~CTFTankBoss()
 +0x0544:  00d6c2d0  non-virtual thunk to CTFTankBoss::~CTFTankBoss()
 +0x0548:  00817480  INextBot::FirstContainedResponder() const

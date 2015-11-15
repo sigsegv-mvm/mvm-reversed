@@ -492,17 +492,17 @@ CTFThrowable
 +0x07a4:  0088ec50  CTFThrowable::GetChargeMaxTime()
 +0x07a8:  008912e0  CTFThrowable::FireProjectileInternal()
 +0x07ac:  fffffb78  (unknown)
-+0x07b0:  01120520  CTFThrowable
++0x07b0:  01120520  typeinfo for CTFThrowable
 +0x07b4:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x07b8:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x07bc:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07c0:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07c4:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07c8:  fffff95c  (unknown)
-+0x07cc:  01120520  CTFThrowable
++0x07cc:  01120520  typeinfo for CTFThrowable
 +0x07d0:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x07d4:  fffff820  (unknown)
-+0x07d8:  01120520  CTFThrowable
++0x07d8:  01120520  typeinfo for CTFThrowable
 +0x07dc:  00891a00  non-virtual thunk to CTFThrowable::CanCharge()
 +0x07e0:  00891930  non-virtual thunk to CTFThrowable::GetChargeBeginTime()
 +0x07e4:  0088ec40  non-virtual thunk to CTFThrowable::GetChargeMaxTime()

@@ -52,7 +52,7 @@ Behavior<CBotNPCDecoy>
 +0x00c4:  00ca7bd0  Behavior<CBotNPCDecoy>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00ca7c60  Behavior<CBotNPCDecoy>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011d81c0  Behavior<CBotNPCDecoy>
++0x00d0:  011d81c0  typeinfo for Behavior<CBotNPCDecoy>
 +0x00d4:  00cb2d30  non-virtual thunk to Behavior<CBotNPCDecoy>::~Behavior()
 +0x00d8:  00cb2e60  non-virtual thunk to Behavior<CBotNPCDecoy>::~Behavior()
 +0x00dc:  00ca77b0  non-virtual thunk to Behavior<CBotNPCDecoy>::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -260,11 +260,11 @@ CTFProjectile_Cleaver
 +0x0404:  00865e40  CTFProjectile_Cleaver::GetImpactEffect()
 +0x0408:  00865e50  CTFProjectile_Cleaver::GetEffectCondition()
 +0x040c:  fffffb78  (unknown)
-+0x0410:  01102550  CTFProjectile_Cleaver
++0x0410:  01102550  typeinfo for CTFProjectile_Cleaver
 +0x0414:  008660d0  non-virtual thunk to CTFProjectile_Cleaver::~CTFProjectile_Cleaver()
 +0x0418:  00865ff0  non-virtual thunk to CTFProjectile_Cleaver::~CTFProjectile_Cleaver()
 +0x041c:  fffffb68  (unknown)
-+0x0420:  01102550  CTFProjectile_Cleaver
++0x0420:  01102550  typeinfo for CTFProjectile_Cleaver
 +0x0424:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0428:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x042c:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

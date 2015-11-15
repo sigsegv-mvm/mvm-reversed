@@ -219,7 +219,7 @@ CWheelOfDoom
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  00899670  CWheelOfDoom::FireGameEvent(IGameEvent*)
 +0x0368:  fffffb78  (unknown)
-+0x036c:  011247c0  CWheelOfDoom
++0x036c:  011247c0  typeinfo for CWheelOfDoom
 +0x0370:  00898cf0  non-virtual thunk to CWheelOfDoom::~CWheelOfDoom()
 +0x0374:  00898f10  non-virtual thunk to CWheelOfDoom::~CWheelOfDoom()
 +0x0378:  00899660  non-virtual thunk to CWheelOfDoom::FireGameEvent(IGameEvent*)

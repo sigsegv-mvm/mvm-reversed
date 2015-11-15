@@ -515,19 +515,19 @@ NextBotPlayer<CTFPlayer>
 +0x0800:  00c8c930  NextBotPlayer<CTFPlayer>::AvoidPlayers(CUserCmd*)
 +0x0804:  00c8d7c0  NextBotPlayer<CTFPlayer>::Update()
 +0x0808:  ffffef00  (unknown)
-+0x080c:  011d4dc0  NextBotPlayer<CTFPlayer>
++0x080c:  011d4dc0  typeinfo for NextBotPlayer<CTFPlayer>
 +0x0810:  008dc560  CAI_ExpresserSink::OnSpokeConcept(char const*, AI_Response*)
 +0x0814:  008dc570  CAI_ExpresserSink::OnStartSpeaking()
 +0x0818:  008dc580  CAI_ExpresserSink::UseSemaphore()
 +0x081c:  ffffeeb4  (unknown)
-+0x0820:  011d4dc0  NextBotPlayer<CTFPlayer>
++0x0820:  011d4dc0  typeinfo for NextBotPlayer<CTFPlayer>
 +0x0824:  00c8c5c0  non-virtual thunk to CTFPlayer::GetAttributeManager()
 +0x0828:  00c8c5e0  non-virtual thunk to CTFPlayer::GetAttributeContainer()
 +0x082c:  00c8c600  non-virtual thunk to CTFPlayer::GetAttributeOwner()
 +0x0830:  00c8c620  non-virtual thunk to CTFPlayer::GetAttributeList()
 +0x0834:  00c8c640  non-virtual thunk to CTFPlayer::ReapplyProvision()
 +0x0838:  ffffeeb0  (unknown)
-+0x083c:  011d4dc0  NextBotPlayer<CTFPlayer>
++0x083c:  011d4dc0  typeinfo for NextBotPlayer<CTFPlayer>
 +0x0840:  00c8c450  IInventoryUpdateListener::SOCreated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
 +0x0844:  00c8c470  IInventoryUpdateListener::PreSOUpdate(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x0848:  00c8c480  IInventoryUpdateListener::SOUpdated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
@@ -537,7 +537,7 @@ NextBotPlayer<CTFPlayer>
 +0x0858:  00c8c4f0  IInventoryUpdateListener::SOCacheUnsubscribed(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x085c:  00dbf1d0  non-virtual thunk to CTFPlayer::InventoryUpdated(CPlayerInventory*)
 +0x0860:  ffffd630  (unknown)
-+0x0864:  011d4dc0  NextBotPlayer<CTFPlayer>
++0x0864:  011d4dc0  typeinfo for NextBotPlayer<CTFPlayer>
 +0x0868:  00c8da40  non-virtual thunk to NextBotPlayer<CTFPlayer>::~NextBotPlayer()
 +0x086c:  00c8dc60  non-virtual thunk to NextBotPlayer<CTFPlayer>::~NextBotPlayer()
 +0x0870:  00817480  INextBot::FirstContainedResponder() const
@@ -620,7 +620,7 @@ NextBotPlayer<CTFPlayer>
 +0x09a4:  00af70f0  INextBot::IsDebugFilterMatch(char const*) const
 +0x09a8:  00af6b90  INextBot::DisplayDebugText(char const*) const
 +0x09ac:  ffffd5d0  (unknown)
-+0x09b0:  011d4dc0  NextBotPlayer<CTFPlayer>
++0x09b0:  011d4dc0  typeinfo for NextBotPlayer<CTFPlayer>
 +0x09b4:  00c8c7d0  non-virtual thunk to NextBotPlayer<CTFPlayer>::PressFireButton(float)
 +0x09b8:  00c8c7a0  non-virtual thunk to NextBotPlayer<CTFPlayer>::ReleaseFireButton()
 +0x09bc:  00c8c860  non-virtual thunk to NextBotPlayer<CTFPlayer>::PressAltFireButton(float)

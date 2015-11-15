@@ -200,7 +200,7 @@ CTFPlayerDestructionLogic
 +0x0314:  007c7c10  CTFPlayerDestructionLogic::OnRedScoreChanged()
 +0x0318:  007c7a10  CTFPlayerDestructionLogic::OnBlueScoreChanged()
 +0x031c:  fffffca0  (unknown)
-+0x0320:  010dd950  CTFPlayerDestructionLogic
++0x0320:  010dd950  typeinfo for CTFPlayerDestructionLogic
 +0x0324:  007c9ce0  non-virtual thunk to CTFPlayerDestructionLogic::~CTFPlayerDestructionLogic()
 +0x0328:  007c9f40  non-virtual thunk to CTFPlayerDestructionLogic::~CTFPlayerDestructionLogic()
 +0x032c:  007c9040  non-virtual thunk to CTFPlayerDestructionLogic::FireGameEvent(IGameEvent*)

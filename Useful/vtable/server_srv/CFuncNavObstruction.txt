@@ -195,7 +195,7 @@ CFuncNavObstruction
 +0x0300:  00ac9610  CFuncNavObstruction::GetObstructingEntity()
 +0x0304:  00ac9a10  CFuncNavObstruction::OnNavMeshLoaded()
 +0x0308:  fffffca0  (unknown)
-+0x030c:  0118c5c0  CFuncNavObstruction
++0x030c:  0118c5c0  typeinfo for CFuncNavObstruction
 +0x0310:  00ac9590  non-virtual thunk to CFuncNavObstruction::IsPotentiallyAbleToObstructNavAreas() const
 +0x0314:  00ac95b0  non-virtual thunk to CFuncNavObstruction::GetNavObstructionHeight() const
 +0x0318:  00ac95d0  non-virtual thunk to CFuncNavObstruction::CanObstructNavAreas() const

@@ -330,7 +330,7 @@ CGhost
 +0x051c:  00ce4ee0  CGhost::GetIntentionInterface() const
 +0x0520:  00ce4f00  CGhost::GetLocomotionInterface() const
 +0x0524:  fffff7b0  (unknown)
-+0x0528:  011e764c  CGhost
++0x0528:  011e764c  typeinfo for CGhost
 +0x052c:  00ce48d0  non-virtual thunk to CGhost::~CGhost()
 +0x0530:  00ce4980  non-virtual thunk to CGhost::~CGhost()
 +0x0534:  00817480  INextBot::FirstContainedResponder() const

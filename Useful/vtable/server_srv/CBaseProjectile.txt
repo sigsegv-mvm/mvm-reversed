@@ -226,6 +226,6 @@ CBaseProjectile
 +0x037c:  00635d00  CBaseProjectile::Destroy(bool, bool)
 +0x0380:  0063bd30  CBaseProjectile::SetLauncher(CBaseEntity*)
 +0x0384:  fffffb78  (unknown)
-+0x0388:  010a5c00  CBaseProjectile
++0x0388:  010a5c00  typeinfo for CBaseProjectile
 +0x038c:  0063bfa0  non-virtual thunk to CBaseProjectile::~CBaseProjectile()
 +0x0390:  0063c040  non-virtual thunk to CBaseProjectile::~CBaseProjectile()

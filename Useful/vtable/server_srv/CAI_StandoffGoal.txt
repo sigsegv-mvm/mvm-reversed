@@ -197,7 +197,7 @@ CAI_StandoffGoal
 +0x0308:  00936800  CAI_StandoffGoal::EnableGoal(CAI_BaseNPC*)
 +0x030c:  00936340  CAI_StandoffGoal::DisableGoal(CAI_BaseNPC*)
 +0x0310:  fffffca0  (unknown)
-+0x0314:  0113b18c  CAI_StandoffGoal
++0x0314:  0113b18c  typeinfo for CAI_StandoffGoal
 +0x0318:  009441f0  non-virtual thunk to CAI_GoalEntity::OnEntityCreated(CBaseEntity*)
 +0x031c:  006eb520  IEntityListener::OnEntitySpawned(CBaseEntity*)
 +0x0320:  009440f0  non-virtual thunk to CAI_GoalEntity::OnEntityDeleted(CBaseEntity*)

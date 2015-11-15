@@ -27,7 +27,7 @@ CTFLobby
 +0x0060:  007c0bc0  CTFLobby::GetPendingInviteIndexBySteamID(CSteamID const&) const
 +0x0064:  007c12e0  CTFLobby::AllowInvites() const
 +0x0068:  ffffff14  (unknown)
-+0x006c:  010db7e0  CTFLobby
++0x006c:  010db7e0  typeinfo for CTFLobby
 +0x0070:  007c0e10  non-virtual thunk to CTFLobby::~CTFLobby()
 +0x0074:  007c0e60  non-virtual thunk to CTFLobby::~CTFLobby()
 +0x0078:  007c1240  non-virtual thunk to CTFLobby::GetGroupID() const

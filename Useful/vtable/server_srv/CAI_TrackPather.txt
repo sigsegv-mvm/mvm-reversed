@@ -584,7 +584,7 @@ CAI_TrackPather
 +0x0914:  009a9590  CAI_TrackPather::FindTrackBlocker(Vector const&, Vector const&)
 +0x0918:  009aea90  CAI_TrackPather::ShouldUseFixedPatrolLogic()
 +0x091c:  fffff7b0  (unknown)
-+0x0920:  0114e3b4  CAI_TrackPather
++0x0920:  0114e3b4  typeinfo for CAI_TrackPather
 +0x0924:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x0928:  008e13c0  non-virtual thunk to CAI_BaseNPC::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x092c:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

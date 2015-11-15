@@ -93,7 +93,7 @@ CRobotPatrol
 +0x0168:  008180b0  Action<CTFRobotDestruction_Robot>::OnLose(CTFRobotDestruction_Robot*)
 +0x016c:  008180e0  Action<CTFRobotDestruction_Robot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  010e9fe4  CRobotPatrol
++0x0174:  010e9fe4  typeinfo for CRobotPatrol
 +0x0178:  00818870  non-virtual thunk to CRobotPatrol::~CRobotPatrol()
 +0x017c:  00819130  non-virtual thunk to CRobotPatrol::~CRobotPatrol()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

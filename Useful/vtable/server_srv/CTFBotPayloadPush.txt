@@ -95,7 +95,7 @@ CTFBotPayloadPush
 +0x0170:  00c509f0  CTFBotPayloadPush::ShouldRetreat(INextBot const*) const
 +0x0174:  00c50a10  CTFBotPayloadPush::ShouldHurry(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011c8fd8  CTFBotPayloadPush
++0x017c:  011c8fd8  typeinfo for CTFBotPayloadPush
 +0x0180:  00c51ef0  non-virtual thunk to CTFBotPayloadPush::~CTFBotPayloadPush()
 +0x0184:  00c51f50  non-virtual thunk to CTFBotPayloadPush::~CTFBotPayloadPush()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

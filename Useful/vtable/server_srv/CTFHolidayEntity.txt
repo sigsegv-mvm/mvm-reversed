@@ -191,7 +191,7 @@ CTFHolidayEntity
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  0078c2e0  CTFHolidayEntity::FireGameEvent(IGameEvent*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  010d3860  CTFHolidayEntity
++0x02fc:  010d3860  typeinfo for CTFHolidayEntity
 +0x0300:  007a12f0  non-virtual thunk to CTFHolidayEntity::~CTFHolidayEntity()
 +0x0304:  007a13c0  non-virtual thunk to CTFHolidayEntity::~CTFHolidayEntity()
 +0x0308:  0078c2d0  non-virtual thunk to CTFHolidayEntity::FireGameEvent(IGameEvent*)

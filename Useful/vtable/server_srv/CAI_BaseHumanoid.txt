@@ -615,7 +615,7 @@ CAI_BaseHumanoid
 +0x0990:  008dfa50  CAI_BaseHumanoid::StartTaskRangeAttack1(Task_t const*)
 +0x0994:  008dfb50  CAI_BaseHumanoid::RunTaskRangeAttack1(Task_t const*)
 +0x0998:  fffff7b0  (unknown)
-+0x099c:  0112cc24  CAI_BaseHumanoid
++0x099c:  0112cc24  typeinfo for CAI_BaseHumanoid
 +0x09a0:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x09a4:  008de240  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x09a8:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)
@@ -626,7 +626,7 @@ CAI_BaseHumanoid
 +0x09bc:  008dbe70  CAI_DefMovementSink::OnMoveStalled(AILocalMoveGoal_t const&)
 +0x09c0:  008dbe80  CAI_DefMovementSink::OnMoveExecuteFailed(AILocalMoveGoal_t const&, AIMoveTrace_t const&, AIMotorMoveResult_t, AIMoveResult_t*)
 +0x09c4:  fffff244  (unknown)
-+0x09c8:  0112cc24  CAI_BaseHumanoid
++0x09c8:  0112cc24  typeinfo for CAI_BaseHumanoid
 +0x09cc:  008dd060  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_GatherConditions()
 +0x09d0:  008dd040  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_SelectSchedule()
 +0x09d4:  008dd020  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_TranslateSchedule(int)

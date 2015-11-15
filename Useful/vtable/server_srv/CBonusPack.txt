@@ -233,7 +233,7 @@ CBonusPack
 +0x0398:  00734640  CBonusPack::AffectedByRadiusCollection() const
 +0x039c:  00734630  CCurrencyPack::GetPackSize()
 +0x03a0:  fffffb78  (unknown)
-+0x03a4:  010c2cc0  CBonusPack
++0x03a4:  010c2cc0  typeinfo for CBonusPack
 +0x03a8:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03ac:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03b0:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -245,10 +245,10 @@ CBonusPack
 +0x03c8:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x03cc:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x03d0:  fffffb14  (unknown)
-+0x03d4:  010c2cc0  CBonusPack
++0x03d4:  010c2cc0  typeinfo for CBonusPack
 +0x03d8:  00734780  non-virtual thunk to CBonusPack::~CBonusPack()
 +0x03dc:  007346c0  non-virtual thunk to CBonusPack::~CBonusPack()
 +0x03e0:  fffffaf4  (unknown)
-+0x03e4:  010c2cc0  CBonusPack
++0x03e4:  010c2cc0  typeinfo for CBonusPack
 +0x03e8:  00734770  non-virtual thunk to CBonusPack::~CBonusPack()
 +0x03ec:  007346b0  non-virtual thunk to CBonusPack::~CBonusPack()

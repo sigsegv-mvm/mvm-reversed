@@ -151,7 +151,7 @@ CFileSystem_Stdio
 +0x0250:  0007a8a0  CFileSystem_Stdio::FS_FindClose(void*)
 +0x0254:  0007a0e0  CFileSystem_Stdio::FS_GetSectorSize(_IO_FILE*)
 +0x0258:  fffffffc  (unknown)
-+0x025c:  001ce820  CFileSystem_Stdio
++0x025c:  001ce820  typeinfo for CFileSystem_Stdio
 +0x0260:  0005e650  non-virtual thunk to CBaseFileSystem::Read(void*, int, void*)
 +0x0264:  00063700  non-virtual thunk to CBaseFileSystem::Write(void const*, int, void*)
 +0x0268:  0005e600  non-virtual thunk to CBaseFileSystem::Open(char const*, char const*, char const*)

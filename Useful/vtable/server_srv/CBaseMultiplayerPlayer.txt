@@ -468,7 +468,7 @@ CBaseMultiplayerPlayer
 +0x0744:  009f8230  CBaseMultiplayerPlayer::CalculateTeamBalanceScore()
 +0x0748:  009f8400  CBaseMultiplayerPlayer::CreateExpresser()
 +0x074c:  ffffef00  (unknown)
-+0x0750:  01156df4  CBaseMultiplayerPlayer
++0x0750:  01156df4  typeinfo for CBaseMultiplayerPlayer
 +0x0754:  008dc560  CAI_ExpresserSink::OnSpokeConcept(char const*, AI_Response*)
 +0x0758:  008dc570  CAI_ExpresserSink::OnStartSpeaking()
 +0x075c:  008dc580  CAI_ExpresserSink::UseSemaphore()

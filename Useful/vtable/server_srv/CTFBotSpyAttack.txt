@@ -98,7 +98,7 @@ CTFBotSpyAttack
 +0x017c:  00c55570  CTFBotSpyAttack::IsHindrance(INextBot const*, CBaseEntity*) const
 +0x0180:  00c55980  CTFBotSpyAttack::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x0184:  fffffffc  (unknown)
-+0x0188:  011c9b44  CTFBotSpyAttack
++0x0188:  011c9b44  typeinfo for CTFBotSpyAttack
 +0x018c:  00c56ab0  non-virtual thunk to CTFBotSpyAttack::~CTFBotSpyAttack()
 +0x0190:  00c56b10  non-virtual thunk to CTFBotSpyAttack::~CTFBotSpyAttack()
 +0x0194:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

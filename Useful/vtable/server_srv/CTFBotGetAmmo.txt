@@ -94,7 +94,7 @@ CTFBotGetAmmo
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c6aec0  CTFBotGetAmmo::ShouldHurry(INextBot const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011ccad0  CTFBotGetAmmo
++0x0178:  011ccad0  typeinfo for CTFBotGetAmmo
 +0x017c:  00c6c920  non-virtual thunk to CTFBotGetAmmo::~CTFBotGetAmmo()
 +0x0180:  00c6c980  non-virtual thunk to CTFBotGetAmmo::~CTFBotGetAmmo()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -193,7 +193,7 @@ CPopulationManager
 +0x02f8:  00d51760  CPopulationManager::Reset()
 +0x02fc:  00d54cb0  CPopulationManager::Initialize()
 +0x0300:  fffffca0  (unknown)
-+0x0304:  011f5620  CPopulationManager
++0x0304:  011f5620  typeinfo for CPopulationManager
 +0x0308:  00d51a70  non-virtual thunk to CPopulationManager::~CPopulationManager()
 +0x030c:  00d51e20  non-virtual thunk to CPopulationManager::~CPopulationManager()
 +0x0310:  00d4f440  non-virtual thunk to CPopulationManager::FireGameEvent(IGameEvent*)

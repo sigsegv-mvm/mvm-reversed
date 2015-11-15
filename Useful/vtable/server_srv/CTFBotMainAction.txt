@@ -99,7 +99,7 @@ CTFBotMainAction
 +0x0180:  00c60740  CTFBotMainAction::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x0184:  00c63230  CTFBotMainAction::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x0188:  fffffffc  (unknown)
-+0x018c:  011cbc00  CTFBotMainAction
++0x018c:  011cbc00  typeinfo for CTFBotMainAction
 +0x0190:  00c650c0  non-virtual thunk to CTFBotMainAction::~CTFBotMainAction()
 +0x0194:  00c65300  non-virtual thunk to CTFBotMainAction::~CTFBotMainAction()
 +0x0198:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

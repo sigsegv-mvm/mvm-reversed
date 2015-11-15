@@ -52,7 +52,7 @@ Behavior<CTFRobotDestruction_Robot>
 +0x00c4:  008185c0  Behavior<CTFRobotDestruction_Robot>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00818650  Behavior<CTFRobotDestruction_Robot>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  010ea020  Behavior<CTFRobotDestruction_Robot>
++0x00d0:  010ea020  typeinfo for Behavior<CTFRobotDestruction_Robot>
 +0x00d4:  00825530  non-virtual thunk to Behavior<CTFRobotDestruction_Robot>::~Behavior()
 +0x00d8:  00825660  non-virtual thunk to Behavior<CTFRobotDestruction_Robot>::~Behavior()
 +0x00dc:  008181a0  non-virtual thunk to Behavior<CTFRobotDestruction_Robot>::ShouldPickUp(INextBot const*, CBaseEntity*) const

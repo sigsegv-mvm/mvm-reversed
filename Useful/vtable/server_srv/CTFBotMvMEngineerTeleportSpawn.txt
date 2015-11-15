@@ -93,7 +93,7 @@ CTFBotMvMEngineerTeleportSpawn
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c40a4  CTFBotMvMEngineerTeleportSpawn
++0x0174:  011c40a4  typeinfo for CTFBotMvMEngineerTeleportSpawn
 +0x0178:  00c2dae0  non-virtual thunk to CTFBotMvMEngineerTeleportSpawn::~CTFBotMvMEngineerTeleportSpawn()
 +0x017c:  00c2db10  non-virtual thunk to CTFBotMvMEngineerTeleportSpawn::~CTFBotMvMEngineerTeleportSpawn()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

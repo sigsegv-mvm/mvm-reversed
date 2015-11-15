@@ -96,7 +96,7 @@ CTFBotMvMEngineerIdle
 +0x0174:  00c29be0  CTFBotMvMEngineerIdle::ShouldRetreat(INextBot const*) const
 +0x0178:  00c29c00  CTFBotMvMEngineerIdle::ShouldHurry(INextBot const*) const
 +0x017c:  fffffffc  (unknown)
-+0x0180:  011c3d44  CTFBotMvMEngineerIdle
++0x0180:  011c3d44  typeinfo for CTFBotMvMEngineerIdle
 +0x0184:  00c2d280  non-virtual thunk to CTFBotMvMEngineerIdle::~CTFBotMvMEngineerIdle()
 +0x0188:  00c2d2e0  non-virtual thunk to CTFBotMvMEngineerIdle::~CTFBotMvMEngineerIdle()
 +0x018c:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

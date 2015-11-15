@@ -333,7 +333,7 @@ CTFRobotDestruction_Robot
 +0x0528:  00817610  CTFRobotDestruction_Robot::GetLocomotionInterface() const
 +0x052c:  00817630  CTFRobotDestruction_Robot::GetBodyInterface() const
 +0x0530:  fffff7b0  (unknown)
-+0x0534:  010e7f88  CTFRobotDestruction_Robot
++0x0534:  010e7f88  typeinfo for CTFRobotDestruction_Robot
 +0x0538:  00816b40  non-virtual thunk to CTFRobotDestruction_Robot::~CTFRobotDestruction_Robot()
 +0x053c:  00816cb0  non-virtual thunk to CTFRobotDestruction_Robot::~CTFRobotDestruction_Robot()
 +0x0540:  00817480  INextBot::FirstContainedResponder() const

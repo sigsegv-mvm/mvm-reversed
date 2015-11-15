@@ -52,7 +52,7 @@ Behavior<CSimpleBot>
 +0x00c4:  00b14a90  Behavior<CSimpleBot>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00b14b20  Behavior<CSimpleBot>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011953a0  Behavior<CSimpleBot>
++0x00d0:  011953a0  typeinfo for Behavior<CSimpleBot>
 +0x00d4:  00b20a80  non-virtual thunk to Behavior<CSimpleBot>::~Behavior()
 +0x00d8:  00b20bb0  non-virtual thunk to Behavior<CSimpleBot>::~Behavior()
 +0x00dc:  00b14670  non-virtual thunk to Behavior<CSimpleBot>::ShouldPickUp(INextBot const*, CBaseEntity*) const

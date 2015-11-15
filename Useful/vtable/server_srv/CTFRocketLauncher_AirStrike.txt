@@ -479,12 +479,12 @@ CTFRocketLauncher_AirStrike
 +0x0770:  00748780  CTFWeaponBaseGun::ShouldRemoveInvisibilityOnPrimaryAttack() const
 +0x0774:  008813e0  CTFRocketLauncher_AirStrike::GetCount()
 +0x0778:  fffffb78  (unknown)
-+0x077c:  01113b24  CTFRocketLauncher_AirStrike
++0x077c:  01113b24  typeinfo for CTFRocketLauncher_AirStrike
 +0x0780:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0784:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0788:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x078c:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0790:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0794:  fffff95c  (unknown)
-+0x0798:  01113b24  CTFRocketLauncher_AirStrike
++0x0798:  01113b24  typeinfo for CTFRocketLauncher_AirStrike
 +0x079c:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

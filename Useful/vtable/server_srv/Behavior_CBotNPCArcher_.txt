@@ -52,7 +52,7 @@ Behavior<CBotNPCArcher>
 +0x00c4:  00c97560  Behavior<CBotNPCArcher>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00c975f0  Behavior<CBotNPCArcher>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011d6fc0  Behavior<CBotNPCArcher>
++0x00d0:  011d6fc0  typeinfo for Behavior<CBotNPCArcher>
 +0x00d4:  00ca3690  non-virtual thunk to Behavior<CBotNPCArcher>::~Behavior()
 +0x00d8:  00ca37c0  non-virtual thunk to Behavior<CBotNPCArcher>::~Behavior()
 +0x00dc:  00c97140  non-virtual thunk to Behavior<CBotNPCArcher>::ShouldPickUp(INextBot const*, CBaseEntity*) const

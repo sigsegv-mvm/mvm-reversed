@@ -93,7 +93,7 @@ Action<CZombie>
 +0x0168:  00d29330  Action<CZombie>::OnLose(CZombie*)
 +0x016c:  00d29360  Action<CZombie>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011f0460  Action<CZombie>
++0x0174:  011f0460  typeinfo for Action<CZombie>
 +0x0178:  00d28aa0  non-virtual thunk to Action<CZombie>::~Action()
 +0x017c:  00d29930  non-virtual thunk to Action<CZombie>::~Action()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

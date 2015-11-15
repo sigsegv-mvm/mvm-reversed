@@ -21,7 +21,7 @@ CSteamWorksGameStatsUploader
 +0x0048:  0071fae0  CSteamWorksGameStatsUploader::LevelShutdown()
 +0x004c:  00720ca0  CSteamWorksGameStatsUploader::FireGameEvent(IGameEvent*)
 +0x0050:  fffffff4  (unknown)
-+0x0054:  010bf5a0  CSteamWorksGameStatsUploader
++0x0054:  010bf5a0  typeinfo for CSteamWorksGameStatsUploader
 +0x0058:  007211f0  non-virtual thunk to CSteamWorksGameStatsUploader::~CSteamWorksGameStatsUploader()
 +0x005c:  00721310  non-virtual thunk to CSteamWorksGameStatsUploader::~CSteamWorksGameStatsUploader()
 +0x0060:  00720c90  non-virtual thunk to CSteamWorksGameStatsUploader::FireGameEvent(IGameEvent*)

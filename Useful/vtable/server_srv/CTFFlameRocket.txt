@@ -237,6 +237,6 @@ CTFFlameRocket
 +0x03a8:  00748940  CTFBaseRocket::SetDamageForceScale(float)
 +0x03ac:  00748960  CTFBaseRocket::GetDamageForceScale()
 +0x03b0:  fffffb78  (unknown)
-+0x03b4:  010fd0cc  CTFFlameRocket
++0x03b4:  010fd0cc  typeinfo for CTFFlameRocket
 +0x03b8:  00857ed0  non-virtual thunk to CTFFlameRocket::~CTFFlameRocket()
 +0x03bc:  00857f00  non-virtual thunk to CTFFlameRocket::~CTFFlameRocket()

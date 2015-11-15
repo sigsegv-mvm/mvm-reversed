@@ -228,7 +228,7 @@ CPhysBoxMultiplayer
 +0x0384:  00bab550  CPhysBoxMultiplayer::GetMass()
 +0x0388:  00bab570  CPhysBoxMultiplayer::IsAsleep()
 +0x038c:  fffffca0  (unknown)
-+0x0390:  011accc0  CPhysBoxMultiplayer
++0x0390:  011accc0  typeinfo for CPhysBoxMultiplayer
 +0x0394:  00a66370  non-virtual thunk to CBreakable::SetDmgModBullet(float)
 +0x0398:  00a663a0  non-virtual thunk to CBreakable::SetDmgModClub(float)
 +0x039c:  00a663d0  non-virtual thunk to CBreakable::SetDmgModExplosive(float)
@@ -260,7 +260,7 @@ CPhysBoxMultiplayer
 +0x0404:  00a666c0  non-virtual thunk to CBreakable::SetBasePropData(string_t)
 +0x0408:  00a666f0  non-virtual thunk to CBreakable::GetBasePropData()
 +0x040c:  fffffc9c  (unknown)
-+0x0410:  011accc0  CPhysBoxMultiplayer
++0x0410:  011accc0  typeinfo for CPhysBoxMultiplayer
 +0x0414:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0418:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x041c:  00b59b70  non-virtual thunk to CPhysBox::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -272,7 +272,7 @@ CPhysBoxMultiplayer
 +0x0434:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x0438:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x043c:  fffffb08  (unknown)
-+0x0440:  011accc0  CPhysBoxMultiplayer
++0x0440:  011accc0  typeinfo for CPhysBoxMultiplayer
 +0x0444:  00bab520  non-virtual thunk to CPhysBoxMultiplayer::GetMultiplayerPhysicsMode()
 +0x0448:  00bab540  non-virtual thunk to CPhysBoxMultiplayer::GetMass()
 +0x044c:  00bab560  non-virtual thunk to CPhysBoxMultiplayer::IsAsleep()

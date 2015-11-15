@@ -190,6 +190,6 @@ CPasstimeBallSpawn
 +0x02ec:  005feee0  CBaseEntity::NetworkStateChanged_m_vecViewOffset(void*)
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  fffffca0  (unknown)
-+0x02f8:  011dc780  CPasstimeBallSpawn
++0x02f8:  011dc780  typeinfo for CPasstimeBallSpawn
 +0x02fc:  00cb9670  non-virtual thunk to CPasstimeBallSpawn::~CPasstimeBallSpawn()
 +0x0300:  00cb9760  non-virtual thunk to CPasstimeBallSpawn::~CPasstimeBallSpawn()

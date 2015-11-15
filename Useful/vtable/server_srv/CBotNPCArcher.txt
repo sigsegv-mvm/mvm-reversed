@@ -331,7 +331,7 @@ CBotNPCArcher
 +0x0520:  00c96660  CBotNPCArcher::GetLocomotionInterface() const
 +0x0524:  00c96680  CBotNPCArcher::GetBodyInterface() const
 +0x0528:  fffff7b0  (unknown)
-+0x052c:  011d5bc8  CBotNPCArcher
++0x052c:  011d5bc8  typeinfo for CBotNPCArcher
 +0x0530:  00c96170  non-virtual thunk to CBotNPCArcher::~CBotNPCArcher()
 +0x0534:  00c96230  non-virtual thunk to CBotNPCArcher::~CBotNPCArcher()
 +0x0538:  00817480  INextBot::FirstContainedResponder() const

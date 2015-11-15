@@ -202,6 +202,6 @@ CFuncPasstimeNoBallZone
 +0x031c:  007d0e10  CBaseTrigger::StartTouchAll()
 +0x0320:  007d0e20  CBaseTrigger::EndTouchAll()
 +0x0324:  fffffb7c  (unknown)
-+0x0328:  011e24c0  CFuncPasstimeNoBallZone
++0x0328:  011e24c0  typeinfo for CFuncPasstimeNoBallZone
 +0x032c:  00cc5f10  non-virtual thunk to CFuncPasstimeNoBallZone::~CFuncPasstimeNoBallZone()
 +0x0330:  00cc5d60  non-virtual thunk to CFuncPasstimeNoBallZone::~CFuncPasstimeNoBallZone()

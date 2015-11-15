@@ -94,7 +94,7 @@ CTFBotSpyBackstab
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c56be0  CTFBotSpyBackstab::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011c9d58  CTFBotSpyBackstab
++0x0178:  011c9d58  typeinfo for CTFBotSpyBackstab
 +0x017c:  00c56c00  non-virtual thunk to CTFBotSpyBackstab::~CTFBotSpyBackstab()
 +0x0180:  00c56c30  non-virtual thunk to CTFBotSpyBackstab::~CTFBotSpyBackstab()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

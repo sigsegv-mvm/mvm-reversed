@@ -267,11 +267,11 @@ CTFProjectile_SpellSpawnHorde
 +0x0420:  00749510  CTFProjectile_SpellSpawnHorde::GetExplodeEffectParticle() const
 +0x0424:  00748c30  CTFProjectile_SpellSpawnHorde::GetExplodeEffectSound() const
 +0x0428:  fffffb78  (unknown)
-+0x042c:  010c6ec0  CTFProjectile_SpellSpawnHorde
++0x042c:  010c6ec0  typeinfo for CTFProjectile_SpellSpawnHorde
 +0x0430:  0074a290  non-virtual thunk to CTFProjectile_SpellSpawnHorde::~CTFProjectile_SpellSpawnHorde()
 +0x0434:  0074a4f0  non-virtual thunk to CTFProjectile_SpellSpawnHorde::~CTFProjectile_SpellSpawnHorde()
 +0x0438:  fffffb68  (unknown)
-+0x043c:  010c6ec0  CTFProjectile_SpellSpawnHorde
++0x043c:  010c6ec0  typeinfo for CTFProjectile_SpellSpawnHorde
 +0x0440:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0444:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0448:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

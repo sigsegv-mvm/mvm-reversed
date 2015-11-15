@@ -93,7 +93,7 @@ CTFBotNavEntDestroyEntity
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c66e0  CTFBotNavEntDestroyEntity
++0x0174:  011c66e0  typeinfo for CTFBotNavEntDestroyEntity
 +0x0178:  00c42260  non-virtual thunk to CTFBotNavEntDestroyEntity::~CTFBotNavEntDestroyEntity()
 +0x017c:  00c422c0  non-virtual thunk to CTFBotNavEntDestroyEntity::~CTFBotNavEntDestroyEntity()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

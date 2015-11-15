@@ -234,11 +234,11 @@ CBaseGrenadeConcussion
 +0x039c:  00635e20  CBaseGrenade::GetDamageRadius()
 +0x03a0:  00636430  CBaseGrenade::SetDamageRadius(float)
 +0x03a4:  fffffb78  (unknown)
-+0x03a8:  01155f84  CBaseGrenadeConcussion
++0x03a8:  01155f84  typeinfo for CBaseGrenadeConcussion
 +0x03ac:  009f7770  non-virtual thunk to CBaseGrenadeConcussion::~CBaseGrenadeConcussion()
 +0x03b0:  009f7820  non-virtual thunk to CBaseGrenadeConcussion::~CBaseGrenadeConcussion()
 +0x03b4:  fffffb68  (unknown)
-+0x03b8:  01155f84  CBaseGrenadeConcussion
++0x03b8:  01155f84  typeinfo for CBaseGrenadeConcussion
 +0x03bc:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03c0:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03c4:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

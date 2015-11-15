@@ -96,7 +96,7 @@ CTFBotSpySap
 +0x0174:  00c5b270  CTFBotSpySap::ShouldRetreat(INextBot const*) const
 +0x0178:  00c5b1f0  CTFBotSpySap::IsHindrance(INextBot const*, CBaseEntity*) const
 +0x017c:  fffffffc  (unknown)
-+0x0180:  011cacc0  CTFBotSpySap
++0x0180:  011cacc0  typeinfo for CTFBotSpySap
 +0x0184:  00c5c3f0  non-virtual thunk to CTFBotSpySap::~CTFBotSpySap()
 +0x0188:  00c5c450  non-virtual thunk to CTFBotSpySap::~CTFBotSpySap()
 +0x018c:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

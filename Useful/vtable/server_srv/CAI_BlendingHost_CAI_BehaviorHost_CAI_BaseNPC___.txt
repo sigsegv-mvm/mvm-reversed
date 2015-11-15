@@ -612,7 +612,7 @@ CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
 +0x0984:  008dcd20  CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_Teleport(Vector const*, QAngle const*, Vector const*)
 +0x0988:  008dccc0  CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_HandleAnimEvent(animevent_t*)
 +0x098c:  fffff7b0  (unknown)
-+0x0990:  0112ca4c  CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
++0x0990:  0112ca4c  typeinfo for CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
 +0x0994:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x0998:  008de240  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x099c:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)
@@ -623,7 +623,7 @@ CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
 +0x09b0:  008dbe70  CAI_DefMovementSink::OnMoveStalled(AILocalMoveGoal_t const&)
 +0x09b4:  008dbe80  CAI_DefMovementSink::OnMoveExecuteFailed(AILocalMoveGoal_t const&, AIMoveTrace_t const&, AIMotorMoveResult_t, AIMoveResult_t*)
 +0x09b8:  fffff244  (unknown)
-+0x09bc:  0112ca4c  CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
++0x09bc:  0112ca4c  typeinfo for CAI_BlendingHost<CAI_BehaviorHost<CAI_BaseNPC> >
 +0x09c0:  008dd060  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_GatherConditions()
 +0x09c4:  008dd040  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_SelectSchedule()
 +0x09c8:  008dd020  non-virtual thunk to CAI_BehaviorHost<CAI_BaseNPC>::BackBridge_TranslateSchedule(int)

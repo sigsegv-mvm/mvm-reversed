@@ -93,7 +93,7 @@ CTFBotEngineerBuildSentryGun
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c4cd8  CTFBotEngineerBuildSentryGun
++0x0174:  011c4cd8  typeinfo for CTFBotEngineerBuildSentryGun
 +0x0178:  00c33080  non-virtual thunk to CTFBotEngineerBuildSentryGun::~CTFBotEngineerBuildSentryGun()
 +0x017c:  00c330e0  non-virtual thunk to CTFBotEngineerBuildSentryGun::~CTFBotEngineerBuildSentryGun()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -12,7 +12,7 @@ CFileAsyncFileSizeJob
 +0x0024:  00075d90  CFileAsyncReadJob::GetResult(void**, int*)
 +0x0028:  00075d70  CFileAsyncJob::IsWrite() const
 +0x002c:  fffffffc  (unknown)
-+0x0030:  001ce568  CFileAsyncFileSizeJob
++0x0030:  001ce568  typeinfo for CFileAsyncFileSizeJob
 +0x0034:  000795f0  non-virtual thunk to CFileAsyncFileSizeJob::~CFileAsyncFileSizeJob()
 +0x0038:  00079d10  non-virtual thunk to CFileAsyncFileSizeJob::~CFileAsyncFileSizeJob()
 +0x003c:  0006e820  CRefCountServiceBase<true, CRefMT>::OnFinalRelease()

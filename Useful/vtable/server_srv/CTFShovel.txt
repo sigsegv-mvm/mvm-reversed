@@ -467,12 +467,12 @@ CTFShovel
 +0x0740:  00887670  CTFShovel::HasDamageBoost()
 +0x0744:  00887a00  CTFShovel::HasSpeedBoost()
 +0x0748:  fffffb78  (unknown)
-+0x074c:  0111b128  CTFShovel
++0x074c:  0111b128  typeinfo for CTFShovel
 +0x0750:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0754:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0758:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x075c:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0760:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0764:  fffff95c  (unknown)
-+0x0768:  0111b128  CTFShovel
++0x0768:  0111b128  typeinfo for CTFShovel
 +0x076c:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

@@ -242,6 +242,6 @@ CTFProjectile_EnergyBall
 +0x03bc:  00e21980  CTFProjectile_EnergyBall::CanHeadshot()
 +0x03c0:  00e21990  CTFProjectile_EnergyBall::ImpactTeamPlayer(CTFPlayer*)
 +0x03c4:  fffffb78  (unknown)
-+0x03c8:  0120e6fc  CTFProjectile_EnergyBall
++0x03c8:  0120e6fc  typeinfo for CTFProjectile_EnergyBall
 +0x03cc:  00e206e0  non-virtual thunk to CTFProjectile_EnergyBall::~CTFProjectile_EnergyBall()
 +0x03d0:  00e20710  non-virtual thunk to CTFProjectile_EnergyBall::~CTFProjectile_EnergyBall()

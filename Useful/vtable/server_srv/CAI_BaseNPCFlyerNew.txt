@@ -580,7 +580,7 @@ CAI_BaseNPCFlyerNew
 +0x0904:  009087b0  CAI_BaseNPCFlyerNew::MinGroundDist()
 +0x0908:  00908a00  CAI_BaseNPCFlyerNew::AbortedMovement()
 +0x090c:  fffff7b0  (unknown)
-+0x0910:  01131dbc  CAI_BaseNPCFlyerNew
++0x0910:  01131dbc  typeinfo for CAI_BaseNPCFlyerNew
 +0x0914:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x0918:  008e13c0  non-virtual thunk to CAI_BaseNPC::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x091c:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

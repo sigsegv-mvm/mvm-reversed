@@ -76,7 +76,7 @@ CHLTVClient
 +0x0124:  0011c510  CHLTVClient::ProcessFileMD5Check(CLC_FileMD5Check*)
 +0x0128:  0011b110  CHLTVClient::ProcessSaveReplay(CLC_SaveReplay*)
 +0x012c:  fffffffc  (unknown)
-+0x0130:  0023e130  CHLTVClient
++0x0130:  0023e130  typeinfo for CHLTVClient
 +0x0134:  0011b470  non-virtual thunk to CHLTVClient::~CHLTVClient()
 +0x0138:  0011b4b0  non-virtual thunk to CHLTVClient::~CHLTVClient()
 +0x013c:  000c8be0  non-virtual thunk to CBaseClient::ConnectionStart(INetChannel*)
@@ -119,7 +119,7 @@ CHLTVClient
 +0x01d0:  000cc490  non-virtual thunk to CBaseClient::IsProximityHearingClient(int) const
 +0x01d4:  000c79f0  non-virtual thunk to CBaseClient::SetMaxRoutablePayloadSize(int)
 +0x01d8:  fffffff8  (unknown)
-+0x01dc:  0023e130  CHLTVClient
++0x01dc:  0023e130  typeinfo for CHLTVClient
 +0x01e0:  0011b460  non-virtual thunk to CHLTVClient::~CHLTVClient()
 +0x01e4:  0011b4a0  non-virtual thunk to CHLTVClient::~CHLTVClient()
 +0x01e8:  000c7900  non-virtual thunk to CBaseClient::ProcessTick(NET_Tick*)

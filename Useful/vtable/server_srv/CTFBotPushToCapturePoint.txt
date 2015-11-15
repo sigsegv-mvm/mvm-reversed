@@ -93,7 +93,7 @@ CTFBotPushToCapturePoint
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c7f6c  CTFBotPushToCapturePoint
++0x0174:  011c7f6c  typeinfo for CTFBotPushToCapturePoint
 +0x0178:  00c4bdc0  non-virtual thunk to CTFBotPushToCapturePoint::~CTFBotPushToCapturePoint()
 +0x017c:  00c4be20  non-virtual thunk to CTFBotPushToCapturePoint::~CTFBotPushToCapturePoint()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -61,12 +61,12 @@ CHLTVClientState
 +0x00e8:  0011c620  CHLTVClientState::ProcessTempEntities(SVC_TempEntities*)
 +0x00ec:  0011c930  CHLTVClientState::ProcessPrefetch(SVC_Prefetch*)
 +0x00f0:  fffffffc  (unknown)
-+0x00f4:  0023e6f0  CHLTVClientState
++0x00f4:  0023e6f0  typeinfo for CHLTVClientState
 +0x00f8:  0011d470  non-virtual thunk to CHLTVClientState::~CHLTVClientState()
 +0x00fc:  0011d4b0  non-virtual thunk to CHLTVClientState::~CHLTVClientState()
 +0x0100:  000ceb40  non-virtual thunk to CBaseClientState::ProcessConnectionlessPacket(netpacket_s*)
 +0x0104:  fffffff8  (unknown)
-+0x0108:  0023e6f0  CHLTVClientState
++0x0108:  0023e6f0  typeinfo for CHLTVClientState
 +0x010c:  0011d460  non-virtual thunk to CHLTVClientState::~CHLTVClientState()
 +0x0110:  0011d4a0  non-virtual thunk to CHLTVClientState::~CHLTVClientState()
 +0x0114:  000cfdb0  non-virtual thunk to CBaseClientState::ProcessTick(NET_Tick*)

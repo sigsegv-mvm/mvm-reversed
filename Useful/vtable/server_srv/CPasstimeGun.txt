@@ -456,17 +456,17 @@ CPasstimeGun
 +0x0714:  008781f0  CPasstimeGun::CanCharge()
 +0x0718:  00878250  CPasstimeGun::GetChargeMaxTime()
 +0x071c:  fffffb78  (unknown)
-+0x0720:  0110c160  CPasstimeGun
++0x0720:  0110c160  typeinfo for CPasstimeGun
 +0x0724:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0728:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x072c:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0730:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0734:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0738:  fffff95c  (unknown)
-+0x073c:  0110c160  CPasstimeGun
++0x073c:  0110c160  typeinfo for CPasstimeGun
 +0x0740:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x0744:  fffff824  (unknown)
-+0x0748:  0110c160  CPasstimeGun
++0x0748:  0110c160  typeinfo for CPasstimeGun
 +0x074c:  008781e0  non-virtual thunk to CPasstimeGun::CanCharge()
 +0x0750:  00878200  non-virtual thunk to CPasstimeGun::GetChargeBeginTime()
 +0x0754:  00878240  non-virtual thunk to CPasstimeGun::GetChargeMaxTime()

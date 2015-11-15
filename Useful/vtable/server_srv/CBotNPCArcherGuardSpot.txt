@@ -93,7 +93,7 @@ CBotNPCArcherGuardSpot
 +0x0168:  00c97080  Action<CBotNPCArcher>::OnLose(CBotNPCArcher*)
 +0x016c:  00c970b0  Action<CBotNPCArcher>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011d6f98  CBotNPCArcherGuardSpot
++0x0174:  011d6f98  typeinfo for CBotNPCArcherGuardSpot
 +0x0178:  00c968e0  non-virtual thunk to CBotNPCArcherGuardSpot::~CBotNPCArcherGuardSpot()
 +0x017c:  00c97a70  non-virtual thunk to CBotNPCArcherGuardSpot::~CBotNPCArcherGuardSpot()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

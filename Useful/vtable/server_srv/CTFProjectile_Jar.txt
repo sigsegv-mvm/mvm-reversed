@@ -260,11 +260,11 @@ CTFProjectile_Jar
 +0x0404:  007488e0  CTFProjectile_Jar::GetImpactEffect()
 +0x0408:  007488f0  CTFProjectile_Jar::GetEffectCondition()
 +0x040c:  fffffb78  (unknown)
-+0x0410:  01102508  CTFProjectile_Jar
++0x0410:  01102508  typeinfo for CTFProjectile_Jar
 +0x0414:  00865fb0  non-virtual thunk to CTFProjectile_Jar::~CTFProjectile_Jar()
 +0x0418:  00866110  non-virtual thunk to CTFProjectile_Jar::~CTFProjectile_Jar()
 +0x041c:  fffffb68  (unknown)
-+0x0420:  01102508  CTFProjectile_Jar
++0x0420:  01102508  typeinfo for CTFProjectile_Jar
 +0x0424:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0428:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x042c:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

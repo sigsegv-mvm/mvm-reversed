@@ -27,7 +27,7 @@ CSoundControllerImp
 +0x0060:  00717900  CSoundControllerImp::~CSoundControllerImp()
 +0x0064:  00717980  CSoundControllerImp::~CSoundControllerImp()
 +0x0068:  fffffffc  (unknown)
-+0x006c:  010be2c0  CSoundControllerImp
++0x006c:  010be2c0  typeinfo for CSoundControllerImp
 +0x0070:  005e7b50  CAutoGameSystemPerFrame::Name()
 +0x0074:  005f99b0  CBaseGameSystemPerFrame::Init()
 +0x0078:  005f99c0  CBaseGameSystemPerFrame::PostInit()

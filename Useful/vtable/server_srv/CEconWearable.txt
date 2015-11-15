@@ -236,7 +236,7 @@ CEconWearable
 +0x03a4:  006b2700  CEconWearable::GetSkin()
 +0x03a8:  006b25b0  CEconWearable::InternalSetPlayerDisplayModel()
 +0x03ac:  fffffb78  (unknown)
-+0x03b0:  010b1fe0  CEconWearable
++0x03b0:  010b1fe0  typeinfo for CEconWearable
 +0x03b4:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x03b8:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x03bc:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()

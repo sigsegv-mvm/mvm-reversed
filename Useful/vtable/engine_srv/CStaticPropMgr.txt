@@ -30,7 +30,7 @@ CStaticPropMgr
 +0x006c:  0019aa90  CStaticPropMgr::GetAllStaticPropsInOBB(Vector const&, Vector const&, Vector const&, Vector const&, CUtlVector<ICollideable*, CUtlMemory<ICollideable*, int> >*)
 +0x0070:  00199840  CStaticPropMgr::DrawStaticProps(IClientRenderable**, int, bool, bool)
 +0x0074:  fffffffc  (unknown)
-+0x0078:  0024bca0  CStaticPropMgr
++0x0078:  0024bca0  typeinfo for CStaticPropMgr
 +0x007c:  001993e0  non-virtual thunk to CStaticPropMgr::CreateVPhysicsRepresentations(IPhysicsEnvironment*, IVPhysicsKeyHandler*, void*)
 +0x0080:  00198470  non-virtual thunk to CStaticPropMgr::TraceRayAgainstStaticProp(Ray_t const&, int, CGameTrace&)
 +0x0084:  001982a0  non-virtual thunk to CStaticPropMgr::IsStaticProp(IHandleEntity*) const
@@ -47,7 +47,7 @@ CStaticPropMgr
 +0x00b0:  00199830  non-virtual thunk to CStaticPropMgr::DrawStaticProps(IClientRenderable**, int, bool, bool)
 +0x00b4:  001984f0  non-virtual thunk to CStaticPropMgr::AddColorDecalToStaticProp(Vector const&, Vector const&, int, int, bool, CGameTrace&, bool, Color)
 +0x00b8:  fffffff8  (unknown)
-+0x00bc:  0024bca0  CStaticPropMgr
++0x00bc:  0024bca0  typeinfo for CStaticPropMgr
 +0x00c0:  001993d0  non-virtual thunk to CStaticPropMgr::CreateVPhysicsRepresentations(IPhysicsEnvironment*, IVPhysicsKeyHandler*, void*)
 +0x00c4:  00198460  non-virtual thunk to CStaticPropMgr::TraceRayAgainstStaticProp(Ray_t const&, int, CGameTrace&)
 +0x00c8:  00198290  non-virtual thunk to CStaticPropMgr::IsStaticProp(IHandleEntity*) const

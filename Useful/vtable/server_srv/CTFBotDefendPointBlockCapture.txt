@@ -95,7 +95,7 @@ CTFBotDefendPointBlockCapture
 +0x0170:  00c47000  CTFBotDefendPointBlockCapture::ShouldHurry(INextBot const*) const
 +0x0174:  00c47020  CTFBotDefendPointBlockCapture::ShouldRetreat(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011c7800  CTFBotDefendPointBlockCapture
++0x017c:  011c7800  typeinfo for CTFBotDefendPointBlockCapture
 +0x0180:  00c48720  non-virtual thunk to CTFBotDefendPointBlockCapture::~CTFBotDefendPointBlockCapture()
 +0x0184:  00c48780  non-virtual thunk to CTFBotDefendPointBlockCapture::~CTFBotDefendPointBlockCapture()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

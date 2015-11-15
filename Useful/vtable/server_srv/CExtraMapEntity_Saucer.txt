@@ -222,6 +222,6 @@ CExtraMapEntity_Saucer
 +0x036c:  00d7f4d0  CExtraMapEntity_Saucer::ShouldAnimate()
 +0x0370:  00d7ea30  CExtraMapEntity::Precache_Internal()
 +0x0374:  fffffb78  (unknown)
-+0x0378:  011fc190  CExtraMapEntity_Saucer
++0x0378:  011fc190  typeinfo for CExtraMapEntity_Saucer
 +0x037c:  00d7f960  non-virtual thunk to CExtraMapEntity_Saucer::~CExtraMapEntity_Saucer()
 +0x0380:  00d7f820  non-virtual thunk to CExtraMapEntity_Saucer::~CExtraMapEntity_Saucer()

@@ -193,7 +193,7 @@ CTFPlayerResource
 +0x02f8:  00e15750  CTFPlayerResource::UpdatePlayerData()
 +0x02fc:  00e14cd0  CTFPlayerResource::FireGameEvent(IGameEvent*)
 +0x0300:  fffff8e4  (unknown)
-+0x0304:  0120cc40  CTFPlayerResource
++0x0304:  0120cc40  typeinfo for CTFPlayerResource
 +0x0308:  00e19120  non-virtual thunk to CTFPlayerResource::~CTFPlayerResource()
 +0x030c:  00e191c0  non-virtual thunk to CTFPlayerResource::~CTFPlayerResource()
 +0x0310:  00e14cc0  non-virtual thunk to CTFPlayerResource::FireGameEvent(IGameEvent*)

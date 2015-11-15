@@ -30,7 +30,7 @@ CAI_Motor
 +0x006c:  00955e20  CAI_Motor::MoveGroundExecute(AILocalMoveGoal_t const&, AIMoveTrace_t*)
 +0x0070:  00955400  CAI_Motor::MoveFlyExecute(AILocalMoveGoal_t const&, AIMoveTrace_t*)
 +0x0074:  fffffff8  (unknown)
-+0x0078:  01145d20  CAI_Motor
++0x0078:  01145d20  typeinfo for CAI_Motor
 +0x007c:  0063b3e0  CAI_ProxyMovementSink::CalcYawSpeed()
 +0x0080:  0063b410  CAI_ProxyMovementSink::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x0084:  0063b450  CAI_ProxyMovementSink::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

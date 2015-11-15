@@ -6,7 +6,7 @@ CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServ
 +0x000c:  001b2090  CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >::~CFunctor2()
 +0x0010:  001b2060  CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >::operator()()
 +0x0014:  fffffff8  (unknown)
-+0x0018:  002505a8  CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >
++0x0018:  002505a8  typeinfo for CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >
 +0x001c:  001b2010  non-virtual thunk to CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >::~CFunctor2()
 +0x0020:  001b2080  non-virtual thunk to CFunctor2<void (*)(bool, bool), bool, bool, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> > >::~CFunctor2()
 +0x0024:  0013c780  CRefCountServiceBase<true, CRefMT>::OnFinalRelease()

@@ -62,7 +62,7 @@ CBaseClient
 +0x00ec:  000c8b30  CBaseClient::FreeBaselines()
 +0x00f0:  000c7a90  CBaseClient::IgnoreTempEntity(CEventInfo*)
 +0x00f4:  fffffffc  (unknown)
-+0x00f8:  00235760  CBaseClient
++0x00f8:  00235760  typeinfo for CBaseClient
 +0x00fc:  000cae20  non-virtual thunk to CBaseClient::~CBaseClient()
 +0x0100:  000caee0  non-virtual thunk to CBaseClient::~CBaseClient()
 +0x0104:  000c8be0  non-virtual thunk to CBaseClient::ConnectionStart(INetChannel*)
@@ -105,7 +105,7 @@ CBaseClient
 +0x0198:  000cc490  non-virtual thunk to CBaseClient::IsProximityHearingClient(int) const
 +0x019c:  000c79f0  non-virtual thunk to CBaseClient::SetMaxRoutablePayloadSize(int)
 +0x01a0:  fffffff8  (unknown)
-+0x01a4:  00235760  CBaseClient
++0x01a4:  00235760  typeinfo for CBaseClient
 +0x01a8:  000cae10  non-virtual thunk to CBaseClient::~CBaseClient()
 +0x01ac:  000caed0  non-virtual thunk to CBaseClient::~CBaseClient()
 +0x01b0:  000c7900  non-virtual thunk to CBaseClient::ProcessTick(NET_Tick*)

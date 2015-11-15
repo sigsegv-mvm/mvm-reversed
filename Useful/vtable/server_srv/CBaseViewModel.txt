@@ -229,5 +229,5 @@ CBaseViewModel
 +0x0388:  0063e680  CBaseViewModel::GetOwnerViaInterface()
 +0x038c:  0063e6a0  CBaseViewModel::IsSelfAnimating()
 +0x0390:  fffffb78  (unknown)
-+0x0394:  010a60e0  CBaseViewModel
++0x0394:  010a60e0  typeinfo for CBaseViewModel
 +0x0398:  0063e670  non-virtual thunk to CBaseViewModel::GetOwnerViaInterface()

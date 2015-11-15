@@ -333,7 +333,7 @@ CTFBaseBoss
 +0x0528:  00d4c700  CTFBaseBoss::GetCurrencyValue()
 +0x052c:  00d4c710  CTFBaseBoss::ModifyDamage(CTakeDamageInfo*) const
 +0x0530:  fffff7b0  (unknown)
-+0x0534:  011f35c4  CTFBaseBoss
++0x0534:  011f35c4  typeinfo for CTFBaseBoss
 +0x0538:  00d4acd0  non-virtual thunk to CTFBaseBoss::~CTFBaseBoss()
 +0x053c:  00d4af20  non-virtual thunk to CTFBaseBoss::~CTFBaseBoss()
 +0x0540:  00817480  INextBot::FirstContainedResponder() const

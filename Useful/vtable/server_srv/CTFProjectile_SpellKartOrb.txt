@@ -246,10 +246,10 @@ CTFProjectile_SpellKartOrb
 +0x03cc:  00748e90  CTFProjectile_SpellKartOrb::GetExplodeEffectParticle() const
 +0x03d0:  00748ad0  CTFProjectile_SpellFireball::GetExplodeEffectSound() const
 +0x03d4:  fffffb78  (unknown)
-+0x03d8:  010c706c  CTFProjectile_SpellKartOrb
++0x03d8:  010c706c  typeinfo for CTFProjectile_SpellKartOrb
 +0x03dc:  00749ec0  non-virtual thunk to CTFProjectile_SpellKartOrb::~CTFProjectile_SpellKartOrb()
 +0x03e0:  00749f50  non-virtual thunk to CTFProjectile_SpellKartOrb::~CTFProjectile_SpellKartOrb()
 +0x03e4:  fffffb40  (unknown)
-+0x03e8:  010c706c  CTFProjectile_SpellKartOrb
++0x03e8:  010c706c  typeinfo for CTFProjectile_SpellKartOrb
 +0x03ec:  00e243e0  non-virtual thunk to CTFProjectile_Rocket::GetScorer()
 +0x03f0:  007489d0  non-virtual thunk to CTFProjectile_Rocket::GetAssistant()

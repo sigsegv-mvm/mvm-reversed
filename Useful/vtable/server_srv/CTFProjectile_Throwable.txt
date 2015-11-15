@@ -275,11 +275,11 @@ CTFProjectile_Throwable
 +0x0440:  00891bf0  CTFProjectile_Throwable::GetAngularImpulse()
 +0x0444:  0088ecb0  CTFProjectile_Throwable::GetVelocityVector(Vector const&, Vector const&, Vector const&, float)
 +0x0448:  fffffb78  (unknown)
-+0x044c:  0112055c  CTFProjectile_Throwable
++0x044c:  0112055c  typeinfo for CTFProjectile_Throwable
 +0x0450:  00891ed0  non-virtual thunk to CTFProjectile_Throwable::~CTFProjectile_Throwable()
 +0x0454:  00892120  non-virtual thunk to CTFProjectile_Throwable::~CTFProjectile_Throwable()
 +0x0458:  fffffb68  (unknown)
-+0x045c:  0112055c  CTFProjectile_Throwable
++0x045c:  0112055c  typeinfo for CTFProjectile_Throwable
 +0x0460:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0464:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0468:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

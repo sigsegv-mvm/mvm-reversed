@@ -11,7 +11,7 @@ CQuestObjectiveManager
 +0x0020:  00751c00  CQuestObjectiveManager::~CQuestObjectiveManager()
 +0x0024:  00752100  CQuestObjectiveManager::FireGameEvent(IGameEvent*)
 +0x0028:  fffffffc  (unknown)
-+0x002c:  010cc540  CQuestObjectiveManager
++0x002c:  010cc540  typeinfo for CQuestObjectiveManager
 +0x0030:  00751ae0  non-virtual thunk to CQuestObjectiveManager::~CQuestObjectiveManager()
 +0x0034:  00751bf0  non-virtual thunk to CQuestObjectiveManager::~CQuestObjectiveManager()
 +0x0038:  007520f0  non-virtual thunk to CQuestObjectiveManager::FireGameEvent(IGameEvent*)

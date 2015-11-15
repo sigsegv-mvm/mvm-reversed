@@ -218,6 +218,6 @@ CTFMerasmusTrickOrTreatProp
 +0x035c:  00629fc0  CBaseAnimating::SetLightingOriginRelative(CBaseEntity*)
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  fffffb78  (unknown)
-+0x0368:  011ee940  CTFMerasmusTrickOrTreatProp
++0x0368:  011ee940  typeinfo for CTFMerasmusTrickOrTreatProp
 +0x036c:  00d263c0  non-virtual thunk to CTFMerasmusTrickOrTreatProp::~CTFMerasmusTrickOrTreatProp()
 +0x0370:  00d26460  non-virtual thunk to CTFMerasmusTrickOrTreatProp::~CTFMerasmusTrickOrTreatProp()

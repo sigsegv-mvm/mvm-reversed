@@ -96,7 +96,7 @@ CTFBotMedicHeal
 +0x0174:  00c37450  CTFBotMedicHeal::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0178:  00c373f0  CTFBotMedicHeal::ShouldRetreat(INextBot const*) const
 +0x017c:  fffffffc  (unknown)
-+0x0180:  011c5b34  CTFBotMedicHeal
++0x0180:  011c5b34  typeinfo for CTFBotMedicHeal
 +0x0184:  00c3bbb0  non-virtual thunk to CTFBotMedicHeal::~CTFBotMedicHeal()
 +0x0188:  00c3bdf0  non-virtual thunk to CTFBotMedicHeal::~CTFBotMedicHeal()
 +0x018c:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

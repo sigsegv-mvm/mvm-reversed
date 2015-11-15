@@ -33,7 +33,7 @@ CAI_Navigator
 +0x0078:  00967360  CAI_Navigator::ShouldOptimizeInitialPathSegment(AI_Waypoint_t*)
 +0x007c:  0095d930  CAI_Navigator::GetStoppingPath(CAI_WaypointList*)
 +0x0080:  fffffff8  (unknown)
-+0x0084:  011469a0  CAI_Navigator
++0x0084:  011469a0  typeinfo for CAI_Navigator
 +0x0088:  0095fb10  non-virtual thunk to CAI_Navigator::CalcYawSpeed()
 +0x008c:  0095d3e0  non-virtual thunk to CAI_Navigator::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x0090:  00963c80  non-virtual thunk to CAI_Navigator::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

@@ -236,7 +236,7 @@ CTFPowerupBottle
 +0x03a4:  007b1c80  CTFPowerupBottle::GetSkin()
 +0x03a8:  007bfaa0  CTFWearable::InternalSetPlayerDisplayModel()
 +0x03ac:  fffffb78  (unknown)
-+0x03b0:  010d950c  CTFPowerupBottle
++0x03b0:  010d950c  typeinfo for CTFPowerupBottle
 +0x03b4:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x03b8:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x03bc:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()

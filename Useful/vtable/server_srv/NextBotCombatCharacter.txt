@@ -328,7 +328,7 @@ NextBotCombatCharacter
 +0x0514:  008174c0  NextBotCombatCharacter::GetEntity() const
 +0x0518:  008174e0  NextBotCombatCharacter::GetNextBotCombatCharacter() const
 +0x051c:  fffff7b0  (unknown)
-+0x0520:  01191960  NextBotCombatCharacter
++0x0520:  01191960  typeinfo for NextBotCombatCharacter
 +0x0524:  00823ba0  non-virtual thunk to NextBotCombatCharacter::~NextBotCombatCharacter()
 +0x0528:  00823c00  non-virtual thunk to NextBotCombatCharacter::~NextBotCombatCharacter()
 +0x052c:  00817480  INextBot::FirstContainedResponder() const

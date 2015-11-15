@@ -95,7 +95,7 @@ CTFBotSeekAndDestroy
 +0x0170:  00c73e50  CTFBotSeekAndDestroy::ShouldRetreat(INextBot const*) const
 +0x0174:  00c73da0  CTFBotSeekAndDestroy::ShouldHurry(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011ce274  CTFBotSeekAndDestroy
++0x017c:  011ce274  typeinfo for CTFBotSeekAndDestroy
 +0x0180:  00c74cf0  non-virtual thunk to CTFBotSeekAndDestroy::~CTFBotSeekAndDestroy()
 +0x0184:  00c74d50  non-virtual thunk to CTFBotSeekAndDestroy::~CTFBotSeekAndDestroy()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

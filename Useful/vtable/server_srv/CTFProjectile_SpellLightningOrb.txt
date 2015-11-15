@@ -246,10 +246,10 @@ CTFProjectile_SpellLightningOrb
 +0x03cc:  00748ac0  CTFProjectile_SpellFireball::GetExplodeEffectParticle() const
 +0x03d0:  00748e70  CTFProjectile_SpellLightningOrb::GetExplodeEffectSound() const
 +0x03d4:  fffffb78  (unknown)
-+0x03d8:  010c7024  CTFProjectile_SpellLightningOrb
++0x03d8:  010c7024  typeinfo for CTFProjectile_SpellLightningOrb
 +0x03dc:  00749a70  non-virtual thunk to CTFProjectile_SpellLightningOrb::~CTFProjectile_SpellLightningOrb()
 +0x03e0:  00749e70  non-virtual thunk to CTFProjectile_SpellLightningOrb::~CTFProjectile_SpellLightningOrb()
 +0x03e4:  fffffb40  (unknown)
-+0x03e8:  010c7024  CTFProjectile_SpellLightningOrb
++0x03e8:  010c7024  typeinfo for CTFProjectile_SpellLightningOrb
 +0x03ec:  00e243e0  non-virtual thunk to CTFProjectile_Rocket::GetScorer()
 +0x03f0:  007489d0  non-virtual thunk to CTFProjectile_Rocket::GetAssistant()

@@ -191,7 +191,7 @@ CAI_ScriptConditions
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  0099ace0  CAI_ScriptConditions::OnEntitySpawned(CBaseEntity*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  0114bb60  CAI_ScriptConditions
++0x02fc:  0114bb60  typeinfo for CAI_ScriptConditions
 +0x0300:  006eb510  IEntityListener::OnEntityCreated(CBaseEntity*)
 +0x0304:  0099acd0  non-virtual thunk to CAI_ScriptConditions::OnEntitySpawned(CBaseEntity*)
 +0x0308:  006eb530  IEntityListener::OnEntityDeleted(CBaseEntity*)

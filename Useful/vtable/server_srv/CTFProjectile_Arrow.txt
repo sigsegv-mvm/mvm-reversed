@@ -251,10 +251,10 @@ CTFProjectile_Arrow
 +0x03e0:  00e1a5e0  CTFProjectile_Arrow::GetTrailParticleName()
 +0x03e4:  00e20100  CTFProjectile_Arrow::IsBreakable() const
 +0x03e8:  fffffb78  (unknown)
-+0x03ec:  0120d720  CTFProjectile_Arrow
++0x03ec:  0120d720  typeinfo for CTFProjectile_Arrow
 +0x03f0:  00e1dff0  non-virtual thunk to CTFProjectile_Arrow::~CTFProjectile_Arrow()
 +0x03f4:  00e1e090  non-virtual thunk to CTFProjectile_Arrow::~CTFProjectile_Arrow()
 +0x03f8:  fffffb40  (unknown)
-+0x03fc:  0120d720  CTFProjectile_Arrow
++0x03fc:  0120d720  typeinfo for CTFProjectile_Arrow
 +0x0400:  00e1a150  non-virtual thunk to CTFProjectile_Arrow::GetScorer()
 +0x0404:  00e200a0  non-virtual thunk to CTFProjectile_Arrow::GetAssistant()

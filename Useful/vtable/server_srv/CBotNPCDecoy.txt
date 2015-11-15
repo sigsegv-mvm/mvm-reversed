@@ -331,7 +331,7 @@ CBotNPCDecoy
 +0x0520:  00ca6d60  CBotNPCDecoy::GetLocomotionInterface() const
 +0x0524:  00ca6d80  CBotNPCDecoy::GetBodyInterface() const
 +0x0528:  fffff7b0  (unknown)
-+0x052c:  011d7364  CBotNPCDecoy
++0x052c:  011d7364  typeinfo for CBotNPCDecoy
 +0x0530:  00ca6850  non-virtual thunk to CBotNPCDecoy::~CBotNPCDecoy()
 +0x0534:  00ca6910  non-virtual thunk to CBotNPCDecoy::~CBotNPCDecoy()
 +0x0538:  00817480  INextBot::FirstContainedResponder() const

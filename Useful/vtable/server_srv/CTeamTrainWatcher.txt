@@ -191,11 +191,11 @@ CTeamTrainWatcher
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00c00610  CTeamTrainWatcher::FireGameEvent(IGameEvent*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  011c0300  CTeamTrainWatcher
++0x02fc:  011c0300  typeinfo for CTeamTrainWatcher
 +0x0300:  00c02640  non-virtual thunk to CTeamTrainWatcher::~CTeamTrainWatcher()
 +0x0304:  00c027e0  non-virtual thunk to CTeamTrainWatcher::~CTeamTrainWatcher()
 +0x0308:  00c00600  non-virtual thunk to CTeamTrainWatcher::FireGameEvent(IGameEvent*)
 +0x030c:  fffffc98  (unknown)
-+0x0310:  011c0300  CTeamTrainWatcher
++0x0310:  011c0300  typeinfo for CTeamTrainWatcher
 +0x0314:  00c02630  non-virtual thunk to CTeamTrainWatcher::~CTeamTrainWatcher()
 +0x0318:  00c027d0  non-virtual thunk to CTeamTrainWatcher::~CTeamTrainWatcher()

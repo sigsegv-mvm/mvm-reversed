@@ -23,7 +23,7 @@ CDispInfo
 +0x0050:  000f6280  CDispInfo::GetCornerNeighbors(int)
 +0x0054:  000f62b0  CDispInfo::GetDispUtilsByIndex(int)
 +0x0058:  fffffffc  (unknown)
-+0x005c:  0023af80  CDispInfo
++0x005c:  0023af80  typeinfo for CDispInfo
 +0x0060:  000f6220  non-virtual thunk to CDispInfo::GetPowerInfo() const
 +0x0064:  000f6240  non-virtual thunk to CDispInfo::GetEdgeNeighbor(int)
 +0x0068:  000f6270  non-virtual thunk to CDispInfo::GetCornerNeighbors(int)

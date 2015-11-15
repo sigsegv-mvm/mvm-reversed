@@ -190,6 +190,6 @@ CTFTeleportLocation
 +0x02ec:  005feee0  CBaseEntity::NetworkStateChanged_m_vecViewOffset(void*)
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  fffffca0  (unknown)
-+0x02f8:  010d6c20  CTFTeleportLocation
++0x02f8:  010d6c20  typeinfo for CTFTeleportLocation
 +0x02fc:  0079d0f0  non-virtual thunk to CTFTeleportLocation::~CTFTeleportLocation()
 +0x0300:  0079e9a0  non-virtual thunk to CTFTeleportLocation::~CTFTeleportLocation()

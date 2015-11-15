@@ -94,7 +94,7 @@ CTFBotEscort
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c6a100  CTFBotEscort::ShouldRetreat(INextBot const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011cc714  CTFBotEscort
++0x0178:  011cc714  typeinfo for CTFBotEscort
 +0x017c:  00c6ad20  non-virtual thunk to CTFBotEscort::~CTFBotEscort()
 +0x0180:  00c6ad80  non-virtual thunk to CTFBotEscort::~CTFBotEscort()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -245,7 +245,7 @@ CInstancedSceneEntity
 +0x03c8:  00bc3750  CInstancedSceneEntity::GetPreDelay()
 +0x03cc:  00bc3760  CInstancedSceneEntity::SetPreDelay(float)
 +0x03d0:  fffffca0  (unknown)
-+0x03d4:  011b2b58  CInstancedSceneEntity
++0x03d4:  011b2b58  typeinfo for CInstancedSceneEntity
 +0x03d8:  00bb8ae0  non-virtual thunk to CSceneEntity::StartEvent(float, CChoreoScene*, CChoreoEvent*)
 +0x03dc:  00bb8740  non-virtual thunk to CSceneEntity::EndEvent(float, CChoreoScene*, CChoreoEvent*)
 +0x03e0:  00bb8470  non-virtual thunk to CSceneEntity::ProcessEvent(float, CChoreoScene*, CChoreoEvent*)

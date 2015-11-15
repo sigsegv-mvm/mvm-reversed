@@ -191,7 +191,7 @@ CLogicNavigation
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00a9bcc0  CLogicNavigation::OnEntitySpawned(CBaseEntity*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  011853e0  CLogicNavigation
++0x02fc:  011853e0  typeinfo for CLogicNavigation
 +0x0300:  006eb510  IEntityListener::OnEntityCreated(CBaseEntity*)
 +0x0304:  00a9bcb0  non-virtual thunk to CLogicNavigation::OnEntitySpawned(CBaseEntity*)
 +0x0308:  006eb530  IEntityListener::OnEntityDeleted(CBaseEntity*)

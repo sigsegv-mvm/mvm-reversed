@@ -56,7 +56,7 @@ IIntention
 +0x00d4:  005e95d0  IIntention::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00d8:  00af67e0  IIntention::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00dc:  ffffffec  (unknown)
-+0x00e0:  01093240  IIntention
++0x00e0:  01093240  typeinfo for IIntention
 +0x00e4:  005e89d0  non-virtual thunk to IIntention::~IIntention()
 +0x00e8:  005e8f10  non-virtual thunk to IIntention::~IIntention()
 +0x00ec:  005e98c0  non-virtual thunk to IIntention::ShouldPickUp(INextBot const*, CBaseEntity*) const

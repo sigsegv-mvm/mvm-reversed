@@ -62,12 +62,12 @@ CTFGameStats
 +0x00ec:  00d88490  CTFGameStats::LevelShutdownPreClearSteamAPIContext()
 +0x00f0:  00d89680  CTFGameStats::FireGameEvent(IGameEvent*)
 +0x00f4:  ffffffa4  (unknown)
-+0x00f8:  011ffe80  CTFGameStats
++0x00f8:  011ffe80  typeinfo for CTFGameStats
 +0x00fc:  00d8b400  non-virtual thunk to CTFGameStats::~CTFGameStats()
 +0x0100:  00d8b5d0  non-virtual thunk to CTFGameStats::~CTFGameStats()
 +0x0104:  00d89670  non-virtual thunk to CTFGameStats::FireGameEvent(IGameEvent*)
 +0x0108:  ffffff9c  (unknown)
-+0x010c:  011ffe80  CTFGameStats
++0x010c:  011ffe80  typeinfo for CTFGameStats
 +0x0110:  0064c820  CAutoGameSystem::Name()
 +0x0114:  00d83240  non-virtual thunk to CTFGameStats::Init()
 +0x0118:  0064c740  CBaseGameSystem::PostInit()

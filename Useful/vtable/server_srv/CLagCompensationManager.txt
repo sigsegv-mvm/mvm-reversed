@@ -22,7 +22,7 @@ CLagCompensationManager
 +0x004c:  00b83a80  CLagCompensationManager::FinishLagCompensation(CBasePlayer*)
 +0x0050:  00b86cf0  CLagCompensationManager::IsCurrentlyDoingLagCompensation() const
 +0x0054:  fffffff4  (unknown)
-+0x0058:  011a7ca0  CLagCompensationManager
++0x0058:  011a7ca0  typeinfo for CLagCompensationManager
 +0x005c:  00b86340  non-virtual thunk to CLagCompensationManager::StartLagCompensation(CBasePlayer*, CUserCmd*)
 +0x0060:  00b83a70  non-virtual thunk to CLagCompensationManager::FinishLagCompensation(CBasePlayer*)
 +0x0064:  00b86ce0  non-virtual thunk to CLagCompensationManager::IsCurrentlyDoingLagCompensation() const

@@ -240,7 +240,7 @@ CTFGameRules
 +0x03b4:  00768780  CTFGameRules::PlayerKilledCheckAchievements(CTFPlayer*, CTFPlayer*)
 +0x03b8:  0078a660  CTFGameRules::DeathNotice(CBasePlayer*, CTakeDamageInfo const&, char const*)
 +0x03bc:  fffffdb8  (unknown)
-+0x03c0:  010d37f0  CTFGameRules
++0x03c0:  010d37f0  typeinfo for CTFGameRules
 +0x03c4:  0079b530  non-virtual thunk to CTFGameRules::~CTFGameRules()
 +0x03c8:  0079bb70  non-virtual thunk to CTFGameRules::~CTFGameRules()
 +0x03cc:  007944d0  non-virtual thunk to CTFGameRules::FireGameEvent(IGameEvent*)

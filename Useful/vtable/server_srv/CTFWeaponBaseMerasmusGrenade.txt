@@ -246,11 +246,11 @@ CTFWeaponBaseMerasmusGrenade
 +0x03cc:  0083bfb0  CTFWeaponBaseGrenadeProj::DetonateThink()
 +0x03d0:  007487f0  CTFWeaponBaseGrenadeProj::IsAllowedToExplode()
 +0x03d4:  fffffb78  (unknown)
-+0x03d8:  010f4d8c  CTFWeaponBaseMerasmusGrenade
++0x03d8:  010f4d8c  typeinfo for CTFWeaponBaseMerasmusGrenade
 +0x03dc:  00845be0  non-virtual thunk to CTFWeaponBaseMerasmusGrenade::~CTFWeaponBaseMerasmusGrenade()
 +0x03e0:  00845c90  non-virtual thunk to CTFWeaponBaseMerasmusGrenade::~CTFWeaponBaseMerasmusGrenade()
 +0x03e4:  fffffb68  (unknown)
-+0x03e8:  010f4d8c  CTFWeaponBaseMerasmusGrenade
++0x03e8:  010f4d8c  typeinfo for CTFWeaponBaseMerasmusGrenade
 +0x03ec:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03f0:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03f4:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

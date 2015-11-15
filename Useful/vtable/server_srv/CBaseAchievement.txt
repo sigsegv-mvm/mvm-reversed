@@ -38,7 +38,7 @@ CBaseAchievement
 +0x008c:  0061c9e0  CBaseAchievement::CalcProgressMsgIncrement()
 +0x0090:  0061c980  CBaseAchievement::GetDataDescMap()
 +0x0094:  fffffff8  (unknown)
-+0x0098:  010a3720  CBaseAchievement
++0x0098:  010a3720  typeinfo for CBaseAchievement
 +0x009c:  0061dc00  non-virtual thunk to CBaseAchievement::GetAchievementID()
 +0x00a0:  0061dc20  non-virtual thunk to CBaseAchievement::GetName()
 +0x00a4:  0061dc40  non-virtual thunk to CBaseAchievement::GetFlags()

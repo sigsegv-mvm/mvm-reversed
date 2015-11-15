@@ -455,12 +455,12 @@ CTFWeaponPDA_Engineer_Destroy
 +0x0710:  0087b6c0  CTFWeaponPDA::ShouldDrawCrosshair()
 +0x0714:  0087b720  CTFWeaponPDA_Engineer_Destroy::GetPanelName()
 +0x0718:  fffffb78  (unknown)
-+0x071c:  0110cb80  CTFWeaponPDA_Engineer_Destroy
++0x071c:  0110cb80  typeinfo for CTFWeaponPDA_Engineer_Destroy
 +0x0720:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0724:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0728:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x072c:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0730:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0734:  fffff95c  (unknown)
-+0x0738:  0110cb80  CTFWeaponPDA_Engineer_Destroy
++0x0738:  0110cb80  typeinfo for CTFWeaponPDA_Engineer_Destroy
 +0x073c:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

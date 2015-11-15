@@ -21,7 +21,7 @@ ConVar
 +0x0048:  00095040  ConVar::ChangeStringValue(char const*, float)
 +0x004c:  00094ee0  ConVar::Create(char const*, char const*, int, char const*, bool, float, bool, float, void (*)(IConVar*, char const*, float))
 +0x0050:  ffffffe8  (unknown)
-+0x0054:  001d1a00  ConVar
++0x0054:  001d1a00  typeinfo for ConVar
 +0x0058:  00094c00  non-virtual thunk to ConVar::SetValue(char const*)
 +0x005c:  00094c30  non-virtual thunk to ConVar::SetValue(float)
 +0x0060:  00094c60  non-virtual thunk to ConVar::SetValue(int)

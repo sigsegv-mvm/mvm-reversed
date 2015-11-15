@@ -191,7 +191,7 @@ CTFPasstimeLogic
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00dbc270  CTFPasstimeLogic::FireGameEvent(IGameEvent*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  01206760  CTFPasstimeLogic
++0x02fc:  01206760  typeinfo for CTFPasstimeLogic
 +0x0300:  00dbdc30  non-virtual thunk to CTFPasstimeLogic::~CTFPasstimeLogic()
 +0x0304:  00dbde60  non-virtual thunk to CTFPasstimeLogic::~CTFPasstimeLogic()
 +0x0308:  00dbc260  non-virtual thunk to CTFPasstimeLogic::FireGameEvent(IGameEvent*)

@@ -487,23 +487,23 @@ CTFPipebombLauncher
 +0x0790:  0087cae0  CTFPipebombLauncher::ModifyPipebombsInView(int)
 +0x0794:  0087d760  CTFPipebombLauncher::AddPipeBomb(CTFGrenadePipebombProjectile*)
 +0x0798:  fffffb78  (unknown)
-+0x079c:  0110f460  CTFPipebombLauncher
++0x079c:  0110f460  typeinfo for CTFPipebombLauncher
 +0x07a0:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x07a4:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x07a8:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x07ac:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07b0:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07b4:  fffff95c  (unknown)
-+0x07b8:  0110f460  CTFPipebombLauncher
++0x07b8:  0110f460  typeinfo for CTFPipebombLauncher
 +0x07bc:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x07c0:  fffff824  (unknown)
-+0x07c4:  0110f460  CTFPipebombLauncher
++0x07c4:  0110f460  typeinfo for CTFPipebombLauncher
 +0x07c8:  00850220  non-virtual thunk to CTFPipebombLauncher::CanCharge()
 +0x07cc:  00850240  non-virtual thunk to CTFPipebombLauncher::GetChargeBeginTime()
 +0x07d0:  0087d880  non-virtual thunk to CTFPipebombLauncher::GetChargeMaxTime()
 +0x07d4:  00748460  ITFChargeUpWeapon::GetCurrentCharge()
 +0x07d8:  fffff820  (unknown)
-+0x07dc:  0110f460  CTFPipebombLauncher
++0x07dc:  0110f460  typeinfo for CTFPipebombLauncher
 +0x07e0:  006eb510  IEntityListener::OnEntityCreated(CBaseEntity*)
 +0x07e4:  006eb520  IEntityListener::OnEntitySpawned(CBaseEntity*)
 +0x07e8:  006eb530  IEntityListener::OnEntityDeleted(CBaseEntity*)

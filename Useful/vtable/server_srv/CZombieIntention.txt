@@ -56,7 +56,7 @@ CZombieIntention
 +0x00d4:  00d26ef0  CZombieIntention::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00d8:  00af67e0  IIntention::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00dc:  ffffffec  (unknown)
-+0x00e0:  011ef590  CZombieIntention
++0x00e0:  011ef590  typeinfo for CZombieIntention
 +0x00e4:  00d26e80  non-virtual thunk to CZombieIntention::~CZombieIntention()
 +0x00e8:  00d26f50  non-virtual thunk to CZombieIntention::~CZombieIntention()
 +0x00ec:  005e98c0  non-virtual thunk to IIntention::ShouldPickUp(INextBot const*, CBaseEntity*) const

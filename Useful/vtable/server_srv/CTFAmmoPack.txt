@@ -225,7 +225,7 @@ CTFAmmoPack
 +0x0378:  00a90d80  CItem::ItemCanBeTouchedByPlayer(CBasePlayer*)
 +0x037c:  00a8fbe0  CItem::ComeToRest()
 +0x0380:  fffffb78  (unknown)
-+0x0384:  011f9478  CTFAmmoPack
++0x0384:  011f9478  typeinfo for CTFAmmoPack
 +0x0388:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x038c:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0390:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

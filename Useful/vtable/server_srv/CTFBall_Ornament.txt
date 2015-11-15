@@ -259,11 +259,11 @@ CTFBall_Ornament
 +0x0400:  0084a4e0  CTFBall_Ornament::ApplyBallImpactEffectOnVictim(CBaseEntity*)
 +0x0404:  008481a0  CTFStunBall::GetDamageForce()
 +0x0408:  fffffb78  (unknown)
-+0x040c:  010f5b94  CTFBall_Ornament
++0x040c:  010f5b94  typeinfo for CTFBall_Ornament
 +0x0410:  0084af60  non-virtual thunk to CTFBall_Ornament::~CTFBall_Ornament()
 +0x0414:  0084af10  non-virtual thunk to CTFBall_Ornament::~CTFBall_Ornament()
 +0x0418:  fffffb68  (unknown)
-+0x041c:  010f5b94  CTFBall_Ornament
++0x041c:  010f5b94  typeinfo for CTFBall_Ornament
 +0x0420:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0424:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0428:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

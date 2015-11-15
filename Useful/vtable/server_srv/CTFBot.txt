@@ -522,19 +522,19 @@ CTFBot
 +0x081c:  00c82800  CTFBot::OnWeaponFired(CBaseCombatCharacter*, CBaseCombatWeapon*)
 +0x0820:  00c7fa40  CTFBot::IsDebugFilterMatch(char const*) const
 +0x0824:  ffffef00  (unknown)
-+0x0828:  011d3600  CTFBot
++0x0828:  011d3600  typeinfo for CTFBot
 +0x082c:  008dc560  CAI_ExpresserSink::OnSpokeConcept(char const*, AI_Response*)
 +0x0830:  008dc570  CAI_ExpresserSink::OnStartSpeaking()
 +0x0834:  008dc580  CAI_ExpresserSink::UseSemaphore()
 +0x0838:  ffffeeb4  (unknown)
-+0x083c:  011d3600  CTFBot
++0x083c:  011d3600  typeinfo for CTFBot
 +0x0840:  00c8c5c0  non-virtual thunk to CTFPlayer::GetAttributeManager()
 +0x0844:  00c8c5e0  non-virtual thunk to CTFPlayer::GetAttributeContainer()
 +0x0848:  00c8c600  non-virtual thunk to CTFPlayer::GetAttributeOwner()
 +0x084c:  00c8c620  non-virtual thunk to CTFPlayer::GetAttributeList()
 +0x0850:  00c8c640  non-virtual thunk to CTFPlayer::ReapplyProvision()
 +0x0854:  ffffeeb0  (unknown)
-+0x0858:  011d3600  CTFBot
++0x0858:  011d3600  typeinfo for CTFBot
 +0x085c:  00c8c450  IInventoryUpdateListener::SOCreated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
 +0x0860:  00c8c470  IInventoryUpdateListener::PreSOUpdate(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x0864:  00c8c480  IInventoryUpdateListener::SOUpdated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
@@ -544,7 +544,7 @@ CTFBot
 +0x0874:  00c8c4f0  IInventoryUpdateListener::SOCacheUnsubscribed(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x0878:  00dbf1d0  non-virtual thunk to CTFPlayer::InventoryUpdated(CPlayerInventory*)
 +0x087c:  ffffd630  (unknown)
-+0x0880:  011d3600  CTFBot
++0x0880:  011d3600  typeinfo for CTFBot
 +0x0884:  00c867f0  non-virtual thunk to CTFBot::~CTFBot()
 +0x0888:  00c86dc0  non-virtual thunk to CTFBot::~CTFBot()
 +0x088c:  00817480  INextBot::FirstContainedResponder() const
@@ -627,7 +627,7 @@ CTFBot
 +0x09c0:  00c7fa30  non-virtual thunk to CTFBot::IsDebugFilterMatch(char const*) const
 +0x09c4:  00af6b90  INextBot::DisplayDebugText(char const*) const
 +0x09c8:  ffffd5d0  (unknown)
-+0x09cc:  011d3600  CTFBot
++0x09cc:  011d3600  typeinfo for CTFBot
 +0x09d0:  00c7f970  non-virtual thunk to CTFBot::PressFireButton(float)
 +0x09d4:  00c8c7a0  non-virtual thunk to NextBotPlayer<CTFPlayer>::ReleaseFireButton()
 +0x09d8:  00c7f8e0  non-virtual thunk to CTFBot::PressAltFireButton(float)
@@ -654,7 +654,7 @@ CTFBot
 +0x0a2c:  00c8ce80  non-virtual thunk to NextBotPlayer<CTFPlayer>::ReleaseWalkButton()
 +0x0a30:  00c8ceb0  non-virtual thunk to NextBotPlayer<CTFPlayer>::SetButtonScale(float, float)
 +0x0a34:  ffffd524  (unknown)
-+0x0a38:  011d3600  CTFBot
++0x0a38:  011d3600  typeinfo for CTFBot
 +0x0a3c:  00c867e0  non-virtual thunk to CTFBot::~CTFBot()
 +0x0a40:  00c86db0  non-virtual thunk to CTFBot::~CTFBot()
 +0x0a44:  00c806c0  non-virtual thunk to CTFBot::FireGameEvent(IGameEvent*)

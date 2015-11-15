@@ -233,7 +233,7 @@ CAmmoPackMedium
 +0x0398:  00cb4c90  CAmmoPackMedium::GetAmmoPackName()
 +0x039c:  00cb4ca0  CAmmoPackMedium::UpdateModelIndexOverrides()
 +0x03a0:  fffffb78  (unknown)
-+0x03a4:  011d8fbc  CAmmoPackMedium
++0x03a4:  011d8fbc  typeinfo for CAmmoPackMedium
 +0x03a8:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03ac:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03b0:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

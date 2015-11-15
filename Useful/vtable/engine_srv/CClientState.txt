@@ -61,12 +61,12 @@ CClientState
 +0x00e8:  000dd820  CClientState::ProcessTempEntities(SVC_TempEntities*)
 +0x00ec:  000dd880  CClientState::ProcessPrefetch(SVC_Prefetch*)
 +0x00f0:  fffffffc  (unknown)
-+0x00f4:  00238600  CClientState
++0x00f4:  00238600  typeinfo for CClientState
 +0x00f8:  000ddb10  non-virtual thunk to CClientState::~CClientState()
 +0x00fc:  000ddc80  non-virtual thunk to CClientState::~CClientState()
 +0x0100:  000dd540  non-virtual thunk to CClientState::ProcessConnectionlessPacket(netpacket_s*)
 +0x0104:  fffffff8  (unknown)
-+0x0108:  00238600  CClientState
++0x0108:  00238600  typeinfo for CClientState
 +0x010c:  000ddb00  non-virtual thunk to CClientState::~CClientState()
 +0x0110:  000ddc70  non-virtual thunk to CClientState::~CClientState()
 +0x0114:  000dd7f0  non-virtual thunk to CClientState::ProcessTick(NET_Tick*)
@@ -99,6 +99,6 @@ CClientState
 +0x0180:  000d0280  non-virtual thunk to CBaseClientState::ProcessGetCvarValue(SVC_GetCvarValue*)
 +0x0184:  000cc770  non-virtual thunk to CBaseClientState::ProcessCmdKeyValues(SVC_CmdKeyValues*)
 +0x0188:  ffffb53c  (unknown)
-+0x018c:  00238600  CClientState
++0x018c:  00238600  typeinfo for CClientState
 +0x0190:  000ddaf0  non-virtual thunk to CClientState::~CClientState()
 +0x0194:  000ddc60  non-virtual thunk to CClientState::~CClientState()

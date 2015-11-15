@@ -222,6 +222,6 @@ CExtraMapEntity_Sign
 +0x036c:  00d7f480  CExtraMapEntity::ShouldAnimate()
 +0x0370:  00d7ea30  CExtraMapEntity::Precache_Internal()
 +0x0374:  fffffb78  (unknown)
-+0x0378:  011fc168  CExtraMapEntity_Sign
++0x0378:  011fc168  typeinfo for CExtraMapEntity_Sign
 +0x037c:  00d7f8c0  non-virtual thunk to CExtraMapEntity_Sign::~CExtraMapEntity_Sign()
 +0x0380:  00d7fb40  non-virtual thunk to CExtraMapEntity_Sign::~CExtraMapEntity_Sign()

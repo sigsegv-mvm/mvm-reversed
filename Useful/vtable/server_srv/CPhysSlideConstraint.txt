@@ -194,7 +194,7 @@ CPhysSlideConstraint
 +0x02fc:  00b2c5f0  CPhysSlideConstraint::CreateConstraint(IPhysicsConstraintGroup*, hl_constraint_info_t const&)
 +0x0300:  00b2ef50  CPhysSlideConstraint::NotifyVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)
 +0x0304:  fffffc64  (unknown)
-+0x0308:  01198fa0  CPhysSlideConstraint
++0x0308:  01198fa0  typeinfo for CPhysSlideConstraint
 +0x030c:  00b2f410  non-virtual thunk to CPhysSlideConstraint::~CPhysSlideConstraint()
 +0x0310:  00b2f8b0  non-virtual thunk to CPhysSlideConstraint::~CPhysSlideConstraint()
 +0x0314:  00b2ef40  non-virtual thunk to CPhysSlideConstraint::NotifyVPhysicsStateChanged(IPhysicsObject*, CBaseEntity*, bool)

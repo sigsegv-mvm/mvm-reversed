@@ -52,7 +52,7 @@ Behavior<CEyeballBoss>
 +0x00c4:  00ce23a0  Behavior<CEyeballBoss>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00ce2430  Behavior<CEyeballBoss>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011e74e0  Behavior<CEyeballBoss>
++0x00d0:  011e74e0  typeinfo for Behavior<CEyeballBoss>
 +0x00d4:  00ce2bf0  non-virtual thunk to Behavior<CEyeballBoss>::~Behavior()
 +0x00d8:  00ce2d20  non-virtual thunk to Behavior<CEyeballBoss>::~Behavior()
 +0x00dc:  00ce1f80  non-virtual thunk to Behavior<CEyeballBoss>::ShouldPickUp(INextBot const*, CBaseEntity*) const

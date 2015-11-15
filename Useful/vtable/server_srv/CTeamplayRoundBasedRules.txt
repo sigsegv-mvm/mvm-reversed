@@ -233,7 +233,7 @@ CTeamplayRoundBasedRules
 +0x0398:  0072a760  CTeamplayRoundBasedRules::InternalHandleTeamWin(int)
 +0x039c:  0072a780  CTeamplayRoundBasedRules::HaveCheatsBeenEnabledDuringLevel()
 +0x03a0:  fffffdb8  (unknown)
-+0x03a4:  010c0da0  CTeamplayRoundBasedRules
++0x03a4:  010c0da0  typeinfo for CTeamplayRoundBasedRules
 +0x03a8:  0072cb30  non-virtual thunk to CTeamplayRoundBasedRules::~CTeamplayRoundBasedRules()
 +0x03ac:  0072c970  non-virtual thunk to CTeamplayRoundBasedRules::~CTeamplayRoundBasedRules()
 +0x03b0:  00722e70  non-virtual thunk to CTeamplayRoundBasedRules::FireGameEvent(IGameEvent*)

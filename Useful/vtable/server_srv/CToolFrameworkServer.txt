@@ -20,5 +20,5 @@ CToolFrameworkServer
 +0x0044:  00e32e50  CToolFrameworkServer::PreClientUpdate()
 +0x0048:  00e32e90  CToolFrameworkServer::PreSetupVisibility()
 +0x004c:  fffffff4  (unknown)
-+0x0050:  012143c0  CToolFrameworkServer
++0x0050:  012143c0  typeinfo for CToolFrameworkServer
 +0x0054:  00e32e80  non-virtual thunk to CToolFrameworkServer::PreSetupVisibility()

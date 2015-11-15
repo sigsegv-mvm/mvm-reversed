@@ -267,11 +267,11 @@ CTFProjectile_SpellMeteorShower
 +0x0420:  00748dc0  CTFProjectile_SpellMeteorShower::GetExplodeEffectParticle() const
 +0x0424:  00748dd0  CTFProjectile_SpellMeteorShower::GetExplodeEffectSound() const
 +0x0428:  fffffb78  (unknown)
-+0x042c:  010c6fa4  CTFProjectile_SpellMeteorShower
++0x042c:  010c6fa4  typeinfo for CTFProjectile_SpellMeteorShower
 +0x0430:  0074a3d0  non-virtual thunk to CTFProjectile_SpellMeteorShower::~CTFProjectile_SpellMeteorShower()
 +0x0434:  0074a590  non-virtual thunk to CTFProjectile_SpellMeteorShower::~CTFProjectile_SpellMeteorShower()
 +0x0438:  fffffb68  (unknown)
-+0x043c:  010c6fa4  CTFProjectile_SpellMeteorShower
++0x043c:  010c6fa4  typeinfo for CTFProjectile_SpellMeteorShower
 +0x0440:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0444:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0448:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

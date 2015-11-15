@@ -251,10 +251,10 @@ CTFProjectile_GrapplingHook
 +0x03e0:  00e1a5e0  CTFProjectile_Arrow::GetTrailParticleName()
 +0x03e4:  00e20160  CTFProjectile_GrapplingHook::IsBreakable() const
 +0x03e8:  fffffb78  (unknown)
-+0x03ec:  0120d788  CTFProjectile_GrapplingHook
++0x03ec:  0120d788  typeinfo for CTFProjectile_GrapplingHook
 +0x03f0:  00e20430  non-virtual thunk to CTFProjectile_GrapplingHook::~CTFProjectile_GrapplingHook()
 +0x03f4:  00e20470  non-virtual thunk to CTFProjectile_GrapplingHook::~CTFProjectile_GrapplingHook()
 +0x03f8:  fffffb40  (unknown)
-+0x03fc:  0120d788  CTFProjectile_GrapplingHook
++0x03fc:  0120d788  typeinfo for CTFProjectile_GrapplingHook
 +0x0400:  00e1a150  non-virtual thunk to CTFProjectile_Arrow::GetScorer()
 +0x0404:  00e200a0  non-virtual thunk to CTFProjectile_Arrow::GetAssistant()

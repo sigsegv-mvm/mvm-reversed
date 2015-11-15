@@ -204,6 +204,6 @@ CFuncPasstimeGoal
 +0x0324:  00cc37b0  CFuncPasstimeGoal::ShimStartTouch(CBaseEntity*)
 +0x0328:  00cc3740  CFuncPasstimeGoal::ShimEndTouch(CBaseEntity*)
 +0x032c:  fffffb7c  (unknown)
-+0x0330:  011e18a0  CFuncPasstimeGoal
++0x0330:  011e18a0  typeinfo for CFuncPasstimeGoal
 +0x0334:  00cc4530  non-virtual thunk to CFuncPasstimeGoal::~CFuncPasstimeGoal()
 +0x0338:  00cc4860  non-virtual thunk to CFuncPasstimeGoal::~CFuncPasstimeGoal()

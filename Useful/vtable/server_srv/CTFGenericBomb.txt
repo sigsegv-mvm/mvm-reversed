@@ -219,6 +219,6 @@ CTFGenericBomb
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  007acb60  CTFGenericBomb::GenericTouch(CBaseEntity*)
 +0x0368:  fffffb78  (unknown)
-+0x036c:  010d7e40  CTFGenericBomb
++0x036c:  010d7e40  typeinfo for CTFGenericBomb
 +0x0370:  007ad600  non-virtual thunk to CTFGenericBomb::~CTFGenericBomb()
 +0x0374:  007ad6f0  non-virtual thunk to CTFGenericBomb::~CTFGenericBomb()

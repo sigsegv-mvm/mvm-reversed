@@ -30,7 +30,7 @@ CReplayServer
 +0x006c:  0018b590  CReplayServer::UserInfoChanged(int)
 +0x0070:  0018b570  CReplayServer::ShouldUpdateMasterServer()
 +0x0074:  fffffffc  (unknown)
-+0x0078:  0024ac20  CReplayServer
++0x0078:  0024ac20  typeinfo for CReplayServer
 +0x007c:  0018dc80  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x0080:  0018de50  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x0084:  000d6bf0  CBaseServer::ProcessConnectionlessPacket(netpacket_s*)
@@ -98,11 +98,11 @@ CReplayServer
 +0x017c:  0018b560  non-virtual thunk to CReplayServer::ShouldUpdateMasterServer()
 +0x0180:  000d92f0  CBaseServer::UpdateMasterServerPlayers()
 +0x0184:  fffffe60  (unknown)
-+0x0188:  0024ac20  CReplayServer
++0x0188:  0024ac20  typeinfo for CReplayServer
 +0x018c:  0018dc70  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x0190:  0018de40  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x0194:  fffffe20  (unknown)
-+0x0198:  0024ac20  CReplayServer
++0x0198:  0024ac20  typeinfo for CReplayServer
 +0x019c:  0018dc60  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x01a0:  0018de30  non-virtual thunk to CReplayServer::~CReplayServer()
 +0x01a4:  0018b5a0  non-virtual thunk to CReplayServer::GetBaseServer()

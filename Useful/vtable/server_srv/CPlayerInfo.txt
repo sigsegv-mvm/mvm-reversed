@@ -37,7 +37,7 @@ CPlayerInfo
 +0x0088:  00b64d80  CPlayerInfo::SetLastUserCommand(CBotCmd const&)
 +0x008c:  00b623c0  CPlayerInfo::GetLastUserCommand()
 +0x0090:  fffffffc  (unknown)
-+0x0094:  011a5140  CPlayerInfo
++0x0094:  011a5140  typeinfo for CPlayerInfo
 +0x0098:  00b61fb0  non-virtual thunk to CPlayerInfo::GetName()
 +0x009c:  00b61fd0  non-virtual thunk to CPlayerInfo::GetUserID()
 +0x00a0:  00b79250  non-virtual thunk to CPlayerInfo::GetNetworkIDString()

@@ -95,7 +95,7 @@ CTFBotAttack
 +0x0170:  00c5ee40  CTFBotAttack::ShouldRetreat(INextBot const*) const
 +0x0174:  00c5ee60  CTFBotAttack::ShouldHurry(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011cb5fc  CTFBotAttack
++0x017c:  011cb5fc  typeinfo for CTFBotAttack
 +0x0180:  00c496e0  non-virtual thunk to CTFBotAttack::~CTFBotAttack()
 +0x0184:  00c498e0  non-virtual thunk to CTFBotAttack::~CTFBotAttack()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

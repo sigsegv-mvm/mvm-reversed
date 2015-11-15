@@ -30,7 +30,7 @@ CAI_BlendedMotor
 +0x006c:  0093c160  CAI_BlendedMotor::MoveGroundExecute(AILocalMoveGoal_t const&, AIMoveTrace_t*)
 +0x0070:  0093c120  CAI_BlendedMotor::MoveFlyExecute(AILocalMoveGoal_t const&, AIMoveTrace_t*)
 +0x0074:  fffffff8  (unknown)
-+0x0078:  0113bbd0  CAI_BlendedMotor
++0x0078:  0113bbd0  typeinfo for CAI_BlendedMotor
 +0x007c:  0063b3e0  CAI_ProxyMovementSink::CalcYawSpeed()
 +0x0080:  0063b410  CAI_ProxyMovementSink::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x0084:  0063b450  CAI_ProxyMovementSink::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

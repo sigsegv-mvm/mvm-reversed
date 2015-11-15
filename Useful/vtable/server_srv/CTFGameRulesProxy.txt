@@ -191,7 +191,7 @@ CTFGameRulesProxy
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  0076a5d0  CTFGameRulesProxy::FireGameEvent(IGameEvent*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  010d37c0  CTFGameRulesProxy
++0x02fc:  010d37c0  typeinfo for CTFGameRulesProxy
 +0x0300:  0079e650  non-virtual thunk to CTFGameRulesProxy::~CTFGameRulesProxy()
 +0x0304:  0079f1d0  non-virtual thunk to CTFGameRulesProxy::~CTFGameRulesProxy()
 +0x0308:  0076a5c0  non-virtual thunk to CTFGameRulesProxy::FireGameEvent(IGameEvent*)

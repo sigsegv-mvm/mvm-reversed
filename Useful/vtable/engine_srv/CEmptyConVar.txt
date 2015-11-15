@@ -21,7 +21,7 @@ CEmptyConVar
 +0x0048:  001e04b0  ConVar::ChangeStringValue(char const*, float)
 +0x004c:  001e0350  ConVar::Create(char const*, char const*, int, char const*, bool, float, bool, float, void (*)(IConVar*, char const*, float))
 +0x0050:  ffffffe8  (unknown)
-+0x0054:  002572e4  CEmptyConVar
++0x0054:  002572e4  typeinfo for CEmptyConVar
 +0x0058:  001e1b20  non-virtual thunk to CEmptyConVar::SetValue(char const*)
 +0x005c:  001e1b40  non-virtual thunk to CEmptyConVar::SetValue(float)
 +0x0060:  001e1b60  non-virtual thunk to CEmptyConVar::SetValue(int)

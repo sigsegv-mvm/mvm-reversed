@@ -218,6 +218,6 @@ CTFTargetDummy
 +0x035c:  00629fc0  CBaseAnimating::SetLightingOriginRelative(CBaseEntity*)
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  fffffb78  (unknown)
-+0x0368:  010f11a0  CTFTargetDummy
++0x0368:  010f11a0  typeinfo for CTFTargetDummy
 +0x036c:  0082a870  non-virtual thunk to CTFTargetDummy::~CTFTargetDummy()
 +0x0370:  0082a940  non-virtual thunk to CTFTargetDummy::~CTFTargetDummy()

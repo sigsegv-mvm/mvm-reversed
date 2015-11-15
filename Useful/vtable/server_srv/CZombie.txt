@@ -331,7 +331,7 @@ CZombie
 +0x0520:  00d28a40  CZombie::GetLocomotionInterface() const
 +0x0524:  00d28a60  CZombie::GetBodyInterface() const
 +0x0528:  fffff7b0  (unknown)
-+0x052c:  011ef5e0  CZombie
++0x052c:  011ef5e0  typeinfo for CZombie
 +0x0530:  00d27970  non-virtual thunk to CZombie::~CZombie()
 +0x0534:  00d27ab0  non-virtual thunk to CZombie::~CZombie()
 +0x0538:  00817480  INextBot::FirstContainedResponder() const
@@ -414,6 +414,6 @@ CZombie
 +0x066c:  00af70f0  INextBot::IsDebugFilterMatch(char const*) const
 +0x0670:  00af6b90  INextBot::DisplayDebugText(char const*) const
 +0x0674:  fffff748  (unknown)
-+0x0678:  011ef5e0  CZombie
++0x0678:  011ef5e0  typeinfo for CZombie
 +0x067c:  00d27960  non-virtual thunk to CZombie::~CZombie()
 +0x0680:  00d27aa0  non-virtual thunk to CZombie::~CZombie()

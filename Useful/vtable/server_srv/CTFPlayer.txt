@@ -482,19 +482,19 @@ CTFPlayer
 +0x077c:  00dbf610  CTFPlayer::GetAllowedTauntPartnerTeam() const
 +0x0780:  00df45c0  CTFPlayer::InitClass()
 +0x0784:  ffffef00  (unknown)
-+0x0788:  0120b360  CTFPlayer
++0x0788:  0120b360  typeinfo for CTFPlayer
 +0x078c:  008dc560  CAI_ExpresserSink::OnSpokeConcept(char const*, AI_Response*)
 +0x0790:  008dc570  CAI_ExpresserSink::OnStartSpeaking()
 +0x0794:  008dc580  CAI_ExpresserSink::UseSemaphore()
 +0x0798:  ffffeeb4  (unknown)
-+0x079c:  0120b360  CTFPlayer
++0x079c:  0120b360  typeinfo for CTFPlayer
 +0x07a0:  00c8c5c0  non-virtual thunk to CTFPlayer::GetAttributeManager()
 +0x07a4:  00c8c5e0  non-virtual thunk to CTFPlayer::GetAttributeContainer()
 +0x07a8:  00c8c600  non-virtual thunk to CTFPlayer::GetAttributeOwner()
 +0x07ac:  00c8c620  non-virtual thunk to CTFPlayer::GetAttributeList()
 +0x07b0:  00c8c640  non-virtual thunk to CTFPlayer::ReapplyProvision()
 +0x07b4:  ffffeeb0  (unknown)
-+0x07b8:  0120b360  CTFPlayer
++0x07b8:  0120b360  typeinfo for CTFPlayer
 +0x07bc:  00c8c450  IInventoryUpdateListener::SOCreated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)
 +0x07c0:  00c8c470  IInventoryUpdateListener::PreSOUpdate(CSteamID const&, GCSDK::ESOCacheEvent)
 +0x07c4:  00c8c480  IInventoryUpdateListener::SOUpdated(CSteamID const&, GCSDK::CSharedObject const*, GCSDK::ESOCacheEvent)

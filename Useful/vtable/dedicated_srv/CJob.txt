@@ -10,7 +10,7 @@ CJob
 +0x001c:  00075d30  CJob::DoAbort(bool)
 +0x0020:  00075d40  CJob::DoCleanup()
 +0x0024:  fffffffc  (unknown)
-+0x0028:  001ce2f4  CJob
++0x0028:  001ce2f4  typeinfo for CJob
 +0x002c:  00075f50  non-virtual thunk to CJob::~CJob()
 +0x0030:  00076040  non-virtual thunk to CJob::~CJob()
 +0x0034:  0006e820  CRefCountServiceBase<true, CRefMT>::OnFinalRelease()

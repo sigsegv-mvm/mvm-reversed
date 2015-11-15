@@ -94,7 +94,7 @@ CTFBotSpyLeaveSpawnRoom
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c59e30  CTFBotSpyLeaveSpawnRoom::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011ca7d4  CTFBotSpyLeaveSpawnRoom
++0x0178:  011ca7d4  typeinfo for CTFBotSpyLeaveSpawnRoom
 +0x017c:  00c5ac20  non-virtual thunk to CTFBotSpyLeaveSpawnRoom::~CTFBotSpyLeaveSpawnRoom()
 +0x0180:  00c5ac50  non-virtual thunk to CTFBotSpyLeaveSpawnRoom::~CTFBotSpyLeaveSpawnRoom()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

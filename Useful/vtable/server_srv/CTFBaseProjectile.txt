@@ -236,10 +236,10 @@ CTFBaseProjectile
 +0x03a4:  00803950  CTFBaseProjectile::GetDamageForce()
 +0x03a8:  008037f0  CTFBaseProjectile::GetDamageType()
 +0x03ac:  fffffb78  (unknown)
-+0x03b0:  010e3be0  CTFBaseProjectile
++0x03b0:  010e3be0  typeinfo for CTFBaseProjectile
 +0x03b4:  00803bf0  non-virtual thunk to CTFBaseProjectile::~CTFBaseProjectile()
 +0x03b8:  00803c60  non-virtual thunk to CTFBaseProjectile::~CTFBaseProjectile()
 +0x03bc:  fffffb68  (unknown)
-+0x03c0:  010e3be0  CTFBaseProjectile
++0x03c0:  010e3be0  typeinfo for CTFBaseProjectile
 +0x03c4:  00803850  non-virtual thunk to CTFBaseProjectile::GetScorer()
 +0x03c8:  00804ac0  non-virtual thunk to CTFBaseProjectile::GetAssistant()

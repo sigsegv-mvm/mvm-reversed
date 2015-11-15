@@ -270,7 +270,7 @@ CBasePropDoor
 +0x042c:  00000000  
 +0x0430:  00000000  
 +0x0434:  fffffb78  (unknown)
-+0x0438:  011acc48  CBasePropDoor
++0x0438:  011acc48  typeinfo for CBasePropDoor
 +0x043c:  0073d4f0  non-virtual thunk to CBreakableProp::SetDmgModBullet(float)
 +0x0440:  0073d520  non-virtual thunk to CBreakableProp::SetDmgModClub(float)
 +0x0444:  0073d550  non-virtual thunk to CBreakableProp::SetDmgModExplosive(float)
@@ -302,7 +302,7 @@ CBasePropDoor
 +0x04ac:  0073d830  non-virtual thunk to CBreakableProp::SetBasePropData(string_t)
 +0x04b0:  0073d860  non-virtual thunk to CBreakableProp::GetBasePropData()
 +0x04b4:  fffffb74  (unknown)
-+0x04b8:  011acc48  CBasePropDoor
++0x04b8:  011acc48  typeinfo for CBasePropDoor
 +0x04bc:  00b9b6f0  non-virtual thunk to CBreakableProp::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x04c0:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x04c4:  00b9eb70  non-virtual thunk to CBreakableProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -314,7 +314,7 @@ CBasePropDoor
 +0x04dc:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x04e0:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x04e4:  fffffa30  (unknown)
-+0x04e8:  011acc48  CBasePropDoor
++0x04e8:  011acc48  typeinfo for CBasePropDoor
 +0x04ec:  00bad950  non-virtual thunk to CBasePropDoor::~CBasePropDoor()
 +0x04f0:  00badd00  non-virtual thunk to CBasePropDoor::~CBasePropDoor()
 +0x04f4:  00b98880  non-virtual thunk to CDynamicProp::NotifyPositionChanged(CBaseEntity*)

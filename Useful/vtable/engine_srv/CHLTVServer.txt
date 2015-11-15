@@ -55,7 +55,7 @@ CHLTVServer
 +0x00d0:  0011ff90  CHLTVServer::ShouldUpdateMasterServer()
 +0x00d4:  001209c0  CHLTVServer::CreateNewClient(int)
 +0x00d8:  fffffffc  (unknown)
-+0x00dc:  0023f7c0  CHLTVServer
++0x00dc:  0023f7c0  typeinfo for CHLTVServer
 +0x00e0:  00125b00  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x00e4:  00125d40  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x00e8:  00125440  non-virtual thunk to CHLTVServer::ProcessConnectionlessPacket(netpacket_s*)
@@ -123,11 +123,11 @@ CHLTVServer
 +0x01e0:  0011ff80  non-virtual thunk to CHLTVServer::ShouldUpdateMasterServer()
 +0x01e4:  000d92f0  CBaseServer::UpdateMasterServerPlayers()
 +0x01e8:  fffffe60  (unknown)
-+0x01ec:  0023f7c0  CHLTVServer
++0x01ec:  0023f7c0  typeinfo for CHLTVServer
 +0x01f0:  00125af0  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x01f4:  00125d30  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x01f8:  fffffe20  (unknown)
-+0x01fc:  0023f7c0  CHLTVServer
++0x01fc:  0023f7c0  typeinfo for CHLTVServer
 +0x0200:  00125ae0  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x0204:  00125d20  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x0208:  00120080  non-virtual thunk to CHLTVServer::GetBaseServer()
@@ -141,7 +141,7 @@ CHLTVServer
 +0x0228:  0011ff60  non-virtual thunk to CHLTVServer::IsDemoPlayback()
 +0x022c:  00121160  non-virtual thunk to CHLTVServer::BroadcastEvent(IGameEvent*)
 +0x0230:  fffffe1c  (unknown)
-+0x0234:  0023f7c0  CHLTVServer
++0x0234:  0023f7c0  typeinfo for CHLTVServer
 +0x0238:  00125ad0  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x023c:  00125d10  non-virtual thunk to CHLTVServer::~CHLTVServer()
 +0x0240:  001200c0  non-virtual thunk to CHLTVServer::GetDemoFile()

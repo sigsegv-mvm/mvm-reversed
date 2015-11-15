@@ -207,6 +207,6 @@ CTriggerAreaCapture
 +0x0330:  00e50bc0  CTriggerAreaCapture::OnStartCapture(int)
 +0x0334:  00e4d5c0  CTriggerAreaCapture::CaptureModeScalesWithPlayers() const
 +0x0338:  fffffb7c  (unknown)
-+0x033c:  0121e160  CTriggerAreaCapture
++0x033c:  0121e160  typeinfo for CTriggerAreaCapture
 +0x0340:  00e50cd0  non-virtual thunk to CTriggerAreaCapture::~CTriggerAreaCapture()
 +0x0344:  00e510b0  non-virtual thunk to CTriggerAreaCapture::~CTriggerAreaCapture()

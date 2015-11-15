@@ -466,12 +466,12 @@ CTFParachute_Primary
 +0x073c:  00845160  CTFWeaponBaseMelee::Swing(CTFPlayer*)
 +0x0740:  0084e4f0  CTFBuffItem::GetBuffType()
 +0x0744:  fffffb78  (unknown)
-+0x0748:  01109b4c  CTFParachute_Primary
++0x0748:  01109b4c  typeinfo for CTFParachute_Primary
 +0x074c:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0750:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0754:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0758:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x075c:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0760:  fffff95c  (unknown)
-+0x0764:  01109b4c  CTFParachute_Primary
++0x0764:  01109b4c  typeinfo for CTFParachute_Primary
 +0x0768:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

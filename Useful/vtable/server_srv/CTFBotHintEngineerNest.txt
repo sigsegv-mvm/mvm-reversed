@@ -191,6 +191,6 @@ CTFBotHintEngineerNest
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00c7ca90  CTFBotHintEngineerNest::GetHintType() const
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  011d03a4  CTFBotHintEngineerNest
++0x02fc:  011d03a4  typeinfo for CTFBotHintEngineerNest
 +0x0300:  00c7cb30  non-virtual thunk to CTFBotHintEngineerNest::~CTFBotHintEngineerNest()
 +0x0304:  00c7cc00  non-virtual thunk to CTFBotHintEngineerNest::~CTFBotHintEngineerNest()

@@ -581,7 +581,7 @@ CAI_BaseFlyingBot
 +0x0908:  00908750  CAI_BaseFlyingBot::GetHeadTurnRate()
 +0x090c:  00000000  
 +0x0910:  fffff7b0  (unknown)
-+0x0914:  01131450  CAI_BaseFlyingBot
++0x0914:  01131450  typeinfo for CAI_BaseFlyingBot
 +0x0918:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x091c:  008e13c0  non-virtual thunk to CAI_BaseNPC::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x0920:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)

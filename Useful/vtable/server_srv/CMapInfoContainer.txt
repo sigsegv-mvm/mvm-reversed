@@ -20,7 +20,7 @@ CMapInfoContainer
 +0x0044:  005f9a00  CBaseGameSystemPerFrame::PreClientUpdate()
 +0x0048:  007dd670  CMapInfoContainer::FireGameEvent(IGameEvent*)
 +0x004c:  fffffff4  (unknown)
-+0x0050:  010e05c0  CMapInfoContainer
++0x0050:  010e05c0  typeinfo for CMapInfoContainer
 +0x0054:  007dcf20  non-virtual thunk to CMapInfoContainer::~CMapInfoContainer()
 +0x0058:  007dd3b0  non-virtual thunk to CMapInfoContainer::~CMapInfoContainer()
 +0x005c:  007dd660  non-virtual thunk to CMapInfoContainer::FireGameEvent(IGameEvent*)

@@ -222,7 +222,7 @@ CRagdollProp
 +0x036c:  00b515f0  CRagdollProp::OnPhysGunDrop(CBasePlayer*, PhysGunDrop_t)
 +0x0370:  00b51520  CRagdollProp::PhysGunLaunchAngularImpulse()
 +0x0374:  fffffb78  (unknown)
-+0x0378:  0119ea40  CRagdollProp
++0x0378:  0119ea40  typeinfo for CRagdollProp
 +0x037c:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0380:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0384:  00b518f0  non-virtual thunk to CRagdollProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

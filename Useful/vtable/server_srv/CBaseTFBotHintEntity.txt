@@ -191,6 +191,6 @@ CBaseTFBotHintEntity
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00000000  
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  011d07c0  CBaseTFBotHintEntity
++0x02fc:  011d07c0  typeinfo for CBaseTFBotHintEntity
 +0x0300:  00c7d2d0  non-virtual thunk to CBaseTFBotHintEntity::~CBaseTFBotHintEntity()
 +0x0304:  00c7d220  non-virtual thunk to CBaseTFBotHintEntity::~CBaseTFBotHintEntity()

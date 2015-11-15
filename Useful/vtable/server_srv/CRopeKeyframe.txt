@@ -191,7 +191,7 @@ CRopeKeyframe
 +0x02f0:  005feef0  CBaseEntity::ShouldBlockNav() const
 +0x02f4:  00bb5e70  CRopeKeyframe::NotifyPositionChanged(CBaseEntity*)
 +0x02f8:  fffffca0  (unknown)
-+0x02fc:  011b1480  CRopeKeyframe
++0x02fc:  011b1480  typeinfo for CRopeKeyframe
 +0x0300:  00bb5780  non-virtual thunk to CRopeKeyframe::~CRopeKeyframe()
 +0x0304:  00bb5830  non-virtual thunk to CRopeKeyframe::~CRopeKeyframe()
 +0x0308:  00bb5e60  non-virtual thunk to CRopeKeyframe::NotifyPositionChanged(CBaseEntity*)

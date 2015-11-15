@@ -94,7 +94,7 @@ CTFBotMedicRetreat
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c3c920  CTFBotMedicRetreat::ShouldAttack(INextBot const*, CKnownEntity const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011c5e34  CTFBotMedicRetreat
++0x0178:  011c5e34  typeinfo for CTFBotMedicRetreat
 +0x017c:  00c3de60  non-virtual thunk to CTFBotMedicRetreat::~CTFBotMedicRetreat()
 +0x0180:  00c3df70  non-virtual thunk to CTFBotMedicRetreat::~CTFBotMedicRetreat()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

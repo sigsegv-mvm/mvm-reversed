@@ -29,7 +29,7 @@ CEconItem
 +0x0068:  0065a220  CEconItem::IsCommodity() const
 +0x006c:  0065a1f0  CEconItem::IsUsableInCrafting() const
 +0x0070:  fffffffc  (unknown)
-+0x0074:  010a9580  CEconItem
++0x0074:  010a9580  typeinfo for CEconItem
 +0x0078:  0065bea0  non-virtual thunk to CEconItem::~CEconItem()
 +0x007c:  0065bf30  non-virtual thunk to CEconItem::~CEconItem()
 +0x0080:  0065d4d0  IEconItemInterface::GetCustomPainkKitDefinition() const

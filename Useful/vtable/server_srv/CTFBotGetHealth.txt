@@ -94,7 +94,7 @@ CTFBotGetHealth
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  00c6ce60  CTFBotGetHealth::ShouldHurry(INextBot const*) const
 +0x0174:  fffffffc  (unknown)
-+0x0178:  011cceec  CTFBotGetHealth
++0x0178:  011cceec  typeinfo for CTFBotGetHealth
 +0x017c:  00c6ef50  non-virtual thunk to CTFBotGetHealth::~CTFBotGetHealth()
 +0x0180:  00c6efb0  non-virtual thunk to CTFBotGetHealth::~CTFBotGetHealth()
 +0x0184:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -192,7 +192,7 @@ CAI_SpeechFilter
 +0x02f4:  009a2cc0  CAI_SpeechFilter::OnEntityCreated(CBaseEntity*)
 +0x02f8:  009a2c40  CAI_SpeechFilter::OnEntityDeleted(CBaseEntity*)
 +0x02fc:  fffffca0  (unknown)
-+0x0300:  0114c780  CAI_SpeechFilter
++0x0300:  0114c780  typeinfo for CAI_SpeechFilter
 +0x0304:  009a2cb0  non-virtual thunk to CAI_SpeechFilter::OnEntityCreated(CBaseEntity*)
 +0x0308:  006eb520  IEntityListener::OnEntitySpawned(CBaseEntity*)
 +0x030c:  009a2c30  non-virtual thunk to CAI_SpeechFilter::OnEntityDeleted(CBaseEntity*)

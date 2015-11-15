@@ -198,11 +198,11 @@ CTFHalloweenMinigame_FallingPlatforms
 +0x030c:  007c1a50  CTFHalloweenMinigame::InternalHandleInputScore(inputdata_t&)
 +0x0310:  007c1af0  CTFMiniGame::SuddenDeathTimeStartThink()
 +0x0314:  fffffca0  (unknown)
-+0x0318:  010dc348  CTFHalloweenMinigame_FallingPlatforms
++0x0318:  010dc348  typeinfo for CTFHalloweenMinigame_FallingPlatforms
 +0x031c:  007c6f10  non-virtual thunk to CTFHalloweenMinigame_FallingPlatforms::~CTFHalloweenMinigame_FallingPlatforms()
 +0x0320:  007c71b0  non-virtual thunk to CTFHalloweenMinigame_FallingPlatforms::~CTFHalloweenMinigame_FallingPlatforms()
 +0x0324:  007c1dd0  non-virtual thunk to CTFHalloweenMinigame_FallingPlatforms::FireGameEvent(IGameEvent*)
 +0x0328:  fffffc98  (unknown)
-+0x032c:  010dc348  CTFHalloweenMinigame_FallingPlatforms
++0x032c:  010dc348  typeinfo for CTFHalloweenMinigame_FallingPlatforms
 +0x0330:  007c6f00  non-virtual thunk to CTFHalloweenMinigame_FallingPlatforms::~CTFHalloweenMinigame_FallingPlatforms()
 +0x0334:  007c71a0  non-virtual thunk to CTFHalloweenMinigame_FallingPlatforms::~CTFHalloweenMinigame_FallingPlatforms()

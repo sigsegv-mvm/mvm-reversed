@@ -227,7 +227,7 @@ CEconEntity
 +0x0380:  00657f60  CEconEntity::UpdateBodygroups(CBaseCombatCharacter*, int)
 +0x0384:  006297f0  CEconEntity::TranslateViewmodelHandActivityInternal(Activity)
 +0x0388:  fffffb78  (unknown)
-+0x038c:  010a8840  CEconEntity
++0x038c:  010a8840  typeinfo for CEconEntity
 +0x0390:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0394:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0398:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()

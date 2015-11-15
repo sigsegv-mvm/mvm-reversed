@@ -336,7 +336,7 @@ CEyeballBoss
 +0x0534:  00ce1ed0  CEyeballBoss::GetBodyInterface() const
 +0x0538:  00ce1ef0  CEyeballBoss::GetVisionInterface() const
 +0x053c:  fffff7b0  (unknown)
-+0x0540:  011e6764  CEyeballBoss
++0x0540:  011e6764  typeinfo for CEyeballBoss
 +0x0544:  00ce0c80  non-virtual thunk to CEyeballBoss::~CEyeballBoss()
 +0x0548:  00ce0d70  non-virtual thunk to CEyeballBoss::~CEyeballBoss()
 +0x054c:  00817480  INextBot::FirstContainedResponder() const

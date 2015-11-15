@@ -93,7 +93,7 @@ CTFBotEngineerBuilding
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011c4784  CTFBotEngineerBuilding
++0x0174:  011c4784  typeinfo for CTFBotEngineerBuilding
 +0x0178:  00c30d50  non-virtual thunk to CTFBotEngineerBuilding::~CTFBotEngineerBuilding()
 +0x017c:  00c30db0  non-virtual thunk to CTFBotEngineerBuilding::~CTFBotEngineerBuilding()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -219,7 +219,7 @@ CTFHalloweenFortuneTeller
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  007c2050  CTFHalloweenFortuneTeller::FireGameEvent(IGameEvent*)
 +0x0368:  fffffb78  (unknown)
-+0x036c:  010dc3a0  CTFHalloweenFortuneTeller
++0x036c:  010dc3a0  typeinfo for CTFHalloweenFortuneTeller
 +0x0370:  007c2370  non-virtual thunk to CTFHalloweenFortuneTeller::~CTFHalloweenFortuneTeller()
 +0x0374:  007c2490  non-virtual thunk to CTFHalloweenFortuneTeller::~CTFHalloweenFortuneTeller()
 +0x0378:  007c2040  non-virtual thunk to CTFHalloweenFortuneTeller::FireGameEvent(IGameEvent*)

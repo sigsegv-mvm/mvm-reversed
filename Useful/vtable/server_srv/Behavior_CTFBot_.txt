@@ -52,7 +52,7 @@ Behavior<CTFBot>
 +0x00c4:  00c8d3f0  Behavior<CTFBot>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00c8d480  Behavior<CTFBot>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011d4e00  Behavior<CTFBot>
++0x00d0:  011d4e00  typeinfo for Behavior<CTFBot>
 +0x00d4:  00c8f200  non-virtual thunk to Behavior<CTFBot>::~Behavior()
 +0x00d8:  00c8f330  non-virtual thunk to Behavior<CTFBot>::~Behavior()
 +0x00dc:  00c8cfd0  non-virtual thunk to Behavior<CTFBot>::ShouldPickUp(INextBot const*, CBaseEntity*) const

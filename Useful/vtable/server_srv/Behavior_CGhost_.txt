@@ -52,7 +52,7 @@ Behavior<CGhost>
 +0x00c4:  00ce5c90  Behavior<CGhost>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00ce5d20  Behavior<CGhost>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011e84c0  Behavior<CGhost>
++0x00d0:  011e84c0  typeinfo for Behavior<CGhost>
 +0x00d4:  00cf1410  non-virtual thunk to Behavior<CGhost>::~Behavior()
 +0x00d8:  00cf1540  non-virtual thunk to Behavior<CGhost>::~Behavior()
 +0x00dc:  00ce5870  non-virtual thunk to Behavior<CGhost>::ShouldPickUp(INextBot const*, CBaseEntity*) const

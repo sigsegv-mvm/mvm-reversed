@@ -42,7 +42,7 @@ CFailableAchievement
 +0x009c:  00000000  
 +0x00a0:  00000000  
 +0x00a4:  fffffff8  (unknown)
-+0x00a8:  010a3758  CFailableAchievement
++0x00a8:  010a3758  typeinfo for CFailableAchievement
 +0x00ac:  0061dc00  non-virtual thunk to CBaseAchievement::GetAchievementID()
 +0x00b0:  0061dc20  non-virtual thunk to CBaseAchievement::GetName()
 +0x00b4:  0061dc40  non-virtual thunk to CBaseAchievement::GetFlags()

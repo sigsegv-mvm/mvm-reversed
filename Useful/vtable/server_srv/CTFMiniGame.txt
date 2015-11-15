@@ -198,11 +198,11 @@ CTFMiniGame
 +0x030c:  007c6250  CTFMiniGame::InternalHandleInputScore(inputdata_t&)
 +0x0310:  007c1af0  CTFMiniGame::SuddenDeathTimeStartThink()
 +0x0314:  fffffca0  (unknown)
-+0x0318:  010dc2c0  CTFMiniGame
++0x0318:  010dc2c0  typeinfo for CTFMiniGame
 +0x031c:  007c6590  non-virtual thunk to CTFMiniGame::~CTFMiniGame()
 +0x0320:  007c69b0  non-virtual thunk to CTFMiniGame::~CTFMiniGame()
 +0x0324:  007c1b40  non-virtual thunk to CTFMiniGame::FireGameEvent(IGameEvent*)
 +0x0328:  fffffc98  (unknown)
-+0x032c:  010dc2c0  CTFMiniGame
++0x032c:  010dc2c0  typeinfo for CTFMiniGame
 +0x0330:  007c6580  non-virtual thunk to CTFMiniGame::~CTFMiniGame()
 +0x0334:  007c69a0  non-virtual thunk to CTFMiniGame::~CTFMiniGame()

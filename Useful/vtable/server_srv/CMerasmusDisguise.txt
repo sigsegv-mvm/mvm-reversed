@@ -93,7 +93,7 @@ CMerasmusDisguise
 +0x0168:  00d0df30  Action<CMerasmus>::OnLose(CMerasmus*)
 +0x016c:  00d0df60  Action<CMerasmus>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011ed100  CMerasmusDisguise
++0x0174:  011ed100  typeinfo for CMerasmusDisguise
 +0x0178:  00d20160  non-virtual thunk to CMerasmusDisguise::~CMerasmusDisguise()
 +0x017c:  00d20190  non-virtual thunk to CMerasmusDisguise::~CMerasmusDisguise()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

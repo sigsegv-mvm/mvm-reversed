@@ -28,7 +28,7 @@ CTFQuestEventListener
 +0x0064:  00809120  CTFQuestEventListener::ResetCondition()
 +0x0068:  0080a330  CTFQuestEventListener::FireGameEvent(IGameEvent*)
 +0x006c:  fffffff0  (unknown)
-+0x0070:  010e6c80  CTFQuestEventListener
++0x0070:  010e6c80  typeinfo for CTFQuestEventListener
 +0x0074:  0080a0e0  non-virtual thunk to CTFQuestEventListener::~CTFQuestEventListener()
 +0x0078:  0080a180  non-virtual thunk to CTFQuestEventListener::~CTFQuestEventListener()
 +0x007c:  0080a320  non-virtual thunk to CTFQuestEventListener::FireGameEvent(IGameEvent*)

@@ -336,7 +336,7 @@ CMerasmus
 +0x0534:  00d0d5f0  CMerasmus::GetLocomotionInterface() const
 +0x0538:  00d0d630  CMerasmus::GetBodyInterface() const
 +0x053c:  fffff7b0  (unknown)
-+0x0540:  011eb720  CMerasmus
++0x0540:  011eb720  typeinfo for CMerasmus
 +0x0544:  00d0a860  non-virtual thunk to CMerasmus::~CMerasmus()
 +0x0548:  00d0aad0  non-virtual thunk to CMerasmus::~CMerasmus()
 +0x054c:  00817480  INextBot::FirstContainedResponder() const
@@ -419,7 +419,7 @@ CMerasmus
 +0x0680:  00af70f0  INextBot::IsDebugFilterMatch(char const*) const
 +0x0684:  00af6b90  INextBot::DisplayDebugText(char const*) const
 +0x0688:  fffff714  (unknown)
-+0x068c:  011eb720  CMerasmus
++0x068c:  011eb720  typeinfo for CMerasmus
 +0x0690:  00d0a850  non-virtual thunk to CMerasmus::~CMerasmus()
 +0x0694:  00d0aac0  non-virtual thunk to CMerasmus::~CMerasmus()
 +0x0698:  00d07be0  non-virtual thunk to CMerasmus::FireGameEvent(IGameEvent*)

@@ -93,7 +93,7 @@ CEyeballBossEscape
 +0x0168:  00ccbdd0  Action<CEyeballBoss>::OnLose(CEyeballBoss*)
 +0x016c:  00ccbe00  Action<CEyeballBoss>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011e5f34  CEyeballBossEscape
++0x0174:  011e5f34  typeinfo for CEyeballBossEscape
 +0x0178:  00cdcc00  non-virtual thunk to CEyeballBossEscape::~CEyeballBossEscape()
 +0x017c:  00cdcc30  non-virtual thunk to CEyeballBossEscape::~CEyeballBossEscape()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

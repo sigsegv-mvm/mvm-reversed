@@ -193,6 +193,6 @@ CFuncForceField
 +0x02f8:  00cc1fc0  CFuncForceField::TurnOn()
 +0x02fc:  00aa2240  CFuncBrush::IsOn() const
 +0x0300:  fffffc8c  (unknown)
-+0x0304:  011e0c00  CFuncForceField
++0x0304:  011e0c00  typeinfo for CFuncForceField
 +0x0308:  00cc22b0  non-virtual thunk to CFuncForceField::~CFuncForceField()
 +0x030c:  00cc2350  non-virtual thunk to CFuncForceField::~CFuncForceField()

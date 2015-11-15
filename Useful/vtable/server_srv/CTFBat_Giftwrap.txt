@@ -473,12 +473,12 @@ CTFBat_Giftwrap
 +0x0758:  0084a0d0  CTFBat_Giftwrap::CreateBall()
 +0x075c:  0084ad80  CTFBat_Giftwrap::GetEffectLabelText()
 +0x0760:  fffffb78  (unknown)
-+0x0764:  010f5b74  CTFBat_Giftwrap
++0x0764:  010f5b74  typeinfo for CTFBat_Giftwrap
 +0x0768:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x076c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0770:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0774:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0778:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x077c:  fffff95c  (unknown)
-+0x0780:  010f5b74  CTFBat_Giftwrap
++0x0780:  010f5b74  typeinfo for CTFBat_Giftwrap
 +0x0784:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

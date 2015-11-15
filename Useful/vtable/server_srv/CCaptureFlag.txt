@@ -262,7 +262,7 @@ CCaptureFlag
 +0x040c:  00739a10  CCaptureFlag::PickUp(CTFPlayer*, bool)
 +0x0410:  0073c010  CCaptureFlag::Drop(CTFPlayer*, bool, bool, bool)
 +0x0414:  fffffb78  (unknown)
-+0x0418:  010c3d80  CCaptureFlag
++0x0418:  010c3d80  typeinfo for CCaptureFlag
 +0x041c:  0073d4f0  non-virtual thunk to CBreakableProp::SetDmgModBullet(float)
 +0x0420:  0073d520  non-virtual thunk to CBreakableProp::SetDmgModClub(float)
 +0x0424:  0073d550  non-virtual thunk to CBreakableProp::SetDmgModExplosive(float)
@@ -294,7 +294,7 @@ CCaptureFlag
 +0x048c:  0073d830  non-virtual thunk to CBreakableProp::SetBasePropData(string_t)
 +0x0490:  0073d860  non-virtual thunk to CBreakableProp::GetBasePropData()
 +0x0494:  fffffb74  (unknown)
-+0x0498:  010c3d80  CCaptureFlag
++0x0498:  010c3d80  typeinfo for CCaptureFlag
 +0x049c:  00b9b6f0  non-virtual thunk to CBreakableProp::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x04a0:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x04a4:  00b9eb70  non-virtual thunk to CBreakableProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -306,11 +306,11 @@ CCaptureFlag
 +0x04bc:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x04c0:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x04c4:  fffffa30  (unknown)
-+0x04c8:  010c3d80  CCaptureFlag
++0x04c8:  010c3d80  typeinfo for CCaptureFlag
 +0x04cc:  0073aa50  non-virtual thunk to CCaptureFlag::~CCaptureFlag()
 +0x04d0:  0073af50  non-virtual thunk to CCaptureFlag::~CCaptureFlag()
 +0x04d4:  00b98880  non-virtual thunk to CDynamicProp::NotifyPositionChanged(CBaseEntity*)
 +0x04d8:  fffff9c0  (unknown)
-+0x04dc:  010c3d80  CCaptureFlag
++0x04dc:  010c3d80  typeinfo for CCaptureFlag
 +0x04e0:  0073aa40  non-virtual thunk to CCaptureFlag::~CCaptureFlag()
 +0x04e4:  0073af40  non-virtual thunk to CCaptureFlag::~CCaptureFlag()

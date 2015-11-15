@@ -482,12 +482,12 @@ CTFParticleCannon
 +0x077c:  00878050  CTFParticleCannon::GetChargeMaxTime()
 +0x0780:  00878060  CTFParticleCannon::GetChargeForceReleaseTime()
 +0x0784:  fffffb78  (unknown)
-+0x0788:  0110b728  CTFParticleCannon
++0x0788:  0110b728  typeinfo for CTFParticleCannon
 +0x078c:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0790:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0794:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0798:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x079c:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07a0:  fffff95c  (unknown)
-+0x07a4:  0110b728  CTFParticleCannon
++0x07a4:  0110b728  typeinfo for CTFParticleCannon
 +0x07a8:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

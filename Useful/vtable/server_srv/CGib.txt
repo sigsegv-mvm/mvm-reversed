@@ -220,7 +220,7 @@ CGib
 +0x0364:  00a819c0  CGib::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0368:  00a81a30  CGib::OnPhysGunDrop(CBasePlayer*, PhysGunDrop_t)
 +0x036c:  fffffb78  (unknown)
-+0x0370:  0117c660  CGib
++0x0370:  0117c660  typeinfo for CGib
 +0x0374:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0378:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x037c:  00a819b0  non-virtual thunk to CGib::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

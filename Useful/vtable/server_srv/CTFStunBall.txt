@@ -259,11 +259,11 @@ CTFStunBall
 +0x0400:  00848ac0  CTFStunBall::ApplyBallImpactEffectOnVictim(CBaseEntity*)
 +0x0404:  008481a0  CTFStunBall::GetDamageForce()
 +0x0408:  fffffb78  (unknown)
-+0x040c:  010f5b54  CTFStunBall
++0x040c:  010f5b54  typeinfo for CTFStunBall
 +0x0410:  0084aed0  non-virtual thunk to CTFStunBall::~CTFStunBall()
 +0x0414:  0084afa0  non-virtual thunk to CTFStunBall::~CTFStunBall()
 +0x0418:  fffffb68  (unknown)
-+0x041c:  010f5b54  CTFStunBall
++0x041c:  010f5b54  typeinfo for CTFStunBall
 +0x0420:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0424:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0428:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

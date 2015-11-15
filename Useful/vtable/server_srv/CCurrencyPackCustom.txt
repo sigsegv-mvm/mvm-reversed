@@ -233,7 +233,7 @@ CCurrencyPackCustom
 +0x0398:  00cb7250  CCurrencyPack::AffectedByRadiusCollection() const
 +0x039c:  00cb72b0  CCurrencyPackCustom::GetPackSize()
 +0x03a0:  fffffb78  (unknown)
-+0x03a4:  011d9b58  CCurrencyPackCustom
++0x03a4:  011d9b58  typeinfo for CCurrencyPackCustom
 +0x03a8:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03ac:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03b0:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -245,6 +245,6 @@ CCurrencyPackCustom
 +0x03c8:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x03cc:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x03d0:  fffffb14  (unknown)
-+0x03d4:  011d9b58  CCurrencyPackCustom
++0x03d4:  011d9b58  typeinfo for CCurrencyPackCustom
 +0x03d8:  00cb7380  non-virtual thunk to CCurrencyPackCustom::~CCurrencyPackCustom()
 +0x03dc:  00cb7440  non-virtual thunk to CCurrencyPackCustom::~CCurrencyPackCustom()

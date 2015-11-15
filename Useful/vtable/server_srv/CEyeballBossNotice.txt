@@ -93,7 +93,7 @@ CEyeballBossNotice
 +0x0168:  00ccbdd0  Action<CEyeballBoss>::OnLose(CEyeballBoss*)
 +0x016c:  00ccbe00  Action<CEyeballBoss>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011e5a8c  CEyeballBossNotice
++0x0174:  011e5a8c  typeinfo for CEyeballBossNotice
 +0x0178:  00cdb630  non-virtual thunk to CEyeballBossNotice::~CEyeballBossNotice()
 +0x017c:  00cdb660  non-virtual thunk to CEyeballBossNotice::~CEyeballBossNotice()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

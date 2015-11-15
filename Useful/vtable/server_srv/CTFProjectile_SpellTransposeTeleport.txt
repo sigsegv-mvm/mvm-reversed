@@ -267,11 +267,11 @@ CTFProjectile_SpellTransposeTeleport
 +0x0420:  00748e20  CTFProjectile_SpellTransposeTeleport::GetExplodeEffectParticle() const
 +0x0424:  00748e30  CTFProjectile_SpellTransposeTeleport::GetExplodeEffectSound() const
 +0x0428:  fffffb78  (unknown)
-+0x042c:  010c6fe8  CTFProjectile_SpellTransposeTeleport
++0x042c:  010c6fe8  typeinfo for CTFProjectile_SpellTransposeTeleport
 +0x0430:  007502e0  non-virtual thunk to CTFProjectile_SpellTransposeTeleport::~CTFProjectile_SpellTransposeTeleport()
 +0x0434:  00750370  non-virtual thunk to CTFProjectile_SpellTransposeTeleport::~CTFProjectile_SpellTransposeTeleport()
 +0x0438:  fffffb68  (unknown)
-+0x043c:  010c6fe8  CTFProjectile_SpellTransposeTeleport
++0x043c:  010c6fe8  typeinfo for CTFProjectile_SpellTransposeTeleport
 +0x0440:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0444:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0448:  00635d30  CDefaultPlayerPickupVPhysics::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

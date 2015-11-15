@@ -218,6 +218,6 @@ CTFDroppedWeapon
 +0x035c:  00629fc0  CBaseAnimating::SetLightingOriginRelative(CBaseEntity*)
 +0x0360:  00629e00  CBaseAnimating::SetLightingOrigin(CBaseEntity*)
 +0x0364:  fffffb78  (unknown)
-+0x0368:  010ccc60  CTFDroppedWeapon
++0x0368:  010ccc60  typeinfo for CTFDroppedWeapon
 +0x036c:  00758aa0  non-virtual thunk to CTFDroppedWeapon::~CTFDroppedWeapon()
 +0x0370:  00758b90  non-virtual thunk to CTFDroppedWeapon::~CTFDroppedWeapon()

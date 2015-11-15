@@ -465,12 +465,12 @@ CTFWrench
 +0x0738:  008420d0  CTFWeaponBaseMelee::SendPlayerAnimEvent(CTFPlayer*)
 +0x073c:  00845160  CTFWeaponBaseMelee::Swing(CTFPlayer*)
 +0x0740:  fffffb78  (unknown)
-+0x0744:  011222e8  CTFWrench
++0x0744:  011222e8  typeinfo for CTFWrench
 +0x0748:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x074c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0750:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0754:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0758:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x075c:  fffff95c  (unknown)
-+0x0760:  011222e8  CTFWrench
++0x0760:  011222e8  typeinfo for CTFWrench
 +0x0764:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

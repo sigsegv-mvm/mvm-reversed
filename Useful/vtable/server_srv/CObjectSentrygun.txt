@@ -410,7 +410,7 @@ CObjectSentrygun
 +0x065c:  00dafbf0  CObjectSentrygun::GetTurretAngles() const
 +0x0660:  00da7f60  CObjectSentrygun::SetBuildingSize()
 +0x0664:  fffff7b0  (unknown)
-+0x0668:  01204098  CObjectSentrygun
++0x0668:  01204098  typeinfo for CObjectSentrygun
 +0x066c:  00731ee0  non-virtual thunk to CBaseObject::GetNumBuildPoints() const
 +0x0670:  00731fb0  non-virtual thunk to CBaseObject::GetBuildPoint(int, Vector&, QAngle&)
 +0x0674:  00732080  non-virtual thunk to CBaseObject::GetBuildPointAttachmentIndex(int) const
@@ -423,10 +423,10 @@ CObjectSentrygun
 +0x0690:  007c9ac0  non-virtual thunk to CBaseObject::ShouldCheckForMovement()
 +0x0694:  007321b0  non-virtual thunk to CBaseObject::FindObjectOnBuildPoint(CBaseObject*)
 +0x0698:  fffff7ac  (unknown)
-+0x069c:  01204098  CObjectSentrygun
++0x069c:  01204098  typeinfo for CObjectSentrygun
 +0x06a0:  007c9a70  non-virtual thunk to CBaseObject::GetScorer()
 +0x06a4:  007c9aa0  non-virtual thunk to CBaseObject::GetAssistant()
 +0x06a8:  fffff7a8  (unknown)
-+0x06ac:  01204098  CObjectSentrygun
++0x06ac:  01204098  typeinfo for CObjectSentrygun
 +0x06b0:  00dafe30  non-virtual thunk to CObjectSentrygun::~CObjectSentrygun()
 +0x06b4:  00db0100  non-virtual thunk to CObjectSentrygun::~CObjectSentrygun()

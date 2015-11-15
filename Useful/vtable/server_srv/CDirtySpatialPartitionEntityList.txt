@@ -22,7 +22,7 @@ CDirtySpatialPartitionEntityList
 +0x004c:  0064c2a0  CDirtySpatialPartitionEntityList::OnPreQuery(int)
 +0x0050:  006491c0  CDirtySpatialPartitionEntityList::OnPostQuery(int)
 +0x0054:  fffffff4  (unknown)
-+0x0058:  010a78e0  CDirtySpatialPartitionEntityList
++0x0058:  010a78e0  typeinfo for CDirtySpatialPartitionEntityList
 +0x005c:  0064c840  non-virtual thunk to CDirtySpatialPartitionEntityList::OnPreQuery_V1()
 +0x0060:  0064c290  non-virtual thunk to CDirtySpatialPartitionEntityList::OnPreQuery(int)
 +0x0064:  006491b0  non-virtual thunk to CDirtySpatialPartitionEntityList::OnPostQuery(int)

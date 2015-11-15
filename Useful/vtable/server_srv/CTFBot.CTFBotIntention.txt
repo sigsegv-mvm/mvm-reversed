@@ -56,7 +56,7 @@ CTFBot::CTFBotIntention
 +0x00d4:  005e95d0  IIntention::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00d8:  00af67e0  IIntention::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00dc:  ffffffec  (unknown)
-+0x00e0:  011d35d8  CTFBot::CTFBotIntention
++0x00e0:  011d35d8  typeinfo for CTFBot::CTFBotIntention
 +0x00e4:  00c7f6c0  non-virtual thunk to CTFBot::CTFBotIntention::~CTFBotIntention()
 +0x00e8:  00c7f730  non-virtual thunk to CTFBot::CTFBotIntention::~CTFBotIntention()
 +0x00ec:  005e98c0  non-virtual thunk to IIntention::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -258,7 +258,7 @@ CPropSoccerBall
 +0x03fc:  00ba8790  CPhysicsProp::OnPhysGunDrop(CBasePlayer*, PhysGunDrop_t)
 +0x0400:  00b98ff0  CBreakableProp::PhysGunLaunchAngularImpulse()
 +0x0404:  fffffb78  (unknown)
-+0x0408:  0120f8c4  CPropSoccerBall
++0x0408:  0120f8c4  typeinfo for CPropSoccerBall
 +0x040c:  0073d4f0  non-virtual thunk to CBreakableProp::SetDmgModBullet(float)
 +0x0410:  0073d520  non-virtual thunk to CBreakableProp::SetDmgModClub(float)
 +0x0414:  0073d550  non-virtual thunk to CBreakableProp::SetDmgModExplosive(float)
@@ -290,7 +290,7 @@ CPropSoccerBall
 +0x047c:  0073d830  non-virtual thunk to CBreakableProp::SetBasePropData(string_t)
 +0x0480:  0073d860  non-virtual thunk to CBreakableProp::GetBasePropData()
 +0x0484:  fffffb74  (unknown)
-+0x0488:  0120f8c4  CPropSoccerBall
++0x0488:  0120f8c4  typeinfo for CPropSoccerBall
 +0x048c:  00b9b6f0  non-virtual thunk to CBreakableProp::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0490:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0494:  00ba8630  non-virtual thunk to CPhysicsProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -302,6 +302,6 @@ CPropSoccerBall
 +0x04ac:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x04b0:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x04b4:  fffffa30  (unknown)
-+0x04b8:  0120f8c4  CPropSoccerBall
++0x04b8:  0120f8c4  typeinfo for CPropSoccerBall
 +0x04bc:  00e255c0  non-virtual thunk to CPropSoccerBall::~CPropSoccerBall()
 +0x04c0:  00e25640  non-virtual thunk to CPropSoccerBall::~CPropSoccerBall()

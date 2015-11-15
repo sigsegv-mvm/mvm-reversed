@@ -231,7 +231,7 @@ CBonusDuckPickup
 +0x0390:  007406d0  CBonusDuckPickup::GetDefaultPowerupModel()
 +0x0394:  00740740  CBonusDuckPickup::GetLifeTime()
 +0x0398:  fffffb78  (unknown)
-+0x039c:  010c4984  CBonusDuckPickup
++0x039c:  010c4984  typeinfo for CBonusDuckPickup
 +0x03a0:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03a4:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03a8:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

@@ -408,7 +408,7 @@ CObjectSapper
 +0x0654:  00d93be0  CBaseObject::DeterminePlaybackRate()
 +0x0658:  00da6ed0  CObjectSapper::SapperThink()
 +0x065c:  fffff7b0  (unknown)
-+0x0660:  012032b8  CObjectSapper
++0x0660:  012032b8  typeinfo for CObjectSapper
 +0x0664:  00731ee0  non-virtual thunk to CBaseObject::GetNumBuildPoints() const
 +0x0668:  00731fb0  non-virtual thunk to CBaseObject::GetBuildPoint(int, Vector&, QAngle&)
 +0x066c:  00732080  non-virtual thunk to CBaseObject::GetBuildPointAttachmentIndex(int) const
@@ -421,10 +421,10 @@ CObjectSapper
 +0x0688:  007c9ac0  non-virtual thunk to CBaseObject::ShouldCheckForMovement()
 +0x068c:  007321b0  non-virtual thunk to CBaseObject::FindObjectOnBuildPoint(CBaseObject*)
 +0x0690:  fffff7ac  (unknown)
-+0x0694:  012032b8  CObjectSapper
++0x0694:  012032b8  typeinfo for CObjectSapper
 +0x0698:  007c9a70  non-virtual thunk to CBaseObject::GetScorer()
 +0x069c:  007c9aa0  non-virtual thunk to CBaseObject::GetAssistant()
 +0x06a0:  fffff7a8  (unknown)
-+0x06a4:  012032b8  CObjectSapper
++0x06a4:  012032b8  typeinfo for CObjectSapper
 +0x06a8:  00da7860  non-virtual thunk to CObjectSapper::~CObjectSapper()
 +0x06ac:  00da7b30  non-virtual thunk to CObjectSapper::~CObjectSapper()

@@ -422,7 +422,7 @@ CRobotDispenser
 +0x068c:  00817570  CRobotDispenser::GetDispenserRadius()
 +0x0690:  008175b0  CRobotDispenser::PlayActiveSound()
 +0x0694:  fffff7b0  (unknown)
-+0x0698:  010e7f60  CRobotDispenser
++0x0698:  010e7f60  typeinfo for CRobotDispenser
 +0x069c:  00731ee0  non-virtual thunk to CBaseObject::GetNumBuildPoints() const
 +0x06a0:  00731fb0  non-virtual thunk to CBaseObject::GetBuildPoint(int, Vector&, QAngle&)
 +0x06a4:  00732080  non-virtual thunk to CBaseObject::GetBuildPointAttachmentIndex(int) const
@@ -435,10 +435,10 @@ CRobotDispenser
 +0x06c0:  007c9ac0  non-virtual thunk to CBaseObject::ShouldCheckForMovement()
 +0x06c4:  007321b0  non-virtual thunk to CBaseObject::FindObjectOnBuildPoint(CBaseObject*)
 +0x06c8:  fffff7ac  (unknown)
-+0x06cc:  010e7f60  CRobotDispenser
++0x06cc:  010e7f60  typeinfo for CRobotDispenser
 +0x06d0:  007c9a70  non-virtual thunk to CBaseObject::GetScorer()
 +0x06d4:  007c9aa0  non-virtual thunk to CBaseObject::GetAssistant()
 +0x06d8:  fffff7a8  (unknown)
-+0x06dc:  010e7f60  CRobotDispenser
++0x06dc:  010e7f60  typeinfo for CRobotDispenser
 +0x06e0:  00818760  non-virtual thunk to CRobotDispenser::~CRobotDispenser()
 +0x06e4:  00818f90  non-virtual thunk to CRobotDispenser::~CRobotDispenser()

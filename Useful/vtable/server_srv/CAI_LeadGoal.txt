@@ -199,11 +199,11 @@ CAI_LeadGoal
 +0x0310:  0092b0a0  CAI_LeadGoal::GetConceptModifiers(char const*)
 +0x0314:  0092af20  CAI_LeadGoal::OnEvent(int)
 +0x0318:  fffffca0  (unknown)
-+0x031c:  01139a20  CAI_LeadGoal
++0x031c:  01139a20  typeinfo for CAI_LeadGoal
 +0x0320:  009441f0  non-virtual thunk to CAI_GoalEntity::OnEntityCreated(CBaseEntity*)
 +0x0324:  006eb520  IEntityListener::OnEntitySpawned(CBaseEntity*)
 +0x0328:  009440f0  non-virtual thunk to CAI_GoalEntity::OnEntityDeleted(CBaseEntity*)
 +0x032c:  fffffc6c  (unknown)
-+0x0330:  01139a20  CAI_LeadGoal
++0x0330:  01139a20  typeinfo for CAI_LeadGoal
 +0x0334:  0092af10  non-virtual thunk to CAI_LeadGoal::OnEvent(int)
 +0x0338:  0092b090  non-virtual thunk to CAI_LeadGoal::GetConceptModifiers(char const*)

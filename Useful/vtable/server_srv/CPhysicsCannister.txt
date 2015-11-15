@@ -331,7 +331,7 @@ CPhysicsCannister
 +0x0520:  00b43080  CPhysicsCannister::PhysGunLaunchAngularImpulse()
 +0x0524:  00b430c0  CPhysicsCannister::PhysGunLaunchVelocity(Vector const&, float)
 +0x0528:  fffff7b0  (unknown)
-+0x052c:  0119c600  CPhysicsCannister
++0x052c:  0119c600  typeinfo for CPhysicsCannister
 +0x0530:  00b43010  non-virtual thunk to CPhysicsCannister::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0534:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0538:  00b40130  non-virtual thunk to CPhysicsCannister::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

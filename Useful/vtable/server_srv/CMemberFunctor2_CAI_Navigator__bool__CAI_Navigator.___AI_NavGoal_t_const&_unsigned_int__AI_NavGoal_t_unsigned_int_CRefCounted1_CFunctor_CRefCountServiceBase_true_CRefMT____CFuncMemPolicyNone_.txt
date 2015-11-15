@@ -6,7 +6,7 @@ CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, uns
 +0x000c:  00967570  CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>::~CMemberFunctor2()
 +0x0010:  00967430  CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>::operator()()
 +0x0014:  fffffff8  (unknown)
-+0x0018:  01146b1c  CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>
++0x0018:  01146b1c  typeinfo for CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>
 +0x001c:  009673d0  non-virtual thunk to CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>::~CMemberFunctor2()
 +0x0020:  00967560  non-virtual thunk to CMemberFunctor2<CAI_Navigator*, bool (CAI_Navigator::*)(AI_NavGoal_t const&, unsigned int), AI_NavGoal_t, unsigned int, CRefCounted1<CFunctor, CRefCountServiceBase<true, CRefMT> >, CFuncMemPolicyNone>::~CMemberFunctor2()
 +0x0024:  00700f60  CRefCountServiceBase<true, CRefMT>::OnFinalRelease()

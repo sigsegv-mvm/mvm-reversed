@@ -34,7 +34,7 @@ CHLTVDirector
 +0x007c:  00a89be0  CHLTVDirector::FindBestGameEvent()
 +0x0080:  00a881d0  CHLTVDirector::CreateShotFromEvent(CHLTVGameEvent*)
 +0x0084:  fffffff8  (unknown)
-+0x0088:  0117df00  CHLTVDirector
++0x0088:  0117df00  typeinfo for CHLTVDirector
 +0x008c:  00a8add0  non-virtual thunk to CHLTVDirector::Name()
 +0x0090:  00a87c10  non-virtual thunk to CHLTVDirector::Init()
 +0x0094:  005f99c0  CBaseGameSystemPerFrame::PostInit()
@@ -54,7 +54,7 @@ CHLTVDirector
 +0x00cc:  00a87d40  non-virtual thunk to CHLTVDirector::FrameUpdatePostEntityThink()
 +0x00d0:  005f9a00  CBaseGameSystemPerFrame::PreClientUpdate()
 +0x00d4:  fffffff4  (unknown)
-+0x00d8:  0117df00  CHLTVDirector
++0x00d8:  0117df00  typeinfo for CHLTVDirector
 +0x00dc:  00a89a60  non-virtual thunk to CHLTVDirector::~CHLTVDirector()
 +0x00e0:  00a89b30  non-virtual thunk to CHLTVDirector::~CHLTVDirector()
 +0x00e4:  00a87c70  non-virtual thunk to CHLTVDirector::IsActive()

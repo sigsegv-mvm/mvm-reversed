@@ -50,12 +50,12 @@ CBaseClientState
 +0x00bc:  00000000  
 +0x00c0:  00000000  
 +0x00c4:  fffffffc  (unknown)
-+0x00c8:  00236940  CBaseClientState
++0x00c8:  00236940  typeinfo for CBaseClientState
 +0x00cc:  000cd2d0  non-virtual thunk to CBaseClientState::~CBaseClientState()
 +0x00d0:  000cd360  non-virtual thunk to CBaseClientState::~CBaseClientState()
 +0x00d4:  000ceb40  non-virtual thunk to CBaseClientState::ProcessConnectionlessPacket(netpacket_s*)
 +0x00d8:  fffffff8  (unknown)
-+0x00dc:  00236940  CBaseClientState
++0x00dc:  00236940  typeinfo for CBaseClientState
 +0x00e0:  000cd2c0  non-virtual thunk to CBaseClientState::~CBaseClientState()
 +0x00e4:  000cd350  non-virtual thunk to CBaseClientState::~CBaseClientState()
 +0x00e8:  000cfdb0  non-virtual thunk to CBaseClientState::ProcessTick(NET_Tick*)

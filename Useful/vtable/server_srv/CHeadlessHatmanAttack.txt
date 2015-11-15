@@ -93,7 +93,7 @@ CHeadlessHatmanAttack
 +0x0168:  00cf7300  Action<CHeadlessHatman>::OnLose(CHeadlessHatman*)
 +0x016c:  00cf7330  Action<CHeadlessHatman>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011e8d20  CHeadlessHatmanAttack
++0x0174:  011e8d20  typeinfo for CHeadlessHatmanAttack
 +0x0178:  00cf7410  non-virtual thunk to CHeadlessHatmanAttack::~CHeadlessHatmanAttack()
 +0x017c:  00cf7770  non-virtual thunk to CHeadlessHatmanAttack::~CHeadlessHatmanAttack()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

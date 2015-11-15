@@ -422,7 +422,7 @@ CObjectCartDispenser
 +0x068c:  00da32f0  CObjectDispenser::GetDispenserRadius()
 +0x0690:  00da1e30  CObjectDispenser::PlayActiveSound()
 +0x0694:  fffff7b0  (unknown)
-+0x0698:  01201be8  CObjectCartDispenser
++0x0698:  01201be8  typeinfo for CObjectCartDispenser
 +0x069c:  00731ee0  non-virtual thunk to CBaseObject::GetNumBuildPoints() const
 +0x06a0:  00731fb0  non-virtual thunk to CBaseObject::GetBuildPoint(int, Vector&, QAngle&)
 +0x06a4:  00732080  non-virtual thunk to CBaseObject::GetBuildPointAttachmentIndex(int) const
@@ -435,10 +435,10 @@ CObjectCartDispenser
 +0x06c0:  007c9ac0  non-virtual thunk to CBaseObject::ShouldCheckForMovement()
 +0x06c4:  007321b0  non-virtual thunk to CBaseObject::FindObjectOnBuildPoint(CBaseObject*)
 +0x06c8:  fffff7ac  (unknown)
-+0x06cc:  01201be8  CObjectCartDispenser
++0x06cc:  01201be8  typeinfo for CObjectCartDispenser
 +0x06d0:  007c9a70  non-virtual thunk to CBaseObject::GetScorer()
 +0x06d4:  007c9aa0  non-virtual thunk to CBaseObject::GetAssistant()
 +0x06d8:  fffff7a8  (unknown)
-+0x06dc:  01201be8  CObjectCartDispenser
++0x06dc:  01201be8  typeinfo for CObjectCartDispenser
 +0x06e0:  00da55f0  non-virtual thunk to CObjectCartDispenser::~CObjectCartDispenser()
 +0x06e4:  00da5630  non-virtual thunk to CObjectCartDispenser::~CObjectCartDispenser()

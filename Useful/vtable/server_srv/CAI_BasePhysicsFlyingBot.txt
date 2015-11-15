@@ -584,7 +584,7 @@ CAI_BasePhysicsFlyingBot
 +0x0914:  00909b30  CAI_BasePhysicsFlyingBot::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)
 +0x0918:  0090a810  CAI_BasePhysicsFlyingBot::ClampMotorForces(Vector&, Vector&)
 +0x091c:  fffff7b0  (unknown)
-+0x0920:  01132780  CAI_BasePhysicsFlyingBot
++0x0920:  01132780  typeinfo for CAI_BasePhysicsFlyingBot
 +0x0924:  008e0910  non-virtual thunk to CAI_BaseNPC::CalcYawSpeed()
 +0x0928:  008e13c0  non-virtual thunk to CAI_BaseNPC::OnCalcBaseMove(AILocalMoveGoal_t*, float, AIMoveResult_t*)
 +0x092c:  008e1330  non-virtual thunk to CAI_BaseNPC::OnObstructionPreSteer(AILocalMoveGoal_t*, float, AIMoveResult_t*)
@@ -595,5 +595,5 @@ CAI_BasePhysicsFlyingBot
 +0x0940:  008dbe70  CAI_DefMovementSink::OnMoveStalled(AILocalMoveGoal_t const&)
 +0x0944:  008dbe80  CAI_DefMovementSink::OnMoveExecuteFailed(AILocalMoveGoal_t const&, AIMoveTrace_t const&, AIMotorMoveResult_t, AIMoveResult_t*)
 +0x0948:  fffff244  (unknown)
-+0x094c:  01132780  CAI_BasePhysicsFlyingBot
++0x094c:  01132780  typeinfo for CAI_BasePhysicsFlyingBot
 +0x0950:  00909b20  non-virtual thunk to CAI_BasePhysicsFlyingBot::Simulate(IPhysicsMotionController*, IPhysicsObject*, float, Vector&, Vector&)

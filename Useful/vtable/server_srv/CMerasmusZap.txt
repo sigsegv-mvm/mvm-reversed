@@ -93,7 +93,7 @@ CMerasmusZap
 +0x0168:  00d0df30  Action<CMerasmus>::OnLose(CMerasmus*)
 +0x016c:  00d0df60  Action<CMerasmus>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011ee13c  CMerasmusZap
++0x0174:  011ee13c  typeinfo for CMerasmusZap
 +0x0178:  00d242c0  non-virtual thunk to CMerasmusZap::~CMerasmusZap()
 +0x017c:  00d242f0  non-virtual thunk to CMerasmusZap::~CMerasmusZap()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

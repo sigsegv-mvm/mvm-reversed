@@ -207,6 +207,6 @@ CTriggerTimerDoor
 +0x0330:  00e29c00  CTriggerTimerDoor::OnStartCapture(int)
 +0x0334:  00e2aa70  CTriggerTimerDoor::CaptureModeScalesWithPlayers() const
 +0x0338:  fffffb7c  (unknown)
-+0x033c:  01210bc4  CTriggerTimerDoor
++0x033c:  01210bc4  typeinfo for CTriggerTimerDoor
 +0x0340:  00e2bf60  non-virtual thunk to CTriggerTimerDoor::~CTriggerTimerDoor()
 +0x0344:  00e2c300  non-virtual thunk to CTriggerTimerDoor::~CTriggerTimerDoor()

@@ -239,10 +239,10 @@ CTFProjectile_Flare
 +0x03b0:  00e21af0  CTFProjectile_Flare::GetScorer()
 +0x03b4:  00e24290  CTFProjectile_Flare::GetAssistant()
 +0x03b8:  fffffb78  (unknown)
-+0x03bc:  0120ee60  CTFProjectile_Flare
++0x03bc:  0120ee60  typeinfo for CTFProjectile_Flare
 +0x03c0:  00e21c70  non-virtual thunk to CTFProjectile_Flare::~CTFProjectile_Flare()
 +0x03c4:  00e21cb0  non-virtual thunk to CTFProjectile_Flare::~CTFProjectile_Flare()
 +0x03c8:  fffffb40  (unknown)
-+0x03cc:  0120ee60  CTFProjectile_Flare
++0x03cc:  0120ee60  typeinfo for CTFProjectile_Flare
 +0x03d0:  00e21ae0  non-virtual thunk to CTFProjectile_Flare::GetScorer()
 +0x03d4:  00e24280  non-virtual thunk to CTFProjectile_Flare::GetAssistant()

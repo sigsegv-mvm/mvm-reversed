@@ -222,6 +222,6 @@ CExtraMapEntity_Rocket
 +0x036c:  00d7f480  CExtraMapEntity::ShouldAnimate()
 +0x0370:  00d7ea70  CExtraMapEntity_Rocket::Precache_Internal()
 +0x0374:  fffffb78  (unknown)
-+0x0378:  011fc11c  CExtraMapEntity_Rocket
++0x0378:  011fc11c  typeinfo for CExtraMapEntity_Rocket
 +0x037c:  00d7f640  non-virtual thunk to CExtraMapEntity_Rocket::~CExtraMapEntity_Rocket()
 +0x0380:  00d7faa0  non-virtual thunk to CExtraMapEntity_Rocket::~CExtraMapEntity_Rocket()

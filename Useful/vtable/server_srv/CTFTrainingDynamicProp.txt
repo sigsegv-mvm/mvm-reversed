@@ -259,7 +259,7 @@ CTFTrainingDynamicProp
 +0x0400:  00b98ff0  CBreakableProp::PhysGunLaunchAngularImpulse()
 +0x0404:  00b98890  CDynamicProp::NotifyPositionChanged(CBaseEntity*)
 +0x0408:  fffffb78  (unknown)
-+0x040c:  010d54d4  CTFTrainingDynamicProp
++0x040c:  010d54d4  typeinfo for CTFTrainingDynamicProp
 +0x0410:  0073d4f0  non-virtual thunk to CBreakableProp::SetDmgModBullet(float)
 +0x0414:  0073d520  non-virtual thunk to CBreakableProp::SetDmgModClub(float)
 +0x0418:  0073d550  non-virtual thunk to CBreakableProp::SetDmgModExplosive(float)
@@ -291,7 +291,7 @@ CTFTrainingDynamicProp
 +0x0480:  0073d830  non-virtual thunk to CBreakableProp::SetBasePropData(string_t)
 +0x0484:  0073d860  non-virtual thunk to CBreakableProp::GetBasePropData()
 +0x0488:  fffffb74  (unknown)
-+0x048c:  010d54d4  CTFTrainingDynamicProp
++0x048c:  010d54d4  typeinfo for CTFTrainingDynamicProp
 +0x0490:  00b9b6f0  non-virtual thunk to CBreakableProp::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x0494:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x0498:  00b9eb70  non-virtual thunk to CBreakableProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -303,7 +303,7 @@ CTFTrainingDynamicProp
 +0x04b0:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x04b4:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x04b8:  fffffa30  (unknown)
-+0x04bc:  010d54d4  CTFTrainingDynamicProp
++0x04bc:  010d54d4  typeinfo for CTFTrainingDynamicProp
 +0x04c0:  007a0690  non-virtual thunk to CTFTrainingDynamicProp::~CTFTrainingDynamicProp()
 +0x04c4:  007a0460  non-virtual thunk to CTFTrainingDynamicProp::~CTFTrainingDynamicProp()
 +0x04c8:  00b98880  non-virtual thunk to CDynamicProp::NotifyPositionChanged(CBaseEntity*)

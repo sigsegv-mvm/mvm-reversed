@@ -261,7 +261,7 @@ CPhysicsPropMultiplayer
 +0x0408:  00bab5e0  CPhysicsPropMultiplayer::GetMass()
 +0x040c:  00bab600  CPhysicsPropMultiplayer::IsAsleep()
 +0x0410:  fffffb78  (unknown)
-+0x0414:  011acd00  CPhysicsPropMultiplayer
++0x0414:  011acd00  typeinfo for CPhysicsPropMultiplayer
 +0x0418:  0073d4f0  non-virtual thunk to CBreakableProp::SetDmgModBullet(float)
 +0x041c:  0073d520  non-virtual thunk to CBreakableProp::SetDmgModClub(float)
 +0x0420:  0073d550  non-virtual thunk to CBreakableProp::SetDmgModExplosive(float)
@@ -293,7 +293,7 @@ CPhysicsPropMultiplayer
 +0x0488:  0073d830  non-virtual thunk to CBreakableProp::SetBasePropData(string_t)
 +0x048c:  0073d860  non-virtual thunk to CBreakableProp::GetBasePropData()
 +0x0490:  fffffb74  (unknown)
-+0x0494:  011acd00  CPhysicsPropMultiplayer
++0x0494:  011acd00  typeinfo for CPhysicsPropMultiplayer
 +0x0498:  00b9b6f0  non-virtual thunk to CBreakableProp::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x049c:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x04a0:  00ba8630  non-virtual thunk to CPhysicsProp::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -305,11 +305,11 @@ CPhysicsPropMultiplayer
 +0x04b8:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x04bc:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x04c0:  fffffa30  (unknown)
-+0x04c4:  011acd00  CPhysicsPropMultiplayer
++0x04c4:  011acd00  typeinfo for CPhysicsPropMultiplayer
 +0x04c8:  00baca00  non-virtual thunk to CPhysicsPropMultiplayer::~CPhysicsPropMultiplayer()
 +0x04cc:  00bacb90  non-virtual thunk to CPhysicsPropMultiplayer::~CPhysicsPropMultiplayer()
 +0x04d0:  fffff938  (unknown)
-+0x04d4:  011acd00  CPhysicsPropMultiplayer
++0x04d4:  011acd00  typeinfo for CPhysicsPropMultiplayer
 +0x04d8:  00bab5b0  non-virtual thunk to CPhysicsPropMultiplayer::GetMultiplayerPhysicsMode()
 +0x04dc:  00bab5d0  non-virtual thunk to CPhysicsPropMultiplayer::GetMass()
 +0x04e0:  00bab5f0  non-virtual thunk to CPhysicsPropMultiplayer::IsAsleep()

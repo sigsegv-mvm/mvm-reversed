@@ -93,7 +93,7 @@ Action<CSimpleBot>
 +0x0168:  00b145b0  Action<CSimpleBot>::OnLose(CSimpleBot*)
 +0x016c:  00b145e0  Action<CSimpleBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  01195360  Action<CSimpleBot>
++0x0174:  01195360  typeinfo for Action<CSimpleBot>
 +0x0178:  00b13d50  non-virtual thunk to Action<CSimpleBot>::~Action()
 +0x017c:  00b14bb0  non-virtual thunk to Action<CSimpleBot>::~Action()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

@@ -95,7 +95,7 @@ CTFBotCapturePoint
 +0x0170:  00c43460  CTFBotCapturePoint::ShouldRetreat(INextBot const*) const
 +0x0174:  00c43410  CTFBotCapturePoint::ShouldHurry(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011c6fd4  CTFBotCapturePoint
++0x017c:  011c6fd4  typeinfo for CTFBotCapturePoint
 +0x0180:  00c44db0  non-virtual thunk to CTFBotCapturePoint::~CTFBotCapturePoint()
 +0x0184:  00c44e10  non-virtual thunk to CTFBotCapturePoint::~CTFBotCapturePoint()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

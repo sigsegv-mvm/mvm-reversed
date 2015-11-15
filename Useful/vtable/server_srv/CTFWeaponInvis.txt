@@ -461,12 +461,12 @@ CTFWeaponInvis
 +0x0728:  00860b00  CTFWeaponInvis::CleanupInvisibilityWatch()
 +0x072c:  008615d0  CTFWeaponInvis::AllowsAutoSwitchTo()
 +0x0730:  fffffb78  (unknown)
-+0x0734:  01101900  CTFWeaponInvis
++0x0734:  01101900  typeinfo for CTFWeaponInvis
 +0x0738:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x073c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0740:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0744:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0748:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x074c:  fffff95c  (unknown)
-+0x0750:  01101900  CTFWeaponInvis
++0x0750:  01101900  typeinfo for CTFWeaponInvis
 +0x0754:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

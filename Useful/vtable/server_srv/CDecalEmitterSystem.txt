@@ -9,7 +9,7 @@ CDecalEmitterSystem
 +0x0018:  00651660  CDecalEmitterSystem::~CDecalEmitterSystem()
 +0x001c:  00651730  CDecalEmitterSystem::~CDecalEmitterSystem()
 +0x0020:  fffffffc  (unknown)
-+0x0024:  010a7d60  CDecalEmitterSystem
++0x0024:  010a7d60  typeinfo for CDecalEmitterSystem
 +0x0028:  0064c820  CAutoGameSystem::Name()
 +0x002c:  00650b00  non-virtual thunk to CDecalEmitterSystem::Init()
 +0x0030:  0064c740  CBaseGameSystem::PostInit()

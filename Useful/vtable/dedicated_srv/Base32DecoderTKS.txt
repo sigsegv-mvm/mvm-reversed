@@ -52,7 +52,7 @@ Base32DecoderTKS
 +0x00c4:  000d2ed0  CryptoPP::Filter::ShouldPropagateMessageSeriesEnd() const
 +0x00c8:  000d3ba0  CryptoPP::Unflushable<CryptoPP::Filter>::InputBufferIsEmpty() const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  001d8814  Base32DecoderTKS
++0x00d0:  001d8814  typeinfo for Base32DecoderTKS
 +0x00d4:  000d9040  non-virtual thunk to Base32DecoderTKS::~Base32DecoderTKS()
 +0x00d8:  000d8eb0  non-virtual thunk to Base32DecoderTKS::~Base32DecoderTKS()
 +0x00dc:  000e1e90  non-virtual thunk to CryptoPP::BufferedTransformation::GetMaxWaitObjectCount() const

@@ -93,7 +93,7 @@ CGhostBehavior
 +0x0168:  00ce57e0  Action<CGhost>::OnLose(CGhost*)
 +0x016c:  00ce5810  Action<CGhost>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011e84a0  CGhostBehavior
++0x0174:  011e84a0  typeinfo for CGhostBehavior
 +0x0178:  00ce5070  non-virtual thunk to CGhostBehavior::~CGhostBehavior()
 +0x017c:  00ce5e70  non-virtual thunk to CGhostBehavior::~CGhostBehavior()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

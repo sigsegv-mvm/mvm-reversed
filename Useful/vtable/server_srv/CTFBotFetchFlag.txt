@@ -95,7 +95,7 @@ CTFBotFetchFlag
 +0x0170:  00c4cb90  CTFBotFetchFlag::ShouldHurry(INextBot const*) const
 +0x0174:  00c4cbb0  CTFBotFetchFlag::ShouldRetreat(INextBot const*) const
 +0x0178:  fffffffc  (unknown)
-+0x017c:  011c86b0  CTFBotFetchFlag
++0x017c:  011c86b0  typeinfo for CTFBotFetchFlag
 +0x0180:  00c4d7e0  non-virtual thunk to CTFBotFetchFlag::~CTFBotFetchFlag()
 +0x0184:  00c4d840  non-virtual thunk to CTFBotFetchFlag::~CTFBotFetchFlag()
 +0x0188:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

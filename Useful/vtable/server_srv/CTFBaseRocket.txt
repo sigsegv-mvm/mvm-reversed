@@ -237,6 +237,6 @@ CTFBaseRocket
 +0x03a8:  00748940  CTFBaseRocket::SetDamageForceScale(float)
 +0x03ac:  00748960  CTFBaseRocket::GetDamageForceScale()
 +0x03b0:  fffffb78  (unknown)
-+0x03b4:  010f52d4  CTFBaseRocket
++0x03b4:  010f52d4  typeinfo for CTFBaseRocket
 +0x03b8:  00845ea0  non-virtual thunk to CTFBaseRocket::~CTFBaseRocket()
 +0x03bc:  00845f00  non-virtual thunk to CTFBaseRocket::~CTFBaseRocket()

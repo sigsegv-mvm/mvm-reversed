@@ -192,6 +192,6 @@ CTFRobotDestruction_RobotGroup
 +0x02f4:  007d1080  CTFRobotDestruction_RobotGroup::NetworkStateChanged_m_iTeamNum()
 +0x02f8:  007d10c0  CTFRobotDestruction_RobotGroup::NetworkStateChanged_m_iTeamNum(void*)
 +0x02fc:  fffffca0  (unknown)
-+0x0300:  010def80  CTFRobotDestruction_RobotGroup
++0x0300:  010def80  typeinfo for CTFRobotDestruction_RobotGroup
 +0x0304:  007ccee0  non-virtual thunk to CTFRobotDestruction_RobotGroup::~CTFRobotDestruction_RobotGroup()
 +0x0308:  007cd040  non-virtual thunk to CTFRobotDestruction_RobotGroup::~CTFRobotDestruction_RobotGroup()

@@ -377,7 +377,7 @@ CBaseCombatWeapon
 +0x05d8:  00624e00  CBaseCombatWeapon::HideThink()
 +0x05dc:  00622820  CBaseCombatWeapon::CanReload()
 +0x05e0:  fffffb78  (unknown)
-+0x05e4:  010a41a0  CBaseCombatWeapon
++0x05e4:  010a41a0  typeinfo for CBaseCombatWeapon
 +0x05e8:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x05ec:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x05f0:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()

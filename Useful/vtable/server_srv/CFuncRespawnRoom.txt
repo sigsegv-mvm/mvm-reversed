@@ -203,6 +203,6 @@ CFuncRespawnRoom
 +0x0320:  007d0e20  CBaseTrigger::EndTouchAll()
 +0x0324:  00cc8310  CFuncRespawnRoom::RespawnRoomTouch(CBaseEntity*)
 +0x0328:  fffffb7c  (unknown)
-+0x032c:  011e3700  CFuncRespawnRoom
++0x032c:  011e3700  typeinfo for CFuncRespawnRoom
 +0x0330:  00cc9d90  non-virtual thunk to CFuncRespawnRoom::~CFuncRespawnRoom()
 +0x0334:  00cc9f70  non-virtual thunk to CFuncRespawnRoom::~CFuncRespawnRoom()

@@ -471,17 +471,17 @@ CTFSword
 +0x0750:  0088d2c0  CTFSword::GetSwordSpeedMod()
 +0x0754:  0088ce60  CTFSword::GetSwordHealthMod()
 +0x0758:  fffffb78  (unknown)
-+0x075c:  0111e1ec  CTFSword
++0x075c:  0111e1ec  typeinfo for CTFSword
 +0x0760:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0764:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0768:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x076c:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0770:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0774:  fffff95c  (unknown)
-+0x0778:  0111e1ec  CTFSword
++0x0778:  0111e1ec  typeinfo for CTFSword
 +0x077c:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x0780:  fffff804  (unknown)
-+0x0784:  0111e1ec  CTFSword
++0x0784:  0111e1ec  typeinfo for CTFSword
 +0x0788:  0088e120  non-virtual thunk to CTFSword::~CTFSword()
 +0x078c:  0088e300  non-virtual thunk to CTFSword::~CTFSword()
 +0x0790:  0088d160  non-virtual thunk to CTFDecapitationMeleeWeaponBase::FireGameEvent(IGameEvent*)

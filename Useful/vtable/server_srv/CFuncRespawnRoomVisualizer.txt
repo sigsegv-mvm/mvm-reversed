@@ -193,6 +193,6 @@ CFuncRespawnRoomVisualizer
 +0x02f8:  00aa2630  CFuncBrush::TurnOn()
 +0x02fc:  00aa2240  CFuncBrush::IsOn() const
 +0x0300:  fffffc8c  (unknown)
-+0x0304:  011e3780  CFuncRespawnRoomVisualizer
++0x0304:  011e3780  typeinfo for CFuncRespawnRoomVisualizer
 +0x0308:  00cc9930  non-virtual thunk to CFuncRespawnRoomVisualizer::~CFuncRespawnRoomVisualizer()
 +0x030c:  00cc9880  non-virtual thunk to CFuncRespawnRoomVisualizer::~CFuncRespawnRoomVisualizer()

@@ -11,7 +11,7 @@ CTFEventLog
 +0x0020:  00a4c450  CEventLog::PrintTeamEvent(IGameEvent*)
 +0x0024:  00a4c460  CEventLog::PrintOtherEvent(IGameEvent*)
 +0x0028:  fffffff8  (unknown)
-+0x002c:  011fbfa0  CTFEventLog
++0x002c:  011fbfa0  typeinfo for CTFEventLog
 +0x0030:  0064c720  CBaseGameSystem::Name()
 +0x0034:  00d7c1e0  non-virtual thunk to CTFEventLog::Init()
 +0x0038:  0064c740  CBaseGameSystem::PostInit()

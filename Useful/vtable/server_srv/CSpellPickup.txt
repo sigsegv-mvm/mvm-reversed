@@ -231,7 +231,7 @@ CSpellPickup
 +0x0390:  00d26ca0  CSpellPickup::GetDefaultPowerupModel()
 +0x0394:  00734620  CTFPowerup::GetLifeTime()
 +0x0398:  fffffb78  (unknown)
-+0x039c:  011eeea4  CSpellPickup
++0x039c:  011eeea4  typeinfo for CSpellPickup
 +0x03a0:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03a4:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03a8:  00a8fb40  non-virtual thunk to CItem::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)

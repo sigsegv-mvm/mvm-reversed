@@ -200,7 +200,7 @@ CTFRobotDestructionLogic
 +0x0314:  007d0e80  CTFRobotDestructionLogic::OnRedScoreChanged()
 +0x0318:  007d0e90  CTFRobotDestructionLogic::OnBlueScoreChanged()
 +0x031c:  fffffca0  (unknown)
-+0x0320:  010defc0  CTFRobotDestructionLogic
++0x0320:  010defc0  typeinfo for CTFRobotDestructionLogic
 +0x0324:  007cd070  non-virtual thunk to CTFRobotDestructionLogic::~CTFRobotDestructionLogic()
 +0x0328:  007cd5b0  non-virtual thunk to CTFRobotDestructionLogic::~CTFRobotDestructionLogic()
 +0x032c:  007cfcb0  non-virtual thunk to CTFRobotDestructionLogic::FireGameEvent(IGameEvent*)

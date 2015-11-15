@@ -472,12 +472,12 @@ CTFBat_Wood
 +0x0754:  0084ad00  CTFBat_Wood::GetBallViewModelName() const
 +0x0758:  00849f50  CTFBat_Wood::CreateBall()
 +0x075c:  fffffb78  (unknown)
-+0x0760:  010f5b38  CTFBat_Wood
++0x0760:  010f5b38  typeinfo for CTFBat_Wood
 +0x0764:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0768:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x076c:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0770:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0774:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x0778:  fffff95c  (unknown)
-+0x077c:  010f5b38  CTFBat_Wood
++0x077c:  010f5b38  typeinfo for CTFBat_Wood
 +0x0780:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

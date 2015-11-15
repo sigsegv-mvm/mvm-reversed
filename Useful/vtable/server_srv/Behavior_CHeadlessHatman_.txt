@@ -52,7 +52,7 @@ Behavior<CHeadlessHatman>
 +0x00c4:  00d04ae0  Behavior<CHeadlessHatman>::IsPositionAllowed(INextBot const*, Vector const&) const
 +0x00c8:  00d04b70  Behavior<CHeadlessHatman>::SelectMoreDangerousThreat(INextBot const*, CBaseCombatCharacter const*, CKnownEntity const*, CKnownEntity const*) const
 +0x00cc:  fffffffc  (unknown)
-+0x00d0:  011ea780  Behavior<CHeadlessHatman>
++0x00d0:  011ea780  typeinfo for Behavior<CHeadlessHatman>
 +0x00d4:  00d055b0  non-virtual thunk to Behavior<CHeadlessHatman>::~Behavior()
 +0x00d8:  00d056e0  non-virtual thunk to Behavior<CHeadlessHatman>::~Behavior()
 +0x00dc:  00d046c0  non-virtual thunk to Behavior<CHeadlessHatman>::ShouldPickUp(INextBot const*, CBaseEntity*) const

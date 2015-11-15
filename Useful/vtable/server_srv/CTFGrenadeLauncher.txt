@@ -481,17 +481,17 @@ CTFGrenadeLauncher
 +0x0778:  0085c200  CTFGrenadeLauncher::GetChargeBeginTime()
 +0x077c:  0085c1e0  CTFGrenadeLauncher::GetChargeMaxTime()
 +0x0780:  fffffb78  (unknown)
-+0x0784:  010ffda0  CTFGrenadeLauncher
++0x0784:  010ffda0  typeinfo for CTFGrenadeLauncher
 +0x0788:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x078c:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0790:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x0794:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x0798:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x079c:  fffff95c  (unknown)
-+0x07a0:  010ffda0  CTFGrenadeLauncher
++0x07a0:  010ffda0  typeinfo for CTFGrenadeLauncher
 +0x07a4:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()
 +0x07a8:  fffff824  (unknown)
-+0x07ac:  010ffda0  CTFGrenadeLauncher
++0x07ac:  010ffda0  typeinfo for CTFGrenadeLauncher
 +0x07b0:  0085c270  non-virtual thunk to CTFGrenadeLauncher::CanCharge()
 +0x07b4:  0085c1f0  non-virtual thunk to CTFGrenadeLauncher::GetChargeBeginTime()
 +0x07b8:  0085c1d0  non-virtual thunk to CTFGrenadeLauncher::GetChargeMaxTime()

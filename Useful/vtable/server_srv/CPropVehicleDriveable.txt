@@ -251,7 +251,7 @@ CPropVehicleDriveable
 +0x03e0:  00e5f530  CPropVehicleDriveable::NPC_FinishedEnterVehicle(CAI_BaseNPC*, bool)
 +0x03e4:  00e5f550  CPropVehicleDriveable::NPC_FinishedExitVehicle(CAI_BaseNPC*, bool)
 +0x03e8:  fffffb78  (unknown)
-+0x03ec:  0121f0e0  CPropVehicleDriveable
++0x03ec:  0121f0e0  typeinfo for CPropVehicleDriveable
 +0x03f0:  00635d10  CDefaultPlayerPickupVPhysics::OnAttemptPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
 +0x03f4:  00635d20  CDefaultPlayerPickupVPhysics::OnFailedPhysGunPickup(Vector)
 +0x03f8:  00e5d220  non-virtual thunk to CPropVehicle::OnPhysGunPickup(CBasePlayer*, PhysGunPickup_t)
@@ -263,7 +263,7 @@ CPropVehicleDriveable
 +0x0410:  00635da0  CDefaultPlayerPickupVPhysics::ShouldPuntUseLaunchForces(PhysGunForce_t)
 +0x0414:  00635ed0  CDefaultPlayerPickupVPhysics::PhysGunLaunchVelocity(Vector const&, float)
 +0x0418:  fffffa20  (unknown)
-+0x041c:  0121f0e0  CPropVehicleDriveable
++0x041c:  0121f0e0  typeinfo for CPropVehicleDriveable
 +0x0420:  00e5cea0  non-virtual thunk to CPropVehicleDriveable::GetDriver()
 +0x0424:  00e5f3e0  non-virtual thunk to CPropVehicleDriveable::ItemPostFrame(CBasePlayer*)
 +0x0428:  00e5ebb0  non-virtual thunk to CPropVehicleDriveable::SetupMove(CBasePlayer*, CUserCmd*, IMoveHelper*, CMoveData*)
@@ -281,7 +281,7 @@ CPropVehicleDriveable
 +0x0458:  00e5f4a0  non-virtual thunk to CPropVehicleDriveable::GetVehicleScriptName()
 +0x045c:  00e5f4d0  non-virtual thunk to CPropVehicleDriveable::PassengerShouldReceiveDamage(CTakeDamageInfo&)
 +0x0460:  fffffa1c  (unknown)
-+0x0464:  0121f0e0  CPropVehicleDriveable
++0x0464:  0121f0e0  typeinfo for CPropVehicleDriveable
 +0x0468:  00e5bb70  non-virtual thunk to CPropVehicleDriveable::NPC_CanEnterVehicle(CAI_BaseNPC*, bool)
 +0x046c:  00e5bb90  non-virtual thunk to CPropVehicleDriveable::NPC_CanExitVehicle(CAI_BaseNPC*, bool)
 +0x0470:  00e5bbb0  non-virtual thunk to CPropVehicleDriveable::NPC_AddPassenger(CAI_BaseNPC*, string_t, int)

@@ -335,7 +335,7 @@ CHeadlessHatman
 +0x0530:  00d045f0  CHeadlessHatman::GetLocomotionInterface() const
 +0x0534:  00d04610  CHeadlessHatman::GetBodyInterface() const
 +0x0538:  fffff7b0  (unknown)
-+0x053c:  011e9aec  CHeadlessHatman
++0x053c:  011e9aec  typeinfo for CHeadlessHatman
 +0x0540:  00d04440  non-virtual thunk to CHeadlessHatman::~CHeadlessHatman()
 +0x0544:  00d04520  non-virtual thunk to CHeadlessHatman::~CHeadlessHatman()
 +0x0548:  00817480  INextBot::FirstContainedResponder() const

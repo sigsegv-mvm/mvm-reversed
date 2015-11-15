@@ -483,12 +483,12 @@ CTFFlareGun
 +0x0780:  00859a60  CTFFlareGun::ChargePostFrame()
 +0x0784:  00859a70  CTFFlareGun::GetChargeEffect() const
 +0x0788:  fffffb78  (unknown)
-+0x078c:  010fe24c  CTFFlareGun
++0x078c:  010fe24c  typeinfo for CTFFlareGun
 +0x0790:  00629740  non-virtual thunk to CEconEntity::GetAttributeManager()
 +0x0794:  00629760  non-virtual thunk to CEconEntity::GetAttributeContainer()
 +0x0798:  00629780  non-virtual thunk to CEconEntity::GetAttributeOwner()
 +0x079c:  006297d0  non-virtual thunk to CEconEntity::GetAttributeList()
 +0x07a0:  008380c0  non-virtual thunk to CTFWeaponBase::ReapplyProvision()
 +0x07a4:  fffff95c  (unknown)
-+0x07a8:  010fe24c  CTFFlareGun
++0x07a8:  010fe24c  typeinfo for CTFFlareGun
 +0x07ac:  007497a0  non-virtual thunk to CTFWeaponBase::GetOwnerViaInterface()

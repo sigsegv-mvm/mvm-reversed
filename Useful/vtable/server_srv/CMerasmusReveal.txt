@@ -93,7 +93,7 @@ CMerasmusReveal
 +0x0168:  00d0df30  Action<CMerasmus>::OnLose(CMerasmus*)
 +0x016c:  00d0df60  Action<CMerasmus>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011ed4f4  CMerasmusReveal
++0x0174:  011ed4f4  typeinfo for CMerasmusReveal
 +0x0178:  00d20c80  non-virtual thunk to CMerasmusReveal::~CMerasmusReveal()
 +0x017c:  00d20cb0  non-virtual thunk to CMerasmusReveal::~CMerasmusReveal()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

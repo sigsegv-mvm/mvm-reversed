@@ -93,7 +93,7 @@ CTFBotUseTeleporter
 +0x0168:  00c1b260  Action<CTFBot>::OnLose(CTFBot*)
 +0x016c:  00c1b290  Action<CTFBot>::IsAbleToBlockMovementOf(INextBot const*) const
 +0x0170:  fffffffc  (unknown)
-+0x0174:  011ced10  CTFBotUseTeleporter
++0x0174:  011ced10  typeinfo for CTFBotUseTeleporter
 +0x0178:  00c784d0  non-virtual thunk to CTFBotUseTeleporter::~CTFBotUseTeleporter()
 +0x017c:  00c78530  non-virtual thunk to CTFBotUseTeleporter::~CTFBotUseTeleporter()
 +0x0180:  005e8930  IContextualQuery::ShouldPickUp(INextBot const*, CBaseEntity*) const

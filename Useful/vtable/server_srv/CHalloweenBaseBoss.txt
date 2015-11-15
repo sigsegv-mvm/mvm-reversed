@@ -332,7 +332,7 @@ CHalloweenBaseBoss
 +0x0524:  00cf3d50  CHalloweenBaseBoss::GetLevel() const
 +0x0528:  00cf3d60  CHalloweenBaseBoss::GetBossType() const
 +0x052c:  fffff7b0  (unknown)
-+0x0530:  011e8590  CHalloweenBaseBoss
++0x0530:  011e8590  typeinfo for CHalloweenBaseBoss
 +0x0534:  00cf3480  non-virtual thunk to CHalloweenBaseBoss::~CHalloweenBaseBoss()
 +0x0538:  00cf3550  non-virtual thunk to CHalloweenBaseBoss::~CHalloweenBaseBoss()
 +0x053c:  00817480  INextBot::FirstContainedResponder() const
