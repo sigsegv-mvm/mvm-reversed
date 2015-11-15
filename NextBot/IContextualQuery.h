@@ -16,7 +16,6 @@ enum class QueryResponse : int
 class IContextualQuery
 {
 public:
-	
 	virtual ~IContextualQuery();
 	
 	virtual QueryResponse ShouldPickUp(const INextBot *nextbot, CBaseEntity *it) const;
