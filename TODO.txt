@@ -48,6 +48,17 @@ CTFObjectiveResource (partial)
 CTFGameRules (partial)
 CTFPlayer (partial)
 CTFBot
+CTFBotHint
+CTFBotHintEngineerNest
+CTFBotHintSentryGun
+CTFBotHintTeleporterExit
+CTFBotRoster
+CTFBotManager
+CTFBaseBoss
+CTFTankBoss
+CTFMannVsMachineLogic
+CTFPowerupBottle
+tf_revive
 
 
 make skeleton for all NextBot AI behaviors/actions
@@ -76,3 +87,9 @@ for pretty much ALL of the relevant source code file paths
 
 classes that are in osx server.dylib but not in linux server_srv.so:
 - CAmmoFilter
+
+make a GIGANTIC awesome flowgraph, basically a finite state machine diagram
+- nodes are the actions
+- edges are CHANGE_TO, SUSPEND_FOR, DONE (hrm, that may be hard...)
+
+for each CTFBot action, document whether it is ever used in MvM mode
