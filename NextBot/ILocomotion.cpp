@@ -387,10 +387,43 @@ void ILocomotion::AdjustPosture(const Vector& v1)
 
 void ILocomotion::StuckMonitor()
 {
+	// TODO: this function needs significant refactoring
+	// extract some of these if statements into bools and flatten it out
+	
 	if (this->m_itUnknown.IsGreaterThen(0.25f)) {
 		this->m_vecStuck = this->GetFeet();
 		this->m_itStuck.Start();
 	} else {
-		// TODO
+		if (this->IsStuck()) {
+			if (this->GetBot()->IsRangeGreaterThan(this->m_vecStuck, 100.0f)) {
+				this->ClearStuckStatus("UN-STUCK");
+			} else {
+				if (this->m_ctUnknown.IsElapsed()) {
+					this->m_ctUnknown.Start(1.0f);
+					// TODO: enum
+					if (this->GetBot()->IsDebugging(0x10)) {
+						// TODO
+					}
+					
+					this->GetBot()->OnStuck();
+				}
+			}
+		} else {
+			if (this->GetBot()->IsRangeGreaterThan(this->m_vecStuck, 100.0f)) {
+				this->m_vecStuck = this->GetFeet();
+				// TODO: enum
+				if (this->GetBot()->IsDebugging(0x10)) {
+					// TODO: Cross3D
+				}
+				this->m_itStuck.Start();
+			} else {
+				// TODO: enum
+				if (this->GetBot()->IsDebugging(0x10)) {
+					// TODO
+				}
+				
+				// TODO
+			}
+		}
 	}
 }
