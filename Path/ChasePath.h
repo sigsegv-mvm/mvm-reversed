@@ -22,11 +22,14 @@ public:
 	UNKNOWN RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost, Vector *v1);
 	
 protected:
-	// TODO
-	
-private:
-	// TODO
+	CountdownTimer m_ctTimer1; // +0x47d4
+	CountdownTimer m_ctTimer2; // +0x47e0
+	CountdownTimer m_ctTimer3; // +0x47ec
+	// 47f8 dword -1
+	// 47fc dword 0
+	CountdownTimer m_ctTimer4; // +0x4800
 };
 
+// TODO: struct and vtable in IDA
 
 // TODO: look at DirectChasePath

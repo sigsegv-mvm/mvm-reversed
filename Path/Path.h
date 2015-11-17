@@ -4,81 +4,130 @@
  */
 
 
+class IPathOpenGoalSelector
+{
+public:
+	virtual CNavArea *operator()(CNavArea *area1, CNavArea *area2) const;
+};
+
+
 class Path
 {
 public:
-	class Segment // or struct?
+	enum class SegmentType : int
 	{
 		// TODO
 	};
 	
-	enum SeekType
+	enum class SeekType : int
 	{
 		// TODO
 	};
 	
-	enum MoveCursorType
+	enum class MoveCursorType : int
+	{
+		ABSOLUTE = 0,
+		RELATIVE = 1,
+	};
+	
+	enum class ResultType : int
 	{
 		// TODO
 	};
 	
-	enum ResultType
+	struct Segment
 	{
-		// TODO
+		// 00 pointer to something with:
+		//    - sizeof >= 0x58
+		//    - bitfield at +0x54
+		// 04 ?
+		
+		Vector m_vecStart;   // +0x08 coordinates of the start of this segment
+		
+		// 14 pointer to something with:
+		//    00 Vector
+		//    0c Vector
+		//    ...?
+		
+		SegmentType m_Type;  // +0x18
+		
+		// 1c Vector, accessed in Draw
+		
+		float m_flLength;    // +0x28 length of this segment
+		float m_flStartDist; // +0x2c distance from the start of the path to the start of this segment
+		
+		// 30 float, might possibly be negative sometimes perhaps?
+		// 34 ?
+		// 38 ?
+		// 3c ?
+		// 40 ?
+	};
+	
+	struct CursorData
+	{
+		// 00 Vector: Segment::m_vecStart
+		// 0c Vector: Segment+1c
+		// 18 float:  Segment+30
+		Segment *m_pSegment; // +0x1c
 	};
 	
 	Path();
 	virtual ~Path();
 	
-	virtual UNKNOWN GetLength() const;
+	virtual float GetLength() const;
 	
-	virtual UNKNOWN GetPosition(float f1, const Segment *seg) const;
-	virtual UNKNOWN GetClosestPosition(const Vector& v1, const Segment *seg, float f1) const;
-	virtual UNKNOWN GetStartPosition() const;
-	virtual UNKNOWN GetEndPosition() const;
+	virtual const Vector& GetPosition(float dist, const Segment *seg) const;
+	virtual const Vector& GetClosestPosition(const Vector& v1, const Segment *seg, float f1) const;
+	virtual const Vector& GetStartPosition() const;
+	virtual const Vector& GetEndPosition() const;
 	
-	virtual UNKNOWN GetSubject() const;
-	virtual UNKNOWN GetCurrentGoal() const;
-	virtual UNKNOWN GetAge() const;
+	virtual CBaseEntity *GetSubject() const;
+	virtual const Segment *GetCurrentGoal() const;
+	virtual float GetAge() const;
 	
-	virtual UNKNOWN MoveCursorToClosestPosition(const Vector&, SeekType stype, float f1) const;
-	virtual UNKNOWN MoveCursorToStart();
-	virtual UNKNOWN MoveCursorToEnd();
-	virtual UNKNOWN MoveCursor(float f1, MoveCursorType mctype);
+	virtual void MoveCursorToClosestPosition(const Vector&, SeekType stype, float f1) const;
+	virtual void MoveCursorToStart();
+	virtual void MoveCursorToEnd();
+	virtual void MoveCursor(float dist, MoveCursorType mctype);
 	
-	virtual UNKNOWN GetCursorPosition() const;
-	virtual UNKNOWN GetCursorData() const;
+	virtual float GetCursorPosition() const;
+	virtual CursorData *GetCursorData() const;
 	
-	virtual UNKNOWN IsValid() const;
-	virtual UNKNOWN Invalidate();
+	virtual bool IsValid() const;
+	virtual void Invalidate();
 	
-	virtual UNKNOWN Draw(const Segment *seg) const;
-	virtual UNKNOWN DrawInterpolated(float f1, float f2);
+	virtual void Draw(const Segment *seg) const;
+	virtual void DrawInterpolated(float from, float to);
 	
-	virtual UNKNOWN FirstSegment() const;
-	virtual UNKNOWN NextSegment(const Segment *seg) const;
-	virtual UNKNOWN PriorSegment(const Segment *seg) const;
-	virtual UNKNOWN LastSegment() const;
+	virtual const Segment *FirstSegment() const;
+	virtual const Segment *NextSegment(const Segment *seg) const;
+	virtual const Segment *PriorSegment(const Segment *seg) const;
+	virtual const Segment *LastSegment() const;
 	
-	virtual UNKNOWN OnPathChanged(INextBot *nextbot, ResultType rtype);
+	virtual void OnPathChanged(INextBot *nextbot, ResultType rtype);
 	
-	virtual UNKNOWN Copy(INextBot *nextbot, const Path& that);
+	virtual void Copy(INextBot *nextbot, const Path& that);
 	
-	virtual UNKNOWN ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost, const IPathOpenGoalSelector& sel, float f1);
-	virtual UNKNOWN ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area1, const Vector& v1, const CNavArea *area2, NavDirType ndtype, Vector *v2) const;
+	virtual bool ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost, const IPathOpenGoalSelector& sel, float f1);
+	virtual void ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area, const Vector& from, const CNavArea *to, NavDirType dir, Vector *out) const;
 	
-	UNKNOWN AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area);
-	UNKNOWN BuildTrivialPath(INextBot *nextbot, const Vector& v1);
-	UNKNOWN FindNextOccludedNode(INextBot *nextbot, int i1);
-	UNKNOWN InsertSegment(Segment seg, int i1);
-	UNKNOWN Optimize(INextBot *nextbot);
-	UNKNOWN PostProcess();
+	void AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area);
+	bool BuildTrivialPath(INextBot *nextbot, const Vector& v1);
+	int FindNextOccludedNode(INextBot *nextbot, int index);
+	void InsertSegment(Segment seg, int index);
+	void Optimize(INextBot *nextbot);
+	void PostProcess();
 	
-	template<class T> Compute(INextBot *nextbot, const Vector& v1, T&, float f1, bool b1);
+	template<class T> bool Compute(INextBot *nextbot, const Vector& v1, T&, float f1, bool b1);
 	
 protected:
-	// TODO
-	
-private:
-	// TODO
+	Segment m_Segments[256];         // +0x0004
+	int m_iSegCount;                 // +0x4404
+	Vector m_vecGetPosition;         // +0x4408
+	Vector m_vecGetClosestPosition;  // +0x4414
+	float m_flCursorPosition;        // +0x4420
+	CursorData m_CursorData;         // +0x4424
+	bool m_bCursorDataDirty;         // +0x4444
+	IntervalTimer m_itAge;           // +0x4448
+	CHandle<CBaseEntity> m_hSubject; // +0x444c
 };
