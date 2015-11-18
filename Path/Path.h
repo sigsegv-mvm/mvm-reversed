@@ -17,41 +17,53 @@ public:
 	enum class SegmentType : int
 	{
 		// TODO
+		TYPE0 = 0, // invalid probably
+		TYPE1 = 1,
+		TYPE2 = 2,
+		TYPE3 = 3,
+		TYPE4 = 4,
+		TYPE5 = 5,
 	};
 	
 	enum class SeekType : int
 	{
-		// TODO
+		FROM_START  = 0,
+		FROM_CURSOR = 1,
+		MAX,
 	};
 	
 	enum class MoveCursorType : int
 	{
 		ABSOLUTE = 0,
 		RELATIVE = 1,
+		MAX,
 	};
 	
 	enum class ResultType : int
 	{
-		// TODO
+		/* this is only ever zero, as far as I can tell */
+		ZERO = 0,
 	};
 	
 	struct Segment
 	{
-		// 00 pointer to something with:
+		UNKNOWN_PTR m_Pointer00; // +0x00
 		//    - sizeof >= 0x58
 		//    - bitfield at +0x54
+		
 		// 04 ?
 		
 		Vector m_vecStart;   // +0x08 coordinates of the start of this segment
 		
-		// 14 pointer to something with:
-		//    00 Vector
-		//    0c Vector
+		// 14 field_14 pointer to something with:
+		//    00 Vector vector_0 (used for endPos in VertArrow call in Path::Draw)
+		//    0c Vector vector_c (used for startPos in VertArrow call in Path::Draw)
 		//    ...?
 		
 		SegmentType m_Type;  // +0x18
 		
-		// 1c Vector, accessed in Draw
+		// 1c Vector, accessed in Draw, seems to be a unit vector (length == 1.0f) indicating the direction
+		// from the start of the segment to the end of the segment
 		
 		float m_flLength;    // +0x28 length of this segment
 		float m_flStartDist; // +0x2c distance from the start of the path to the start of this segment
@@ -77,7 +89,7 @@ public:
 	virtual float GetLength() const;
 	
 	virtual const Vector& GetPosition(float dist, const Segment *seg) const;
-	virtual const Vector& GetClosestPosition(const Vector& v1, const Segment *seg, float f1) const;
+	virtual const Vector& GetClosestPosition(const Vector& near, const Segment *seg, float dist) const;
 	virtual const Vector& GetStartPosition() const;
 	virtual const Vector& GetEndPosition() const;
 	
@@ -85,13 +97,13 @@ public:
 	virtual const Segment *GetCurrentGoal() const;
 	virtual float GetAge() const;
 	
-	virtual void MoveCursorToClosestPosition(const Vector&, SeekType stype, float f1) const;
+	virtual void MoveCursorToClosestPosition(const Vector& near, SeekType stype, float dist) const;
 	virtual void MoveCursorToStart();
 	virtual void MoveCursorToEnd();
 	virtual void MoveCursor(float dist, MoveCursorType mctype);
 	
 	virtual float GetCursorPosition() const;
-	virtual CursorData *GetCursorData() const;
+	virtual const CursorData *GetCursorData() const;
 	
 	virtual bool IsValid() const;
 	virtual void Invalidate();
