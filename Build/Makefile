@@ -7,6 +7,7 @@ DEFINES:= \
 	-DRAD_TELEMETRY_DISABLED=1 \
 	-DGAME_DLL=1
 INCLUDES:= \
+	-I..
 	-I/pool/Game/TF2/source-sdk-2013/mp/src \
 	-I/pool/Game/TF2/source-sdk-2013/mp/src/public \
 	-I/pool/Game/TF2/source-sdk-2013/mp/src/public/tier0 \
@@ -14,7 +15,14 @@ INCLUDES:= \
 	-I/pool/Game/TF2/source-sdk-2013/mp/src/game/shared \
 	-I/pool/Game/TF2/source-sdk-2013/mp/src/game/server
 
-SOURCES_CXX:=$(shell find . -follow -type f -name '*.cpp')
+SRC_DIRS:= \
+	../CTFBot \
+	../Entity \
+	../NextBot \
+	../Path \
+	../Population
+
+SOURCES_CXX:=$(shell find $(SRC_DIRS) -follow -type f -name '*.cpp')
 OBJECTS:=$(patsubst %.cpp,%.o,$(SOURCES_CXX))
 HEADERS:=$(shell find . -follow -type f -name '*.h')
 
