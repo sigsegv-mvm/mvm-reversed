@@ -466,8 +466,42 @@ void Path::Copy(INextBot *nextbot, const Path& that)
 }
 
 
-bool Path::ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost, const IPathOpenGoalSelector& sel, float f1)
+bool Path::ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost_func, const IPathOpenGoalSelector& sel, float f1)
 {
+	VPROF_BUDGET("ComputeWithOpenGoal", "NextBot");
+	
+	int nb_teamnum = nextbot->GetEntity()->GetTeamNumber();
+	
+	CNavArea *nb_area = static_cast<CBaseCombatCharacter *>(nextbot->GetEntity())->GetLastKnownArea();
+	if (nb_area == nullptr) {
+		return false;
+	}
+	nb_area->SetParent(nullptr);
+	
+	CNavArea::ClearSearchLists();
+	
+	float cost = cost_func(nb_area, nullptr, nullptr, nullptr, -1.0f);
+	if (cost < 0.0f) {
+		return false;
+	}
+	nb_area->SetTotalCost(cost);
+	nb_area->AddToOpenList();
+	
+	// TODO: v68 = 0
+	
+	CNavArea *area;
+	while ((area = CNavArea::PopOpenList) != nullptr) {
+		area->Mark();
+		
+		if (area->IsBlocked(nb_teamnum)) {
+			continue;
+		}
+		
+		// uhhhhh... why are we trying to assign to this+0x4570???
+		
+		// TODO
+	}
+	
 	// TODO
 }
 
@@ -482,8 +516,10 @@ void Path::AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea
 	// TODO
 }
 
-bool Path::BuildTrivialPath(INextBot *nextbot, const Vector& v1)
+bool Path::BuildTrivialPath(INextBot *nextbot, const Vector& dest)
 {
+	
+	
 	// TODO
 }
 

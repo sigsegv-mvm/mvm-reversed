@@ -59,6 +59,7 @@ public:
 		//    00 Vector vector_0 (used for endPos in VertArrow call in Path::Draw)
 		//    0c Vector vector_c (used for startPos in VertArrow call in Path::Draw)
 		//    ...?
+		// AHA: this might be a struct Ray (see nav.h), or a struct Extent
 		
 		SegmentType m_Type;  // +0x18
 		
@@ -120,11 +121,11 @@ public:
 	
 	virtual void Copy(INextBot *nextbot, const Path& that);
 	
-	virtual bool ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost, const IPathOpenGoalSelector& sel, float f1);
+	virtual bool ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost_func, const IPathOpenGoalSelector& sel, float f1);
 	virtual void ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area, const Vector& from, const CNavArea *to, NavDirType dir, Vector *out) const;
 	
 	void AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area);
-	bool BuildTrivialPath(INextBot *nextbot, const Vector& v1);
+	bool BuildTrivialPath(INextBot *nextbot, const Vector& dest);
 	int FindNextOccludedNode(INextBot *nextbot, int index);
 	void InsertSegment(Segment seg, int index);
 	void Optimize(INextBot *nextbot);
