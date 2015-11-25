@@ -1,7 +1,3 @@
-// CPopulationManager (CPointEntity)
-// CPointPopulatorInterface (CPointEntity)
-// CPopulatorInternalSpawnPoint (CPointEntity)
-
 // IBotController (base, ?)
 // IBotManager (base, ?)
 
@@ -40,56 +36,18 @@ copy over the in-progress bot spy detection code
 (make separate dirs for the 20130214 version and the current version)
 
 create skeletons for classes:
-CUpgrades
-CMannVsMachineStats
-CMannVsMachineUpgradeManager
-CMannVsMachineUpgrades
-CTFObjectiveResource (partial)
-CTFGameRules (partial)
-CTFPlayer (partial)
-CTFBot
-CTFBotHint
-CTFBotHintEngineerNest
-CTFBotHintSentryGun
-CTFBotHintTeleporterExit
-CTFBotRoster
-CTFBotManager
-CTFBaseBoss
-CTFTankBoss
-CTFMannVsMachineLogic
-CTFPowerupBottle
 tf_revive
-
-
-make skeleton for all NextBot AI behaviors/actions
+bomb hatch
+upgrade station
 
 
 also RE all the nb_, tf_bot_, bot_ cvars
-
-CSpawnLocation
-non-virtual
-::ctor
-::Parse
-::SelectSpawnArea
-::FindSpawnLocation
-00 enum
-   1 = Ahead
-   2 = Behind
-   3 = Anywhere
-04 CUtlVector<CHandle<CBaseEntity>>
-
-MAKE SURE THAT CUtlVector includes:
-- m_pElements @ 0x10
-- sizeof == 0x14
-
-LOOK AT https://github.com/SteamDatabase/GameTracking/blob/master/BuildbotPaths/tf/server.txt
-for pretty much ALL of the relevant source code file paths
-
-classes that are in osx server.dylib but not in linux server_srv.so:
-- CAmmoFilter
 
 make a GIGANTIC awesome flowgraph, basically a finite state machine diagram
 - nodes are the actions
 - edges are CHANGE_TO, SUSPEND_FOR, DONE (hrm, that may be hard...)
 
 for each CTFBot action, document whether it is ever used in MvM mode
+
+change enum QueryResponse to existing three-state enum (ThreeState_t) in basetypes.h
+convert all scoped enums into unscoped (C style) enums
