@@ -172,6 +172,10 @@ private:
 	// 0x24c4: CTFPlayer: CEconItemView
 	// 0x26ec: CTFPlayer: CTFPlayerClass
 	
+	// 0x2834: CTFPlayer: byte  true for mission-populator-spawned bots
+	// (causes no money to drop, and determines when decrementing the wave class count whether flag 1 or 4 should be set)
+	// 0x284c: CTFPlayer: dword
+	
 	// 0x2a3c: NextBotPlayer<CTFPlayer>: CountdownTimer
 	// 0x2a54: NextBotPlayer<CTFPlayer>: CountdownTimer
 	// 0x2a60: NextBotPlayer<CTFPlayer>: CountdownTimer
@@ -199,6 +203,8 @@ private:
 	
 	float m_flScale; // +0x2bf4
 	
+	// 0x2bf8: CTFBot: m_nMission
+	
 	// 0x2c04: CTFBot: CUtlString
 	
 	// TODO: 0x2c54
@@ -210,7 +216,7 @@ private:
 	// TODO: 0x2c7c
 	// TODO: 0x2c80
 	// TODO: 0x2c84
-	CUtlVector<EventChangeAttributes_t> m_ECAttrs; // +0x2c88
+	CUtlVector<const EventChangeAttributes_t *> m_ECAttrs; // +0x2c88 (maybe autopurge)
 	// TODO: 0x2c9c
 	
 	// 0x2c1c: CTFBot: CountdownTimer
