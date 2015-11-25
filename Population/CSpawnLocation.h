@@ -4,6 +4,14 @@
  */
 
 
+enum SpawnResult
+{
+	SPAWN_FAIL     = 0,
+	SPAWN_NORMAL   = 1,
+	SPAWN_TELEPORT = 2,
+};
+
+
 class CSpawnLocation
 {
 public:
@@ -19,9 +27,13 @@ public:
 	
 	bool Parse(KeyValues *kv);
 	CTFNavArea *SelectSpawnArea();
-	bool FindSpawnLocation(Vector& vec);
+	SpawnResult FindSpawnLocation(Vector& vec);
 	
 private:
 	Where m_iWhere;                            // +0x00
 	CUtlVector<CHandle<CBaseEntity>> m_Spawns; // +0x04
 };
+
+
+SpawnResult DoTeleporterOverride(CBaseEntity *ent, Vector& vec);
+void OnBotTelported(CTFBot *bot);
