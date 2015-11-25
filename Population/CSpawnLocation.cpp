@@ -15,12 +15,12 @@ bool CSpawnLocation::Parse(KeyValues *kv)
 	// TODO
 }
 
-CTFNavArea *CSpawnLocation::SelectSpawnArea()
+SpawnResult CSpawnLocation::FindSpawnLocation(Vector& vec)
 {
 	// TODO
 }
 
-SpawnResult CSpawnLocation::FindSpawnLocation(Vector& vec)
+CTFNavArea *CSpawnLocation::SelectSpawnArea()
 {
 	// TODO
 }

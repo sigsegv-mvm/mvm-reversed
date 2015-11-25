@@ -18,8 +18,8 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
+private:
 	CObjectSentrygun *SelectSentryTarget(CTFBot *actor);
 	
-private:
 	// TODO
 };

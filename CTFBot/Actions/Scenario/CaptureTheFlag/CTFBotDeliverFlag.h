@@ -24,8 +24,8 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
+private:
 	bool UpgradeOverTime(CTFBot *actor);
 	
-private:
 	// TODO
 };

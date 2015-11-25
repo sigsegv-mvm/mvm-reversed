@@ -27,8 +27,8 @@ public:
 	
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
+private:
 	UNKNOWN FindHidingSpot(CTFBot *actor);
 	
-private:
 	// TODO
 };

@@ -20,20 +20,26 @@ public:
 	};
 	
 	void CollectMembers(CUtlVector<CTFBot *> *) const;
-	void DisbandAndDeleteSquad();
+	
 	Iterator GetFirstMember() const;
-	CTFBot *GetLeader() const;
-	float GetMaxSquadFormationError() const;
-	int GetMemberCount() const;
 	Iterator GetNextMember(CTFBotSquad::Iterator const&) const;
-	float GetSlowestMemberIdealSpeed(bool) const;
-	float GetSlowestMemberSpeed(bool) const;
-	bool IsInFormation() const;
+	
+	int GetMemberCount() const;
+	CTFBot *GetLeader() const;
+	
 	void Join(CTFBot *);
 	void Leave(CTFBot *);
+	
+	float GetMaxSquadFormationError() const;
+	float GetSlowestMemberIdealSpeed(bool) const;
+	float GetSlowestMemberSpeed(bool) const;
+	
+	bool IsInFormation() const;
 	bool ShouldSquadLeaderWaitForFormation() const;
 	
 private:
+	void DisbandAndDeleteSquad();
+	
 	CUtlVector<CHandle<CTFBot>> m_Members; // +0x04
 	CHandle<CTFBot> m_hLeader;             // +0x18
 	float m_flFormationSize;               // +0x1c

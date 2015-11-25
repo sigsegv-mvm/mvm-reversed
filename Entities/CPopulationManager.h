@@ -37,23 +37,16 @@ public:
 	virtual void Reset();
 	virtual bool Initialize();
 	
-	void AddPlayerCurrencySpent(CTFPlayer *player, int amount);
 	void AddRespecToPlayer(CTFPlayer *player);
+	void AddPlayerCurrencySpent(CTFPlayer *player, int amount);
 	void AdjustMinPlayerSpawnTime();
-	void AllocateBots();
 	void ClearCheckpoint();
 	int CollectMvMBots(CUtlVector<CTFPlayer *> *bots);
 	void CycleMission();
 	void DebugWaveStats();
 	void EndlessFlagHasReset();
-	void EndlessParseBotUpgrades();
-	void EndlessRollEscalation();
 	void EndlessSetAttributesForBot(CTFBot *bot);
 	bool EndlessShouldResetFlag();
-	UNKNOWN FindCheckpointSnapshot(CSteamID steamid) const; // probably returns CheckpointSnapshotInfo *
-	UNKNOWN FindCheckpointSnapshot(CTFPlayer *player) const; // probably returns CheckpointSnapshotInfo *
-	PlayerUpgradeHistory *FindOrAddPlayerUpgradeHistory(CSteamID steamid);
-	PlayerUpgradeHistory *FindOrAddPlayerUpgradeHistory(CTFPlayer *player);
 	void ForgetOtherBottleUpgrades(CTFPlayer *player, CEconItemView *bottle, int i1);
 	UNKNOWN GetCurrentWave(); // probably returns CWave *
 	float GetDamageMultiplier();
@@ -69,37 +62,45 @@ public:
 	bool IsInEndlessWaves();
 	bool IsValidMvMMap(const char *name);
 	void JumpToWave(unsigned int i1, float f1);
-	void LoadLastKnownMission();
 	void LoadMissionCycleFile();
-	bool LoadMvMMission(KeyValues *kv);
 	void MvMVictory();
 	void OnCurrencyCollected(int i1, bool b1, bool b2);
 	void OnCurrencyPackFade();
 	void OnPlayerKilled(CTFPlayer *player);
-	bool Parse();
 	void PauseSpawning();
 	void PlayerDoneViewingLoot(const CTFPlayer *player);
-	void PostInitialize();
 	void RemovePlayerAndItemUpgradesFromHistory(CTFPlayer *player);
 	void RemoveRespecFromPlayer(CTFPlayer *player);
 	void ResetMap();
-	void ResetRespecPoints();
-	void RestoreCheckpoint();
-	void RestoreItemToCheckpointState(CTFPlayer *player, CEconItemView *item);
 	void RestorePlayerCurrency();
 	void SendUpgradesToPlayer(CTFPlayer *player);
 	void SetCheckpoint(int i1);
 	void SetNumRespecsForPlayer(CTFPlayer *player, int num);
 	void SetPopulationFilename(const char *name);
 	void SetupOnRoundStart();
-	void ShowNextWaveDescription();
 	void StartCurrentWave();
 	void UnpauseSpawning();
 	void Update();
-	void UpdateObjectiveResource();
 	void WaveEnd(bool b1);
 	
 private:
+	void AllocateBots();
+	void EndlessParseBotUpgrades();
+	void EndlessRollEscalation();
+	UNKNOWN FindCheckpointSnapshot(CSteamID steamid) const; // probably returns CheckpointSnapshotInfo *
+	UNKNOWN FindCheckpointSnapshot(CTFPlayer *player) const; // probably returns CheckpointSnapshotInfo *
+	PlayerUpgradeHistory *FindOrAddPlayerUpgradeHistory(CSteamID steamid);
+	PlayerUpgradeHistory *FindOrAddPlayerUpgradeHistory(CTFPlayer *player);
+	void LoadLastKnownMission();
+	bool LoadMvMMission(KeyValues *kv);
+	bool Parse();
+	void PostInitialize();
+	void ResetRespecPoints();
+	void RestoreCheckpoint();
+	void RestoreItemToCheckpointState(CTFPlayer *player, CEconItemView *item);
+	void ShowNextWaveDescription();
+	void UpdateObjectiveResource();
+	
 	// +0x000: vtable CBaseEntity
 	// +0x360: vtable CGameEventListener
 	
@@ -156,7 +157,7 @@ private:
 	
 	static int m_nNumConsecutiveWipes = 0;
 	static int m_checkpointWaveIndex = 0;
-	static CUtlVector<CheckpointSnapshotInfo *> m_checkpointSnapshot; // maybe autopurge
+	static CUtlVector<CheckpointSnapshotInfo *> m_checkpointSnapshot;
 };
 
 // global static s_iLastKnownMission

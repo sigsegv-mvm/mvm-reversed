@@ -23,6 +23,7 @@ public:
 	virtual CBaseEntity *GetHindrance() const;
 	virtual bool IsDiscontinuityAhead(INextBot *nextbot, SegmentType stype, float f1) const;
 	
+private:
 	void AdjustSpeed(INextBot *nextbot);
 	Vector Avoid(INextBot *nextbot, const Vector& v1, const Vector& v2, const Vector& v3);
 	bool CheckProgress(INextBot *nextbot);
@@ -32,7 +33,7 @@ public:
 	bool JumpOverGaps(INextBOt *nextbot, const Segment *seg, const Vector& v1, const Vector& v2, float f1);
 	bool LadderUpdate(INextBot *nextbot);
 	
-protected:
+	// TODO: do any of these need to be protected, i.e. accessed by ChasePath?
 	// 4450 
 	// ...
 	// 4754 dword 0, Segment* returned by GetCurrentGoal

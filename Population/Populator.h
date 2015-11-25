@@ -78,10 +78,10 @@ public:
 	virtual void Update() override;
 	virtual void UnpauseSpawning() override;
 	
+private:
 	bool UpdateMission(CTFBot::MissionType mtype);
 	bool UpdateMissionDestroySentries();
 	
-private:
 	CTFBot::MissionType m_Objective; // +0x0c
 	CSpawnLocation m_Where;          // +0x10
 	State m_iState;                  // +0x28
@@ -153,7 +153,7 @@ private:
 	// +0x4bc 
 	bool m_bSupport;                           // +0x4c0
 	bool m_bSupportLimited;                    // +0x4c1
-	// +0x4c4 dword/float 0
+	CWave *m_Wave;                             // +0x4c4
 	InternalStateType m_iState;                // +0x4c8
 	bool m_bRandomSpawn;                       // +0x4cc
 	// +0x4d0 dword/float 0
@@ -171,28 +171,29 @@ public:
 	virtual void OnPlayerKilled(CTFPlayer *player) override;
 	virtual bool HasEventChangeAttributes(const char *name) const override;
 	
-	bool IsDoneWithNonSupportWaves();
 	void ForceFinish();
 	void ForceReset();
-	
-	void ActiveWaveUpdate();
-	void WaveCompleteUpdate();
-	void WaveIntermissionUpdate();
 	
 	CWaveSpawnPopulator *FindWaveSpawnPopulator(char const *name);
 	void AddClassType(string_t icon, int count, unsigned int flags);
 	
 private:
+	void ActiveWaveUpdate();
+	void WaveCompleteUpdate();
+	void WaveIntermissionUpdate();
+	
+	bool IsDoneWithNonSupportWaves();
+	
 	CUtlVectorAutoPurge<CWaveSpawnPopulator *> m_WaveSpawns;
 	// +0x020 byte 0
 	// +0x021 byte 0
-	// +0x024 
+	// +0x024 sum of TotalCount of non-support WaveSpawns
 	// +0x028 
 	// +0x02c 
 	// +0x030 
 	// +0x034 
 	// +0x038 CUtlVector<WaveClassCount_t> (aka int)
-	// +0x04c 
+	// +0x04c sum of TotalCurrency of WaveSpawns
 	EventInfo *m_StartWaveOutput;   // +0x050
 	EventInfo *m_DoneOutput;        // +0x054
 	EventInfo *m_InitWaveOutput;    // +0x058

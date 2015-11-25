@@ -26,10 +26,11 @@ public:
 	CSpawnLocation();
 	
 	bool Parse(KeyValues *kv);
-	CTFNavArea *SelectSpawnArea();
 	SpawnResult FindSpawnLocation(Vector& vec);
 	
 private:
+	CTFNavArea *SelectSpawnArea();
+	
 	Where m_iWhere;                            // +0x00
 	CUtlVector<CHandle<CBaseEntity>> m_Spawns; // +0x04
 };

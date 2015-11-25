@@ -31,16 +31,3 @@ protected:
 private:
 	// TODO
 };
-
-
-class NextBotManager
-{
-public:
-	// TODO
-	
-protected:
-	// TODO
-	
-private:
-	// TODO
-};

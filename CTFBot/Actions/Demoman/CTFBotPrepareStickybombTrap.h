@@ -24,9 +24,10 @@ public:
 	
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
-	void InitBombTargetAreas(CTFBot *actor);
-	bool IsPossible(CTFBot *actor);
+	static bool IsPossible(CTFBot *actor);
 	
 private:
+	void InitBombTargetAreas(CTFBot *actor);
+	
 	// TODO
 };

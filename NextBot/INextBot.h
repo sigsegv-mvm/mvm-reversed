@@ -87,3 +87,4 @@ protected:
 // TODO: for IsDebugging(): enum
 // 1   BEHAVIOR
 // 128 EVENTS
+// (see enum NextBotDebugType in NextBot.h, is this the same as that?)

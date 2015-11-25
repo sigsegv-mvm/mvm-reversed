@@ -290,7 +290,6 @@ public:
 	
 	virtual bool IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
-	
 private:
 	void StorePendingEventResult(const EventDesiredResult<T>& result, const char *event);
 	Action<T> *ApplyResult(T *actor, Behavior<T> *behavior, ActionResult<T> result);

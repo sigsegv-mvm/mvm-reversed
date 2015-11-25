@@ -33,6 +33,7 @@ public:
 	virtual QueryResponse IsPositionAllowed(const INextBot *nextbot, const Vector& v1) const override;
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
+private:
 	void Dodge(CTFBot *actor);
 	void FireWeaponAtEnemy(CTFBot *actor);
 	UNKNOWN GetHealerOfThreat(const CKnownEntity *known) const;
@@ -40,6 +41,5 @@ public:
 	const CKnownEntity *SelectCloserThreat(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2) const;
 	const CKnownEntity *SelectMoreDangerousThreatInternal(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const;
 	
-private:
 	// TODO
 };

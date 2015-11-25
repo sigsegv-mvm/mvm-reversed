@@ -31,6 +31,7 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	virtual QueryResponse IsHindrance(const INextBot *nextbot, CBaseEntity *it) const override;
 	
+private:
 	UNKNOWN ComputeFollowPosition(CTFBot *actor);
 	bool IsGoodUberTarget(CTFPlayer *player) const;
 	bool IsReadyToDeployUber(const CWeaponMedigun *medigun) const;
@@ -38,6 +39,5 @@ public:
 	bool IsVisibleToEnemy(CTFBot *actor, const Vector& v1) const;
 	UNKNOWN SelectPatient(CTFBot *actor, CTFPlayer *player);
 	
-private:
 	// TODO
 };

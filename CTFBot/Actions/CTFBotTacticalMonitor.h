@@ -25,11 +25,11 @@ public:
 	
 	virtual EventDesiredResult<CTFBot> OnCommandString(CTFBot *actor, const char *cmd) override;
 	
+private:
 	void AvoidBumpingEnemies(CTFBot *actor);
 	UNKNOWN FindNearbyTeleporter(CTFBot *actor);
 	void MonitorArmedStickybombs(CTFBot *actor);
 	bool ShouldOpportunisticallyTeleport(CTFBot *actor) const;
 	
-private:
 	// TODO
 };

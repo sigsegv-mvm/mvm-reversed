@@ -53,9 +53,9 @@ public:
 	virtual bool IsLookingAt(const Vector& v1, float cos_half_fov) const;
 	virtual bool IsLookingAt(const CBaseCombatCharacter *who, float cos_half_fov) const;
 	
+protected:
 	void UpdateKnownEntities();
 	
-protected:
 	CountdownTimer m_Timer1;                  // +0x14
 	float m_flFOV;                            // +0x20
 	float m_flCosHalfFOV;                     // +0x24

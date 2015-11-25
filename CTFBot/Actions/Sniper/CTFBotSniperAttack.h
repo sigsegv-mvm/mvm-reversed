@@ -24,9 +24,10 @@ public:
 	virtual Vector SelectTargetPoint(const INextBot *nextbot, const CBaseCombatCharacter *them) const override;
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
-	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const;
-	bool IsPossible(CTFBot *actor);
+	static bool IsPossible(CTFBot *actor);
 	
 private:
+	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const;
+	
 	// TODO
 };

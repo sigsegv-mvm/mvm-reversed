@@ -25,9 +25,9 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
+private:
 	UNKNOWN FindHint(CTFBot *actor);
 	UNKNOWN FindNewHome(CTFBot *actor);
 	
-private:
 	// TODO
 };

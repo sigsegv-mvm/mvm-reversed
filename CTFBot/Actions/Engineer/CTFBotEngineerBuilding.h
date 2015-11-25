@@ -23,10 +23,10 @@ public:
 	virtual EventDesiredResult<CTFBot> OnTerritoryCaptured(CTFBot *actor, int i1) override;
 	virtual EventDesiredResult<CTFBot> OnTerritoryLost(CTFBot *actor, int i1) override;
 	
+private:
 	bool CheckIfSentryIsOutOfPosition(CTFBot *actor) const;
 	bool IsMetalSourceNearby(CTFBot *actor) const;
 	void UpgradeAndMaintainBuildings(CTFBot *actor);
 	
-private:
 	// TODO
 };

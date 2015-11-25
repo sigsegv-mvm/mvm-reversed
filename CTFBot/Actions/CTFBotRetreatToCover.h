@@ -25,8 +25,8 @@ public:
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	
+private:
 	UNKNOWN FindCoverArea(CTFBot *actor);
 	
-private:
 	// TODO
 };
