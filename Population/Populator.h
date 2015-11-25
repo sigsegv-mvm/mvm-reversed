@@ -4,6 +4,9 @@
  */
 
 
+typedef int WaveClassCount_t;
+
+
 class IPopulator
 {
 public:
@@ -61,6 +64,13 @@ private:
 class CMissionPopulator : public IPopulator
 {
 public:
+	enum class State : int
+	{
+		NOT_STARTED = 0, // mission not running yet
+		INITIAL     = 1, // waiting for the initial cooldown period
+		RUNNING     = 2, // running normally
+	};
+	
 	CMissionPopulator(CPopulationManager *popmgr);
 	virtual ~CMissionPopulator();
 	
@@ -74,11 +84,11 @@ public:
 private:
 	CTFBot::MissionType m_Objective; // +0x0c
 	CSpawnLocation m_Where;          // +0x10
-	// +0x28 dword 0
+	State m_iState;                  // +0x28
 	float m_flInitialCooldown;       // +0x2c
 	float m_flCooldownTime;          // +0x30
-	CountdownTimer m_Timer1;         // +0x34
-	CountdownTimer m_Timer2;         // +0x40
+	CountdownTimer m_ctTimer1;       // +0x34 (used for initial cooldown and subsequent cooldowns for non-busters)
+	CountdownTimer m_ctTimer2;       // +0x40 (used for subsequent cooldowns for busters)
 	int m_iDesiredCount;             // +0x4c
 	int m_iBeginAtWave;              // +0x50
 	int m_iEndBeforeThisWave;        // +0x54
@@ -88,11 +98,6 @@ private:
 class CWaveSpawnPopulator : public IPopulator
 {
 public:
-	enum InternalStateType
-	{
-		// TODO
-	};
-	
 	CWaveSpawnPopulator(CPopulationManager *popmgr);
 	virtual ~CWaveSpawnPopulator();
 	
@@ -104,48 +109,53 @@ public:
 	void OnNonSupportWavesDone();
 	void ForceFinish();
 	
-	void SetState(CWaveSpawnPopulator::InternalStateType newstate);
-	
 	int GetCurrencyAmountPerDeath();
 	
 private:
-	//static int m_reservedPlayerSlotCount = ???;
+	enum InternalStateType : int
+	{
+		INITIAL           = 0,
+		PRE_SPAWN_DELAY   = 1,
+		SPAWNING          = 2,
+		WAIT_FOR_ALL_DEAD = 3,
+		DONE              = 4,
+	};
 	
-	// +0x00c CSpawnLocation
-	// +0x024 TotalCount dword 0
-	// +0x028 
+	void SetState(InternalStateType newstate);
+	
+	static int m_reservedPlayerSlotCount = 0;
+	
+	CSpawnLocation m_Where;                    // +0x00c
+	int m_iTotalCount;                         // +0x024
+	int m_iCountNotYetSpawned;                 // +0x028
 	// +0x02c 
-	// +0x030 MaxActive dword decimal 999
-	// +0x034 SpawnCount dword 1
-	// +0x038 WaitBeforeStarting float 0
-	// +0x03c float 0
-	// +0x040 byte 0
-	// +0x044 StartWaveWarningSound CFmtStrN<256>
-	// +0x150 StartWaveOutput EventInfo *
-	// +0x154 FirstSpawnWarningSound CFmtStrN<256>
-	// +0x260 FirstSpawnOutput EventInfo *
-	// +0x264 LastSpawnWarningSound CFmtStrN<256>
-	// +0x370 LastSpawnOutput EventInfo *
-	// +0x374 DoneWarningSound CFmtStrN<256>
-	// +0x480 DoneOutput EventInfo *
-	// +0x484 TotalCurrency dword
-	// +0x488 
-	// +0x48c Name CUtlString
-	// +0x490 WaitForAllSpawned CUtlString
+	int m_iMaxActive;                          // +0x030
+	int m_iSpawnCount;                         // +0x034
+	float m_flWaitBeforeStarting;              // +0x038
+	float m_flWaitBetweenSpawns;               // +0x03c
+	bool m_bWaitBetweenSpawnsAfterDeath;       // +0x040
+	CFmtStrN<256> m_strStartWaveWarningSound;  // +0x044
+	EventInfo *m_StartWaveOutput;              // +0x150
+	CFmtStrN<256> m_strFirstSpawnWarningSound; // +0x154
+	EventInfo *m_FirstSpawnOutput;             // +0x260
+	CFmtStrN<256> m_strLastSpawnWarningSound;  // +0x264
+	EventInfo *m_LastSpawnOutput;              // +0x370
+	CFmtStrN<256> m_strDoneWarningSound;       // +0x374
+	EventInfo *m_DoneOutput;                   // +0x480
+	int m_iTotalCurrency;                      // +0x484
+	int m_iCurrencyLeft;                       // +0x488
+	CUtlString m_strName;                      // +0x48c
+	CUtlString m_strWaitForAllSpawned;         // +0x490
 	// +0x494 dword/float 0
-	// +0x498 CountdownTimer
-	// +0x4a4 dword/float 0
-	// +0x4a8 dword/float 0
-	// +0x4ac dword/float 0
-	// +0x4b0 dword/float 0
-	// +0x4b4 dword/float 0
-	// +0x4b8 
+	CountdownTimer m_ctPreSpawnDelay;          // +0x498
+	CUtlVector<CHandle<CBaseEntity>> m_ActiveBots; // +0x4a4
+	// +0x4b8 dword (number spawned so far)
 	// +0x4bc 
-	// +0x4c0 Support bool
-	// +0x4c1 SupportLimited bool
+	bool m_bSupport;                           // +0x4c0
+	bool m_bSupportLimited;                    // +0x4c1
 	// +0x4c4 dword/float 0
-	// +0x4c8 
-	// +0x4cc RandomSpawn bool
+	InternalStateType m_iState;                // +0x4c8
+	bool m_bRandomSpawn;                       // +0x4cc
 	// +0x4d0 dword/float 0
 };
 
@@ -183,12 +193,12 @@ private:
 	// +0x034 
 	// +0x038 CUtlVector<WaveClassCount_t> (aka int)
 	// +0x04c 
-	// +0x050 StartWaveOutput EventInfo *
-	// +0x054 DoneOutput EventInfo *
-	// +0x058 InitWaveOutput EventInfo *
-	// +0x05c Description CFmtStr<256>
-	// +0x168 Sound CFmtStr<256>
-	// +0x274 WaitWhenDone float
+	EventInfo *m_StartWaveOutput;   // +0x050
+	EventInfo *m_DoneOutput;        // +0x054
+	EventInfo *m_InitWaveOutput;    // +0x058
+	CFmtStrN<256> m_strDescription; // +0x05c
+	CFmtStrN<256> m_strSound;       // +0x168
+	float m_flWaitWhenDone;         // +0x274
 	// +0x278 CountdownTimer
 	// +0x284 byte 1
 	// +0x288 

@@ -122,8 +122,8 @@ private:
 	// 59f?
 	int m_iSentryBusterThresholdDamage;    // +0x5a0
 	int m_iSentryBusterThresholdKills;     // +0x5a4
-	// 5a8 current wave index, probably
-	CUtlVector<CWave *> m_Waves; // +0x5ac
+	int m_iCurrentWave;                    // +0x5a8
+	CUtlVector<CWave *> m_Waves;           // +0x5ac
 	// 5c0 
 	CUtlVector<PlayerUpgradeHistory *> m_UpgradeHistory; // +0x5c4
 	// 5d8 bool

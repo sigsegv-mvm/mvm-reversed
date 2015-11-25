@@ -12,17 +12,19 @@ EventInfo *ParseEvent(KeyValues *kv)
 	
 	FOR_EACH_SUBKEY(kv, subkey) {
 		const char *name = subkey->GetName();
-		if (strlen(name) > 0) {
-			if (V_stricmp(name, "Target") == 0) {
-				info->target.sprintf(subkey->GetString(nullptr));
-			} else if (V_stricmp(name, "Action") == 0) {
-				info->action.sprintf(subkey->GetString(nullptr));
-			} else {
-				Warning("Unknown field '%s' in WaveSpawn event definition.\n",
-					subkey->GetString(nullptr));
-				delete info;
-				return nullptr;
-			}
+		if (strlen(name) <= 0) {
+			continue;
+		}
+		
+		if (V_stricmp(name, "Target") == 0) {
+			info->target.sprintf(subkey->GetString());
+		} else if (V_stricmp(name, "Action") == 0) {
+			info->action.sprintf(subkey->GetString());
+		} else {
+			Warning("Unknown field '%s' in WaveSpawn event definition.\n",
+				subkey->GetString());
+			delete info;
+			return nullptr;
 		}
 	}
 	
