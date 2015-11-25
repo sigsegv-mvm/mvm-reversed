@@ -143,15 +143,3 @@ class CZombieLocomotion : public NextBotGroundLocomotion
 {
 	// TODO
 };
-
-
-class PlayerLocomotion : public ILocomotion
-{
-	// TODO
-};
-
-// sizeof: 0xa4
-class CTFBotLocomotion : public PlayerLocomotion
-{
-	// TODO
-};

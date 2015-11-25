@@ -99,15 +99,3 @@ class CEyeballBossBody : public CBotNPCBody
 {
 	// TODO
 };
-
-
-class PlayerBody : public IBody
-{
-	// TODO
-};
-
-// sizeof: 0xc8
-class CTFBotBody : public PlayerBody
-{
-	// TODO
-};

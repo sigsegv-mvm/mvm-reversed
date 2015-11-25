@@ -72,13 +72,6 @@ class CSimpleBot::CSimpleBotIntention : public IIntention
 };
 
 
-// sizeof: 0x1c
-class CTFBot::CTFBotIntention : public IIntention
-{
-	// TODO
-};
-
-
 class CZombieIntention : public IIntention
 {
 	// TODO

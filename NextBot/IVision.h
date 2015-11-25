@@ -70,10 +70,3 @@ class CDisableVision : public IVision
 {
 	// TODO
 };
-
-
-// sizeof: 0xf0
-class CTFBotVision : public IVision
-{
-	// TODO
-};
