@@ -84,7 +84,7 @@ public:
 	bool IsPvEModeControlled(CBaseEntity *ent)
 	{
 		return (ent != nullptr && this->m_bPlayingMannVsMachine &&
-			ent->GetTeamNumber() == TF_TEAM_BLU);
+			ent->GetTeamNumber() == TF_TEAM_BLUE);
 	}
 	// TODO
 	

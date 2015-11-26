@@ -39,7 +39,7 @@ SpawnResult DoTeleporterOverride(CBaseEntity *ent, Vector& vec)
 		
 		// TODO: not sure if this is really the right enum name for object type
 		if (obj->GetType() == OBJ_TELEPORTER &&
-			obj->GetTeamNumber() == TF_TEAM_BLU &&
+			obj->GetTeamNumber() == TF_TEAM_BLUE &&
 			!obj->IsBuilding() && !obj->HasSapper()) {
 			const char *ent_name = STRING(obj->GetEntityName());
 			

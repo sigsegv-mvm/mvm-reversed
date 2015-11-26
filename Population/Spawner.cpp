@@ -339,7 +339,7 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 	sentry->SetAbsOrigin(where);
 	sentry->SetAbsAngles(vec3_angle);
 	sentry->Spawn();
-	sentry->ChangeTeam(TF_TEAM_BLU);
+	sentry->ChangeTeam(TF_TEAM_BLUE);
 	
 	/* undocumented: CBaseObject+0x9e4 */
 	sentry->m_iUpgradeLevelDesired = this->m_iLevel + 1;
@@ -483,7 +483,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		bot->SetSpawnPoint(g_internalSpawnPoint);
 		
 		bot->ChangeTeam((TFGameRules()->IsMannVsMachineMode() ?
-			TF_TEAM_BLU : TF_TEAM_RED), false, true);
+			TF_TEAM_BLUE : TF_TEAM_RED), false, true);
 		
 		// TODO bot offset 0x9c0 byte = 0
 		
@@ -538,7 +538,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		if (this->m_iClass == TF_CLASS_SPY) {
 			CUtlVector<CTFPlayer *> blu_players;
-			CollectPlayers<CTFPlayer>(&blu_players, TF_TEAM_BLU, true, false);
+			CollectPlayers<CTFPlayer>(&blu_players, TF_TEAM_BLUE, true, false);
 			
 			int num_spies = 0;
 			FOR_EACH_VEC(blu_players, i) {
@@ -575,7 +575,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		bot->StartIdleSound();
 		
 		if (TFGameRules()->IsMannVsMachineMode() &&
-			bot->GetTeamNumber() == TF_TEAM_BLU) {
+			bot->GetTeamNumber() == TF_TEAM_BLUE) {
 			// TODO: determine for sure what is at CMissionPopulator+0x30
 			// before we finish this block
 			// (romevision stuff)

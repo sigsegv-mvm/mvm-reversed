@@ -438,7 +438,7 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 	VPROF_BUDGET("CMissionPopulator::UpdateMission", "NextBot");
 	
 	Vector<CTFPlayer *> blu_players;
-	CollectPlayers<CTFPlayer>(&players, TF_TEAM_BLU, true);
+	CollectPlayers<CTFPlayer>(&players, TF_TEAM_BLUE, true);
 	
 	int num_existing_bots_with_same_mission = 0;
 	FOR_EACH_VEC(blu_players, i) {
@@ -463,7 +463,7 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 		return false;
 	}
 	
-	if (GetGlobalTeam(TF_TEAM_BLU)->GetNumPlayers() > 22) {
+	if (GetGlobalTeam(TF_TEAM_BLUE)->GetNumPlayers() > 22) {
 		if (tf_populator_debug.GetBool()) {
 			DevMsg("MANN VS MACHINE: %3.2f: Waiting for slots to spawn mission.\n",
 				gpGlobals->curtime);

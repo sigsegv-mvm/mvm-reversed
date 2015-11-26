@@ -51,3 +51,7 @@ for each CTFBot action, document whether it is ever used in MvM mode
 
 change enum QueryResponse to existing three-state enum (ThreeState_t) in basetypes.h
 convert all scoped enums into unscoped (C style) enums
+
+find/replace:
+- TF_TEAM_RED  -> TF_TEAM_PVE_DEFENDERS
+- TF_TEAM_BLUE -> TF_TEAM_PVE_INVADERS
