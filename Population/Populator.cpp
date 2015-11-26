@@ -253,10 +253,85 @@ bool CWaveSpawnPopulator::Parse(KeyValues *kv)
 
 bool CWave::Parse(KeyValues *kv)
 {
-	// TODO
 	
-	// this is the function responsible for adding up class types
-	// (it should be using a recursive algorithm but isn't)
+	FOR_EACH_SUBKEY(kv, subkey) {
+		/* this is crustier then the other parsers:
+		 * keeps calling subkey->GetName() instead of storing it in a local;
+		 * also doesn't do a strlen check on the name */
+		
+		if (V_stricmp(subkey->GetName(), "WaveSpawn") == 0) {
+			CWaveSpawnPopulator *wavespawn =
+				new CWaveSpawnPopulator(this->m_PopMgr);
+			if (!wavespawn->Parse(subkey)) {
+				Warning("Error reading WaveSpawn definition\n");
+				return false;
+			}
+			this->m_WaveSpawns.AddToTail(wavespawn);
+			
+			if (!wavespawn->m_bSupport) {
+				this->m_iTotalCountNonSupport += wavespawn->m_iTotalCount;
+			}
+			this->m_iTotalCurrency += wavespawn->m_iTotalCurrency;
+			
+			wavespawn->m_Wave = this;
+			
+			IPopulationSpawner *spawner = wavespawn->m_Spawner;
+			if (spawner != nullptr) {
+				if (spawner->IsVarious()) {
+					for (int i = 0; i < wavespawn->m_iTotalCount; ++i) {
+						unsigned int flags = (wavespawn->m_bSupport ?
+							CLASSFLAG_SUPPORT : CLASSFLAG_NORMAL);
+						if (wavespawn->m_Spawner->IsMiniBoss()) {
+							flags |= CLASSFLAG_MINIBOSS;
+						}
+						if (wavespawn->m_Spawner->HasAttribute(CTFBot::AttributeType::ALWAYSCRIT, i)) {
+							flags |= CLASSFLAG_CRITICAL;
+						}
+						if (wavespawn->m_bSupportLimited) {
+							flags |= CLASSFLAG_SUPPORT_LIMITED;
+						}
+						
+						this->AddClassType(wavespawn->m_Spawner->GetClassIcon(i),
+							1, flags);
+					}
+				} else {
+					unsigned int flags = (wavespawn->m_bSupport ?
+						CLASSFLAG_SUPPORT : CLASSFLAG_NORMAL);
+					if (wavespawn->m_Spawner->IsMiniBoss()) {
+						flags |= CLASSFLAG_MINIBOSS;
+					}
+					if (wavespawn->m_Spawner->HasAttribute(CTFBot::AttributeType::ALWAYSCRIT, -1)) {
+						flags |= CLASSFLAG_CRITICAL;
+					}
+					if (wavespawn->m_bSupportLimited) {
+						flags |= CLASSFLAG_SUPPORT_LIMITED;
+					}
+					
+					this->AddClassType(wavespawn->m_Spawner->GetClassIcon(-1),
+						wavespawn->m_iTotalCount, flags);
+				}
+			}
+		} else if (V_stricmp(subkey->GetName(), "Sound") == 0) {
+			this->m_strSound.sprintf("%s", subkey->GetString());
+		} else if (V_stricmp(subkey->GetName(), "Description") == 0) {
+			this->m_strDescription.sprintf("%s", subkey->GetString());
+		} else if (V_stricmp(subkey->GetName(), "WaitWhenDone") == 0) {
+			this->m_flWaitWhenDone = subkey->GetFloat();
+		} else if (V_stricmp(subkey->GetName(), "Checkpoint") == 0) {
+			/* doesn't do anything! */
+		} else if (V_stricmp(subkey->GetName(), "StartWaveOutput") == 0) {
+			this->m_StartWaveOutput = ParseEvent(subkey);
+		} else if (V_stricmp(subkey->GetName(), "DoneOutput") == 0) {
+			this->m_DoneOutput = ParseEvent(subkey);
+		} else if (V_stricmp(subkey->GetName(), "InitWaveOutput") == 0) {
+			this->m_InitWaveOutput = ParseEvent(subkey);
+		} else {
+			Warning("Unknown attribute '%s' in Wave definition.\n",
+				subkey->GetName());
+		}
+	}
+	
+	return true;
 }
 
 
@@ -341,22 +416,28 @@ void CWaveSpawnPopulator::Update()
 	switch (this->m_iState) {
 		
 	case InternalStateType::INITIAL:
-		this->m_ctPreSpawnDelay.Start(this->m_flWaitBeforeStarting);
+		this->m_ctSpawnDelay.Start(this->m_flWaitBeforeStarting);
 		this->m_reservedPlayerSlotCount = 0;
 		this->SetState(InternalStateType::PRE_SPAWN_DELAY);
 		return;
 		
 	case InternalStateType::PRE_SPAWN_DELAY:
-		if (this->m_ctPreSpawnDelay.IsElapsed()) {
-			// TODO: field_4b8 = 0
-			// TODO: field_4bc = 0
+		if (this->m_ctSpawnDelay.IsElapsed()) {
+			this->m_iCountSpawned = 0;
+			this->m_iCountToSpawn = 0;
 			this->SetState(InternalStateType::SPAWNING);
 		}
 		return;
 		
 	case InternalStateType::SPAWNING:
-		if (!this->m_ctPreSpawnDelay.IsElapsed() ||
+		if (!this->m_ctSpawnDelay.IsElapsed() ||
 			g_pPopulationManager->m_bIsPaused) {
+			return;
+		}
+		
+		if (this->m_Spawner == nullptr) {
+			Warning("Invalid spawner\n");
+			this->SetState(InternalStateType::DONE);
 			return;
 		}
 		
@@ -368,7 +449,133 @@ void CWaveSpawnPopulator::Update()
 			}
 		}
 		
-		// TODO
+		if (this->m_bWaitBetweenSpawnsAfterDeath) {
+			if (num_active != 0) {
+				return;
+			}
+			
+			if (this->m_iSpawnResult != SPAWN_FAIL) {
+				this->m_iSpawnResult = SPAWN_FAIL;
+				
+				float wait_between_spawns = this->m_flWaitBetweenSpawns;
+				if (wait_between_spawns != 0.0f) {
+					this->m_ctSpawnDelay.Set(wait_between_spawns);
+				}
+				
+				return;
+			}
+		}
+		
+		int max_active = this->m_iMaxActive;
+		if (num_active >= max_active) {
+			return;
+		}
+		
+		if (this->m_iCountToSpawn <= 0) {
+			if (num_active + this->m_iSpawnCount > max_active) {
+				return;
+			}
+			
+			int spawn_count = this->m_iSpawnCount;
+			if (CWaveSpawnPopulator::m_reservedPlayerSlotCount + spawn_count +
+				GetGlobalTeam(TF_TEAM_BLUE)->GetNumPlayers() > 22) {
+				return;
+			}
+			
+			this->m_iCountToSpawn = spawn_count;
+			CWaveSpawnPopulator::m_reservedPlayerSlotCount += spawn_count;
+		}
+		
+		Vector vec_spawn = vec3_origin;
+		if (this->m_Spawner->IsWhereRequired()) {
+			if (this->m_iSpawnResult != SPAWN_NORMAL) {
+				this->m_iSpawnResult = this->m_Where->FindSpawnLocation(&this->m_vecSpawn);
+				if (this->m_iSpawnResult == SPAWN_FAIL) {
+					return;
+				}
+			}
+			
+			vec_spawn = this->m_vecSpawn;
+			if (this->m_bRandomSpawn) {
+				this->m_iSpawnResult = SPAWN_FAIL;
+			}
+		}
+		
+		CUtlVector<CHandle<CBaseEntity>> spawned;
+		if (this->m_Spawner->Spawn(&vec_spawn, &spawned) == 0) {
+			this->m_ctSpawnDelay.Set(1.0f);
+			return;
+		}
+		
+		FOR_EACH_VEC(spawned, i) {
+			CBaseEntity *ent = spawned[i]();
+			
+			CTFBot *bot = ToTFBot(ent);
+			if (bot == nullptr) {
+				CTFTankBoss *tank = dynamic_cast<CTFTankBoss *>(ent);
+				if (tank != nullptr) {
+					// TODO: set tank+0x9c4 dword to 0 (presumably this is m_nCurrency?)
+					// TODO: set tank+0xe90 CWaveSpawnPopulator* to this
+					// TODO: increment this->m_Wave->field_28
+				}
+				
+				continue;
+			}
+			
+			bot->m_nCurrency = 0;
+			// TODO: set CTFPlayer offset 0x284c of bot (CWaveSpawnPopulator*) to this
+			
+			TFObjectiveResource()->SetMannVsMachineWaveClassActive(
+				bot->GetPlayerClass()->m_iszClassIcon, true);
+			
+			if (this->m_bSupportLimited) {
+				// TODO: set CTFPlayer bool offset 0x2836 (support limited) to true
+			}
+			
+			if (this->m_iSpawnResult == SPAWN_TELEPORT) {
+				OnBotTeleported(bot);
+			}
+		}
+		
+		int num_spawned = spawned.Count();
+		this->m_iCountSpawned += num_spawned;
+		
+		int count_to_spawn = this->m_iCountToSpawn;
+		if (num_spawned > count_to_spawn) {
+			num_spawned = count_to_spawn;
+		}
+		
+		CWaveSpawnPopulator::m_reservedPlayerSlotCount -= num_spawned;
+		this->m_iCountToSpawn -= num_spawned;
+		
+		FOR_EACH_VEC(spawned, i) {
+			CBaseEntity *ent1 = spawned[i]();
+			
+			FOR_EACH_VEC(this->m_ActiveBots, j) {
+				CBaseEntity *ent2 = this->m_ActiveBots[j]();
+				if (ent2 == nullptr) {
+					continue;
+				}
+				
+				if (ENTINDEX(ent1) == ENTINDEX(ent2)) {
+					Warning("WaveSpawn duplicate entry in active vector\n");
+				}
+			}
+			
+			this->m_ActiveBots.AddToTail(ent1->GetRefEHandle());
+		}
+		
+		if (this->IsFinishedSpawning()) {
+			this->SetState(InternalStateType::WAIT_FOR_ALL_DEAD);
+		} else if (this->m_iCountToSpawn <= 0 &&
+			!this->m_bWaitBetweenSpawnsAfterDeath) {
+			this->m_iSpawnResult = SPAWN_FAIL;
+			
+			float wait_between_spawns = this->m_flWaitBetweenSpawns;
+			if (wait_between_spawns != 0.0f) {
+				this->m_ctSpawnDelay.Set(wait_between_spawns);
+			}
+		}
 		
 		return;
 		
@@ -387,7 +594,19 @@ void CWaveSpawnPopulator::Update()
 
 void CWave::Update()
 {
-	// TODO
+	VPROF_BUDGET("CWave::Update", "NextBot");
+	
+	gamerules_roundstate_t roundstate = g_pGameRules->State_Get();
+	
+	if (roundstate == GR_STATE_RND_RUNNING) {
+		this->ActiveWaveUpdate();
+	} else if (roundstate == GR_STATE_TEAM_WIN ||
+		roundstate == GR_STATE_BETWEEN_RNDS) {
+		this->WaveIntermissionUpdate();
+	}
+	
+	// TODO: stuff involving CPopulationManager
+	// and WaveCompleteUpdate
 }
 
 
@@ -418,18 +637,30 @@ void CWaveSpawnPopulator::OnPlayerKilled(CTFPlayer *player)
 
 void CWave::OnPlayerKilled(CTFPlayer *player)
 {
-	// TODO
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		this->m_WaveSpawns[i]->OnPlayerKilled(player);
+	}
 }
 
 
 bool IPopulator::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	if (this->m_Spawner == nullptr) {
+		return false;
+	}
+	
+	return this->m_Spawner->HasEventChangeAttributes(name);
 }
 
 bool CWave::HasEventChangeAttributes(const char *name) const
 {
-	// TODO
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		if (this->m_WaveSpawns[i]->HasEventChangeAttributes(name)) {
+			return true;
+		}
+	}
+	
+	return false;
 }
 
 
@@ -549,6 +780,7 @@ bool CMissionPopulator::UpdateMissionDestroySentries()
 }
 
 
+/* this is inlined in CWaveSpawnPopulator::Update */
 bool CWaveSpawnPopulator::IsFinishedSpawning()
 {
 	if (this->m_bSupport && !this->m_bSupportLimited) {
@@ -560,7 +792,16 @@ bool CWaveSpawnPopulator::IsFinishedSpawning()
 
 bool CWave::IsDoneWithNonSupportWaves()
 {
-	// TODO
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		CWaveSpawnPopulator *wavespawn = this->m_WaveSpawns[i];
+		
+		if (wavespawn != nullptr && !wavespawn->m_bSupport &&
+			wavespawn->m_iState != CWaveSpawnPopulator::InternalStateType::DONE) {
+			return false;
+		}
+	}
+	
+	return true;
 }
 
 
@@ -614,13 +855,31 @@ void CWaveSpawnPopulator::ForceFinish()
 
 void CWave::ForceFinish()
 {
-	// TODO
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		this->m_WaveSpawns[i]->ForceFinish();
+	}
 }
 
 
 void CWave::ForceReset()
 {
-	// TODO
+	// TODO: this->byte_0x020 = false
+	// TODO: this->byte_0x021 = false
+	// TODO: this->dword_0x288 = 0
+	// TODO: this->byte_0x28c = false
+	// TODO: this->dword_0x2a0 = 0
+	
+	// TODO: call Invalidate() on CountdownTimer @ 0x290
+	
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		CWaveSpawnPopulator *wavespawn = this->m_WaveSpawns[i];
+		
+		// TODO: probably put these into an assumed inline function
+		// (at least the last two, which pop up in CWaveSpawnPopulator::Parse)
+		wavespawn->m_iState = CWaveSpawnPopulator::InternalStateType::INITIAL;
+		wavespawn->m_iCurrencyLeft = wavespawn->m_iTotalCurrency;
+		wavespawn->m_iCountNotYetSpawned = wavespawn->m_iTotalCount;
+	}
 }
 
 
@@ -710,8 +969,51 @@ void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newsta
 }
 
 
+CWaveSpawnPopulator *CWave::FindWaveSpawnPopulator(const char *name)
+{
+	FOR_EACH_VEC(this->m_WaveSpawns, i) {
+		CWaveSpawnPopulator *wavespawn = this->m_WaveSpawns[i];
+		if (V_stricmp(wavespawn->m_strName(), name) == 0) {
+			return wavespawn;
+		}
+	}
+	
+	return nullptr;
+}
+
+void CWave::AddClassType(string_t icon, int count, unsigned int flags)
+{
+	WaveClassCount_t *wcc = nullptr;
+	
+	FOR_EACH_VEC(this->m_ClassCounts, i) {
+		WaveClassCount_t& wcc_i = this->m_ClassCounts[i];
+		
+		/* this is a string pointer comparison, not a content comparison */
+		if (wcc_i.icon == icon && (wcc_i.flags & flags) != 0) {
+			wcc = &wcc_i;
+			break;
+		}
+	}
+	
+	if (wcc == nullptr) {
+		WaveClassCount_t wcc_new = {
+			.count = 0,
+			.icon  = icon,
+			.flags = 0,
+		};
+		
+		wcc = &(this->m_ClassCounts.AddToTail(wcc_new));
+	}
+	
+	wcc->count += count;
+	wcc->flags |= flags;
+}
+
+
 void CWave::ActiveWaveUpdate()
 {
+	VPROF_BUDGET("CWave::ActiveWaveUpdate", "NextBot");
+	
 	// TODO
 }
 

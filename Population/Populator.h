@@ -147,16 +147,17 @@ private:
 	CUtlString m_strName;                      // +0x48c
 	CUtlString m_strWaitForAllSpawned;         // +0x490
 	// +0x494 dword/float 0
-	CountdownTimer m_ctPreSpawnDelay;          // +0x498
+	CountdownTimer m_ctSpawnDelay;             // +0x498
 	CUtlVector<CHandle<CBaseEntity>> m_ActiveBots; // +0x4a4
 	int m_iCountSpawned;                       // +0x4b8
-	// +0x4bc 
+	int m_iCountToSpawn;                       // +0x4bc
 	bool m_bSupport;                           // +0x4c0
 	bool m_bSupportLimited;                    // +0x4c1
 	CWave *m_Wave;                             // +0x4c4
 	InternalStateType m_iState;                // +0x4c8
 	bool m_bRandomSpawn;                       // +0x4cc
-	// +0x4d0 dword/float 0
+	SpawnResult m_iSpawnResult;                // +0x4d0
+	Vector m_vecSpawn;                         // +0x4d4
 };
 
 
@@ -178,6 +179,13 @@ public:
 	void AddClassType(string_t icon, int count, unsigned int flags);
 	
 private:
+	struct WaveClassCount_t
+	{
+		// 00 int count
+		// 04 string_t icon
+		// 08 unsigned int flags
+	};
+	
 	void ActiveWaveUpdate();
 	void WaveCompleteUpdate();
 	void WaveIntermissionUpdate();
@@ -187,13 +195,13 @@ private:
 	CUtlVectorAutoPurge<CWaveSpawnPopulator *> m_WaveSpawns;
 	// +0x020 byte 0
 	// +0x021 byte 0
-	// +0x024 sum of TotalCount of non-support WaveSpawns
-	// +0x028 
+	int m_iTotalCountNonSupport;    // +0x024
+	// +0x028 dword (is incremented when CWaveSpawnPopulator spawns a tank)
 	// +0x02c 
 	// +0x030 
 	// +0x034 
-	// +0x038 CUtlVector<WaveClassCount_t> (aka int)
-	// +0x04c sum of TotalCurrency of WaveSpawns
+	CUtlVector<WaveClassCount_t> m_ClassCounts; // +0x038
+	int m_iTotalCurrency;           // +0x04c
 	EventInfo *m_StartWaveOutput;   // +0x050
 	EventInfo *m_DoneOutput;        // +0x054
 	EventInfo *m_InitWaveOutput;    // +0x058
@@ -202,9 +210,9 @@ private:
 	float m_flWaitWhenDone;         // +0x274
 	// +0x278 CountdownTimer
 	// +0x284 byte 1
-	// +0x288 
+	// +0x288 IntervalTimer
 	// +0x28c byte 0
 	// +0x290 CountdownTimer
 	// +0x29c byte 0
-	// +0x2a0 
+	// +0x2a0 dword/float
 };
