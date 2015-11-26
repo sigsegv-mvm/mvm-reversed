@@ -497,16 +497,12 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 			if (this->m_Spawner->Spawn(&where, &spawned)) {
 				FOR_EACH_VEC(spawned, j) {
 					CBaseEntity *ent = spawned[j]();
-					if (!ent->IsPlayer()) {
+					
+					CTFBot *bot = ToTFBot(ent);
+					if (bot == nullptr) {
 						continue;
 					}
 					
-					CTFPlayer *player = ToTFPlayer(ent);
-					if (!player->IsBotOfType(1337)) {
-						continue;
-					}
-					
-					CTFBot *bot = static_cast<CTFBot *>(player);
 					bot->SetFlagTarget(nullptr);
 					bot->SetMission(mtype, true);
 					
@@ -604,15 +600,13 @@ void CWaveSpawnPopulator::ForceFinish()
 	
 	FOR_EACH_VEC(this->m_ActiveBots, i) {
 		CBaseEntity *ent = this->m_ActiveBots[i]();
-		if (ent != nullptr && ent->IsPlayer()) {
-			CBasePlayer *player = ToBasePlayer(ent);
-			if (player->IsBotOfType(1337)) {
-				player->ChangeTeam(TEAM_SPECTATOR, false, true);
-				continue;
-			}
-		}
 		
-		ent->Remove();
+		CTFBot *bot = ToTFBot(ent);
+		if (bot != nullptr) {
+			bot->ChangeTeam(TEAM_SPECTATOR, false, true);
+		} else {
+			ent->Remove();
+		}
 	}
 	
 	this->m_ActiveBots.RemoveAll();

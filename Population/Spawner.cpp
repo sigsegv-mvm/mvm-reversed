@@ -720,14 +720,10 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		FOR_EACH_VEC(spawned, i) {
 			CBaseEntity *ent = spawned[i];
-			if (ent != nullptr && ent->IsPlayer()) {
-				CBasePlayer *player = static_cast<CBasePlayer *>(ent);
-				
-				/* CTFBot::GetBotType() returns 1337, no joke */
-				if (player->IsBotOfType(1337)) {
-					CTFBot *bot = static_cast<CTFBot *>(player);
-					bot->JoinSquad(squad);
-				}
+			
+			CTFBot *bot = ToTFBot(ent);
+			if (bot != nullptr) {
+				bot->JoinSquad(squad);
 			}
 		}
 	}

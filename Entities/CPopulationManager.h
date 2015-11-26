@@ -111,9 +111,9 @@ private:
 	KeyValues *m_kvTemplates; // +0x584
 	// 588 byte
 	// 589 byte
-	// 58a?
+	// 58a byte
 	// 58b?
-	// 58c dword
+	// 58c CHandle<?> (at least a CBaseEntity)
 	int m_iStartingCurrency;               // +0x590 (from popfile)
 	bool m_bEventPopfile;                  // +0x594 (from popfile)
 	int m_iRespawnWaveTime;                // +0x598 (from popfile)
