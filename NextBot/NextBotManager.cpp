@@ -4,14 +4,20 @@
  */
 
 
+CTFBotManager sTFBotManager;
+
+
 NextBotManager *TheNextBots()
 {
-	// TODO
+	static NextBotManager manager;
+	return manager;
 }
 
-TFBotManager *TheTFBots()
+CTFBotManager *TheTFBots()
 {
-	// TODO
-	// the game binary implements this by returning TheNextBots() and static_cast<TFBotManager *>'ing the result, I guess
-	// probably a parallel implementation should work too
+	/* uh... yeah... this isn't valid at all, since the pointer returned by
+	 * TheNextBots() is not actually a CTFBotManager!
+	 * (why the hell doesn't this return sTFBotManager, which is a valid
+	 * CTFBotManager that is completely unused?) */
+	return static_cast<CTFBotManager *>(TheNextBots());
 }
