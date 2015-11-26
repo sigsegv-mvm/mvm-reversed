@@ -21,6 +21,10 @@ public:
 	{
 		// TODO
 		// sizeof: 0x84
+		
+		// seems to have:
+		// 00 int
+		// 04 char[0x80]
 	};
 	
 	NextBotManager();
