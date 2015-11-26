@@ -494,7 +494,7 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 		
 		if (where_result != SPAWN_FAIL) {
 			CUtlVector<CHandle<CBaseEntity>> spawned;
-			if (this->m_Spawner->Spawn(&where, &spawned)) {
+			if (this->m_Spawner->Spawn(&where, &spawned) != 0) {
 				FOR_EACH_VEC(spawned, j) {
 					CBaseEntity *ent = spawned[j]();
 					

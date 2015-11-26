@@ -314,7 +314,7 @@ int CMobSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *en
 	}
 	
 	for (int i = 0; i < this->m_iCount; ++i) {
-		if (!this->m_SubSpawner->Spawn(where, ents)) {
+		if (this->m_SubSpawner->Spawn(where, ents) == 0) {
 			return 0;
 		}
 	}
@@ -688,7 +688,7 @@ int CSquadSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 	bool failed = false;
 	FOR_EACH_VEC(this->m_SubSpawners, i) {
 		IPopulationSpawner *spawner = this->m_SubSpawners[i];
-		if (!spawner->Spawn(where, spawned)) {
+		if (spawner->Spawn(where, spawned) == 0) {
 			failed = true;
 			break;
 		}
