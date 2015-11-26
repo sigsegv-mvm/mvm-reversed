@@ -38,6 +38,11 @@ public:
 	void SetMannVsMachineWaveClassName(int index, string_t name);
 	void SetMannVsMachineWaveClassActive(string_t name, bool active);
 	
+	// inline functions known to exist:
+	// SetMannVsMachineBetweenWaves(bool)
+	// GetMannVsMachineIsBetweenWaves()
+	// GetMvMPopFileName()
+	
 private:
 	CNetworkVar(int,   m_nMannVsMachineMaxWaveCount);                 // +0x0fa4
 	CNetworkVar(int,   m_nMannVsMachineWaveCount);                    // +0x0fa8
