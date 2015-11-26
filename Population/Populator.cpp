@@ -237,6 +237,7 @@ bool CWaveSpawnPopulator::Parse(KeyValues *kv)
 		} else if (V_stricmp(name, "RandomSpawn") == 0) {
 			this->m_bRandomSpawn = subkey->GetBool();
 		} else {
+			/* BUG: duplicate spawner definitions will leak memory */
 			this->m_Spawner = IPopulationSpawner::ParseSpawner(this, subkey);
 			if (this->m_Spawner == nullptr) {
 				Warning("Unknown attribute '%s' in WaveSpawn definition.\n",
