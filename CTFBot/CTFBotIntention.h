@@ -8,7 +8,14 @@
 class CTFBot::CTFBotIntention : public IIntention
 {
 public:
-	// TODO
+	CTFBotIntention(CTFBot *actor);
+	virtual ~CTFBotIntention();
+	
+	virtual INextBotEventResponder *FirstContainedResponder() const override;
+	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const override;
+	
+	virtual void Reset() override;
+	virtual void Update() override;
 	
 private:
 	// TODO

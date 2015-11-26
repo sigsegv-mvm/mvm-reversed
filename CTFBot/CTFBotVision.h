@@ -4,12 +4,27 @@
  */
 
 
-// sizeof: 0xf0
 class CTFBotVision : public IVision
 {
 public:
-	// TODO
+	CTFBotVision(INextBot *nextbot);
+	virtual ~CTFBotVision();
+	
+	virtual void Update() override;
+	
+	virtual void CollectPotentiallyVisibleEntities(CUtlVector<CBaseEntity *> *ents) override;
+	virtual float GetMaxVisionRange() const override;
+	virtual float GetMinRecognizeTime() const override;
+	virtual bool IsIgnored(CBaseEntity *ent) const override;
+	virtual bool IsVisibleEntityNoticed(CBaseEntity *ent) const override;
 	
 private:
+	UNKNOWN UpdatePotentiallyVisibleNPCVector();
+	
 	// TODO
+	// 64 
+	// ...
+	// c4 CUtlVector<CHandle<CBaseCombatCharacter>>
+	// ...
+	// ec
 };
