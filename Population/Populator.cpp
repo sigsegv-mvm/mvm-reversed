@@ -189,7 +189,8 @@ bool CWaveSpawnPopulator::Parse(KeyValues *kv)
 				!this->m_bWaitBetweenSpawnsAfterDeath) {
 				this->m_flWaitBetweenSpawns = subkey->GetFloat();
 			} else {
-				Warning("Already specified WaitBetweenSpawnsAfterDeath time, WaitBetweenSpawns won't be used\n");
+				Warning("Already specified WaitBetweenSpawnsAfterDeath time, "
+					"WaitBetweenSpawns won't be used\n");
 				continue;
 			}
 		} else if (V_stricmp(name, "WaitBetweenSpawnsAfterDeath") == 0) {
@@ -197,7 +198,8 @@ bool CWaveSpawnPopulator::Parse(KeyValues *kv)
 				this->m_bWaitBetweenSpawnsAfterDeath = true;
 				this->m_flWaitBetweenSpawns = subkey->GetFloat();
 			} else {
-				Warning("Already specified WaitBetweenSpawns time, WaitBetweenSpawnsAfterDeath won't be used\n");
+				Warning("Already specified WaitBetweenSpawns time, "
+					"WaitBetweenSpawnsAfterDeath won't be used\n");
 				continue;
 			}
 		} else if (V_stricmp(name, "StartWaveWarningSound") == 0) {
@@ -411,7 +413,7 @@ void IPopulator::OnPlayerKilled(CTFPlayer *player)
 
 void CWaveSpawnPopulator::OnPlayerKilled(CTFPlayer *player)
 {
-	// TODO
+	this->m_ActiveBots.FindAndFastRemove(player->GetRefEHandle());
 }
 
 void CWave::OnPlayerKilled(CTFPlayer *player)
@@ -553,7 +555,11 @@ bool CMissionPopulator::UpdateMissionDestroySentries()
 
 bool CWaveSpawnPopulator::IsFinishedSpawning()
 {
-	// TODO
+	if (this->m_bSupport && !this->m_bSupportLimited) {
+		return false;
+	}
+	
+	return (this->m_iCountSpawned >= this->m_iTotalCount);
 }
 
 bool CWave::IsDoneWithNonSupportWaves()
@@ -564,13 +570,52 @@ bool CWave::IsDoneWithNonSupportWaves()
 
 void CWaveSpawnPopulator::OnNonSupportWavesDone()
 {
-	// TODO
+	if (!this->m_bSupport) {
+		return;
+	}
+	
+	int state = this->m_iState;
+	if (state == InternalStateType::INITIAL ||
+		state == InternalStateType::PRE_SPAWN_DELAY) {
+		this->SetState(InternalStateType::DONE);
+	} else if (state == InternalStateType::SPAWNING ||
+		state == InternalStateType::WAIT_FOR_ALL_DEAD) {
+		if (TFGameRules() != nullptr && this->m_iCurrencyLeft > 0) {
+			TFGameRules()->DistributeCurrencyAmount(this->m_iCurrencyLeft,
+				nullptr, true, true, false);
+			this->m_iCurrencyLeft = 0;
+		}
+		
+		this->SetState(InternalStateType::WAIT_FOR_ALL_DEAD);
+	}
 }
 
 
 void CWaveSpawnPopulator::ForceFinish()
 {
-	// TODO
+	int state = this->m_iState;
+	if (state == InternalStateType::INITIAL ||
+		state == InternalStateType::PRE_SPAWN_DELAY ||
+		state == InternalStateType::SPAWNING) {
+		this->SetState(InternalStateType::WAIT_FOR_ALL_DEAD);
+	} else if (state != InternalStateType::WAIT_FOR_ALL_DEAD) {
+		this->SetState(InternalStateType::DONE);
+	}
+	
+	FOR_EACH_VEC(this->m_ActiveBots, i) {
+		CBaseEntity *ent = this->m_ActiveBots[i]();
+		if (ent != nullptr && ent->IsPlayer()) {
+			CBasePlayer *player = ToBasePlayer(ent);
+			if (player->IsBotOfType(1337)) {
+				player->ChangeTeam(TEAM_SPECTATOR, false, true);
+				continue;
+			}
+		}
+		
+		ent->Remove();
+	}
+	
+	this->m_ActiveBots.RemoveAll();
 }
 
 void CWave::ForceFinish()
@@ -587,10 +632,30 @@ void CWave::ForceReset()
 
 int CWaveSpawnPopulator::GetCurrencyAmountPerDeath()
 {
-	// TODO
+	if (this->m_bSupport &&
+		this->m_iState == InternalStateType::WAIT_FOR_ALL_DEAD) {
+		this->m_iCountNotYetSpawned = this->m_ActiveBots.Count();
+	}
+	
+	int currency_left = this->m_iCurrencyLeft;
+	if (currency_left <= 0) {
+		return 0;
+	}
+	
+	int bots_left = this->m_iCountNotYetSpawned;
+	if (bots_left <= 0) {
+		bots_left = 1;
+	}
+	
+	int amount = (currency_left / bots_left);
+	--this->m_iCountNotYetSpawned;
+	this->m_iCurrencyLeft -= amount;
+	
+	return amount;
 }
 
 
+/* parts of this function are inlined into CWaveSpawnPopulator::Update */
 void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newstate)
 {
 	this->m_iState = newstate;

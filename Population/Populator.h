@@ -149,7 +149,7 @@ private:
 	// +0x494 dword/float 0
 	CountdownTimer m_ctPreSpawnDelay;          // +0x498
 	CUtlVector<CHandle<CBaseEntity>> m_ActiveBots; // +0x4a4
-	// +0x4b8 dword (number spawned so far)
+	int m_iCountSpawned;                       // +0x4b8
 	// +0x4bc 
 	bool m_bSupport;                           // +0x4c0
 	bool m_bSupportLimited;                    // +0x4c1
