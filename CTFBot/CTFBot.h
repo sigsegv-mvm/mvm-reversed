@@ -69,13 +69,16 @@ public:
 	
 	enum class MissionType : int
 	{
+		// some of these can be found in CFuncNavCost::IsApplicableTo
+		// in game/server/nav_entities.cpp
+		
 		// TODO: 0
 		// TODO: 1
 		DESTROY_SENTRIES = 2,
 		SNIPER           = 3,
 		SPY              = 4,
 		ENGINEER         = 5,
-		// TODO: 6
+		REPROGRAMMED     = 6,
 	};
 	
 	// TODO: type name for this?
@@ -132,6 +135,11 @@ public:
 	};
 	
 	// TODO
+	
+	// functions revealed in game/server/nav_entities.cpp:
+	// HasMission
+	// IsOnAnyMission
+	// HasTag
 	
 private:
 	// base class layout
@@ -227,3 +235,35 @@ private:
 	
 	// TODO
 };
+
+
+// TODO: document these somewhere better
+
+inline CBasePlayer *ToBasePlayer(CBaseEntity *pEntity)
+{
+	if (pEntity == nullptr || !pEntity->IsPlayer()) {
+		return nullptr;
+	}
+	
+	return static_cast<CBasePlayer *>(pEntity);
+}
+
+inline CTFPlayer *ToTFPlayer(CBaseEntity *pEntity)
+{
+	if (pEntity == nullptr || !pEntity->IsPlayer()) {
+		return nullptr;
+	}
+	
+	return static_cast<CTFPlayer *>(pEntity);
+}
+
+inline CTFBot *ToTFBot(CBaseEntity *pEntity)
+{
+	CBasePlayer *player = ToBasePlayer(pEntity);
+	
+	if (player == nullptr || !player->IsBotOfType(1337)) {
+		return nullptr;
+	}
+	
+	return static_cast<CTFBot *>(player);
+}
