@@ -4,9 +4,6 @@
  */
 
 
-typedef int WaveClassCount_t;
-
-
 class IPopulator
 {
 public:
