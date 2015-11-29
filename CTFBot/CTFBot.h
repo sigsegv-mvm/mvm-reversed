@@ -136,6 +136,17 @@ public:
 	
 	// TODO
 	
+	// CTFBot::AddItem was previously CTFBotSpawner::AddItemToBot
+	
+	// functions only in certain game versions:
+	// (TODO: find callers, figure out places where these were probably inlined into)
+	// server.dylib
+	//   CTFBot::EventChangeAttributes_t::EventChangeAttributes_t()
+	//   CTFBot::EventChangeAttributes_t::operator=(CTFBot::EventChangeAttributes_t const&)
+	// server_srv.so 20140619a
+	//   CTFBot::EventChangeAttributes_t::item_attributes_t::~item_attributes_t()
+	//   CTFBot::FindClosestReachableObject(char const*, CNavArea*, float) const
+	
 	// functions revealed in game/server/nav_entities.cpp:
 	// HasMission
 	// IsOnAnyMission
