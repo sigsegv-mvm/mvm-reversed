@@ -502,6 +502,11 @@ bool Path::ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost_func, co
 		// TODO
 	}
 	
+	// NOTE:
+	// this function calls Path::CollectAdjacentAreas
+	// which is inlined in ServerLinux, but distinct in ClientOSX server.dylib
+	// figure out where the call is and un-inline it
+	
 	// TODO
 }
 
@@ -511,17 +516,11 @@ void Path::ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area, const Ve
 }
 
 
-void Path::AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area)
+bool Path::ComputePathDetails(INextBot *nextbot, const Vector& vec)
 {
 	// TODO
 }
 
-bool Path::BuildTrivialPath(INextBot *nextbot, const Vector& dest)
-{
-	
-	
-	// TODO
-}
 
 int Path::FindNextOccludedNode(INextBot *nextbot, int index)
 {
@@ -563,17 +562,39 @@ void Path::InsertSegment(Segment seg, int index)
 	++this->m_iSegCount;
 }
 
-void Path::Optimize(INextBot *nextbot)
+
+template<class PathCost> bool Path::Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float f1, bool b1)
 {
+	// TODO
 }
 
-void Path::PostProcess()
+template<class PathCost> bool Path::Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float f1, bool b1)
 {
 	// TODO
 }
 
 
-template<class T> bool Path::Compute(INextBot *nextbot, const Vector& v1, T&, float f1, bool b1)
+void Path::AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area)
+{
+	// TODO
+}
+
+bool Path::BuildTrivialPath(INextBot *nextbot, const Vector& dest)
+{
+	// TODO
+}
+
+/* this function is inlined, but it can be found in ClientOSX server.dylib */
+void Path::CollectAdjacentAreas(CNavArea *areas)
+{
+	// TODO
+}
+
+void Path::Optimize(INextBot *nextbot)
+{
+}
+
+void Path::PostProcess()
 {
 	// TODO
 }

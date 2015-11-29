@@ -124,14 +124,18 @@ public:
 	virtual bool ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost_func, const IPathOpenGoalSelector& sel, float f1);
 	virtual void ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area, const Vector& from, const CNavArea *to, NavDirType dir, Vector *out) const;
 	
+	bool ComputePathDetails(INextBot *nextbot, const Vector& vec);
+	
 	int FindNextOccludedNode(INextBot *nextbot, int index);
 	void InsertSegment(Segment seg, int index);
 	
-	template<class T> bool Compute(INextBot *nextbot, const Vector& v1, T&, float f1, bool b1);
+	template<class PathCost> bool Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float f1, bool b1);
+	template<class PathCost> bool Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float f1, bool b1);
 	
 protected:
 	void AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area);
 	bool BuildTrivialPath(INextBot *nextbot, const Vector& dest);
+	void CollectAdjacentAreas(CNavArea *areas);
 	void Optimize(INextBot *nextbot);
 	void PostProcess();
 	
