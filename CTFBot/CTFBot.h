@@ -136,6 +136,14 @@ public:
 	
 	// TODO
 	
+	// TODO: make sure to check whether these are private
+	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
+	// AddItem
+	// AddTag
+	// ClearTags
+	// DeleteSquad
+	// 
+	
 	// CTFBot::AddItem was previously CTFBotSpawner::AddItemToBot
 	
 	// functions only in certain game versions:
