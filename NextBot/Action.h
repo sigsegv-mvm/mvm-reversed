@@ -291,7 +291,6 @@ public:
 	virtual bool IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
 private:
-	void StorePendingEventResult(const EventDesiredResult<T>& result, const char *event);
 	Action<T> *ApplyResult(T *actor, Behavior<T> *behavior, ActionResult<T> result);
 	
 	ActionResult<T> InvokeOnStart(T *actor, Behavior<T> *behavior, Action<T> *action1, Action<T> *action2);
@@ -306,6 +305,7 @@ private:
 	void PrintStateToConsole() const;
 	
 	void HandleEvent(const char *name, const std::function<EventDesiredResult<T> (Action<T> *, T *)>& handler);
+	void StorePendingEventResult(const EventDesiredResult<T>& result, const char *event);
 	
 	
 	Behavior<T> *m_Behavior;        // +0x08

@@ -1247,6 +1247,13 @@ template<class T> void Action<T>::HandleEvent(const char *name, const std::funct
 		}
 	}
 	
+	action->StorePendingEventResult(result, name);
+}
+
+/* this function is currently inlined, but it can be found in the L4D binary
+ * as well as the 20130214 OSX TF2 server binary */
+template<class T> void Action<T>::StorePendingEventResult(const EventDesiredResult<T>& result, const char *event)
+{
 	if (result.severity < action->m_Result.severity) {
 		if (result.action != nullptr) {
 			delete result.action;
