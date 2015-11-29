@@ -38,10 +38,15 @@ public:
 	void SetMannVsMachineWaveClassName(int index, string_t name);
 	void SetMannVsMachineWaveClassActive(string_t name, bool active);
 	
-	// inline functions known to exist:
+	// inline functions known to exist from SDK:
 	// SetMannVsMachineBetweenWaves(bool)
 	// GetMannVsMachineIsBetweenWaves()
 	// GetMvMPopFileName()
+	
+	// functions only in certain versions:
+	// SetBaseMvMBombUpgradeTime(float)
+	// SetFlagCarrierUpgradeLevel(int)
+	// SetNextMvMBombUpgradeTime(float)
 	
 private:
 	CNetworkVar(int,   m_nMannVsMachineMaxWaveCount);                 // +0x0fa4
