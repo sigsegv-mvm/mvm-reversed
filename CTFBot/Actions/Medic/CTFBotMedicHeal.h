@@ -9,7 +9,7 @@
 class CTFBotMedicHeal : public Action<CTFBot>
 {
 public:
-	CTFBotMedicHeal(/* TODO */);
+	CTFBotMedicHeal();
 	virtual ~CTFBotMedicHeal();
 	
 	virtual const char *GetName() const override;
@@ -29,7 +29,6 @@ public:
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
-	virtual QueryResponse IsHindrance(const INextBot *nextbot, CBaseEntity *it) const override;
 	
 private:
 	UNKNOWN ComputeFollowPosition(CTFBot *actor);
@@ -39,5 +38,16 @@ private:
 	bool IsVisibleToEnemy(CTFBot *actor, const Vector& v1) const;
 	UNKNOWN SelectPatient(CTFBot *actor, CTFPlayer *player);
 	
-	// TODO
+	// 0x0034 ChasePath
+	// 0x4840 CountdownTimer
+	// 0x484c dword -1, possibly CHandle<T>
+	// 0x4850 Vector
+	// 0x485c CountdownTimer
+	// 0x4868 dword
+	// 0x486c CountdownTimer
+	// 0x4878 PathFollower
+	// 0x9050 ???
+	// 0x9054 ???
 };
+
+// TODO: CSelectPrimaryPatient

@@ -9,7 +9,7 @@
 class CTFBotDead : public Action<CTFBot>
 {
 public:
-	CTFBotDead(/* TODO */);
+	CTFBotDead();
 	virtual ~CTFBotDead();
 	
 	virtual const char *GetName() const override;
@@ -18,5 +18,5 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
 	
 private:
-	// TODO
+	InvervalTimer m_itTimeSinceDeath; // +0x34
 };

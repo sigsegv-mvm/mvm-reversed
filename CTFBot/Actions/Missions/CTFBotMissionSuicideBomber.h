@@ -25,5 +25,18 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// TODO
+	// 0x0034 CHandle<CBaseEntity>
+	// 0x0038 Vector
+	// 0x0044 PathFollower
+	// 0x4818 CountdownTimer
+	// 0x4824 CountdownTimer
+	// 0x4830 CountdownTimer
+	// 0x483c byte
+	// 0x483d byte
+	// 0x483e byte
+	// 0x483f?
+	// 0x4840 ???
+	// 0x4844 ???
+	// 0x4848 ???
+	// 0x484c ???
 };

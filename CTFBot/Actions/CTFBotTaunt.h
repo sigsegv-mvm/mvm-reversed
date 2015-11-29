@@ -9,7 +9,7 @@
 class CTFBotTaunt : public Action<CTFBot>
 {
 public:
-	CTFBotTaunt(/* TODO */);
+	CTFBotTaunt();
 	virtual ~CTFBotTaunt();
 	
 	virtual const char *GetName() const override;
@@ -18,5 +18,7 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
 	
 private:
-	// TODO
+	CountdownTimer m_ctStart;  // +0x34
+	CountdownTimer m_ctTimer2; // +0x40
+	bool m_bStartedTaunting;   // +0x4c
 };
