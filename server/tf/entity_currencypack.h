@@ -12,6 +12,9 @@ class CCurrencyPack : public CTFPowerup, public ICurrencyPackAutoList
 {
 public:
 	// TODO
+	
+private:
+	// TODO 0x50a m_bDistributed
 };
 
 class CBonusPack : public CCurrencyPack, public IBonusPackAutoList

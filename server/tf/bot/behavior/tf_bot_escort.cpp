@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_bot_escort_range("tf_bot_escort_range", "300", FCVAR_CHEAT);
+
+
 

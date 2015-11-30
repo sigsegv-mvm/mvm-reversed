@@ -5,4 +5,10 @@
  */
 
 
+ConVar tf_bot_sticky_base_range("tf_bot_sticky_base_range", "800", FCVAR_CHEAT);
+ConVar tf_bot_sticky_charge_rate("tf_bot_sticky_charge_rate", "0.01", FCVAR_CHEAT,
+	"Seconds of charge per unit range beyond base");
+
+
+
 

@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_bot_debug_spy("tf_bot_debug_spy", "0", FCVAR_CHEAT);
+
+
 

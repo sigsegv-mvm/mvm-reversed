@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_raid_engineer_infinte_metal("tf_raid_engineer_infinte_metal", "1", FCVAR_CHEAT | FCVAR_DEVELOPMENTONLY);
+
+
 

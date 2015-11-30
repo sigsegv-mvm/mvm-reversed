@@ -24,6 +24,8 @@ public:
 	{
 		// TODO
 		// sizeof: at least 0x1c
+		
+		// see: static var init for CPopulationManager::m_checkpointSnapshot
 	};
 	
 	CPopulationManager();

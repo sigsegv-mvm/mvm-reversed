@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_bot_debug_seek_and_destroy("tf_bot_debug_seek_and_destroy", "0", FCVAR_CHEAT);
+
+
 

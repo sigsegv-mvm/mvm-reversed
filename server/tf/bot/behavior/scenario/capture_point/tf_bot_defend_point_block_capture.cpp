@@ -5,4 +5,8 @@
  */
 
 
+ConVar tf_bot_defend_owned_point_percent("tf_bot_defend_owned_point_percent", "0.5", FCVAR_CHEAT,
+	"Stay on the contested point we own until enemy cap percent falls below this");
+
+
 

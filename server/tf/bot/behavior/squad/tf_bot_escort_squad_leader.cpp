@@ -5,4 +5,8 @@
  */
 
 
+ConVar tf_bot_squad_escort_range("tf_bot_squad_escort_range", "500", FCVAR_CHEAT);
+ConVar tf_bot_formation_debug("tf_bot_formation_debug", "0", FCVAR_CHEAT);
+
+
 

@@ -4,6 +4,11 @@
  */
 
 
+ConVar NextBotPathDrawIncrement("nb_path_draw_inc", "100", FCVAR_CHEAT);
+ConVar NextBotPathDrawSegmentCount("nb_path_draw_segment_count", "100", FCVAR_CHEAT);
+ConVar NextBotPathSegmentInfluenceRadius("nb_path_segment_influence_radius", "100", FCVAR_CHEAT);
+
+
 Path::Path()
 {
 	this->m_iSegCount        = 0;

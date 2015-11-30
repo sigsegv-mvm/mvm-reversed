@@ -4,6 +4,9 @@
  */
 
 
+ConVar tf_mvm_engineer_teleporter_uber_duration("tf_mvm_engineer_teleporter_uber_duration", "5.f", FCVAR_CHEAT);
+
+
 CSpawnLocation::CSpawnLocation()
 {
 	this->m_iWhere = Where::TEAMSPAWN;

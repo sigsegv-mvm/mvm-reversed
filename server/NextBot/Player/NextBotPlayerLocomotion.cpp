@@ -4,4 +4,7 @@
  */
 
 
+ConVar NextBotPlayerMoveDirect("nb_player_move_direct", "0", FCVAR_NONE);
+
+
 

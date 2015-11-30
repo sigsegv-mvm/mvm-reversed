@@ -5,4 +5,9 @@
  */
 
 
+ConVar tf_bot_melee_attack_abandon_range("tf_bot_melee_attack_abandon_range", "500", FCVAR_CHEAT,
+	"If threat is farther away than this, bot will switch back to its primary weapon and attack");
+
+
+
 

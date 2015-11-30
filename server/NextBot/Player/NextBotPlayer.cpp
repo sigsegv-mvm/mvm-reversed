@@ -4,8 +4,17 @@
  */
 
 
+ConVar NextBotPlayerStop("nb_player_stop", "0", FCVAR_CHEAT,
+	"Stop all NextBotPlayers from updating");
+ConVar NextBotPlayerWalk("nb_player_walk", "0", FCVAR_CHEAT,
+	"Force bots to walk");
+ConVar NextBotPlayerCrouch("nb_player_crouch", "0", FCVAR_CHEAT,
+	"Force bots to crouch");
+ConVar NextBotPlayerMove("nb_player_move", "0", FCVAR_CHEAT,
+	"Prevents bots from moving");
+
+
 // TODO: these should all actually be inline definitions in NextBotPlayer.h
-// and this file shouldn't exist
 
 
 template<class T> NextBotPlayer<T>::NextBotPlayer()

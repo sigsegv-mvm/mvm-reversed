@@ -5,6 +5,10 @@
  */
 
 
+ConVar tf_bot_suicide_bomb_range("tf_bot_suicide_bomb_range", "300", FCVAR_CHEAT);
+ConVar tf_bot_suicide_bomb_friendly_fire("tf_bot_suicide_bomb_friendly_fire", "1", FCVAR_CHEAT);
+
+
 CTFBotMissionSuicideBomber::CTFBotMissionSuicideBomber()
 {
 }

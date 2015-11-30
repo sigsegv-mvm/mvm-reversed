@@ -369,9 +369,9 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 	
 	tank->SetAbsOrigin(where);
 	tank->SetAbsAngles(vec3_angle);
-	tank->m_iBossHealth = (int)((float)this->m_iHealth *
+	tank->m_initialHealth = (int)((float)this->m_iHealth *
 		g_pPopulationManager->GetHealthMultiplier(true));
-	tank->m_flBossSpeed = this->m_flSpeed;
+	tank->m_speed = this->m_flSpeed;
 	tank->SetName(MAKE_STRING(this->m_strName.Get()));
 	tank->SetSkin(this->m_iSkin);
 	tank->SetStartingPathTrackNode(this->m_strStartNode.GetForModify());

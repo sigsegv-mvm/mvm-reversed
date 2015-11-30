@@ -4,4 +4,8 @@
  */
 
 
+ConVar tf_decoy_lifetime("tf_decoy_lifetime", "5", FCVAR_CHEAT,
+	"The lifetime of a decoy, in seconds");
+
+
 

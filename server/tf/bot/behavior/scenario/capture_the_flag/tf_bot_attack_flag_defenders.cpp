@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_bot_flag_escort_range("tf_bot_flag_escort_range", "500", FCVAR_CHEAT);
+
+
 

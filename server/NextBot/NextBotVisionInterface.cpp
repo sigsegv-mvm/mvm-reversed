@@ -4,6 +4,12 @@
  */
 
 
+ConVar nb_blind("nb_blind", "0", FCVAR_CHEAT,
+	"Disable vision");
+ConVar nb_debug_known_entities("nb_debug_known_entities", "0", FCVAR_CHEAT,
+	"Show the 'known entities' for the bot that is the current spectator target");
+
+
 IVision::IVision(INextBot *nextbot)
 	: INextBotComponent(nextbot)
 {

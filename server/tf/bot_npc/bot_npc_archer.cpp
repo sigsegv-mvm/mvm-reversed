@@ -4,4 +4,10 @@
  */
 
 
+ConVar tf_bot_npc_archer_health("tf_bot_npc_archer_health", "100", FCVAR_CHEAT);
+ConVar tf_bot_npc_archer_speed("tf_bot_npc_archer_speed", "100", FCVAR_CHEAT);
+ConVar tf_bot_npc_archer_shoot_interval("tf_bot_npc_archer_shoot_interval", "2", FCVAR_CHEAT);
+ConVar tf_bot_npc_archer_arrow_damage("tf_bot_npc_archer_arrow_damage", "75", FCVAR_CHEAT);
+
+
 

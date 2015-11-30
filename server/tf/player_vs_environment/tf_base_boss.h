@@ -11,9 +11,11 @@ public:
 	
 protected:
 	// TODO
-	int m_iBossHealth;   // +0x9a8
-	// TODO
-	float m_flBossSpeed; // +0x9b4
+	int m_initialHealth;          // +0x9a8
+	float m_lastHealthPercentage; // +0x9ac
+	// TODO 0x9b0 m_modelString
+	float m_speed;                // +0x9b4
+	// TODO 0x9b8 m_startDisabled
 	// TODO
 };
 

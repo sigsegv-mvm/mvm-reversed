@@ -5,6 +5,15 @@
  */
 
 
+// TODO: static s_possibleHealth = -1
+
+
+ConVar tf_bot_health_critical_ratio("tf_bot_health_critical_ratio", "0.3", FCVAR_CHEAT);
+ConVar tf_bot_health_ok_ratio("tf_bot_health_ok_ratio", "0.8", FCVAR_CHEAT);
+ConVar tf_bot_health_search_near_range("tf_bot_health_search_near_range", "1000", FCVAR_CHEAT);
+ConVar tf_bot_health_search_far_range("tf_bot_health_search_far_range", "2000", FCVAR_CHEAT);
+
+
 
 
 

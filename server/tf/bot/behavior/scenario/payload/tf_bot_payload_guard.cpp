@@ -5,4 +5,8 @@
  */
 
 
+ConVar tf_bot_payload_guard_range("tf_bot_payload_guard_range", "1000", FCVAR_CHEAT);
+ConVar tf_bot_debug_payload_guard_vantage_points("tf_bot_debug_payload_guard_vantage_points", nullptr, FCVAR_CHEAT);
+
+
 

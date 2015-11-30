@@ -5,4 +5,7 @@
  */
 
 
+ConVar tf_bot_cart_push_radius("tf_bot_cart_push_radius", "60", FCVAR_CHEAT);
+
+
 

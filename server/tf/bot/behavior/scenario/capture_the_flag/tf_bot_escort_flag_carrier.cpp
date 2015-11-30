@@ -5,4 +5,8 @@
  */
 
 
+ConVar tf_bot_flag_escort_give_up_range("tf_bot_flag_escort_give_up_range", "1000", FCVAR_CHEAT);
+ConVar tf_bot_flag_escort_max_count("tf_bot_flag_escort_max_count", "4", FCVAR_CHEAT);
+
+
 

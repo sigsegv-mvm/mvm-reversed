@@ -5,4 +5,8 @@
  */
 
 
+ConVar tf_bot_force_jump("tf_bot_force_jump", "0", FCVAR_CHEAT,
+	"Force bots to continuously jump");
+
+
 
