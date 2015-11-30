@@ -1,3 +1,6 @@
 *.sublime-workspace
 *.o
 Binaries/
+Useful/paths/strings-raw/
+Useful/paths/strings-filtered/
+Useful/symbol-history/

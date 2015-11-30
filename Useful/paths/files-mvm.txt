@@ -288,6 +288,9 @@ shared/tf/tf_lobby.h
 shared/tf/tf_matchmaking_scoring.h
 shared/tf/tf_matchmaking_shared.h
 
+shared/tf/tf_quickplay_shared.cpp
+shared/tf/tf_quickplay_shared.h
+
 client/tf/vgui/tf_lobbypanel.cpp
 
 client/tf/vgui/tf_layeredmappanel.cpp
@@ -325,8 +328,6 @@ client/tf/c_entity_currencypack.cpp
 
 server/tf/player_vs_environment/tf_mann_vs_machine_logic.cpp
 server/tf/player_vs_environment/tf_mann_vs_machine_logic.h
-
-server/tf/player_vs_environment/tf_populator_interface.cpp
 
 ============
 MvM Entities
@@ -391,11 +392,12 @@ MvM Population
 ==============
 server/tf/player_vs_environment/tf_population_manager.cpp
 server/tf/player_vs_environment/tf_population_manager.h
-server/tf/player_vs_environment/tf_populator.cpp
 server/tf/player_vs_environment/tf_populators.cpp
 server/tf/player_vs_environment/tf_populators.h
 server/tf/player_vs_environment/tf_populator_spawners.cpp
 server/tf/player_vs_environment/tf_populator_spawners.h
+server/tf/player_vs_environment/tf_populator_interface.cpp
+server/tf/player_vs_environment/tf_populator_interface.h
 
 =====
 TFBot
