@@ -197,7 +197,7 @@ private:
 	// 0x1164: CTFPlayer: CAttributeManager
 	// 0x11c4: CTFPlayer: CTFPlayerInventory
 	// 0x1964: CTFPlayer: CTFPlayerShared
-	// 0x24c4: CTFPlayer: CEconItemView
+	  // 0x24c4: CTFPlayerShared: CEconItemView
 	// 0x26ec: CTFPlayer: CTFPlayerClass
 	
 	// 0x2834: CTFPlayer: byte  true for mission-populator-spawned bots
@@ -235,8 +235,9 @@ private:
 	
 	float m_flScale; // +0x2bf4
 	
-	// 0x2bf8: CTFBot: m_nMission
-	
+	// 0x2bf8: CTFBot: MissionType m_nMission
+	// 0x2bfc: CTFBot: 
+	CHandle<CBaseEntity> m_hSBTarget; // +0x2c00
 	// 0x2c04: CTFBot: CUtlString
 	
 	// TODO: 0x2c54

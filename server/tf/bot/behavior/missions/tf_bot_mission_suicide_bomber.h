@@ -25,32 +25,27 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	void StartDetonate(CTFBot *actor, bool reached_goal, bool killed);
+	void StartDetonate(CTFBot *actor, bool reached_goal, bool lost_all_health);
 	void Detonate(CTFBot *actor);
 	
-	// 0x0034 CHandle<CBaseEntity>
-	// 0x0038 Vector
-	PathFollower m_PathFollower; // +0x0044
-	CountdownTimer m_ctTimer1;   // +0x4818
-	CountdownTimer m_ctTimer2;   // +0x4824
-	CountdownTimer m_ctTimer3;   // +0x4830
-	// 0x483c byte "is detonating"
-	// - w OnStart =0
-	// - w Detonate =1
-	// - r OnStuck (if false, then call StartDetonate)
-	// - r OnKilled (if false, then call StartDetonate)
-	// 0x483d byte "detonated because reached goal"
-	// - w OnStart =0
-	// - w StartDetonate =b1
-	// - r Detonate (if false, speak TLK_MVM_SENTRY_BUSTER_DOWN)
-	// - r Update (if true, fire event "mvm_sentrybuster_detonate", give achievement 2326 "Ctrl + Assault + Delete: Destroy a sentry buster before it reaches its target.")
-	// 0x483e byte "detonated because killed"
-	// - w OnStart =0
-	// - w StartDetonate =b2
-	// - r Detonate (if true, fire event "mvm_sentrybuster_killed")
-	// - r Detonate (if true, increment CPopulationManager::GetCurrentWave()->field_34)
-	// 0x4840 ???
-	// 0x4844 ???
-	// 0x4848 ???
-	// 0x484c ???
+	CHandle<CBaseEntity> m_hTarget; // +0x0034
+	Vector m_vecTargetPos;          // +0x0038
+	PathFollower m_PathFollower;    // +0x0044
+	CountdownTimer m_ctTimer1;      // +0x4818
+	CountdownTimer m_ctTimer2;      // +0x4824
+	CountdownTimer m_ctTimer3;      // +0x4830, started when detonation sequence begins (duration: 2.0 seconds)
+	bool m_bDetonating;             // +0x483c
+	bool m_bDetReachedGoal;         // +0x483d
+	bool m_bDetLostAllHealth;       // +0x483e
+	int m_nConsecutivePathFailures; // +0x4840
+	Vector m_vecDetonatePos;        // +0x4844
 };
+
+
+// offset +0x108: m_iHealth
+// offset +0x10c: m_lifeState
+// offset +0x10d: m_takedamage
+
+// vcall +0x108: IsAlive()
+// vcall +0x1ec: NetworkStateChanged_m_iHealth
+// vcall +0x1f4: NetworkStateChanged_m_lifeState
