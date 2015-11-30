@@ -60,3 +60,24 @@ QueryResponse CTFBotMissionSuicideBomber::ShouldAttack(const INextBot *nextbot, 
 {
 	return QueryResponse::NO;
 }
+
+
+// OnStuck               (false, false)
+// OnKilled              (false, false)
+// Update path failure   (false, false)
+// Update health 1       (false, true)
+// Update reached sentry (true,  false)
+void CTFBotMissionSuicideBomber::StartDetonate(CTFBot *actor, bool reached_goal, bool killed)
+{
+	// field_483d = b1
+	// field_483e = b2
+	
+	
+	
+	// TODO
+}
+
+void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
+{
+	// TODO
+}

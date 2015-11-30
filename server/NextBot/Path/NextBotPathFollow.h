@@ -38,6 +38,7 @@ private:
 	// ...
 	// 4754 dword 0, Segment* returned by GetCurrentGoal
 	// 4758 float -1.0f, set by SetMinLookAheadDistance
+	// 475c 
 	// 4760 CountdownTimer
 	// 476c CountdownTimer
 	// 4778 CHandle<CBaseEntity>, referenced by GetHindrance
