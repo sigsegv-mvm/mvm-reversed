@@ -4,11 +4,26 @@
  */
 
 
+// sizeof: 0x36c
 class CTFBotHint : public CBaseEntity
 {
 public:
-	// TODO
+	CTFBotHint();
+	virtual ~CTFBotHint();
+	
+	virtual UNKNOWN Spawn() override;
+	
+	virtual UNKNOWN UpdateOnRemove() override;
+	
+	// TODO: InputEnable
+	// TODO: InputDisable
+	
+	UNKNOWN IsFor(CTFBot *bot) const;
 	
 private:
-	// TODO
+	UNKNOWN UpdateNavDecoration();
+	
+	// 360 
+	// 364 
+	// 368 byte 0
 };

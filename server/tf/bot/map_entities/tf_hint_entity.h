@@ -4,14 +4,23 @@
  */
 
 
+// TODO: ITFBotHintEntityAutoList
+
+
+// sizeof: 0x36c
 class CBaseTFBotHintEntity : public CPointEntity, public ITFBotHintEntityAutoList
 {
 public:
-	// TODO
+	CBaseTFBotHintEntity();
+	virtual ~CBaseTFBotHintEntity();
+	
+	// TODO: InputEnable
+	// TODO: InputDisable
+	
+	UNKNOWN OwnerObjectFinishBuilding() const;
+	UNKNOWN OwnerObjectHasNoOwner() const;
 	
 protected:
-	// TODO
+	// 364 byte 0
+	// 368 dword -1
 };
-
-
-// TODO: ITFBotHintEntityAutoList

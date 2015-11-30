@@ -4,11 +4,12 @@
  */
 
 
+// sizeof: 0x36c
 class CTFBotHintTeleporterExit : public CBaseTFBotHintEntity
 {
 public:
-	// TODO
+	CTFBotHintTeleporterExit();
+	virtual ~CTFBotHintTeleporterExit();
 	
-private:
-	// TODO
+	virtual UNKNOWN GetHintType() const;
 };
