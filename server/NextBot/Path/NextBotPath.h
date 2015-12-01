@@ -129,8 +129,8 @@ public:
 	int FindNextOccludedNode(INextBot *nextbot, int index);
 	void InsertSegment(Segment seg, int index);
 	
-	template<class PathCost> bool Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float f1, bool b1);
-	template<class PathCost> bool Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float f1, bool b1);
+	template<class PathCost> bool Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float maxPathLength, bool b1);
+	template<class PathCost> bool Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float maxPathLength, bool b1);
 	
 protected:
 	void AssemblePrecomputedPath(INextBot *nextbot, const Vector& v1, CNavArea *area);

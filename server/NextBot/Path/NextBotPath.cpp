@@ -523,6 +523,8 @@ void Path::ComputeAreaCrossing(INextBot *nextbot, const CNavArea *area, const Ve
 
 bool Path::ComputePathDetails(INextBot *nextbot, const Vector& vec)
 {
+	VPROF_BUDGET("Path::ComputePathDetails", "NextBot");
+	
 	// TODO
 }
 
@@ -568,13 +570,17 @@ void Path::InsertSegment(Segment seg, int index)
 }
 
 
-template<class PathCost> bool Path::Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float f1, bool b1)
+template<class PathCost> bool Path::Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float maxPathLength, bool b1)
 {
+	VPROF_BUDGET("Path::Compute(goal)", "NextBotSpiky");
+	
 	// TODO
 }
 
-template<class PathCost> bool Path::Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float f1, bool b1)
+template<class PathCost> bool Path::Compute(INextBot *nextbot, CBaseCombatCharacter *who, PathCost& const_func, float maxPathLength, bool b1)
 {
+	VPROF_BUDGET("Path::Compute(subject)", "NextBotSpiky");
+	
 	// TODO
 }
 
@@ -601,5 +607,7 @@ void Path::Optimize(INextBot *nextbot)
 
 void Path::PostProcess()
 {
+	VPROF_BUDGET("Path::PostProcess", "NextBot");
+	
 	// TODO
 }
