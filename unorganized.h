@@ -37,13 +37,38 @@ public:
 	// CTFBotDeliverFlag::Update (RouteType=1)
 	
 private:
-	// 04 CTFBot *actor
-	// 08 RouteType rtype
-	// 0c float, result of ILocomotion::GetStepHeight
-	// 10 float, result of ILocomotion::GetMaxJumpHeight
-	// 14 float, result of ILocomotion::GetDeathDropHeight
-	// 18 CUtlVector<CBaseObject *>
+	CTFBot *m_Actor;                          // +0x04
+	RouteType m_iRouteType;                   // +0x08
+	float m_flStepHeight;                     // +0x0c
+	float m_flMaxJumpHeight;                  // +0x10
+	float m_flDeathDropHeight;                // +0x14
+	CUtlVector<CBaseObject *> m_EnemyObjects; // +0x18
 };
+
+CTFBotPathCost(CTFBot *actor, RouteType rtype)
+	: m_Actor(actor), m_iRouteType(rtype)
+{
+	this->m_flStepHeight      = actor->GetLocomotionInterface()->GetStepHeight();
+	this->m_flMaxJumpHeight   = actor->GetLocomotionInterface()->GetMaxJumpHeight();
+	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
+	
+	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
+		int enemy_team = actor->GetTeamNumber();
+		switch (enemy_team) {
+		case TF_TEAM_RED:
+			enemy_team = TF_TEAM_BLUE;
+			break;
+		case TF_TEAM_BLUE:
+			enemy_team = TF_TEAM_RED;
+			break;
+		}
+		
+		TheNavMesh()->CollectBuiltObjects(&this->m_EnemyObjects, enemy_team);
+	} else {
+		this->m_EnemyObjects.RemoveAll();
+	}
+}
+
 
 class CTFPlayertPathCost : public IPathCost
 {
