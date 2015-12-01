@@ -31,7 +31,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 	
 	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange);
 	
-	this->m_ctTimer3->Invalidate();
+	this->m_ctDetonation->Invalidate();
 	this->m_nConsecutivePathFailures = 0;
 	
 	if (actor->m_hSBTarget() != nullptr) {
@@ -50,7 +50,88 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 
 ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float f1)
 {
-	// TODO
+	if (this->m_ctDetonation.HasStarted()) {
+		if (!this->m_ctDetonation.IsElapsed()) {
+			return ActionResult<CTFBot>::Continue();
+		}
+		
+		this->m_vecDetonatePos = actor->GetAbsOrigin();
+		this->Detonate(actor);
+		
+		if (this->m_bDetReachedGoal && this->m_hTarget() != nullptr &&
+			this->m_hTarget()->IsBaseObject()) {
+			CObjectSentrygun *sentry =
+				dynamic_cast<CObjectSentrygun *>(this->m_hTarget());
+			if (sentry != nullptr && sentry->GetOwner() != nullptr) {
+				CTFPlayer *owner = ToTFPlayer(sentry->GetOwner());
+				if (owner != nullptr) {
+					CGameEvent *event = gameeventmanager->CreateEvent("mvm_sentrybuster_detonate");
+					if (event != nullptr) {
+						event->SetInt("player", ENTINDEX(owner));
+						event->SetFloat("det_x", this->m_vecDetonatePos.x);
+						event->SetFloat("det_y", this->m_vecDetonatePos.y);
+						event->SetFloat("det_z", this->m_vecDetonatePos.z);
+						gameeventmanager->FireEvent(event);
+					}
+				}
+			}
+		}
+		
+		return ActionResult<CTFBot>::Done("KABOOM!");
+	}
+	
+	if (actor->GetHealth() == 1) {
+		this->StartDetonate(actor, false, true);
+		return ActionResult<CTFBot>::Continue();
+	}
+	
+	if (this->m_hTarget() != nullptr) {
+		if (this->m_hTarget()->IsAlive() && !this->m_hTarget()->IsDying()) {
+			this->m_vecTargetPos = this->m_hTarget()->GetAbsOrigin();
+		}
+		
+		if (this->m_hTarget()->IsBaseObject()) {
+			CObjectSentrygun *sentry =
+				dynamic_cast<CObjectSentrygun *>(this->m_hTarget());
+			if (sentry != nullptr &&
+				sentry->m_bIsCarried && sentry->GetOwner() != nullptr) {
+				this->m_vecTargetPos = sentry->GetOwner()->GetAbsOrigin();
+			}
+		}
+	}
+	
+	float goal_range = (1.0f / 3.0f) * tf_bot_suicide_bomb_range.GetFloat();
+	
+	if (this->m_vecTargetPos.DistToSqr(actor->GetAbsOrigin()) <
+		(goal_range * goal_range) && actor->IsLineOfFireClear({
+			.x = this->m_vecTargetPos.x,
+			.y = this->m_vecTargetPos.y,
+			.z = this->m_vecTargetPos.z + 18.0f,
+		})) {
+		this->StartDetonate(actor, true, false);
+	}
+	
+	if (this->m_ctPlaySound.IsElapsed()) {
+		this->m_ctPlaySound.Start(4.0f);
+		actor->EmitSound("MVM.SentryBusterIntro");
+	}
+	
+	if (this->m_ctRecomputePath.IsElapsed()) {
+		this->m_ctRecomputePath.Start(RandomFloat(0.5f, 1.0f));
+		
+		CTFBotPathCost cost_func(actor, FASTEST_ROUTE);
+		if (this->m_PathFollower.Compute<CTFBotPathCost>(actor,
+			this->m_vecTargetPos, cost_func, 0.0f, true) {
+			this->m_nConsecutivePathFailures = 0;
+		} else {
+			if (++this->m_nConsecutivePathFailures > 2) {
+				this->StartDetonate(actor, false, false);
+			}
+		}
+	}
+	
+	this->m_PathFollower.Update(actor);
+	return ActionResult<CTFBot>::Continue();
 }
 
 void CTFBotMissionSuicideBomber::OnEnd(CTFBot *actor, Action<CTFBot> *action)
@@ -60,7 +141,7 @@ void CTFBotMissionSuicideBomber::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 
 EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnStuck(CTFBot *actor)
 {
-	if (!this->m_bDetonating && !this->m_ctTimer3.HasStarted()) {
+	if (!this->m_bDetonating && !this->m_ctDetonation.HasStarted()) {
 		this->StartDetonate(actor, false, false);
 	}
 	
@@ -78,12 +159,12 @@ EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnKilled(CTFBot *actor, c
 	 */
 	
 	if (!this->m_bDetonating) {
-		if (!this->m_ctTimer3.HasStarted()) {
+		if (!this->m_ctDetonation.HasStarted()) {
 			this->StartDetonate(actor, false, false);
 		} else {
 			/* BUG: probably bad to call Detonate when m_bDetonating is false
 			 * and we haven't called StartDetonate... */
-			if (this->m_ctTimer3.IsElapsed()) {
+			if (this->m_ctDetonation.IsElapsed()) {
 				this->Detonate();
 			} else {
 				if (actor->GetTeamNumber != TEAM_SPECTATOR) {
@@ -106,7 +187,7 @@ QueryResponse CTFBotMissionSuicideBomber::ShouldAttack(const INextBot *nextbot, 
 
 void CTFBotMissionSuicideBomber::StartDetonate(CTFBot *actor, bool reached_goal, bool lost_all_health)
 {
-	if (this->m_ctTimer3.HasStarted()) {
+	if (this->m_ctDetonation.HasStarted()) {
 		return;
 	}
 	
@@ -124,7 +205,7 @@ void CTFBotMissionSuicideBomber::StartDetonate(CTFBot *actor, bool reached_goal,
 	// TODO: enum/default values for CTFPlayer::Taunt(taunts_t, int)
 	actor->Taunt(0, 0);
 	
-	this->m_ctTimer3.Start(2.0f);
+	this->m_ctDetonation.Start(2.0f);
 	
 	actor->EmitSound("MvM.SentryBusterSpin");
 }

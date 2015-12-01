@@ -28,24 +28,15 @@ private:
 	void StartDetonate(CTFBot *actor, bool reached_goal, bool lost_all_health);
 	void Detonate(CTFBot *actor);
 	
-	CHandle<CBaseEntity> m_hTarget; // +0x0034
-	Vector m_vecTargetPos;          // +0x0038
-	PathFollower m_PathFollower;    // +0x0044
-	CountdownTimer m_ctTimer1;      // +0x4818
-	CountdownTimer m_ctTimer2;      // +0x4824
-	CountdownTimer m_ctTimer3;      // +0x4830, started when detonation sequence begins (duration: 2.0 seconds)
-	bool m_bDetonating;             // +0x483c
-	bool m_bDetReachedGoal;         // +0x483d
-	bool m_bDetLostAllHealth;       // +0x483e
-	int m_nConsecutivePathFailures; // +0x4840
-	Vector m_vecDetonatePos;        // +0x4844
+	CHandle<CBaseEntity> m_hTarget;   // +0x0034
+	Vector m_vecTargetPos;            // +0x0038
+	PathFollower m_PathFollower;      // +0x0044
+	CountdownTimer m_ctRecomputePath; // +0x4818, fires every 0.5-1.0 seconds to recompute path
+	CountdownTimer m_ctPlaySound;     // +0x4824, fires every 4 seconds to play sound "MVM.SentryBusterIntro"
+	CountdownTimer m_ctDetonation;    // +0x4830, started when detonation sequence begins (duration: 2.0 seconds)
+	bool m_bDetonating;               // +0x483c
+	bool m_bDetReachedGoal;           // +0x483d
+	bool m_bDetLostAllHealth;         // +0x483e
+	int m_nConsecutivePathFailures;   // +0x4840
+	Vector m_vecDetonatePos;          // +0x4844
 };
-
-
-// offset +0x108: m_iHealth
-// offset +0x10c: m_lifeState
-// offset +0x10d: m_takedamage
-
-// vcall +0x108: IsAlive()
-// vcall +0x1ec: NetworkStateChanged_m_iHealth
-// vcall +0x1f4: NetworkStateChanged_m_lifeState
