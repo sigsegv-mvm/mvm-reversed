@@ -229,6 +229,7 @@ private:
 	// 0x2b04: CTFBot: CountdownTimer
 	
 	AttributeType m_nBotAttrs; // +0x2b14
+	DifficultyType m_iSkill;   // +0x2b18
 	
 	// 0x2bb8: CTFBot: CountdownTimer
 	// 0x2be8: CTFBot: CountdownTimer
