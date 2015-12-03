@@ -30,6 +30,4 @@ protected:
 	CountdownTimer m_ctTimer4; // +0x4800
 };
 
-// TODO: struct and vtable in IDA
-
 // TODO: DirectChasePath
