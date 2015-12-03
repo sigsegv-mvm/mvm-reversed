@@ -1066,6 +1066,12 @@ template<class T> bool Action<T>::IsAbleToBlockMovementOf(const INextBot *nextbo
 }
 
 
+template<class T> T *Action<T>::GetActor() const
+{
+	return this->m_Actor;
+}
+
+
 template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behavior, ActionResult<T> result)
 {
 	if (result.transition == ActionTransition::CHANGE_TO) {
