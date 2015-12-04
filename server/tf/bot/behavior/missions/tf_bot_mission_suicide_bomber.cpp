@@ -94,7 +94,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float f1)
 			CObjectSentrygun *sentry =
 				dynamic_cast<CObjectSentrygun *>(this->m_hTarget());
 			if (sentry != nullptr &&
-				sentry->m_bIsCarried && sentry->GetOwner() != nullptr) {
+				sentry->m_bCarried && sentry->GetOwner() != nullptr) {
 				this->m_vecTargetPos = sentry->GetOwner()->GetAbsOrigin();
 			}
 		}

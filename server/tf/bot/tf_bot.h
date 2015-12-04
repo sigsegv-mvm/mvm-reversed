@@ -38,7 +38,7 @@ public:
 		
 		REMOVEONDEATH           = (1 << 0),
 		AGGRESSIVE              = (1 << 1),
-		// 4?
+		// 2?
 		SUPPRESSFIRE            = (1 << 3),
 		DISABLEDODGE            = (1 << 4),
 		BECOMESPECTATORONDEATH  = (1 << 5),
@@ -145,6 +145,17 @@ public:
 	// DeleteSquad
 	// 
 	
+	// IsAttentionFocused
+	// IsAttentionFocusedOn
+	// IsSuspectedSpy
+	// IsKnownSpy
+	// SuspectSpy
+	// RealizeSpy
+	// ForgetSpy
+	// DeleyedThreatNotice
+	// UpdateDelayedThreatNotices
+	// Touch
+	
 	// CTFBot::AddItem was previously CTFBotSpawner::AddItemToBot
 	
 	// functions only in certain game versions:
@@ -207,6 +218,7 @@ private:
 	// 0x2840: CTFPlayer: int m_nExperienceLevel
 	// 0x2844: CTFPlayer: int m_nExperienceLevelProgress
 	// 0x284c: CTFPlayer: dword, probably CWaveSpawnPopulator*
+	// 0x2894: CTFPlayer: CountdownTimer m_ctSapNotice
 	
 	// 0x2a3c: NextBotPlayer<CTFPlayer>: CountdownTimer
 	// 0x2a54: NextBotPlayer<CTFPlayer>: CountdownTimer
@@ -232,6 +244,23 @@ private:
 	DifficultyType m_iSkill;   // +0x2b18
 	
 	// 0x2bb8: CTFBot: CountdownTimer
+	
+	enum IgnoreMask : int
+	{
+		/* the ordering of these is weird */
+		IGNORE_SCOUTS   = (1 << 0),
+		IGNORE_SOLDIERS = (1 << 1),
+		IGNORE_PYROS    = (1 << 2),
+		IGNORE_DEMOS    = (1 << 3),
+		IGNORE_HEAVIES  = (1 << 4),
+		IGNORE_MEDICS   = (1 << 5),
+		IGNORE_ENGIES   = (1 << 6),
+		IGNORE_SNIPERS  = (1 << 7),
+		IGNORE_SPIES    = (1 << 8),
+		IGNORE_SENTRIES = (1 << 9),
+	};
+	IgnoreMask m_nIgnoreMask; // +0x2bc8
+	
 	// 0x2be8: CTFBot: CountdownTimer
 	
 	float m_flScale; // +0x2bf4
@@ -240,6 +269,8 @@ private:
 	// 0x2bfc: CTFBot: 
 	CHandle<CBaseEntity> m_hSBTarget; // +0x2c00
 	// 0x2c04: CTFBot: CUtlString
+	
+	float m_flVisionRange; // +0x2c3c
 	
 	// TODO: 0x2c54
 	CUtlStringList m_TeleportWhere; // +0x2c58

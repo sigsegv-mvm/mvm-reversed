@@ -76,7 +76,7 @@ float CTFBotLocomotion::GetRunSpeed() const
 {
 	CTFBot *actor = static_cast<CTFBot *>(this->GetBot()->GetEntity());
 	
-	return GetPlayerClassData(actor->m_Shared.GetClassIndex()->m_flMaxSpeed;
+	return GetPlayerClassData(actor->GetPlayerClass()->GetClassIndex()->m_flMaxSpeed;
 }
 
 bool CTFBotLocomotion::IsAreaTraversable(const CNavArea *area) const
