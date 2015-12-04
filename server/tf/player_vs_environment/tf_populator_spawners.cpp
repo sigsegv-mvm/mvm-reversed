@@ -603,7 +603,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 			bot->m_Shared.SetRageMeter(100.0f);
 		}
 		
-		int model_class = bot->GetPlayerClass()->m_iClass;
+		int model_class = bot->GetPlayerClass()->GetClassIndex();
 		// TODO: find out what's at CPopulationManager+1650?
 		// presumably it's the EventPopfile value
 		// TODO: holiday enum

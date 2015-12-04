@@ -12,12 +12,12 @@ public:
 	
 	virtual void Update() override;
 	
-	virtual float Approach(const Vector& v1, float f1) override;
+	virtual void Approach(const Vector& v1, float f1) override;
 	virtual void Jump() override;
 	virtual float GetMaxJumpHeight() const override;
 	virtual float GetDeathDropHeight() const override;
 	virtual float GetRunSpeed() const override;
-	virtual bool IsAreaTraversable(const CNavArea *area) const;
-	virtual bool IsEntityTraversable(CBaseEntity *ent, TraverseWhenType ttype) const;
-	virtual void AdjustPosture(const Vector& v1);
+	virtual bool IsAreaTraversable(const CNavArea *area) const override;
+	virtual bool IsEntityTraversable(CBaseEntity *ent, TraverseWhenType ttype) const override;
+	virtual void AdjustPosture(const Vector& v1) override;
 };

@@ -12,8 +12,8 @@ public:
 	
 	virtual void Reset() override;
 	
-	virtual float Approach(const Vector& v1, float f1) override;
-	virtual float DriveTo(const Vector& v1) override;
+	virtual void Approach(const Vector& v1, float f1) override;
+	virtual void DriveTo(const Vector& v1) override;
 	virtual bool ClimbUpToLedge(const Vector& v1, const Vector& v2, const CBaseEntity *ent) override;
 	virtual void JumpAcrossGap(const Vector& v1, const Vector& v2) override;
 	virtual void Jump() override;

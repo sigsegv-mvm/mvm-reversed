@@ -40,12 +40,12 @@ void ILocomotion::Update()
 }
 
 
-float ILocomotion::Approach(const Vector& v1, float f1)
+void ILocomotion::Approach(const Vector& v1, float f1)
 {
 	this->m_itUnknown.Start();
 }
 
-float ILocomotion::DriveTo(const Vector& v1)
+void ILocomotion::DriveTo(const Vector& v1)
 {
 	this->m_itUnknown.Start();
 }

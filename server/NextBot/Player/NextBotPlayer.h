@@ -7,29 +7,29 @@
 class INextBotPlayerInput
 {
 public:
-	virtual void PressFireButton(float duration) = 0;
+	virtual void PressFireButton(float duration = -1.0f) = 0;
 	virtual void ReleaseFireButton() = 0;
-	virtual void PressAltFireButton(float duration) = 0;
+	virtual void PressAltFireButton(float duration = -1.0f) = 0;
 	virtual void ReleaseAltFireButton() = 0;
-	virtual void PressMeleeButton(float duration) = 0;
+	virtual void PressMeleeButton(float duration = -1.0f) = 0;
 	virtual void ReleaseMeleeButton() = 0;
-	virtual void PressUseButton(float duration) = 0;
+	virtual void PressUseButton(float duration = -1.0f) = 0;
 	virtual void ReleaseUseButton() = 0;
-	virtual void PressReloadButton(float duration) = 0;
+	virtual void PressReloadButton(float duration = -1.0f) = 0;
 	virtual void ReleaseReloadButton() = 0;
-	virtual void PressForwardButton(float duration) = 0;
+	virtual void PressForwardButton(float duration = -1.0f) = 0;
 	virtual void ReleaseForwardButton() = 0;
-	virtual void PressBackwardButton(float duration) = 0;
+	virtual void PressBackwardButton(float duration = -1.0f) = 0;
 	virtual void ReleaseBackwardButton() = 0;
-	virtual void PressLeftButton(float duration) = 0;
+	virtual void PressLeftButton(float duration = -1.0f) = 0;
 	virtual void ReleaseLeftButton() = 0;
-	virtual void PressRightButton(float duration) = 0;
+	virtual void PressRightButton(float duration = -1.0f) = 0;
 	virtual void ReleaseRightButton() = 0;
-	virtual void PressJumpButton(float duration) = 0;
+	virtual void PressJumpButton(float duration = -1.0f) = 0;
 	virtual void ReleaseJumpButton() = 0;
-	virtual void PressCrouchButton(float duration) = 0;
+	virtual void PressCrouchButton(float duration = -1.0f) = 0;
 	virtual void ReleaseCrouchButton() = 0;
-	virtual void PressWalkButton(float duration) = 0;
+	virtual void PressWalkButton(float duration = -1.0f) = 0;
 	virtual void ReleaseWalkButton() = 0;
 	virtual void SetButtonScale(float forward, float side) = 0;
 };
