@@ -74,9 +74,13 @@ float CTFBotLocomotion::GetDeathDropHeight() const
 
 float CTFBotLocomotion::GetRunSpeed() const
 {
+	/* BUG: this function is the reason why fast bots (e.g. super scouts) will
+	 * occasionally decide to randomly slow down to their class's normal maximum
+	 * movement speed */
+	
 	CTFBot *actor = static_cast<CTFBot *>(this->GetBot()->GetEntity());
 	
-	return GetPlayerClassData(actor->GetPlayerClass()->GetClassIndex()->m_flMaxSpeed;
+	return GetPlayerClassData(actor->GetPlayerClass()->GetClassIndex())->m_flMaxSpeed;
 }
 
 bool CTFBotLocomotion::IsAreaTraversable(const CNavArea *area) const
