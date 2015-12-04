@@ -122,4 +122,4 @@ protected:
 //template<> class NextBotPlayer<CTFPlayer>;
 
 
-// TODO: NextBotCreatePlayerBot<CTFBot>(const char *, bool)
+template<class T> T *NextBotCreatePlayerBot<T>(const char *name, bool fakeclient);

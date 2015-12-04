@@ -494,3 +494,28 @@ template<class T> float NextBotPlayer<T>::GetDistanceBetween(CBaseEntity *ent) c
 	return pos_me.DistTo(pos_ent);
 }
 
+
+template<class T> T *NextBotCreatePlayerBot<T>(const char *name, bool fakeclient)
+{
+	ClientPutInServerOverride(CTFBot::AllocatePlayerEntity);
+	edict_t *client = engine->CreateFakeClientEx(name, fakeclient);
+	ClientPutInServerOverride(nullptr);
+	
+	if (client == nullptr) {
+		Msg("CreatePlayerBot: Unable to create bot %s - "
+			"CreateFakeClient() returned NULL.\n", name);
+		return nullptr;
+	}
+	
+	CTFBot *bot = dynamic_cast<CTFBot *>(CBaseEntity::Instance(client));
+	if (bot == nullptr) {
+		Error("CreatePlayerBot: Could not Instance() from the bot edict.\n");
+		return nullptr;
+	}
+	
+	bot->SetPlayerName(name);
+	bot->ClearFlags();
+	bot->AddFlag(FL_CLIENT | FL_FAKECLIENT);
+	
+	return bot;
+}
