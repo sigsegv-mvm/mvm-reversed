@@ -261,6 +261,8 @@ private:
 	};
 	IgnoreMask m_nIgnoreMask; // +0x2bc8
 	
+	// 0x2be0: CTFBot: CHandle<T> attention focus
+	
 	// 0x2be8: CTFBot: CountdownTimer
 	
 	float m_flScale; // +0x2bf4

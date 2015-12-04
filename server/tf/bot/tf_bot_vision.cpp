@@ -120,7 +120,8 @@ bool CTFBotVision::IsIgnored(CBaseEntity *ent) const
 {
 	CTFBot *actor = static_cast<CTFBot *>(this->GetBot()->GetEntity());
 	
-	// TODO: look into this...
+	/* this is irrelevant CTFBotActionPoint stuff, which is only really used by
+	 * CTFBotGenerator (for training mode or something) */
 	if (actor->IsAttentionFocused() && !actor->IsAttentionFocusedOn(ent)) {
 		return false;
 	}
