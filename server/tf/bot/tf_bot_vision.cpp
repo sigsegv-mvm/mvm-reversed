@@ -21,13 +21,72 @@ CTFBotVision::~CTFBotVision()
 
 void CTFBotVision::Update()
 {
-	// TODO
+	if (TFGameRules()->IsMannVsMachineMode()) {
+		if (!this->m_ctUpdate.IsElapsed()) {
+			return;
+		}
+		
+		this->m_ctUpdate.Start(RandomFloat(0.9f, 1.1f));
+	}
+	
+	IVision::Update();
+	
+	CTFBot *actor = static_cast<CTFBot *>(this->GetBot()->GetEntity());
+	if (actor == nullptr) {
+		return;
+	}
+	
+	int enemy_team = actor->GetTeamNumber();
+	switch (enemy_team) {
+	case TF_TEAM_RED:
+		enemy_team = TF_TEAM_BLUE;
+		break;
+	case TF_TEAM_BLUE:
+		enemy_team = TF_TEAM_RED;
+		break;
+	}
+	
+	CUtlVector<CTFPlayer *> enemies;
+	CollectPlayers<CTFPlayer>(enemies, enemy_team, true, false);
+	
+	FOR_EACH_VEC(enemies, i) {
+		CTFPlayer *enemy = enemies[i];
+		
+		if (enemy->IsPlayerClass(TF_CLASS_SPY)) {
+			const CKnownEntity *known = this->GetKnown(enemy);
+			
+			if (known != nullptr && (known->IsVisibleRecently() ||
+				!player->m_Shared.InCond(TF_COND_DISGUISING))) {
+				actor->ForgetSpy(enemy);
+			}
+		}
+	}
 }
 
 
 void CTFBotVision::CollectPotentiallyVisibleEntities(CUtlVector<CBaseEntity *> *ents)
 {
-	// TODO
+	VPROF_BUDGET("CTFBotVision::CollectPotentiallyVisibleEntities", "NextBot");
+	
+	ents->RemoveAll();
+	
+	for (int i = 0; i < gpGlobals->maxClients; ++i) {
+		CBaseEntity *client = UTIL_PlayerByIndex(i);
+		if (client == nullptr) {
+			continue;
+		}
+		
+		if (ENTINDEX(client) != 0 && client->IsPlayer() &&
+			client->IsConnected() && client->IsAlive()) {
+			ents->AddToTail(client);
+		}
+	}
+	
+	this->UpdatePotentiallyVisibleNPCVector();
+	FOR_EACH_VEC(this->m_PVNPCs, i) {
+		CBaseEntity *npc = this->m_PVNPCs[i]();
+		ents->AddToTail(npc);
+	}
 }
 
 float CTFBotVision::GetMaxVisionRange() const
@@ -287,5 +346,36 @@ bool CTFBotVision::IsVisibleEntityNoticed(CBaseEntity *ent) const
 
 void CTFBotVision::UpdatePotentiallyVisibleNPCVector()
 {
-	// TODO
+	if (!this->m_ctUpdatePVNPCs.IsElapsed()) {
+		return;
+	}
+	this->m_ctUpdatePVNPCs.Start(RandomFloat(3.0f, 4.0f));
+	
+	this->m_PVNPCs.RemoveAll();
+	
+	bool ignore_teleporters = false;
+	if (TFGameRules()->IsMannVsMachineMode()) {
+		CBaseEntity *actor = this->GetBot()->GetEntity();
+		ignore_teleporters = (actor->GetTeamNumber() == TF_TEAM_BLUE);
+	}
+	
+	for (int i = 0; i < IBaseObjectAutoList::AutoList().Count(); ++i) {
+		CBaseObject *obj = static_cast<CBaseObject *>(IBaseObjectAutoList::AutoList()[i]);
+		
+		if (obj->ObjectType() == OBJ_SENTRYGUN ||
+			(obj->ObjectType() == OBJ_DISPENSER && obj->ClassMatches("obj_dispenser") ||
+			(obj->ObjectType() == OBJ_TELEPORTER && !ignore_teleporters)) {
+			this->m_PVNPCs.AddToTail(obj);
+		}
+	}
+	
+	CUtlVector<INextBot *> nextbots;
+	TheNextBots()->CollectAllBots(&nextbots);
+	
+	FOR_EACH_VEC(nextbots, i) {
+		CBaseEntity *ent = nextbots[i]->GetEntity();
+		if (ent != nullptr && !ent->IsPlayer()) {
+			this->m_PVNPCs.AddToTail(ent);
+		}
+	}
 }

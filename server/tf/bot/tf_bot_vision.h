@@ -21,32 +21,8 @@ public:
 private:
 	void UpdatePotentiallyVisibleNPCVector();
 	
-	// TODO
-	// 64 
-	// 68 
-	// 6c 
-	// 70 
-	// 74 
-	// 78 
-	// 7c 
-	// 80 
-	// 84 
-	// 88 
-	// 8c 
-	// 90 
-	// 94 
-	// 98 
-	// 9c 
-	// a0 
-	// a4 
-	// a8 
-	// ac 
-	// b0 
-	// b4 
-	// b8 
-	// bc 
-	// c0 
-	// c4 CUtlVector<CHandle<CBaseCombatCharacter>>
-	// d8 CountdownTimer
-	// e4 CountdownTimer
+	/* offsets 0x64-0xc3 seem to be completely unused */
+	CUtlVector<CHandle<CBaseCombatCharacter>> m_PVNPCs; // +0xc4
+	CountdownTimer m_ctUpdatePVNPCs;                    // +0xd8
+	CountdownTimer m_ctUpdate;                          // +0xe4
 };
