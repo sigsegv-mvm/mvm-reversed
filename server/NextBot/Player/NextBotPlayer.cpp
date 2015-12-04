@@ -495,7 +495,7 @@ template<class T> float NextBotPlayer<T>::GetDistanceBetween(CBaseEntity *ent) c
 }
 
 
-template<class T> T *NextBotCreatePlayerBot<T>(const char *name, bool fakeclient)
+template<> CTFBot *NextBotCreatePlayerBot<CTFBot>(const char *name, bool fakeclient)
 {
 	ClientPutInServerOverride(CTFBot::AllocatePlayerEntity);
 	edict_t *client = engine->CreateFakeClientEx(name, fakeclient);

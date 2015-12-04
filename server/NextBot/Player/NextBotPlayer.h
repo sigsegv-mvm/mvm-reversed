@@ -123,3 +123,4 @@ protected:
 
 
 template<class T> T *NextBotCreatePlayerBot<T>(const char *name, bool fakeclient);
+template<> CTFBot *NextBotCreatePlayerBot<CTFBot>(const char *name, bool fakeclient);
