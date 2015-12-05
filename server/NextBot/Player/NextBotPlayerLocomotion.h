@@ -11,9 +11,10 @@ public:
 	virtual ~PlayerLocomotion();
 	
 	virtual void Reset() override;
+	virtual void Update() override;
 	
-	virtual void Approach(const Vector& v1, float f1) override;
-	virtual void DriveTo(const Vector& v1) override;
+	virtual void Approach(const Vector& dst, float f1) override;
+	virtual void DriveTo(const Vector& dst) override;
 	virtual bool ClimbUpToLedge(const Vector& v1, const Vector& v2, const CBaseEntity *ent) override;
 	virtual void JumpAcrossGap(const Vector& v1, const Vector& v2) override;
 	virtual void Jump() override;
@@ -34,8 +35,8 @@ public:
 	virtual bool IsUsingLadder() const override;
 	virtual bool IsAscendingOrDescendingLadder() const override;
 	virtual bool IsAbleToAutoCenterOnLadder() const override;
-	virtual void FaceTowards(const Vector& v1) override;
-	virtual void SetDesiredLean(const QAngle& q1) override;
+	virtual void FaceTowards(const Vector& vec) override;
+	virtual void SetDesiredLean(const QAngle& ang) override;
 	virtual QAngle& GetDesiredLean() const override;
 	virtual Vector& GetFeet() const override;
 	virtual float GetStepHeight() const override;
@@ -46,20 +47,45 @@ public:
 	virtual float GetMaxAcceleration() const override;
 	virtual float GetMaxDeceleration() const override;
 	virtual Vector& GetVelocity() const override;
-	virtual void AdjustPosture(const Vector& v1) override;
+	virtual void AdjustPosture(const Vector& vec) override;
 	
 	virtual void SetMinimumSpeedLimit(float speed);
 	virtual void SetMaximumSpeedLimit(float speed);
 	
-protected:
-	// TODO
-	// 58 dword 0
-	// 5c 
-	// 60 CountdownTimer
-	// 6c 
-	// ...
-	// 84 float minimum speed limit
-	// 88 float maximum speed limit
-	// ...
-	// 98 CountdownTimer
+private:
+	enum LadderState : int
+	{
+		NONE             = 0,
+		ASCEND_APPROACH  = 1,
+		DESCEND_APPROACH = 2,
+		ASCEND           = 3,
+		DESCEND          = 4,
+		ASCEND_DISMOUNT  = 5,
+		DESCEND_DISMOUNT = 6,
+	};
+	
+	bool IsClimbPossible(INextBot *nextbot, const CBaseEntity *ent);
+	
+	bool TraverseLadder();
+	LadderState ApproachAscendingLadder();
+	LadderState ApproachDescendingLadder();
+	LadderState AscendLadder();
+	LadderState DescendLadder();
+	LadderState DismountLadderTop();
+	LadderState DismountLadderBottom();
+	
+	CBasePlayer *m_Player;          // +0x58
+	bool m_bJumping;                // +0x5c
+	CountdownTimer m_ctJump;        // +0x60
+	bool m_bClimbing;               // +0x6c
+	bool m_bGapJumping;             // +0x6d
+	Vector m_vecClimbJump;          // +0x70
+	// 7c byte, something about being airborne after jumping/climbing
+	float m_flDesiredSpeed;         // +0x80
+	float m_flMinSpeedLimit;        // +0x84
+	float m_flMaxSpeedLimit;        // +0x88
+	LadderState m_iLadderState;     // +0x8c
+	const CNavLadder *m_NavLadder;  // +0x90
+	const CNavArea *m_NavArea;      // +0x94
+	CountdownTimer m_ctPlayerLoco2; // +0x98
 };
