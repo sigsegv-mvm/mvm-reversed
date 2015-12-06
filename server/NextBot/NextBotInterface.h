@@ -46,7 +46,7 @@ public:
 	virtual IIntention *GetIntentionInterface() const;
 	virtual IVision *GetVisionInterface() const;
 	
-	virtual bool SetPosition(const Vector& v1);
+	virtual bool SetPosition(const Vector& pos);
 	virtual Vector& GetPosition() const;
 	
 	virtual bool IsEnemy(const CBaseEntity *ent) const;
@@ -68,20 +68,20 @@ public:
 	virtual void SetCurrentPath(const PathFollower *follower);
 	virtual void NotifyPathDestruction(const PathFollower *follower);
 	
-	virtual bool IsRangeLessThan(CBaseEntity *ent, float f1) const;
-	virtual bool IsRangeLessThan(const Vector& v1, float f1) const;
-	virtual bool IsRangeGreaterThan(CBaseEntity *ent, float f1) const;
-	virtual bool IsRangeGreaterThan(const Vector& v1, float f1) const;
+	virtual bool IsRangeLessThan(CBaseEntity *ent, float dist) const;
+	virtual bool IsRangeLessThan(const Vector& vec, float dist) const;
+	virtual bool IsRangeGreaterThan(CBaseEntity *ent, float dist) const;
+	virtual bool IsRangeGreaterThan(const Vector& vec, float dist) const;
 	
 	virtual float GetRangeTo(CBaseEntity *ent) const;
-	virtual float GetRangeTo(const Vector& v1) const;
+	virtual float GetRangeTo(const Vector& vec) const;
 	virtual float GetRangeSquaredTo(CBaseEntity *ent) const;
-	virtual float GetRangeSquaredTo(const Vector& v1) const;
+	virtual float GetRangeSquaredTo(const Vector& vec) const;
 	
 	virtual bool IsDebugging(unsigned int type) const;
 	virtual char *GetDebugIdentifier() const;
-	virtual bool IsDebugFilterMatch(const char *s1) const;
-	virtual void DisplayDebugText(const char *s1) const;
+	virtual bool IsDebugFilterMatch(const char *filter) const;
+	virtual void DisplayDebugText(const char *text) const;
 	
 	bool BeginUpdate();
 	void EndUpdate();
@@ -94,7 +94,21 @@ public:
 	void RegisterComponent(INextBotComponent *component);
 	
 protected:
-	// TODO
+	void UpdateImmobileStatus();
 	
+	INextBotComponent *m_ComponentList; // +0x04
+	PathFollower *m_CurrentPath;        // +0x08
+	// 0c int, default -1, from NextBotManager::Register
+	// 10 byte
+	// 14 dword -999
+	// 18 
+	int m_iDebugTextOffset;             // +0x1c
+	Vector m_vecLastPosition;           // +0x20
+	CountdownTimer m_ctImmobileCheck;   // +0x2c
+	IntervalTimer m_itImmobileEpoch;    // +0x38
+	ILocomotion *m_LocoInterface;       // +0x3c
+	IBody *m_BodyInterface;             // +0x40
+	IIntention *m_IntentionInterface;   // +0x44
+	IVision *m_VisionInterface;         // +0x48
 	// 4c CUtlVector<NextBotDebugLineType *>
 };

@@ -44,7 +44,7 @@ public:
 	void NotifyBeginUpdate(INextBot *nextbot);
 	void NotifyEndUpdate(INextBot *nextbot);
 	
-	unsigned int Register(INextBot *nextbot);
+	int Register(INextBot *nextbot);
 	void UnRegister(INextBot *nextbot);
 	
 	static NextBotManager *sInstance = nullptr;
@@ -56,7 +56,7 @@ protected:
 	// 04 CUtlLinkedList<INextBot *> (sizeof: 0x1c)
 	// 20 
 	// ...
-	// 34 
+	unsigned int m_nDebugMask; // +0x34
 	// 38 CUtlVector<DebugFilter>
 	// 4c 
 };
