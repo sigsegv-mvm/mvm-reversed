@@ -18,9 +18,8 @@ public:
 	
 	enum class PostureType : int
 	{
-		// TODO
+		STAND  = 0,
 		CROUCH = 1,
-		// TODO
 	};
 	
 	enum class ArousalType : int
@@ -37,8 +36,8 @@ public:
 	virtual bool SetPosition(const Vector& pos);
 	virtual Vector& GetEyePosition() const;
 	virtual Vector& GetViewVector() const;
-	virtual void AimHeadTowards(const Vector& vec, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *s1);
-	virtual void AimHeadTowards(CBaseEntity *ent, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *s1);
+	virtual void AimHeadTowards(const Vector& vec, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason);
+	virtual void AimHeadTowards(CBaseEntity *ent, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason);
 	virtual bool IsHeadAimingOnTarget() const;
 	virtual bool IsHeadSteady() const;
 	virtual float GetHeadSteadyDuration() const;

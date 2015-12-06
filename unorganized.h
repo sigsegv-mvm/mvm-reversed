@@ -297,12 +297,13 @@ struct static_attrib_t
 
 
 #define COLOR_WHITE    Color(255, 255, 255, 255)
-#define COLOR_LTYELLOW Color(255, 255, 150, 255)
-#define COLOR_LTGREEN  Color(150, 255, 150, 255)
-#define COLOR_GREEN    Color(  0, 255,   0, 255)
-#define COLOR_RED      Color(255,   0,   0, 255)
-#define COLOR_MAGENTA  Color(255,   0, 255, 255)
 #define COLOR_GRAY100  Color(100, 100, 100, 255)
+#define COLOR_RED      Color(255,   0,   0, 255)
+#define COLOR_ORANGE   Color(255, 100,   0, 255)
+#define COLOR_LTYELLOW Color(255, 255, 150, 255)
+#define COLOR_GREEN    Color(  0, 255,   0, 255)
+#define COLOR_LTGREEN  Color(150, 255, 150, 255)
+#define COLOR_MAGENTA  Color(255,   0, 255, 255)
 
 
 class INextBotEntityFilter
@@ -357,7 +358,8 @@ class INextBotReply
 public:
 	enum class FailureReason : int
 	{
-		// TODO
+		REJECTED  = 0, // AimHeadTowards denied the aim
+		PREEMPTED = 1, // a higher priority aim preempted our aim
 	};
 	
 	virtual void OnSuccess(INextBot *nextbot);
