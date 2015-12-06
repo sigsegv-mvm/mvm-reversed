@@ -588,7 +588,7 @@ void CWaveSpawnPopulator::Update()
 				}
 			}
 			
-			this->m_ActiveBots.AddToTail(ent1->GetRefEHandle());
+			this->m_ActiveBots.AddToTail(ent1);
 		}
 		
 		if (this->IsFinishedSpawning()) {
@@ -658,7 +658,7 @@ void IPopulator::OnPlayerKilled(CTFPlayer *player)
 
 void CWaveSpawnPopulator::OnPlayerKilled(CTFPlayer *player)
 {
-	this->m_ActiveBots.FindAndFastRemove(player->GetRefEHandle());
+	this->m_ActiveBots.FindAndFastRemove(player);
 }
 
 void CWave::OnPlayerKilled(CTFPlayer *player)

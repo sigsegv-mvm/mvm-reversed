@@ -347,7 +347,7 @@ int CSentryGunSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity
 	sentry->InitializeMapPlacedObject();
 	
 	if (ents != nullptr) {
-		ents->AddToTail(sentry->GetRefEHandle());
+		ents->AddToTail(sentry);
 	}
 	
 	return 1;
@@ -387,7 +387,7 @@ int CTankSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *e
 	}
 	
 	if (ents != nullptr) {
-		ents->AddToTail(tank->GetRefEHandle());
+		ents->AddToTail(tank);
 	}
 	
 	return 1;
@@ -633,7 +633,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		}
 		
 		if (ents != nullptr) {
-			ents->AddToTail(bot->GetRefEHandle());
+			ents->AddToTail(bot);
 		}
 		
 		if (TFGameRules()->IsMannVsMachineMode() && bot->IsMiniBoss()) {

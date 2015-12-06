@@ -19,7 +19,7 @@ CKnownEntity::CKnownEntity(CBaseEntity *ent)
 	this->m_flTimeLastBecameKnown = gpGlobals->curtime;
 	
 	if (ent != nullptr) {
-		this->m_Entity = ent->GetRefEHandle();
+		this->m_hEntity = ent;
 		this->UpdatePosition();
 	}
 }
@@ -31,21 +31,21 @@ CKnownEntity::~CKnownEntity()
 
 void CKnownEntity::Destroy()
 {
-	this->m_Entity = nullptr;
+	this->m_hEntity = nullptr;
 	this->m_bIsVisible = false;
 }
 
 void CKnownEntity::UpdatePosition()
 {
-	CBaseEntity *ent = this->m_Entity;
+	CBaseEntity *ent = this->m_hEntity();
 	if (ent == nullptr) {
 		return;
 	}
 	this->m_Position = ent->GetAbsOrigin();
 	
 	CNavArea *area = nullptr;
-	if (this->m_Entity->IsCombatCharacter()) {
-		CBaseCombatCharacter *cbcc = static_cast<CBaseCombatCharacter *>(this->m_Entity.Get());
+	if (this->m_hEntity()->IsCombatCharacter()) {
+		CBaseCombatCharacter *cbcc = static_cast<CBaseCombatCharacter *>(this->m_hEntity());
 		area = cbcc->GetLastKnownArea();
 	}
 	this->m_NavArea = area;
@@ -55,7 +55,7 @@ void CKnownEntity::UpdatePosition()
 
 CBaseEntity *CKnownEntity::GetEntity() const
 {
-	return this->m_Entity;
+	return this->m_hEntity();
 }
 
 const Vector *CKnownEntity::GetLastKnownPosition() const

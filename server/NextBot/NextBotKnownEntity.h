@@ -31,7 +31,7 @@ public:
 	virtual bool Is(CBaseEntity *ent) const;
 	
 private:
-	CHandle<CBaseEntity> m_Entity;   // +0x04
+	CHandle<CBaseEntity> m_hEntity;  // +0x04
 	Vector m_Position;               // +0x08
 	bool m_bLastKnownPosWasSeen;     // +0x14
 	CNavArea *m_NavArea;             // +0x18
