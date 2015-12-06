@@ -19,7 +19,7 @@ ConVar bot_mimic("bot_mimic", "0", FCVAR_NONE,
 PlayerBody::PlayerBody(INextBot *nextbot)
 	: IBody(nextbot)
 {
-	// TODO
+	this->m_Player = static_cast<CBasePlayer *>(nextbot->GetEntity());
 }
 
 PlayerBody::~PlayerBody()
@@ -29,12 +29,169 @@ PlayerBody::~PlayerBody()
 
 void PlayerBody::Reset()
 {
-	// TODO
+	this->m_iPosture = IBody::PostureType::STAND;
+	
+	this->m_angLastEyeAngles  = vec3_angle;
+	this->m_vecAimTarget      = vec3_origin;
+	this->m_vecTargetVelocity = vec3_origin;
+	this->m_vecLastEyeVectors = vec3_origin;
+	
+	this->m_hAimTarget = nullptr;
+	this->m_AimReply   = nullptr;
+	this->m_iAimPriority = LookAtPriorityType::BORING;
+	
+	this->m_ctAimDuration.Invalidate();
+	this->m_itAimStart.Invalidate();
+	this->m_itHeadSteady.Invalidate();
+	this->m_ctResettle.Invalidate();
+	
+	this->m_bHeadOnTarget = false;
+	this->m_bSightedIn    = false;
 }
 
 void PlayerBody::Upkeep()
 {
-	// TODO
+	static ConVarRef bot_mimic("bot_mimic");
+	if (bot_mimic.IsValid() && bot_mimic.GetDefault() == nullptr) {
+		return;
+	}
+	
+	float frametime = gpGlobals->frametime;
+	if (gpGlobals->frametime < 1.0e-5f) {
+		return;
+	}
+	
+	CBasePlayer *actor = static_cast<CBasePlayer *>(this->GetBot()->GetEntity());
+	
+	QAngle eye_ang = actor->EyeAngles() + actor->GetPunchAngle();
+	
+	bool head_steady;
+	if (abs((int)AngleDiff(eye_ang.x, this->m_angLastEyeAngles.x)) >
+		(frametime * nb_head_aim_steady_max_rate.GetFloat()) ||
+		abs((int)AngleDiff(eye_ang.y, this->m_angLastEyeAngles.y)) >
+		(frametime * nb_head_aim_steady_max_rate.GetFloat())) {
+		this->m_itHeadSteady.Invalidate();
+		head_steady = false;
+	} else {
+		if (!this->m_itHeadSteady.HasStarted()) {
+			this->m_itHeadSteady.Start();
+		}
+		head_steady = true;
+	}
+	
+	if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT) && this->IsHeadSteady()) {
+		float radius = Clamp(this->GetHeadSteadyDuration * (1.0f / 3.0f),
+			0.0f, 1.0f) * 10.0f;
+		NDebugOverlay::Circle(actor->EyePosition(),
+			radius, 0, 255, 0, 255, true, 2 * frametime);
+	}
+	
+	this->m_angLastEyeAngles = eye_ang;
+	
+	if (this->m_bSightedIn && this->m_ctAimDuration.IsElapsed()) {
+		return;
+	}
+	
+	const Vector& eye_vec = this->GetViewVector();
+	if (acosf(this->m_vecLastEyeVectors.Dot(eye_vec)) * (180.0f / M_PI) >
+		nb_head_aim_resettle_angle.GetFloat()) {
+		this->m_ctResettle.Start(RandomFloat(0.9f, 1.1f));
+		this->m_vecLastEyeVectors = eye_vec;
+	} else if (!this->m_ctResettle.HasStarted() || this->m_ctResettle.IsElapsed()) {
+		this->m_ctResettle.Invalidate();
+		
+		CBaseEntity *target_ent = this->m_hAimTarget();
+		if (target_ent != nullptr) {
+			if (this->m_ctAimTracking.IsElapsed()) {
+				Vector target_point;
+				if (target_ent->IsCombatCharacter()) {
+					target_point = this->GetBot()->GetIntentionInterface(this->GetBot(),
+						target_ent->MyCombatCharacterPointer());
+				} else {
+					target_point = target_ent->WorldSpaceCenter();
+				}
+				
+				Vector delta = target_point - this->m_vecAimTarget +
+					(this->GetHeadAimSubjectLeadTime() * target_ent->GetAbsVelocity());
+				
+				float scale = delta.Length() / Max(frametime,
+					this->GetHeadAimTrackingInterval());
+				delta.NormalizeInPlace();
+				
+				this->m_vecTargetVelocity = (scale * delta) +
+					target_ent->GetAbsVelocity();
+				
+				this->m_ctAimTracking.Start(RandomFloat(0.8f, 1.2f));
+			}
+			
+			this->m_vecAimTarget += frametime * this->m_vecTargetVelocity;
+		}
+	}
+	
+	Vector eye_to_target = this->m_vecAimTarget - this->GetEyePosition();
+	eye_to_target.NormalizeInPlace();
+	
+	QAngle ang_to_target;
+	VectorAngles(eye_to_target, ang_to_target);
+	
+	if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+		NDebugOverlay::Line(this->GetEyePosition(),
+			this->GetEyePosition() + (100.0f * eye_vec),
+			255, 255, 0, false, 2 * frametime);
+		
+		NDebugOverlay::HorzArrow(this->GetEyePosition(),
+			this->m_vecAimTarget, (head_steady ? 2.0f : 3.0f),
+			(this->m_bHeadOnTarget ? 255 : 0),
+			(target_ent != nullptr ? 255 : 0), 255, 255, false, 2 * frametime);
+	}
+	
+	float cos_error = eye_to_target.Dot(eye_vec);
+	
+	/* must be within ~11.5 degrees to be considered on target */
+	if (cos_error <= 0.98f) {
+		this->m_bHeadOnTarget = false;
+	} else {
+		this->m_bHeadOnTarget = true;
+		
+		if (!this->m_bSightedIn) {
+			this->m_bSightedIn = true;
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+				ConColorMsg(COLOR_ORANGE, "%3.2f: %s Look At SIGHTED IN\n",
+					gpGlobals->curtime, this->m_Player->GetPlayerName());
+			}
+		}
+		
+		if (this->m_AimReply != nullptr) {
+			this->m_AimReply->OnSuccess(this->GetBot());
+			this->m_AimReply = nullptr;
+		}
+	}
+	
+	float max_angvel = this->GetMaxHeadAngularVelocity();
+	
+	/* adjust angular velocity limit based on aim error amount */
+	if (cos_error > 0.7f) {
+		/* unintentional conversion to double due to using sin, not sinf */
+		max_angvel *= sin((3.14f / 2.0f) * (1.0f +
+			((-49.0f / 15.0f) * (cos_error - 0.7f))));
+	}
+	
+	/* start turning gradually during the first quarter second */
+	if (this->m_itAimStart.HasStarted() && this->m_itAimStart.IsLessThen(0.25f)) {
+		max_angvel *= 4.0f * m_itAimStart.GetElapsedTime();
+	}
+	
+	QAngle new_eye_angle = {
+		.x = ApproachAngle(ang_to_target.x, eye_ang.x, (max_angvel * frametime) * 0.5f),
+		.y = ApproachAngle(ang_to_target.y, eye_ang.y, (max_angvel * frametime)),
+		.z = 0.0f,
+	};
+	
+	new_eye_angle -= actor->GetPunchAngle();
+	new_eye_angle.x = AngleNormalize(new_eye_angle.x);
+	new_eye_angle.y = AngleNormalize(new_eye_angle.y);
+	
+	actor->SnapEyeAngles(new_eye_angle);
 }
 
 
@@ -56,7 +213,7 @@ Vector& PlayerBody::GetViewVector() const
 	return this->m_vecEyeVectors;
 }
 
-void PlayerBody::AimHeadTowards(const Vector& vec, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason)
+void PlayerBody::AimHeadTowards(const Vector& vec, IBody::LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason)
 {
 	if (duration <= 0.0f) {
 		duration = 0.1f;
@@ -88,15 +245,16 @@ void PlayerBody::AimHeadTowards(const Vector& vec, LookAtPriorityType priority, 
 		this->m_ctAimDuration.Start(duration);
 		this->m_iAimPriority = priority;
 		
-		/* ignore tiny changes to our aim target */
+		/* only update our aim if the target vector changed significantly */
 		if (vec->DistTo(this->m_vecAimTarget) >= 1.0f) {
-			// TODO: dword @ +0x5c = -1
+			this->m_hAimTarget = nullptr;
 			this->m_vecAimTarget = vec;
 			this->m_itAimStart.Start();
-			// TODO: bool @ +0x90 = false
+			this->m_bHeadOnTarget = false;
 			
 			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
-				NDebugOverlay::Cross3D(vec, 2.0f, 255, 255, 100, true, 2 * duration);
+				NDebugOverlay::Cross3D(vec,
+					2.0f, 255, 255, 100, true, 2 * duration);
 				
 				const char *pri_str = "";
 				switch (priority) {
@@ -135,14 +293,89 @@ void PlayerBody::AimHeadTowards(const Vector& vec, LookAtPriorityType priority, 
 	}
 }
 
-void PlayerBody::AimHeadTowards(CBaseEntity *ent, LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason)
+void PlayerBody::AimHeadTowards(CBaseEntity *ent, IBody::LookAtPriorityType priority, float duration, INextBotReply *reply, const char *reason)
 {
-	// TODO
+	if (duration <= 0.0f) {
+		duration = 0.1f;
+	}
+	
+	if (priority == this->m_iAimPriority &&
+		(!this->IsHeadSteady() || this->GetHeadSteadyDuration() <
+		nb_head_aim_settle_duration.GetFloat())) {
+		if (reply != nullptr) {
+			reply->OnFail(this->GetBot(),
+				INextBotReply::FailureReason::REJECTED);
+		}
+		
+		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
+				"previous aim not %s\n",
+				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason,
+				(this->IsHeadSteady() ? "settled long enough" : "head-steady"));
+		}
+	}
+	
+	if (priority > this->m_iAimPriority || this->m_ctAimDuration.IsElapsed()) {
+		if (this->m_AimReply != nullptr) {
+			this->m_AimReply->OnFail(this->GetBot(),
+				INextBotReply::FailureReason::PREEMPTED);
+		}
+		this->m_AimReply = reply;
+		
+		this->m_ctAimDuration.Start(duration);
+		this->m_iAimPriority = priority;
+		
+		/* only update our aim if the target entity changed */
+		CBaseEntity *prev_target = this->m_hAimTarget();
+		if (prev_target == nullptr || ent != prev_target) {
+			this->m_hAimTarget = ent;
+			this->m_itAimStart.Start();
+			this->m_bHeadOnTarget = false;
+			
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+				NDebugOverlay::Cross3D(this->m_vecAimTarget,
+					2.0f, 100, 100, 100, true, duration);
+				
+				const char *pri_str = "";
+				switch (priority) {
+				case IBody::PriorityType::BORING:
+					pri_str = "Boring";
+					break;
+				case IBody::PriorityType::INTERESTING:
+					pri_str = "Interesting";
+					break;
+				case IBody::PriorityType::IMPORTANT:
+					pri_str = "Important";
+					break;
+				case IBody::PriorityType::CRITICAL:
+					pri_str = "Critical";
+					break;
+				}
+				
+				ConColorMsg(COLOR_ORANGE, "%3.2f: %s Look At subject %s "
+					"for %3.2f s, Pri = %s, Reason = %s\n",
+					gpGlobals->curtime, this->m_Player->GetPlayerName(),
+					ent->GetClassname(), duration, pri_str,
+					(reason != nullptr ? reason : ""));
+			}
+		}
+	} else {
+		if (reply != nullptr) {
+			reply->OnFail(this->GetBot(),
+				INextBotReply::FailureReason::REJECTED);
+		}
+		
+		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
+				"higher priority aim in progress\n",
+				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason);
+		}
+	}
 }
 
 bool PlayerBody::IsHeadAimingOnTarget() const
 {
-	// TODO
+	return this->m_bHeadOnTarget;
 }
 
 bool PlayerBody::IsHeadSteady() const
