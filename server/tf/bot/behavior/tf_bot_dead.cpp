@@ -27,7 +27,7 @@ ActionResult<CTFBot> CTFBotDead::OnStart(CTFBot *actor, Action<CTFBot> *action)
 	return ActionResult<CTFBot>::Continue();
 }
 
-ActionResult<CTFBot> CTFBotDead::Update(CTFBot *actor, float f1)
+ActionResult<CTFBot> CTFBotDead::Update(CTFBot *actor, float dt)
 {
 	if (actor->IsAlive()) {
 		// TODO: figure out constructor args for CTFBotMainAction

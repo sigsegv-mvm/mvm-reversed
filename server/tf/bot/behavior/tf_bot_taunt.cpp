@@ -28,7 +28,7 @@ ActionResult<CTFBot> CTFBotTaunt::OnStart(CTFBot *actor, Action<CTFBot> *action)
 	return ActionResult<CTFBot>::Continue();
 }
 
-ActionResult<CTFBot> CTFBotTaunt::Update(CTFBot *actor, float f1)
+ActionResult<CTFBot> CTFBotTaunt::Update(CTFBot *actor, float dt)
 {
 	if (this->m_ctStart.IsElapsed()) {
 		// TODO

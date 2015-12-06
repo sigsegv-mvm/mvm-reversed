@@ -280,7 +280,7 @@ template<class T> const CKnownEntity *Behavior<T>::SelectMoreDangerousThreat(con
 }
 
 
-template<class T> void Behavior<T>::Update(T *actor, float f1)
+template<class T> void Behavior<T>::Update(T *actor, float dt)
 {
 	if (actor == nullptr || this->m_MainAction == nullptr) {
 		return;
@@ -288,7 +288,7 @@ template<class T> void Behavior<T>::Update(T *actor, float f1)
 	
 	this->m_Actor = actor;
 	
-	ActionResult<T> result = this->m_MainAction->InvokeUpdate(actor, this, f1);
+	ActionResult<T> result = this->m_MainAction->InvokeUpdate(actor, this, dt);
 	this->m_MainAction = this->m_MainAction->ApplyResult(actor, this, result);
 	
 	if (this->m_MainAction != nullptr && actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
@@ -825,7 +825,7 @@ template<class T> ActionResult<T> Action<T>::OnStart(T *actor, Action<T> *action
 	return ActionResult<T>::Continue();
 }
 
-template<class T> ActionResult<T> Action<T>::Update(T *actor, float f1)
+template<class T> ActionResult<T> Action<T>::Update(T *actor, float dt)
 {
 	return ActionResult<T>::Continue();
 }
@@ -1281,9 +1281,9 @@ template<class T> ActionResult<T> Action<T>::InvokeOnStart(T *actor, Behavior<T>
 	return this->OnStart(actor, action1);
 }
 
-template<class T> ActionResult<T> Action<T>::InvokeUpdate(T *actor, Behavior<T> *behavior, float f1)
+template<class T> ActionResult<T> Action<T>::InvokeUpdate(T *actor, Behavior<T> *behavior, float dt)
 {
-	// f1 = ???
+	// dt = (INextBotComponent *)behavior->m_flTickInterval
 	
 	
 	Action<T> *suspended = this;
@@ -1308,12 +1308,12 @@ template<class T> ActionResult<T> Action<T>::InvokeUpdate(T *actor, Behavior<T> 
 			}
 			
 			if (this->m_ActionChild != nullptr) {
-				ActionResult<T> result = this->m_ActionChild->InvokeUpdate(actor, behavior, f1);
+				ActionResult<T> result = this->m_ActionChild->InvokeUpdate(actor, behavior, dt);
 				this->m_ActionChild = this->m_ActionChild->ApplyResult(actor, behavior, result);
 			}
 			
 			VPROF_BUDGET(this->GetName(), "NextBot");
-			return this->Update(actor, f1);
+			return this->Update(actor, dt);
 		} else {
 			ActionResult<T> result = this->m_Result;
 			this->m_Result = { 0, nullptr, nullptr, 0 };

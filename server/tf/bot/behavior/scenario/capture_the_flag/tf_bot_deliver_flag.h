@@ -15,7 +15,7 @@ public:
 	virtual const char *GetName() const override;
 	
 	virtual ActionResult<CTFBot> OnStart(CTFBot *actor, Action<CTFBot> *action) override;
-	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
+	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
 	virtual EventDesiredResult<CTFBot> OnContact(CTFBot *actor, CBaseEntity *ent, CGameTrace *trace) override;
@@ -40,7 +40,7 @@ public:
 	
 	virtual const char *GetName() const override;
 	
-	virtual ActionResult<CTFBot> Update(CTFBot *actor, float f1) override;
+	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 	virtual EventDesiredResult<CTFBot> OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2) override;
 	

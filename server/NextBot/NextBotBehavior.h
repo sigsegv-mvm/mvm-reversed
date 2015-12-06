@@ -25,7 +25,7 @@ public:
 	virtual QueryResponse IsPositionAllowed(const INextBot *nextbot, const Vector& v1) const override final;
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override final;
 	
-	void Update(T *actor, float f1);
+	void Update(T *actor, float dt);
 	
 private:
 	Action<T> *m_MainAction;                    // +0x08
@@ -270,7 +270,7 @@ public:
 	virtual char *GetFullName() const;
 	
 	virtual ActionResult<T> OnStart(T *actor, Action<T> *action);
-	virtual ActionResult<T> Update(T *actor, float f1);
+	virtual ActionResult<T> Update(T *actor, float dt);
 	virtual void OnEnd(T *actor, Action<T> *action);
 	
 	virtual ActionResult<T> OnSuspend(T *actor, Action<T> *action);
@@ -339,7 +339,7 @@ private:
 	Action<T> *ApplyResult(T *actor, Behavior<T> *behavior, ActionResult<T> result);
 	
 	ActionResult<T> InvokeOnStart(T *actor, Behavior<T> *behavior, Action<T> *action1, Action<T> *action2);
-	ActionResult<T> InvokeUpdate(T *actor, Behavior<T> *behavior, float f1);
+	ActionResult<T> InvokeUpdate(T *actor, Behavior<T> *behavior, float dt);
 	void InvokeOnEnd(T *actor, Behavior<T> *behavior, Action<T> *action);
 	
 	ActionResult<T> InvokeOnResume(T *actor, Behavior<T> *behavior, Action<T> *action);

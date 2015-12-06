@@ -48,7 +48,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 	return ActionResult<CTFBot>::Continue();
 }
 
-ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float f1)
+ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float dt)
 {
 	if (this->m_ctDetonation.HasStarted()) {
 		if (!this->m_ctDetonation.IsElapsed()) {

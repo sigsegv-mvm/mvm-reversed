@@ -35,7 +35,7 @@ ActionResult<CTFBot> CTFBotMedicHeal::OnStart(CTFBot *actor, Action<CTFBot> *act
 	return ActionResult<CTFBot>::Continue();
 }
 
-ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float f1)
+ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
 {
 	// TODO
 }
