@@ -111,12 +111,6 @@ inline CTFBot *ToTFBot(CBaseEntity *pEntity)
 }
 
 
-enum NextBotDebugType
-{
-	// TODO
-};
-
-
 // TODO: GetBombInfo(BombInfo_t *)
 // TODO: BombInfo_t
 

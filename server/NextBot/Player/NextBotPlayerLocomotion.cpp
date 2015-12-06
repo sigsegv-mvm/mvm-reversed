@@ -64,8 +64,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 	ILocomotion::Approach(dst, 1.0f);
 	this->AdjustPosture(dst);
 	
-	// TODO: enum values for IsDebugging
-	if (this->GetBot()->IsDebugging(0x10)) {
+	if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 		NDebugOverlay::Line(this->GetFeet(), dst, 255, 255, 0, true, 0.1f);
 	}
 	
@@ -103,8 +102,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		if (forward > 0.25f) {
 			input->PressForwardButton();
 			
-			// TODO: enum values for IsDebugging
-			if (this->GetBot()->IsDebugging(0x10)) {
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
@@ -113,8 +111,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		} else if (forward < -0.25f) {
 			input->PressBackwardButton();
 			
-			// TODO: enum values for IsDebugging
-			if (this->GetBot()->IsDebugging(0x10)) {
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
@@ -125,8 +122,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		if (side <= -0.25f) {
 			input->PressLeftButton();
 			
-			// TODO: enum values for IsDebugging
-			if (this->GetBot()->IsDebugging(0x10)) {
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),
@@ -135,8 +131,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		} else if (size >= 0.25f) {
 			input->PressRightButton();
 			
-			// TODO: enum values for IsDebugging
-			if (this->GetBot()->IsDebugging(0x10)) {
+			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),

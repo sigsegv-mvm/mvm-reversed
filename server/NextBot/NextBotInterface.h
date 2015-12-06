@@ -7,9 +7,23 @@
 class INextBot : public INextBotEventResponder
 {
 public:
-	enum NextBotDebugLineType
+	enum NextBotDebugType : unsigned int
 	{
-		// TODO
+		BEHAVIOR   = (1 << 0), // NextBotBehavior
+		LOOK_AT    = (1 << 1), // NextBotBodyInterface
+		PATH       = (1 << 2), // NextBotPath, NextBotPathFollow, NextBotChasePath
+		ANIMATION  = (1 << 3),
+		LOCOMOTION = (1 << 4), // NextBotLocomotionInterface
+		VISION     = (1 << 5), // NextBotVisionInterface
+		HEARING    = (1 << 6),
+		EVENTS     = (1 << 7), // NextBotEventResponderInterface
+		ERRORS     = (1 << 8),
+	};
+	
+	struct NextBotDebugLineType
+	{
+		NextBotDebugType type; // +0x000
+		char buf[0x100];       // +0x004
 	};
 	
 	INextBot();
@@ -64,7 +78,7 @@ public:
 	virtual float GetRangeSquaredTo(CBaseEntity *ent) const;
 	virtual float GetRangeSquaredTo(const Vector& v1) const;
 	
-	virtual bool IsDebugging(unsigned int i1) const;
+	virtual bool IsDebugging(unsigned int type) const;
 	virtual char *GetDebugIdentifier() const;
 	virtual bool IsDebugFilterMatch(const char *s1) const;
 	virtual void DisplayDebugText(const char *s1) const;
@@ -74,17 +88,13 @@ public:
 	
 	void DebugConColorMessage(NextBotDebugType type, const Color& color, const char *fmt, ...);
 	
-	void GetDebugHistory(unsigned int i1, CUtlVector<const NextBotDebugLineType *> *v1) const;
+	void GetDebugHistory(unsigned int mask, CUtlVector<const NextBotDebugLineType *> *dst) const;
 	void ResetDebugHistory();
 	
 	void RegisterComponent(INextBotComponent *component);
 	
 protected:
 	// TODO
+	
+	// 4c CUtlVector<NextBotDebugLineType *>
 };
-
-
-// TODO: for IsDebugging(): enum
-// 1   BEHAVIOR
-// 128 EVENTS
-// (see enum NextBotDebugType in NextBot.h, is this the same as that?)

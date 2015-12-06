@@ -21,10 +21,22 @@ ConCommand WarpSelectedHere("nb_warp_selected_here", &CC_WarpSelectedHere,
 	"Teleport the selected bot to your cursor position", FCVAR_CHEAT);
 
 
-/* global static */
-int g_nBlockedSlides = 0;
-int g_nSlid = 0;
-int g_nRun = 0;
+static const char *const debugTypeName[] = {
+	"BEHAVIOR",
+	"LOOK_AT",
+	"PATH",
+	"ANIMATION",
+	"LOCOMOTION",
+	"VISION",
+	"HEARING",
+	"EVENTS",
+	"ERRORS",
+};
+
+
+static int g_nBlockedSlides = 0;
+static int g_nSlid = 0;
+static int g_nRun = 0;
 
 
 NextBotManager *TheNextBots()

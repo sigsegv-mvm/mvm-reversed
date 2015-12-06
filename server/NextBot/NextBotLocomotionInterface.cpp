@@ -359,8 +359,7 @@ void ILocomotion::ClearStuckStatus(char const *s1)
 	
 	this->m_itStuck.Start();
 	
-	// TODO: enum
-	if (this->GetBot()->IsDebugging(0x10)) {
+	if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 		DevMsg("%3.2f: ClearStuckStatus: %s %s\n",
 			gpGlobals->curtime, this->GetBot()->GetDebugIdentifier(), s1);
 	}
@@ -400,8 +399,7 @@ void ILocomotion::StuckMonitor()
 			} else {
 				if (this->m_ctUnknown.IsElapsed()) {
 					this->m_ctUnknown.Start(1.0f);
-					// TODO: enum
-					if (this->GetBot()->IsDebugging(0x10)) {
+					if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 						// TODO
 					}
 					
@@ -411,14 +409,12 @@ void ILocomotion::StuckMonitor()
 		} else {
 			if (this->GetBot()->IsRangeGreaterThan(this->m_vecStuck, 100.0f)) {
 				this->m_vecStuck = this->GetFeet();
-				// TODO: enum
-				if (this->GetBot()->IsDebugging(0x10)) {
+				if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 					// TODO: Cross3D
 				}
 				this->m_itStuck.Start();
 			} else {
-				// TODO: enum
-				if (this->GetBot()->IsDebugging(0x10)) {
+				if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
 					// TODO
 				}
 				
