@@ -21,7 +21,7 @@ public:
 		virtual void Update() override;
 		
 	private:
-		// TODO
+		Behavior<CTFBot> m_Behavior; // +0x18
 	};
 	
 	enum class DifficultyType : int

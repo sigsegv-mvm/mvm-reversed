@@ -43,4 +43,43 @@ ConCommand tf_bot_warp_team_to_me("tf_bot_warp_team_to_me", &CMD_BotWarpTeamToMe
 	"", FCVAR_CHEAT | FCVAR_GAMEDLL);
 
 
+CTFBot::CTFBotIntention::CTFBotIntention(CTFBot *actor)
+	: IIntention(actor)
+{
+	// TODO: verify parameters for CTFBotMainAction ctor
+	this->m_Behavior = new Behavior<CTFBot>(new CTFBotMainAction());
+}
 
+CTFBot::CTFBotIntention::~CTFBotIntention()
+{
+	if (this->m_Behavior != nullptr) {
+		delete this->m_Behavior;
+	}
+}
+
+
+INextBotEventResponder *CTFBot::CTFBotIntention::FirstContainedResponder() const
+{
+	return this->m_Behavior;
+}
+
+INextBotEventResponder *CTFBot::CTFBotIntention::NextContainedResponder(INextBotEventResponder *prev) const
+{
+	return nullptr;
+}
+
+
+void CTFBot::CTFBotIntention::Reset()
+{
+	if (this->m_Behavior != nullptr) {
+		delete this->m_Behavior;
+	}
+	
+	// TODO: verify parameters for CTFBotMainAction ctor
+	this->m_Behavior = new Behavior<CTFBot>(new CTFBotMainAction());
+}
+
+void CTFBot::CTFBotIntention::Update()
+{
+	this->m_Behavior->Update(this->GetBot(), this->m_flTickInterval);
+}
