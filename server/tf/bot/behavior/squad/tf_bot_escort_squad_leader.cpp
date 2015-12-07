@@ -102,7 +102,7 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 	
 	PathFollower *leader_path = leader->GetCurrentPath();
 	if (leader_path == nullptr || leader_path->GetCurrentGoal() == nullptr) {
-		// TODO: set bool @ CTFBot+0x2c54 to false
+		this->m_bIsInFormation = false;
 		actor->m_flFormationError = 0.0f;
 		
 		return ActionResult<CTFBot>::Continue();
@@ -201,15 +201,16 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 	
 	if (this->m_ctRecomputePath.IsElapsed()) {
 		this->m_ctRecomputePath.Start(RandomFloat(0.1f, 0.2f));
+		actor->m_bIsInFormation = false;
 		
 		CTFBotPathCost cost_func(actor, FASTEST_ROUTE);
 		if (!this->m_PathFollower.Compute<CTFBotPathCost>(actor,
 			ideal_pos, cost_func, 0.0f, true)) {
-			actor->m_bOutOfFormation = true;
+			actor->m_bIsInFormation = true;
 		}
 		
-		if (this->m_PathFollower->GetEndPosition()->m_flStartDist > 750.0f) {
-			actor->m_bOutOfFormation = true;
+		if (this->m_PathFollower->GetLength() > 750.0f) {
+			actor->m_bIsInFormation = true;
 		}
 	}
 	

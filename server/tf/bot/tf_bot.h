@@ -277,7 +277,7 @@ private:
 	float m_flVisionRange; // +0x2c3c
 	
 	float m_flFormationError; // +0x2c50
-	bool m_bOutOfFormation;   // +0x2c54
+	bool m_bIsInFormation;    // +0x2c54
 	
 	CUtlStringList m_TeleportWhere; // +0x2c58
 	// TODO: 0x2c6c
