@@ -506,7 +506,7 @@ void IVision::UpdateKnownEntities()
 								known.GetEntity()->GetClassname(), ENTINDEX(known.GetEntity());
 							
 							NDebugOverlay::Line(this->GetBot()->GetBodyInterface()->GetEyePosition(),
-								known.GetLastKnownPosition(), 255, 255, 0, false, 0.2f);
+								known.GetLastKnownPosition(), RGB_YELLOW, false, 0.2f);
 						}
 						
 						this->GetBot()->OnSight(known.GetEntity());

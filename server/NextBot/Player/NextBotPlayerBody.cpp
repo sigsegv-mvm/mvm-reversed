@@ -83,7 +83,7 @@ void PlayerBody::Upkeep()
 		float radius = Clamp(this->GetHeadSteadyDuration * (1.0f / 3.0f),
 			0.0f, 1.0f) * 10.0f;
 		NDebugOverlay::Circle(actor->EyePosition(),
-			radius, 0, 255, 0, 255, true, 2 * frametime);
+			radius, RGBA_GREEN, true, 2 * frametime);
 	}
 	
 	this->m_angLastEyeAngles = eye_ang;
@@ -137,12 +137,14 @@ void PlayerBody::Upkeep()
 	if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
 		NDebugOverlay::Line(this->GetEyePosition(),
 			this->GetEyePosition() + (100.0f * eye_vec),
-			255, 255, 0, false, 2 * frametime);
+			RGB_YELLOW, false, 2 * frametime);
 		
+		int r = (this->m_bHeadOnTarget ? 255 : 0);
+		int g = (target_ent != nullptr ? 255 : 0);
+		int b = 255;
 		NDebugOverlay::HorzArrow(this->GetEyePosition(),
 			this->m_vecAimTarget, (head_steady ? 2.0f : 3.0f),
-			(this->m_bHeadOnTarget ? 255 : 0),
-			(target_ent != nullptr ? 255 : 0), 255, 255, false, 2 * frametime);
+			r, g, b, 255, false, 2 * frametime);
 	}
 	
 	float cos_error = eye_to_target.Dot(eye_vec);
@@ -254,7 +256,7 @@ void PlayerBody::AimHeadTowards(const Vector& vec, IBody::LookAtPriorityType pri
 			
 			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
 				NDebugOverlay::Cross3D(vec,
-					2.0f, 255, 255, 100, true, 2 * duration);
+					2.0f, RGB_LTYELLOW, true, 2 * duration);
 				
 				const char *pri_str = "";
 				switch (priority) {
@@ -334,7 +336,7 @@ void PlayerBody::AimHeadTowards(CBaseEntity *ent, IBody::LookAtPriorityType prio
 			
 			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
 				NDebugOverlay::Cross3D(this->m_vecAimTarget,
-					2.0f, 100, 100, 100, true, duration);
+					2.0f, RGB_GRAY100, true, duration);
 				
 				const char *pri_str = "";
 				switch (priority) {

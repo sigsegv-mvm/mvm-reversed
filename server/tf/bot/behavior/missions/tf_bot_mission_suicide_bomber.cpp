@@ -303,12 +303,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 		}
 		
 		if (victim->IsPlayer()) {
-			UTIL_ScreenFade(victim, {
-				.r = 255,
-				.g = 255,
-				.b = 255,
-				.a = 255,
-			}, 1.0f, 0.1f, FFADE_IN);
+			UTIL_ScreenFade(victim, COLOR32_WHITE, 1.0f, 0.1f, FFADE_IN);
 		}
 		
 		if (actor->IsLineOfFireClear(victim)) {

@@ -296,6 +296,7 @@ struct static_attrib_t
 };
 
 
+// TODO: fix these to not conflict with the definitions in shareddefs.h
 #define COLOR_WHITE    Color(255, 255, 255, 255)
 #define COLOR_GRAY100  Color(100, 100, 100, 255)
 #define COLOR_RED      Color(255,   0,   0, 255)
@@ -304,6 +305,18 @@ struct static_attrib_t
 #define COLOR_GREEN    Color(  0, 255,   0, 255)
 #define COLOR_LTGREEN  Color(150, 255, 150, 255)
 #define COLOR_MAGENTA  Color(255,   0, 255, 255)
+
+#define COLOR32_WHITE { .r = 255, .g = 255, .b = 255, .a = 255, }
+
+#define RGB_GRAY100  100, 100, 100
+#define RGB_YELLOW   255, 255,   0
+#define RGB_LTYELLOW 255, 255, 100
+
+#define RGBA_WHITE   255, 255, 255, 255
+#define RGBA_RED     255,   0,   0, 255
+#define RGBA_GREEN     0, 255,   0, 255
+#define RGBA_CYAN      0, 255, 255, 255
+#define RGBA_MAGENTA 255,   0, 255, 255
 
 
 class INextBotEntityFilter

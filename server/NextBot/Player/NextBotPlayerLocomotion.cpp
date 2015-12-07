@@ -65,7 +65,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 	this->AdjustPosture(dst);
 	
 	if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
-		NDebugOverlay::Line(this->GetFeet(), dst, 255, 255, 0, true, 0.1f);
+		NDebugOverlay::Line(this->GetFeet(), dst, RGB_YELLOW, true, 0.1f);
 	}
 	
 	INextBot *nextbot = this->GetBot();
@@ -106,7 +106,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
-					15.0f, 0, 255, 0, 255, true, 0.1f);
+					15.0f, RGBA_GREEN, true, 0.1f);
 			}
 		} else if (forward < -0.25f) {
 			input->PressBackwardButton();
@@ -115,7 +115,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
-					15.0f, 255, 0, 0, 255, true, 0.1f);
+					15.0f, RGBA_RED, true, 0.1f);
 			}
 		}
 		
@@ -126,7 +126,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),
-					15.0f, 255, 0, 255, 255, true, 0.1f);
+					15.0f, RGBA_MAGENTA, true, 0.1f);
 			}
 		} else if (size >= 0.25f) {
 			input->PressRightButton();
@@ -135,7 +135,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),
-					15.0f, 0, 255, 255, 255, true, 0.1f);
+					15.0f, RGBA_CYAN, true, 0.1f);
 			}
 		}
 	}

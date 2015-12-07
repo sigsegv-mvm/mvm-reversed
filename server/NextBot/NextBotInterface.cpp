@@ -345,7 +345,7 @@ bool INextBot::IsDebugFilterMatch(const char *filter) const
 void INextBot::DisplayDebugText(const char *text) const
 {
 	this->GetEntity()->EntityText(this->m_iDebugTextOffset++, text,
-		0.1f, 255, 255, 255, 255);
+		0.1f, RGBA_WHITE);
 }
 
 

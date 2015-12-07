@@ -623,11 +623,11 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 					g_pFullFileSystem->FileExists(model_boss)) {
 					bot->PlayerClass.SetCustomModel(model_boss, true);
 					bot->UpdateModel();
-					bot->SetBloodColor(-1);
+					bot->SetBloodColor(DONT_BLEED);
 				} else if (g_pFullFileSystem->FileExists(model)) {
 					bot->PlayerClass.SetCustomModel(model, true);
 					bot->UpdateModel();
-					bot->SetBloodColor(-1);
+					bot->SetBloodColor(DONT_BLEED);
 				}
 			}
 		}
