@@ -240,10 +240,25 @@ const char *CTFBotWaitForOutOfPositionSquadMember::GetName() const
 
 ActionResult<CTFBot> CTFBotWaitForOutOfPositionSquadMember::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	this->m_ctTimeout.Start(2.0f);
+	
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotWaitForOutOfPositionSquadMember::Update(CTFBot *actor, float dt)
 {
-	// TODO
+	if (this->m_ctTimeout.IsElapsed()) {
+		return ActionResult<CTFBot>::Done("Timeout");
+	}
+	
+	CTFBotSquad *squad = actor->m_Squad;
+	if (squad == nullptr || actor != squad->GetLeader()) {
+		return ActionResult<CTFBot>::Done("No squad");
+	}
+	
+	if (squad->IsInFormation()) {
+		return ActionResult<CTFBot>::Done("Everyone is in formation. Moving on.");
+	} else {
+		return ActionResult<CTFBot>::Continue();
+	}
 }
