@@ -363,9 +363,9 @@ void CTFBotVision::UpdatePotentiallyVisibleNPCVector()
 	for (int i = 0; i < IBaseObjectAutoList::AutoList().Count(); ++i) {
 		CBaseObject *obj = static_cast<CBaseObject *>(IBaseObjectAutoList::AutoList()[i]);
 		
-		if (obj->ObjectType() == OBJ_SENTRYGUN ||
-			(obj->ObjectType() == OBJ_DISPENSER && obj->ClassMatches("obj_dispenser") ||
-			(obj->ObjectType() == OBJ_TELEPORTER && !ignore_teleporters)) {
+		if (obj->GetType() == OBJ_SENTRYGUN ||
+			(obj->GetType() == OBJ_DISPENSER && obj->ClassMatches("obj_dispenser") ||
+			(obj->GetType() == OBJ_TELEPORTER && !ignore_teleporters)) {
 			this->m_PVNPCs.AddToTail(obj);
 		}
 	}
