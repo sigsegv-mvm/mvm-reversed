@@ -139,6 +139,9 @@ public:
 	
 	float TransientlyConsistentRandomValue(float duration, int seed) const;
 	
+	bool IsCombatWeapon(CTFWeaponBase *weapon = nullptr) const;
+	bool IsQuietWeapon(CTFWeaponBase *weapon = nullptr) const;
+	
 	// TODO: make sure to check whether these are private
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
 	// AddItem

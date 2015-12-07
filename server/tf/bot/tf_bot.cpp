@@ -97,3 +97,65 @@ float CTFBot::TransientlyConsistentRandomValue(float duration, int seed) const
 	
 	return Abs(pfFastCos((float)seed));
 }
+
+
+bool CTFBot::IsCombatWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+		if (weapon == nullptr) {
+			return true;
+		}
+	}
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_PDA:
+	case TF_WEAPON_PDA_ENGINEER_BUILD:
+	case TF_WEAPON_PDA_ENGINEER_DESTROY:
+	case TF_WEAPON_PDA_SPY:
+	case TF_WEAPON_BUILDER:
+	case TF_WEAPON_MEDIGUN:
+	case TF_WEAPON_DISPENSER:
+	case TF_WEAPON_INVIS:
+	case TF_WEAPON_LUNCHBOX:
+	case TF_WEAPON_BUFF_ITEM:
+	case TF_WEAPON_PUMPKIN_BOMB:
+		return false;
+		
+	default:
+		return true;
+	}
+}
+
+bool CTFBot::IsQuietWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+		if (weapon == nullptr) {
+			return false;
+		}
+	}
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_KNIFE:
+	case TF_WEAPON_FISTS:
+	case TF_WEAPON_PDA:
+	case TF_WEAPON_PDA_ENGINEER_BUILD:
+	case TF_WEAPON_PDA_ENGINEER_DESTROY:
+	case TF_WEAPON_PDA_SPY:
+	case TF_WEAPON_BUILDER:
+	case TF_WEAPON_MEDIGUN:
+	case TF_WEAPON_DISPENSER:
+	case TF_WEAPON_INVIS:
+	case TF_WEAPON_FLAREGUN:
+	case TF_WEAPON_LUNCHBOX:
+	case TF_WEAPON_JAR:
+	case TF_WEAPON_COMPOUND_BOW:
+	case TF_WEAPON_SWORD:
+	case TF_WEAPON_CROSSBOW:
+		return true;
+		
+	default:
+		return false;
+	}
+}
