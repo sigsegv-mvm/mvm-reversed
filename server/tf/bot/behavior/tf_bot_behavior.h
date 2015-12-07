@@ -36,15 +36,31 @@ public:
 private:
 	void Dodge(CTFBot *actor);
 	void FireWeaponAtEnemy(CTFBot *actor);
-	UNKNOWN GetHealerOfThreat(const CKnownEntity *known) const;
+	const CKnownEntity *GetHealerOfThreat(const CKnownEntity *threat) const;
 	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const;
 	const CKnownEntity *SelectCloserThreat(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2) const;
 	const CKnownEntity *SelectMoreDangerousThreatInternal(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const;
 	
-	// TODO
+	// TODO 34
+	// TODO 38
+	// TODO 3c
+	// TODO 40
+	// TODO 44
+	// TODO 48
+	// TODO 4c dword 0
+	// TODO 50 dword 0
+	// TODO 54 dword 0
+	// TODO 58 dword 0
+	// TODO 5c IntervalTimer
+	// TODO 60 dword 0, related to disguising
+	// TODO 64 byte 0
+	// TODO 68 dword -1, possibly a handle
+	// TODO 6c dword 0
+	// TODO 70 IntervalTimer
 };
 
 
-// TODO: SelectClosestSpyToMe(CTFBot *, const CKnownEntity *, const CKnownEntity *)
+const CKnownEntity *SelectClosestSpyToMe(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2);
+
 
 // TODO: CCompareFriendFoeInfluence
