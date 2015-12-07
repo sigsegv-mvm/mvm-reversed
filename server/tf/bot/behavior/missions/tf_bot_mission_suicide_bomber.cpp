@@ -307,9 +307,9 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 		}
 		
 		if (actor->IsLineOfFireClear(victim)) {
-			float dmg = victim->GetHealth();
-			if (victim->GetHealth() > victim->GetMaxHealth()) {
-				dmg = victim->GetMaxHealth();
+			float health = victim->GetHealth();
+			if (victim->GetHealth() < victim->GetMaxHealth()) {
+				health = victim->GetMaxHealth();
 			}
 			
 			/* NOTE: CTFPlayer::OnTakeDamage reduces the damage to 600 if:
@@ -319,7 +319,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 			 * victim->IsMiniBoss
 			 */
 			
-			CTakeDamageInfo dmginfo;
+			CTakeDamageInfo dmginfo(actor, actor, 4 * health, DMG_BLAST);
 			if (tf_bot_suicide_bomb_friendly_fire.GetBool()) {
 				dmginfo.SetForceFriendlyFire(true);
 			}
