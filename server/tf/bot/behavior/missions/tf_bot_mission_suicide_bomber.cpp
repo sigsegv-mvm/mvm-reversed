@@ -121,7 +121,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float dt)
 		
 		CTFBotPathCost cost_func(actor, FASTEST_ROUTE);
 		if (this->m_PathFollower.Compute<CTFBotPathCost>(actor,
-			this->m_vecTargetPos, cost_func, 0.0f, true) {
+			this->m_vecTargetPos, cost_func, 0.0f, true)) {
 			this->m_nConsecutivePathFailures = 0;
 		} else {
 			if (++this->m_nConsecutivePathFailures > 2) {

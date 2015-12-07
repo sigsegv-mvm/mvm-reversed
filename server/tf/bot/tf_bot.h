@@ -201,7 +201,7 @@ private:
 	// 0x0368-0x0488: CBaseAnimating/CBaseAnimatingOverlay
 	// 0x0488-0x067c: CBaseFlex
 	// 0x0680-0x0850: CBaseCombatCharacter
-	// 0x0858-0x1100: CBasePlayer
+	// 0x0850-0x1100: CBasePlayer
 	// 0x1100-0x114c: CBaseMultiplayerPlayer
 	// 0x114c-0x1150: IHasAttributes
 	
@@ -219,6 +219,8 @@ private:
 	// 0x2844: CTFPlayer: int m_nExperienceLevelProgress
 	// 0x284c: CTFPlayer: dword, probably CWaveSpawnPopulator*
 	// 0x2894: CTFPlayer: CountdownTimer m_ctSapNotice
+	
+	// 0x29e0: byte INextBot+0x10
 	
 	// 0x2a3c: NextBotPlayer<CTFPlayer>: CountdownTimer
 	// 0x2a54: NextBotPlayer<CTFPlayer>: CountdownTimer
@@ -274,7 +276,9 @@ private:
 	
 	float m_flVisionRange; // +0x2c3c
 	
-	// TODO: 0x2c54
+	float m_flFormationError; // +0x2c50
+	bool m_bOutOfFormation;   // +0x2c54
+	
 	CUtlStringList m_TeleportWhere; // +0x2c58
 	// TODO: 0x2c6c
 	float m_flAutoJumpMin; // +0x2c70

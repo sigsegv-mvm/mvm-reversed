@@ -9,7 +9,7 @@
 class CTFBotFetchFlag : public Action<CTFBot>
 {
 public:
-	CTFBotFetchFlag(bool b1);
+	CTFBotFetchFlag(bool attack_if_unreachable);
 	virtual ~CTFBotFetchFlag();
 	
 	virtual const char *GetName() const override;
@@ -21,5 +21,6 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 private:
+	// 0032 bool (from ctor: change to AttackFlagDefenders if flag unreachable)
 	// TODO
 };

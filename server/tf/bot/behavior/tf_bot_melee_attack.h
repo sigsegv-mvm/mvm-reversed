@@ -18,5 +18,6 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// TODO
+	// 0034 
+	// 0038 ChasePath
 };
