@@ -245,6 +245,8 @@ private:
 	AttributeType m_nBotAttrs; // +0x2b14
 	DifficultyType m_iSkill;   // +0x2b18
 	
+	CTFBotSquad *m_Squad; // +0x2b2c
+	
 	// 0x2bb8: CTFBot: CountdownTimer
 	
 	enum IgnoreMask : int
@@ -274,6 +276,9 @@ private:
 	CHandle<CBaseEntity> m_hSBTarget; // +0x2c00
 	// 0x2c04: CTFBot: CUtlString
 	
+	// 0x2c1c: CTFBot: CountdownTimer
+	// 0x2c40: CTFBot: CountdownTimer
+	
 	float m_flVisionRange; // +0x2c3c
 	
 	float m_flFormationError; // +0x2c50
@@ -283,20 +288,9 @@ private:
 	// TODO: 0x2c6c
 	float m_flAutoJumpMin; // +0x2c70
 	float m_flAutoJumpMax; // +0x2c74
-	// TODO: 0x2c78
-	// TODO: 0x2c7c
-	// TODO: 0x2c80
+	// 0x2c78: CTFBot: CountdownTimer
 	// TODO: 0x2c84
 	CUtlVector<const EventChangeAttributes_t *> m_ECAttrs; // +0x2c88 (maybe autopurge)
-	// TODO: 0x2c9c
-	
-	// 0x2c1c: CTFBot: CountdownTimer
-	// 0x2c40: CTFBot: CountdownTimer
-	
-	
-	// 0x2c78: CTFBot: CountdownTimer
-	
-	// TODO
 };
 
 

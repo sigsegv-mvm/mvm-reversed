@@ -10,29 +10,29 @@ public:
 	CTFBotSquad();
 	virtual ~CTFBotSquad();
 	
-	virtual INextBotEventResponder *FirstContainedResponder() const;
-	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *) const;
+	virtual INextBotEventResponder *FirstContainedResponder() const override;
+	virtual INextBotEventResponder *NextContainedResponder(INextBotEventResponder *prev) const override;
 	
 	struct Iterator
 	{
-		// 0x00
-		// 0x04
+		CTFBot *bot; // +0x0
+		int index;   // +0x4
 	};
 	
-	void CollectMembers(CUtlVector<CTFBot *> *) const;
+	void CollectMembers(CUtlVector<CTFBot *> *members) const;
 	
 	Iterator GetFirstMember() const;
-	Iterator GetNextMember(CTFBotSquad::Iterator const&) const;
+	Iterator GetNextMember(const Iterator& it) const;
 	
 	int GetMemberCount() const;
 	CTFBot *GetLeader() const;
 	
-	void Join(CTFBot *);
-	void Leave(CTFBot *);
+	void Join(CTFBot *bot);
+	void Leave(CTFBot *bot);
 	
 	float GetMaxSquadFormationError() const;
-	float GetSlowestMemberIdealSpeed(bool) const;
-	float GetSlowestMemberSpeed(bool) const;
+	float GetSlowestMemberIdealSpeed(bool include_leader) const;
+	float GetSlowestMemberSpeed(bool include_leader) const;
 	
 	bool IsInFormation() const;
 	bool ShouldSquadLeaderWaitForFormation() const;
