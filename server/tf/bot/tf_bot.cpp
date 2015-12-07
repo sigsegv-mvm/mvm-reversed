@@ -83,3 +83,17 @@ void CTFBot::CTFBotIntention::Update()
 {
 	this->m_Behavior->Update(this->GetBot(), this->m_flTickInterval);
 }
+
+
+float CTFBot::TransientlyConsistentRandomValue(float duration, int seed) const
+{
+	CNavArea *area = this->GetLastKnownArea();
+	if (area == nullptr) {
+		return 0.0f;
+	}
+	
+	int time_seed = (int)(gpGlobals->curtime / duration) + 1;
+	seed += (area->GetID() * time_seed * ENTINDEX(this));
+	
+	return Abs(pfFastCos((float)seed));
+}

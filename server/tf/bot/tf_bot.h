@@ -137,6 +137,8 @@ public:
 	
 	// TODO
 	
+	float TransientlyConsistentRandomValue(float duration, int seed) const;
+	
 	// TODO: make sure to check whether these are private
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
 	// AddItem
