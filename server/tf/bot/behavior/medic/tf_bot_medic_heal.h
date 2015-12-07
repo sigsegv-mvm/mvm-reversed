@@ -39,6 +39,7 @@ private:
 	UNKNOWN SelectPatient(CTFBot *actor, CTFPlayer *player);
 	
 	// 0x0034 ChasePath
+	// 0x4834 CountdownTimer
 	// 0x4840 CountdownTimer
 	// 0x484c dword -1, possibly CHandle<T>
 	// 0x4850 Vector

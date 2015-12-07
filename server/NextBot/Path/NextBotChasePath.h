@@ -27,7 +27,6 @@ protected:
 	CountdownTimer m_ctTimer3; // +0x47ec
 	// 47f8 dword -1
 	// 47fc dword 0 or possibly 1
-	CountdownTimer m_ctTimer4; // +0x4800
 };
 
 // TODO: DirectChasePath
