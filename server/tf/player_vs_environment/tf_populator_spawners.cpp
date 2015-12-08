@@ -271,13 +271,19 @@ bool CSquadSpawner::Parse(KeyValues *kv)
 			this->m_flFormationSize = subkey->GetFloat();
 		} else if (V_stricmp(name, "ShouldPreserveSquad") == 0) {
 			this->m_bShouldPreserveSquad = subkey->GetBool();
+			/* BUG: ShouldPreserveSquad is parsed correctly, but it falls thru
+			 * into the spawner parsing part of the code, which will give an
+			 * "Unknown attribute 'ShouldPreserveSquad' in Squad definition"
+			 * error in console */
+			goto fall_thru;
 		} else {
+		fall_thru:
 			IPopulationSpawner *spawner =
 				IPopulationSpawner::ParseSpawner(this->m_Populator, subkey);
 			if (spawner != nullptr) {
 				this->m_SubSpawners.AddToTail(spawner);
 			} else {
-				Warning("Unknown attribute '%s' in Mob definition.\n", name);
+				Warning("Unknown attribute '%s' in Squad definition.\n", name);
 			}
 		}
 	}
