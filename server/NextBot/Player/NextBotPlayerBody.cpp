@@ -95,7 +95,8 @@ void PlayerBody::Upkeep()
 	const Vector& eye_vec = this->GetViewVector();
 	if (acosf(this->m_vecLastEyeVectors.Dot(eye_vec)) * (180.0f / M_PI) >
 		nb_head_aim_resettle_angle.GetFloat()) {
-		this->m_ctResettle.Start(RandomFloat(0.9f, 1.1f));
+		this->m_ctResettle.Start(nb_head_aim_resettle_time.GetFloat() *
+			RandomFloat(0.9f, 1.1f));
 		this->m_vecLastEyeVectors = eye_vec;
 	} else if (!this->m_ctResettle.HasStarted() || this->m_ctResettle.IsElapsed()) {
 		this->m_ctResettle.Invalidate();
@@ -114,14 +115,17 @@ void PlayerBody::Upkeep()
 				Vector delta = target_point - this->m_vecAimTarget +
 					(this->GetHeadAimSubjectLeadTime() * target_ent->GetAbsVelocity());
 				
-				float scale = delta.Length() / Max(frametime,
+				float track_interval = Max(frametime,
 					this->GetHeadAimTrackingInterval());
+				
+				float scale = delta.Length() / track_interval;
 				delta.NormalizeInPlace();
 				
 				this->m_vecTargetVelocity = (scale * delta) +
 					target_ent->GetAbsVelocity();
 				
-				this->m_ctAimTracking.Start(RandomFloat(0.8f, 1.2f));
+				this->m_ctAimTracking.Start(track_interval *
+					RandomFloat(0.8f, 1.2f));
 			}
 			
 			this->m_vecAimTarget += frametime * this->m_vecTargetVelocity;
