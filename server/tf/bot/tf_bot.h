@@ -139,8 +139,21 @@ public:
 	
 	float TransientlyConsistentRandomValue(float duration, int seed) const;
 	
+	bool IsWeaponRestricted(CTFWeaponBase *weapon) const;
+	
 	bool IsCombatWeapon(CTFWeaponBase *weapon = nullptr) const;
 	bool IsQuietWeapon(CTFWeaponBase *weapon = nullptr) const;
+	
+	bool IsHitScanWeapon(CTFWeaponBase *weapon = nullptr) const;
+	bool IsExplosiveProjectileWeapon(CTFWeaponBase *weapon = nullptr) const;
+	
+	bool IsContinuousFireWeapon(CTFWeaponBase *weapon = nullptr) const;
+	bool IsBarrageAndReloadWeapon(CTFWeaponBase *weapon = nullptr) const;
+	
+	bool IsAmmoLow() const;
+	bool IsAmmoFull() const;
+	
+	float GetMaxAttackRange() const;
 	
 	// TODO: make sure to check whether these are private
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);

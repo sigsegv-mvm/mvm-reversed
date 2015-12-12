@@ -99,6 +99,12 @@ float CTFBot::TransientlyConsistentRandomValue(float duration, int seed) const
 }
 
 
+bool CTFBot::IsWeaponRestricted(CTFWeaponBase *weapon) const
+{
+	// TODO
+}
+
+
 bool CTFBot::IsCombatWeapon(CTFWeaponBase *weapon) const
 {
 	if (weapon == nullptr) {
@@ -107,6 +113,10 @@ bool CTFBot::IsCombatWeapon(CTFWeaponBase *weapon) const
 			return true;
 		}
 	}
+	
+	/* BUG: this function is horribly outdated; post-2010 weapons are all
+	 * considered combat weapons by default
+	 */
 	
 	switch (weapon->GetWeaponID()) {
 	case TF_WEAPON_PDA:
@@ -136,6 +146,11 @@ bool CTFBot::IsQuietWeapon(CTFWeaponBase *weapon) const
 		}
 	}
 	
+	/* BUG: this function is horribly outdated; post-2010 weapons are all
+	 * considered non-quiet weapons by default
+	 * also: why is jarate quiet but milk isn't?
+	 */
+	
 	switch (weapon->GetWeaponID()) {
 	case TF_WEAPON_KNIFE:
 	case TF_WEAPON_FISTS:
@@ -158,4 +173,187 @@ bool CTFBot::IsQuietWeapon(CTFWeaponBase *weapon) const
 	default:
 		return false;
 	}
+}
+
+
+bool CTFBot::IsHitScanWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+		if (weapon == nullptr) {
+			return false;
+		}
+	}
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_SHOTGUN_PRIMARY:
+	case TF_WEAPON_SHOTGUN_SOLDIER:
+	case TF_WEAPON_SHOTGUN_HWG:
+	case TF_WEAPON_SHOTGUN_PYRO:
+	case TF_WEAPON_SCATTERGUN:
+	case TF_WEAPON_SNIPERRIFLE:
+	case TF_WEAPON_MINIGUN:
+	case TF_WEAPON_SMG:
+	case TF_WEAPON_PISTOL:
+	case TF_WEAPON_PISTOL_SCOUT:
+	case TF_WEAPON_REVOLVER:
+	case TF_WEAPON_SENTRY_BULLET:
+	case TF_WEAPON_SENTRY_ROCKET:
+	case TF_WEAPON_SENTRY_REVENGE:
+	case TF_WEAPON_HANDGUN_SCOUT_PRIMARY:
+	case TF_WEAPON_HANDGUN_SCOUT_SEC:
+	case TF_WEAPON_SODA_POPPER:
+	case TF_WEAPON_SNIPERRIFLE_DECAP:
+	case TF_WEAPON_PEP_BRAWLER_BLASTER:
+	case TF_WEAPON_SNIPERRIFLE_CLASSIC:
+		return true;
+		
+	default:
+		return false;
+	}
+}
+
+bool CTFBot::IsExplosiveProjectileWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+		if (weapon == nullptr) {
+			return false;
+		}
+	}
+	
+	/* BUG: this function is horribly outdated; post-2010 weapons are all
+	 * considered non-explosive weapons by default
+	 * TF_WEAPON_PARTICLE_CANNON is conspicuously absent (Cow Mangler)
+	 * TF_WEAPON_CANNON is conspicuously absent (Loose Cannon)
+	 * 
+	 * surely they could implement this function as a dynamic_cast or something
+	 * instead of a weapon ID whitelist that has to be updated constantly?
+	 */
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_ROCKETLAUNCHER:
+	case TF_WEAPON_GRENADELAUNCHER:
+	case TF_WEAPON_PIPEBOMBLAUNCHER:
+	case TF_WEAPON_JAR:
+	case TF_WEAPON_DIRECTHIT:
+		return true;
+		
+	default:
+		return false;
+	}
+}
+
+
+bool CTFBot::IsContinuousFireWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+	}
+	
+	if (!this->IsCombatWeapon(weapon)) {
+		return false;
+	}
+	
+	if (weapon == nullptr) {
+		return true;
+	}
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_ROCKETLAUNCHER:
+	case TF_WEAPON_GRENADELAUNCHER:
+	case TF_WEAPON_PIPEBOMBLAUNCHER:
+	case TF_WEAPON_PISTOL:
+	case TF_WEAPON_PISTOL_SCOUT:
+	case TF_WEAPON_FLAREGUN:
+	case TF_WEAPON_JAR:
+	case TF_WEAPON_COMPOUND_BOW:
+	case TF_WEAPON_DIRECTHIT:
+		return false;
+		
+	default:
+		return true;
+	}
+}
+
+bool CTFBot::IsBarrageAndReloadWeapon(CTFWeaponBase *weapon) const
+{
+	if (weapon == nullptr) {
+		weapon = this->m_Shared.GetActiveTFWeapon();
+		if (weapon == nullptr) {
+			return false;
+		}
+	}
+	
+	/* BUG: this function is horribly outdated; post-2010 weapons are all
+	 * considered non-barrage weapons by default
+	 * TF_WEAPON_PARTICLE_CANNON is conspicuously absent (Cow Mangler)
+	 * TF_WEAPON_CANNON is conspicuously absent (Loose Cannon)
+	 * TF_WEAPON_SODA_POPPER is conspicuously absent (Soda Popper)
+	 * TF_WEAPON_PEP_BRAWLER_BLASTER is conspicuously absent (BFB)
+	 * 
+	 * surely they could implement this function as a dynamic_cast or something
+	 * instead of a weapon ID whitelist that has to be updated constantly?
+	 */
+	
+	switch (weapon->GetWeaponID()) {
+	case TF_WEAPON_SCATTERGUN:
+	case TF_WEAPON_ROCKETLAUNCHER:
+	case TF_WEAPON_GRENADELAUNCHER:
+	case TF_WEAPON_PIPEBOMBLAUNCHER:
+	case TF_WEAPON_DIRECTHIT:
+		return true;
+		
+	default:
+		return false;
+	}
+}
+
+
+bool CTFBot::IsAmmoLow(CTFWeaponBase *weapon) const
+{
+	// TODO
+}
+
+bool CTFBot::IsAmmoFull(CTFWeaponBase *weapon) const
+{
+	// TODO
+}
+
+
+float CTFBot::GetMaxAttackRange() const
+{
+	CTFWeaponBase *weapon = this->m_Shared.GetActiveTFWeapon();
+	if (weapon == nullptr) {
+		return 0.0f;
+	}
+	
+	if (weapon->IsMeleeWeapon()) {
+		return 100.0f;
+	}
+	
+	if (weapon->IsWeapon(TF_WEAPON_FLAMETHROWER)) {
+		if (TFGameRules()->IsMannVsMachineMode()) {
+			static CSchemaFieldHandle<CEconItemDefinition>
+				pItemDef_GiantFlamethrower("MVM Giant Flamethrower");
+			
+			if (this->IsActiveTFWeapon(pItemDef_GiantFlamethrower)) {
+				return 875.0f;
+			} else {
+				return 350.0f;
+			}
+		} else {
+			return 250.0f;
+		}
+	}
+	
+	if (WeaponID_IsSniperRifle(weapon->GetWeaponID())) {
+		return FLT_MAX;
+	}
+	
+	if (weapon->IsWeapon(TF_WEAPON_ROCKETLAUNCHER)) {
+		return 3000.0f;
+	}
+	
+	return FLT_MAX;
 }
