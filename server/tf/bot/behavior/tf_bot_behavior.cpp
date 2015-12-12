@@ -429,7 +429,7 @@ void CTFBotMainAction::FireWeaponAtEnemy(CTFBot *actor)
 			actor->EyePosition() + aim_vec,
 			MASK_SHOT, actor, COLLISION_GROUP_NONE, &trace);
 		
-		if ((trace.fraction * (1.1 * dist_to_threat)) < 146.0f &&
+		if ((trace.fraction * (1.1f * dist_to_threat)) < 146.0f &&
 			(trace.m_pEnt == nullptr || !trace.m_pEnt.IsCombatCharacter())) {
 			return;
 		}
