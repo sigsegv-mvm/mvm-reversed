@@ -507,6 +507,7 @@ float PlayerBody::GetStandHullHeight() const
 float PlayerBody::GetCrouchHullHeight() const
 {
 	/* BUG: should be using the _SCALED versions of these macros! */
+	/* report emailed 20151210 */
 	return (VEC_DUCK_HULL_MAX.z - VEC_DUCK_HULL_MIN.z);
 }
 
