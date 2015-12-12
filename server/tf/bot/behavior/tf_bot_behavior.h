@@ -37,8 +37,8 @@ private:
 	void Dodge(CTFBot *actor);
 	void FireWeaponAtEnemy(CTFBot *actor);
 	const CKnownEntity *GetHealerOfThreat(const CKnownEntity *threat) const;
-	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const;
-	const CKnownEntity *SelectCloserThreat(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2) const;
+	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *threat) const;
+	const CKnownEntity *SelectCloserThreat(CTFBot *actor, const CKnownEntity *threat1, const CKnownEntity *threat2) const;
 	const CKnownEntity *SelectMoreDangerousThreatInternal(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const;
 	
 	// TODO 34
@@ -53,9 +53,9 @@ private:
 	// TODO 58 dword 0
 	// TODO 5c IntervalTimer
 	// TODO 60 dword 0, related to disguising
-	// TODO 64 byte 0
-	// TODO 68 dword -1, possibly a handle
-	// TODO 6c dword 0
+	bool m_bReloadingBarrage; // +0x64
+	// TODO 68 CHandle<CBaseEntity>, set in OnContact to the entity touching us
+	// TODO 6c float, set in OnContact to the time when we touched a solid non-player entity
 	// TODO 70 IntervalTimer
 };
 

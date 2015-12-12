@@ -69,7 +69,34 @@ Action<CTFBot> *CTFBotMainAction::InitialContainedAction(CTFBot *actor)
 
 EventDesiredResult<CTFBot> CTFBotMainAction::OnContact(CTFBot *actor, CBaseEntity *ent, CGameTrace *trace)
 {
-	// TODO
+	if (ent != nullptr &&
+		(ent->CollisionProp()->GetSolidFlags() & FSOLID_NOT_SOLID) == 0 &&
+		ENTINDEX(ent) != 0 &&
+		!ent->IsPlayer()) {
+		// TODO: set handle @ +0x68 = ent
+		// TODO: set float  @ +0x6c = gpGlobals->curtime
+		
+		if (TFGameRules()->IsMannVsMachineMode() && actor->IsMiniBoss() &&
+			ent->IsBaseObject()) {
+			CBaseObject *obj = static_cast<CBaseObject *>(ent);
+			if (obj->GetType() != OBJ_SENTRYGUN || obj->m_bMiniBuilding) {
+				/* it looks suspiciously like they copy-and-pasted this from the
+				 * sentry buster detonation damage code */
+				
+				float health = obj->GetMaxHealth();
+				if (obj->GetHealth() < obj->GetMaxHealth()) {
+					health = obj->GetMaxHealth();
+				}
+				
+				CTakeDamage dmginfo(actor, actor, 4 * health, DMG_BLAST);
+				CalculateMeleeDamageForce(&dmginfo, obj->WorldSpaceCenter() -
+					actor->WorldSpaceCenter(), actor->WorldSpaceCenter());
+				obj->TakeDamage(dmginfo);
+			}
+		}
+	}
+	
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 
@@ -92,6 +119,21 @@ EventDesiredResult<CTFBot> CTFBotMainAction::OnOtherKilled(CTFBot *actor, CBaseC
 
 QueryResponse CTFBotMainAction::ShouldHurry(const INextBot *nextbot) const
 {
+	if (g_pPopulationManager == nullptr) {
+		return QueryResponse::DONTCARE;
+	}
+	
+	CTFBot *actor = ToTFBot(nextbot->GetEntity());
+	
+	CTFNavArea *area = static_cast<CTFNavArea *>(actor->GetLastKnownArea());
+	if (area == nullptr) {
+		return QueryResponse::DONTCARE;
+	}
+	
+	// CTFNavArea+0x1c4:
+	// if on red, tests 0x2 (bit 1)
+	// if on blu, tests 0x4 (bit 2)
+	
 	// TODO
 }
 
@@ -208,7 +250,192 @@ void CTFBotMainAction::Dodge(CTFBot *actor)
 
 void CTFBotMainAction::FireWeaponAtEnemy(CTFBot *actor)
 {
-	// TODO
+	if (!actor->IsAlive()) {
+		return;
+	}
+	
+	if ((actor->m_nBotAttrs & (CTFBot::AttributeType::SUPPRESSFIRE |
+		CTFBot::AttributeType::IGNOREENGMIES)) != 0) {
+		return;
+	}
+	
+	if (!tf_bot_fire_weapon_allowed.GetBool()) {
+		return;
+	}
+	
+	CTFWeaponBase *weapon = actor->m_Shared.GetActiveTFWeapon();
+	if (weapon == nullptr) {
+		return;
+	}
+	
+	if (actor->IsBarrageAndReloadWeapon() && ((actor->m_nBotAttrs &
+		CTFBot::AttributeType::HOLDFIREUNTILFULLRELOAD) != 0 ||
+		tf_bot_always_full_reload.GetBool())) {
+		if (weapon->Clip1() <= 0) {
+			this->m_bReloadingBarrage = true;
+		} else if (this->m_bReloadingBarrage) {
+			if (weapon->Clip1() < weapon->GetMaxClip1()) {
+				return;
+			}
+			
+			this->m_bReloadingBarrage = false;
+		}
+	}
+	
+	if ((actor->m_nBotAttrs & CTFBot::AttributeType::ALWAYSFIREWEAPON) != 0) {
+		actor->PressFireButton();
+		return;
+	}
+	
+	if (actor->IsPlayerClass(TF_CLASS_MEDIC) &&
+		weapon->IsWeapon(TF_WEAPON_MEDIGUN)) {
+		return;
+	}
+	
+	if (actor->IsPlayerClass(TF_CLASS_HEAVYWEAPONS) && !actor->IsAmmoLow()) {
+		if (actor->GetIntentionInterface()->ShouldHurry(actor) != QueryResponse::YES) {
+			int enemy_team = actor->GetTeamNumber();
+			switch (enemy_team) {
+			case TF_TEAM_RED:
+				enemy_team = TF_TEAM_BLUE;
+				break;
+			case TF_TEAM_BLUE:
+				enemy_team = TF_TEAM_RED;
+				break;
+			}
+			
+			if (actor->GetVisionInterface()->GetTimeSinceVisible(enemy_team) < 3.0f) {
+				actor->PressAltFireButton();
+			}
+		}
+	}
+	
+	const CKnownEntity *threat = this->GetVisionInterface()->GetPrimaryKnownThreat(false);
+	if (threat = nullptr || threat->GetEntity() == nullptr ||
+		!threat->IsVisibleRecently()) {
+		return;
+	}
+	
+	if (!actor->IsLineOfFireClear(threat->GetEntity()->EyePosition()) &&
+		!actor->IsLineOfFireClear(threat->GetEntity()->WorldSpaceCenter()) &&
+		!actor->IsLineOfFireClear(threat->GetEntity()->GetAbsOrigin())) {
+		return;
+	}
+	
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode()) {
+		CTFPlayer *player = ToTFPlayer(threat->GetEntity());
+		if (player != nullptr && player->m_Shared.IsInvulnerable()) {
+			/* BUG: incomplete list of weapon IDs
+			 * (see CTFBot::IsExplosiveProjectileWeapon for details) */
+			if (!weapon->IsWeapon(TF_WEAPON_ROCKETLAUNCHER) &&
+				!weapon->IsWeapon(TF_WEAPON_GRENADELAUNCHER) &&
+				!weapon->IsWeapon(TF_WEAPON_PIPEBOMBLAUNCHER) &&
+				!weapon->IsWeapon(TF_WEAPON_DIRECTHIT)) {
+				return;
+			}
+		}
+	}
+	
+	if (!actor->GetIntentionInterface()->ShouldAttack(actor, threat) ||
+		g_pGameRules->InSetup()) {
+		return;
+	}
+	
+	if (weapon->IsMeleeWeapon()) {
+		if (actor->IsRangeLessThan(threat->GetEntity(), 250.0f)) {
+			actor->PressFireButton();
+		}
+		
+		return;
+	}
+	
+	if (TFGameRules()->IsMannVsMachineMode()) {
+		if (!actor->IsPlayerClass(TF_CLASS_SNIPER) &&
+			weapon->IsHitScanWeapon() && actor->IsRangeGreaterThan(threat->GetEntity(),
+			tf_bot_hitscan_range_limit.GetFloat()) {
+			return;
+		}
+	}
+	
+	if (weapon->IsWeapon(TF_WEAPON_FLAMETHROWER)) {
+		CTFFlameThrower *flamethrower = static_cast<CTFFlameThrower *>(weapon);
+		if (flamethrower->CanAirBlast() && actor->ShouldFireCompressionBlast()) {
+			actor->PressAltFireButton();
+			return;
+		}
+		
+		if (threat->GetTimeSinceLastSeen() < 1.0f) {
+			Vector threat_to_actor = (actor->GetAbsOrigin() -
+				threat->GetEntity()->GetAbsOrigin());
+			if (threat_to_actor.IsLengthLessThan(actor->GetMaxAttackRange())) {
+				actor->PressFireButton(tf_bot_fire_weapon_min_time.GetFloat());
+			}
+		}
+		
+		return;
+	}
+	
+	Vector actor_to_threat = (threat->GetEntity()->GetAbsOrigin() -
+		actor->GetAbsOrigin());
+	float dist_to_threat = actor_to_threat.Length();
+	
+	if (!actor->GetBodyInterface()->IsHeadAimingOnTarget()) {
+		return;
+	}
+	
+	if (dist_to_threat >= actor->GetMaxAttackRange()) {
+		return;
+	}
+	
+	if (weapon->IsWeapon(TF_WEAPON_COMPOUND_BOW)) {
+		CTFCompoundBow *huntsman = static_cast<CTFCompoundBow *>(weapon);
+		if (huntsman->GetCurrentCharge() >= 0.95f &&
+			actor->IsLineOfFireClear(threat->GetEntity())) {
+			return;
+		}
+		
+		actor->PressFireButton();
+		return;
+	}
+	
+	if (WeaponID_IsSniperRifle(weapon->GetWeaponID())) {
+		if (!actor->m_Shared.InCond(TF_COND_ZOOMED)) {
+			return;
+		}
+		
+		// TODO: bunch of stuff related to IntervalTimer @ 0x5c
+		// ...
+		
+		actor->PressFireButton();
+		return;
+	}
+	
+	if (!actor->IsCombatWeapon()) {
+		return;
+	}
+	
+	if (actor->IsContinuousFireWeapon()) {
+		actor->PressFireButton(tf_bot_fire_weapon_min_time.GetFloat());
+		return;
+	}
+	
+	if (actor->IsExplosiveProjectileWeapon()) {
+		Vector aim_vec;
+		actor->EyeVectors(&aim_vec);
+		aim_vec *= (1.1f * dist_to_threat);
+		
+		trace_t trace;
+		UTIL_TraceLine(actor->EyePosition(),
+			actor->EyePosition() + aim_vec,
+			MASK_SHOT, actor, COLLISION_GROUP_NONE, &trace);
+		
+		if ((trace.fraction * (1.1 * dist_to_threat)) < 146.0f &&
+			(trace.m_pEnt == nullptr || !trace.m_pEnt.IsCombatCharacter())) {
+			return;
+		}
+	}
+	
+	actor->PressFireButton();
 }
 
 const CKnownEntity *CTFBotMainAction::GetHealerOfThreat(const CKnownEntity *threat) const
@@ -237,14 +464,23 @@ const CKnownEntity *CTFBotMainAction::GetHealerOfThreat(const CKnownEntity *thre
 	return healer;
 }
 
-bool CTFBotMainAction::IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const
+bool CTFBotMainAction::IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *threat) const
 {
 	// TODO
+	
+	/* BUG: distant snipers must have dot product zero (lol) */
 }
 
-const CKnownEntity *CTFBotMainAction::SelectCloserThreat(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2) const
+const CKnownEntity *CTFBotMainAction::SelectCloserThreat(CTFBot *actor, const CKnownEntity *threat1, const CKnownEntity *threat2) const
 {
-	// TODO
+	float range1 = actor->GetRangeSquaredTo(known1->GetEntity());
+	float range2 = actor->GetRangeSquaredTo(known2->GetEntity());
+	
+	if (range1 < range2) {
+		return threat1;
+	} else {
+		return threat2;
+	}
 }
 
 const CKnownEntity *CTFBotMainAction::SelectMoreDangerousThreatInternal(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const
