@@ -28,7 +28,7 @@ public:
 	virtual bool ForEachKnownEntity(IForEachKnownEntity& functor);
 	virtual void CollectKnownEntities(CUtlVector<CKnownEntity> *knowns);
 	virtual const CKnownEntity *GetPrimaryKnownThreat(bool only_recently_visible) const;
-	virtual float GetTimeSinceVisible(int index) const;
+	virtual float GetTimeSinceVisible(int teamnum) const;
 	virtual const CKnownEntity *GetClosestKnown(int teamnum) const;
 	virtual int GetKnownCount(int teamnum, bool only_recently_visible, float range) const;
 	virtual const CKnownEntity *GetClosestKnown(const INextBotEntityFilter& filter) const;
@@ -62,5 +62,5 @@ protected:
 	CUtlVector<CKnownEntity> m_KnownEntities; // +0x28
 	CHandle<CBaseEntity> m_hPrimaryThreat;    // +0x3c
 	float m_flLastUpdate;                     // +0x40
-	IntervalTimer m_Timers[32];               // +0x44
+	IntervalTimer m_itTeamVisible[32];        // +0x44
 };

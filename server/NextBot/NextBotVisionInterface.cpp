@@ -119,9 +119,9 @@ const CKnownEntity *IVision::GetPrimaryKnownThreat(bool only_recently_visible) c
 	return threat;
 }
 
-float IVision::GetTimeSinceVisible(int index) const
+float IVision::GetTimeSinceVisible(int teamnum) const
 {
-	if (index == -2) {
+	if (teamnum == -2) {
 		for (int i = 0; i < 32; ++i) {
 			IntervalTimer *timer = this->m_Timers + i;
 			if (timer->IsLessThen(1e+10f) && timer->HasStarted()) {
@@ -129,8 +129,8 @@ float IVision::GetTimeSinceVisible(int index) const
 			}
 		}
 		return 1e+10f;
-	} else if (index < 32) {
-		return this->m_Timers[index].GetElapsedTime();
+	} else if (teamnum < 32) {
+		return this->m_Timers[teamnum].GetElapsedTime();
 	} else {
 		return 0.0f;
 	}
