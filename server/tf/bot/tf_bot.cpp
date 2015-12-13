@@ -357,3 +357,39 @@ float CTFBot::GetMaxAttackRange() const
 	
 	return FLT_MAX;
 }
+
+
+void CTFBot::DisguiseAsMemberOfEnemyTeam()
+{
+	int enemy_team = this->GetTeamNumber();
+	switch (enemy_team) {
+	case TF_TEAM_RED:
+		enemy_team = TF_TEAM_BLUE;
+		break;
+	case TF_TEAM_BLUE:
+		enemy_team = TF_TEAM_RED;
+		break;
+	}
+	
+	CUtlVector<CTFPlayer *> enemies;
+	CollectPlayers<CTFPlayer>(&enemies, enemy_team, false, false);
+	
+	int classnum;
+	if (!enemies.IsEmpty()) {
+		classnum = enemies.Random()->GetPlayerClass()->GetClassIndex();
+	} else {
+		classnum = RandomInt(1, 9);
+	}
+	
+	enemy_team = this->GetTeamNumber();
+	switch (enemy_team) {
+	case TF_TEAM_RED:
+		enemy_team = TF_TEAM_BLUE;
+		break;
+	case TF_TEAM_BLUE:
+		enemy_team = TF_TEAM_RED;
+		break;
+	}
+	
+	this->m_Shared.Disguise(enemy_team, classnum, false, false);
+}

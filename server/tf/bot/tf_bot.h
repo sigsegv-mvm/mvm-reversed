@@ -155,6 +155,8 @@ public:
 	
 	float GetMaxAttackRange() const;
 	
+	void DisguiseAsMemberOfEnemyTeam();
+	
 	// TODO: make sure to check whether these are private
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
 	// AddItem
