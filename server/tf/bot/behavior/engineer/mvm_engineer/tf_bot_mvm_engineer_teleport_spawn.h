@@ -9,7 +9,7 @@
 class CTFBotMvMEngineerTeleportSpawn : public Action<CTFBot>
 {
 public:
-	CTFBotMvMEngineerTeleportSpawn(CBaseTFBotHintEntity *hint, bool b1);
+	CTFBotMvMEngineerTeleportSpawn(CBaseTFBotHintEntity *hint, bool non_silent);
 	virtual ~CTFBotMvMEngineerTeleportSpawn();
 	
 	virtual const char *GetName() const override;
@@ -18,5 +18,7 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// TODO
+	CountdownTimer m_ctPushAway;       // +0x34
+	CHandle<CBaseEntity> m_hintEntity; // +0x40 (actual name)
+	bool m_bNonSilent;                 // +0x44
 };

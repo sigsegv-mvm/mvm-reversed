@@ -234,7 +234,7 @@ private:
 	int m_iTotalCountNonSupport;    // +0x024
 	// +0x028 dword (is incremented when CWaveSpawnPopulator spawns a tank)
 	// +0x02c 
-	// +0x030 
+	int m_iEngiesTeleportedIn;      // +0x030
 	// +0x034 
 	CUtlVector<WaveClassCount_t> m_ClassCounts; // +0x038
 	int m_iTotalCurrency;           // +0x04c
