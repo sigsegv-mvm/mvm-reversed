@@ -361,18 +361,8 @@ float CTFBot::GetMaxAttackRange() const
 
 void CTFBot::DisguiseAsMemberOfEnemyTeam()
 {
-	int enemy_team = this->GetTeamNumber();
-	switch (enemy_team) {
-	case TF_TEAM_RED:
-		enemy_team = TF_TEAM_BLUE;
-		break;
-	case TF_TEAM_BLUE:
-		enemy_team = TF_TEAM_RED;
-		break;
-	}
-	
 	CUtlVector<CTFPlayer *> enemies;
-	CollectPlayers<CTFPlayer>(&enemies, enemy_team, false, false);
+	CollectPlayers<CTFPlayer>(&enemies, GetEnemyTeam(this), false, false);
 	
 	int classnum;
 	if (!enemies.IsEmpty()) {
@@ -381,15 +371,5 @@ void CTFBot::DisguiseAsMemberOfEnemyTeam()
 		classnum = RandomInt(1, 9);
 	}
 	
-	enemy_team = this->GetTeamNumber();
-	switch (enemy_team) {
-	case TF_TEAM_RED:
-		enemy_team = TF_TEAM_BLUE;
-		break;
-	case TF_TEAM_BLUE:
-		enemy_team = TF_TEAM_RED;
-		break;
-	}
-	
-	this->m_Shared.Disguise(enemy_team, classnum, false, false);
+	this->m_Shared.Disguise(GetEnemyTeam(this), classnum, false, false);
 }

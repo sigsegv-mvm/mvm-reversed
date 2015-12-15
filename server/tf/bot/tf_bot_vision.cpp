@@ -36,18 +36,8 @@ void CTFBotVision::Update()
 		return;
 	}
 	
-	int enemy_team = actor->GetTeamNumber();
-	switch (enemy_team) {
-	case TF_TEAM_RED:
-		enemy_team = TF_TEAM_BLUE;
-		break;
-	case TF_TEAM_BLUE:
-		enemy_team = TF_TEAM_RED;
-		break;
-	}
-	
 	CUtlVector<CTFPlayer *> enemies;
-	CollectPlayers<CTFPlayer>(enemies, enemy_team, true, false);
+	CollectPlayers<CTFPlayer>(enemies, GetEnemyTeam(actor), true, false);
 	
 	FOR_EACH_VEC(enemies, i) {
 		CTFPlayer *enemy = enemies[i];

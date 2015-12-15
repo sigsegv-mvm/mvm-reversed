@@ -294,17 +294,7 @@ void CTFBotMainAction::FireWeaponAtEnemy(CTFBot *actor)
 	
 	if (actor->IsPlayerClass(TF_CLASS_HEAVYWEAPONS) && !actor->IsAmmoLow()) {
 		if (actor->GetIntentionInterface()->ShouldHurry(actor) != QueryResponse::YES) {
-			int enemy_team = actor->GetTeamNumber();
-			switch (enemy_team) {
-			case TF_TEAM_RED:
-				enemy_team = TF_TEAM_BLUE;
-				break;
-			case TF_TEAM_BLUE:
-				enemy_team = TF_TEAM_RED;
-				break;
-			}
-			
-			if (actor->GetVisionInterface()->GetTimeSinceVisible(enemy_team) < 3.0f) {
+			if (actor->GetVisionInterface()->GetTimeSinceVisible(GetEnemyTeam(actor)) < 3.0f) {
 				actor->PressAltFireButton();
 			}
 		}

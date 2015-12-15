@@ -53,17 +53,8 @@ CTFBotPathCost(CTFBot *actor, RouteType rtype)
 	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
 	
 	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
-		int enemy_team = actor->GetTeamNumber();
-		switch (enemy_team) {
-		case TF_TEAM_RED:
-			enemy_team = TF_TEAM_BLUE;
-			break;
-		case TF_TEAM_BLUE:
-			enemy_team = TF_TEAM_RED;
-			break;
-		}
-		
-		TheNavMesh()->CollectBuiltObjects(&this->m_EnemyObjects, enemy_team);
+		TheNavMesh()->CollectBuiltObjects(&this->m_EnemyObjects,
+			GetEnemyTeam(actor));
 	} else {
 		this->m_EnemyObjects.RemoveAll();
 	}
@@ -470,4 +461,24 @@ bool VisionTraceFilterFunction(IHandleEntity *pHandleEntity, int contentsMask)
 	} else {
 		return ent->BlocksLOS();
 	}
+}
+
+
+/* I invented this function, because this particular idiom comes up frequently;
+ * I can't seem to actually find it anywhere in the 2013 SDK or the 2007 leak,
+ * so I don't know if it actually is an inlined function or just a copypasta */
+inline int GetEnemyTeam(CBaseEntity *ent)
+{
+	int enemy_team = ent->GetTeamNumber();
+	
+	switch (enemy_team) {
+	case TF_TEAM_RED:
+		enemy_team = TF_TEAM_BLUE;
+		break;
+	case TF_TEAM_BLUE:
+		enemy_team = TF_TEAM_RED;
+		break;
+	}
+	
+	return enemy_team;
 }
