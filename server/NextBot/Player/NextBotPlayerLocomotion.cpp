@@ -167,7 +167,7 @@ void PlayerLocomotion::JumpAcrossGap(const Vector& v1, const Vector& v2)
 {
 	this->Jump();
 	this->GetBot()->GetBodyInterface()->AimHeadTowards(v1,
-		IBody::LookAtPriorityType::JUMPACROSSGAP, 1.0f, nullptr,
+		IBody::LookAtPriorityType::OVERRIDE, 1.0f, nullptr,
 		"Looking forward while jumping a gap");
 	this->m_bGapJumping = true;
 	// TODO: bool @ +0x7c = false

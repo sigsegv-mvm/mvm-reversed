@@ -18,8 +18,8 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	CHandle<CBaseEntity> m_hintEntity; // +0x0034
-	CountdownTimer m_ctPushAway;       // +0x0038
-	CountdownTimer m_ctRecomputePath;  // +0x0044
-	PathFollower m_PathFollower;       // +0x0050
+	CHandle<CTFBotHintTeleportExit> m_hintEntity; // +0x0034
+	CountdownTimer m_ctPushAway;                  // +0x0038
+	CountdownTimer m_ctRecomputePath;             // +0x0044
+	PathFollower m_PathFollower;                  // +0x0050
 };

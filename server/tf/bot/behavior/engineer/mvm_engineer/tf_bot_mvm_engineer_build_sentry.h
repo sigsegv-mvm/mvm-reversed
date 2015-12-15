@@ -19,5 +19,9 @@ public:
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
 private:
-	// TODO
+	CHandle<CTFBotHintSentrygun> m_hintEntity; // +0x0034
+	CHandle<CObjectSentrygun> m_hSentry;       // +0x0038
+	CountdownTimer m_ctPushAway;               // +0x003c
+	CountdownTimer m_ctRecomputePath;          // +0x0048
+	PathFollower m_PathFollower;               // +0x0054
 };
