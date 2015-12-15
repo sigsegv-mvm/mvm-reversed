@@ -305,7 +305,7 @@ private:
 	bool m_bIsInFormation;    // +0x2c54
 	
 	CUtlStringList m_TeleportWhere; // +0x2c58
-	// TODO: 0x2c6c
+	bool m_bTeleQuickBuild;         // +0x2c6c
 	float m_flAutoJumpMin; // +0x2c70
 	float m_flAutoJumpMax; // +0x2c74
 	// 0x2c78: CTFBot: CountdownTimer
