@@ -20,5 +20,5 @@ public:
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
 	
 private:
-	// TODO
+	PathFollower m_PathFollower; // +0x0034
 };

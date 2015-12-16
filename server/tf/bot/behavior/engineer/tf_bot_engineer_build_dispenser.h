@@ -21,5 +21,9 @@ public:
 	virtual ActionResult<CTFBot> OnResume(CTFBot *actor, Action<CTFBot> *action) override;
 	
 private:
-	// TODO
+	// 0034 CountdownTimer
+	// 0040 CountdownTimer
+	// 004c CountdownTimer
+	// 0058 
+	PathFollower m_PathFollower; // +0x005c
 };

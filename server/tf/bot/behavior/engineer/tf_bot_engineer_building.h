@@ -9,6 +9,7 @@
 class CTFBotEngineerBuilding : public Action<CTFBot>
 {
 public:
+	CTFBotEngineerBuilding();
 	CTFBotEngineerBuilding(CTFBotHintSentrygun *hint);
 	virtual ~CTFBotEngineerBuilding();
 	
@@ -28,5 +29,17 @@ private:
 	bool IsMetalSourceNearby(CTFBot *actor) const;
 	void UpgradeAndMaintainBuildings(CTFBot *actor);
 	
-	// TODO
+	// 0034 CountdownTimer
+	// 0040 CountdownTimer
+	// 004c CountdownTimer
+	// 0058 CountdownTimer
+	// 0064 
+	// 0068 CountdownTimer
+	// 0074 CountdownTimer
+	PathFollower m_PathFollower; // +0x0080
+	// 4854 
+	// 4858 
+	// 485c 
+	// 4860 CountdownTimer
+	// 486c 
 };

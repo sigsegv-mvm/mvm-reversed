@@ -28,7 +28,15 @@ private:
 	void CollectBuildAreas(CTFBot *actor);
 	void SelectBuildLocation(CTFBot *actor);
 	
-	// TODO
+	// 0034 
+	// 0038 
+	// 003c 
+	// 0040 
+	PathFollower m_PathFollower; // +0x0044
+	// 4818 CountdownTimer
+	// 4824 CUtlVector<CTFNavArea *>
+	// 4838 
+	// 483c CountdownTimer
 };
 
 

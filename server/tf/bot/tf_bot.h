@@ -269,6 +269,8 @@ private:
 	
 	// 0x2bb8: CTFBot: CountdownTimer
 	
+	bool m_bLookAroundForEnemies; // +0x2bc4
+	
 	enum IgnoreMask : int
 	{
 		/* the ordering of these is weird */

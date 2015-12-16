@@ -11,4 +11,36 @@ ConVar tf_bot_teleport_build_surface_normal_limit("tf_bot_teleport_build_surface
 	"If the ground normal Z component is less that this value, Engineer bots won't place their entrance teleporter");
 
 
+CTFBotEngineerBuildTeleportEntrance::CTFBotEngineerBuildTeleportEntrance(/* TODO */)
+{
+	// TODO
+}
 
+CTFBotEngineerBuildTeleportEntrance::~CTFBotEngineerBuildTeleportEntrance()
+{
+}
+
+
+const char *CTFBotEngineerBuildTeleportEntrance::GetName() const
+{
+	return "EngineerBuildTeleportEntrance";
+}
+
+
+ActionResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::OnStart(CTFBot *actor, Action<CTFBot> *action)
+{
+	return ActionResult<CTFBot>::Continue();
+}
+
+ActionResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::Update(CTFBot *actor, float dt)
+{
+	// TODO
+}
+
+
+EventDesiredResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::OnStuck(CTFBot *actor)
+{
+	this->m_PathFollower.Invalidate();
+	
+	return ActionResult<CTFBot>::Continue();
+}

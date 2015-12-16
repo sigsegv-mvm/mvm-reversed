@@ -9,6 +9,7 @@
 class CTFBotEngineerBuildSentryGun : public Action<CTFBot>
 {
 public:
+	CTFBotEngineerBuildSentryGun();
 	CTFBotEngineerBuildSentryGun(CTFBotHintSentrygun *hint);
 	virtual ~CTFBotEngineerBuildSentryGun();
 	
@@ -20,5 +21,20 @@ public:
 	virtual ActionResult<CTFBot> OnResume(CTFBot *actor, Action<CTFBot> *action) override;
 	
 private:
-	// TODO
+	// 0034 CountdownTimer
+	// 0040 CountdownTimer
+	// 004c CountdownTimer
+	// 0058 CountdownTimer
+	// 0064 CountdownTimer
+	// 0070 
+	PathFollower m_PathFollower; // +0x0074
+	// 4848 
+	// 484c 
+	// 4850 
+	// 4854 
+	// 4858 
+	// 485c 
+	// 4860 
+	// 4864 
+	// 4868 
 };
