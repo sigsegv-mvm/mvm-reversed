@@ -26,16 +26,27 @@ private:
 	void TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor);
 	void TryToDetonateStaleNest();
 	
-	// TODO
+	PathFollower m_PathFollower; // +0x0034
+	// 4808 CountdownTimer
+	// 4814 CountdownTimer
+	// 4820 CountdownTimer
+	// 482c CountdownTimer
+	// 4838 CountdownTimer
+	// 4844 CountdownTimer
+	// 4850 
+	// 4854 
+	// 4858 dword -1
+	// 485c dword -1
+	// 4860 dword -1
+	// 4864 
 };
 
 
 class CTFBotMvMEngineerHintFinder
 {
 public:
-	static bool FindHint(bool, bool, CHandle<CTFBotHintEngineerNest> *);
+	static bool FindHint(bool b1, bool b2, CHandle<CTFBotHintEngineerNest> *hint);
 };
-
 
 
 // TODO: SelectOutOfRangeNest(const CUtlVector<CTFBotHintEngineerNest *>&)
