@@ -4,23 +4,29 @@
  */
 
 
-// TODO: ITFBotHintEntityAutoList
-
+DECLARE_AUTO_LIST(ITFBotHintEntityAutoList);
 
 // sizeof: 0x36c
 class CBaseTFBotHintEntity : public CPointEntity, public ITFBotHintEntityAutoList
 {
 public:
+	enum HintType : int
+	{
+		TELEPORTER_EXIT = 0,
+		SENTRY_GUN      = 1,
+		ENGINEER_NEST   = 2,
+	};
+	
 	CBaseTFBotHintEntity();
 	virtual ~CBaseTFBotHintEntity();
 	
-	// TODO: InputEnable
-	// TODO: InputDisable
+	void InputEnable(inputdata_t& inputdata);
+	void InputDisable(inputdata_t& inputdata);
 	
-	UNKNOWN OwnerObjectFinishBuilding() const;
-	UNKNOWN OwnerObjectHasNoOwner() const;
+	bool OwnerObjectFinishBuilding() const;
+	bool OwnerObjectHasNoOwner() const;
 	
 protected:
-	// 364 byte 0
+	bool m_bDisabled; // +0x364
 	// 368 dword -1
 };

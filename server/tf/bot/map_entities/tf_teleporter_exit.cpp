@@ -4,4 +4,16 @@
  */
 
 
+CTFBotHintTeleporterExit::CTFBotHintTeleporterExit()
+{
+}
 
+CTFBotHintTeleporterExit::~CTFBotHintTeleporterExit()
+{
+}
+
+
+CBaseTFBotHintEntity::HintType CTFBotHintTeleporterExit::GetHintType() const
+{
+	return CBaseTFBotHintEntity::HintType::TELEPORTER_EXIT;
+}

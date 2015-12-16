@@ -11,20 +11,15 @@ public:
 	CTFBotHintSentrygun();
 	virtual ~CTFBotHintSentrygun();
 	
-	virtual UNKNOWN GetHintType() const;
+	virtual HintType GetHintType() const;
 	
-	UNKNOWN IsAvailableForSelection(CTFPlayer *player) const;
+	bool IsAvailableForSelection(CTFPlayer *player) const;
 	
-	UNKNOWN OnSentryGunDestroyed(CBaseEntity *ent);
+	void OnSentryGunDestroyed(CBaseEntity *ent);
 	
 private:
 	// 36c byte 0
 	// 370 dword 0
-	// 374 dword 0
-	// 378 
-	// 37c 
-	// 380 dword -1
-	// 384 dword 0
-	// 388 
-	// 38c dword -1
+	COutputEvent m_OnSentryGunDestroyed; // +0x374
+	// 38c CHandle<?>
 };

@@ -11,35 +11,27 @@ public:
 	CTFBotHintEngineerNest();
 	virtual ~CTFBotHintEngineerNest();
 	
-	virtual UNKNOWN UpdateTransmitState() override;
+	virtual int UpdateTransmitState() override;
 	
-	virtual UNKNOWN Spawn() override;
+	virtual void Spawn() override;
 	
-	virtual UNKNOWN GetHintType() const;
+	virtual HintType GetHintType() const;
 	
-	UNKNOWN DetonateStateNest();
+	void DetonateStateNest();
 	
-	UNKNOWN GetSentryHint() const;
-	UNKNOWN GetTeleporterHint() const;
+	CTFBotHintSentrygun *GetSentryHint() const;
+	CTFBotHintTeleporterExit *GetTeleporterHint() const;
 	
-	UNKNOWN IsStaleNest() const;
+	bool IsStaleNest() const;
 	
 private:
-	UNKNOWN HintThink();
-	UNKNOWN HintTeleporterThink();
+	void HintThink();
+	void HintTeleporterThink();
 	
-	UNKNOWN DetonateObjectsFromHints(const CUtlVector<CHandle<CBaseTFBotHintEntity>>& hints);
-	UNKNOWN GetHint(const CUtlVector<CHandle<CBaseTFBotHintEntity>>& hints);
+	void DetonateObjectsFromHints(const CUtlVector<CHandle<CBaseTFBotHintEntity>>& hints);
+	CBaseTFBotHintEntity *GetHint(const CUtlVector<CHandle<CBaseTFBotHintEntity>>& hints);
 	
-	// 36c dword 0
-	// 370 dword 0
-	// 374 dword 0
-	// 378 dword 0
-	// 37c dword 0
-	// 380 dword 0
-	// 384 dword 0
-	// 388 dword 0
-	// 38c dword 0
-	// 390 dword 0
+	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_SentryHints; // +0x36c
+	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_TeleHints;   // +0x380
 	// 394 byte 0
 };

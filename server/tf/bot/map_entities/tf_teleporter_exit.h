@@ -11,5 +11,5 @@ public:
 	CTFBotHintTeleporterExit();
 	virtual ~CTFBotHintTeleporterExit();
 	
-	virtual UNKNOWN GetHintType() const;
+	virtual HintType GetHintType() const;
 };

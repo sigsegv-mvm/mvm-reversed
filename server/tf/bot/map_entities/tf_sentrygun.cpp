@@ -4,4 +4,29 @@
  */
 
 
+CTFBotHintSentrygun::CTFBotHintSentrygun()
+{
+	// TODO
+}
 
+CTFBotHintSentrygun::~CTFBotHintSentrygun()
+{
+}
+
+
+CBaseTFBotHintEntity::HintType CTFBotHintSentrygun::GetHintType() const
+{
+	return CBaseTFBotHintEntity::HintType::SENTRY_GUN;
+}
+
+
+bool CTFBotHintSentrygun::IsAvailableForSelection(CTFPlayer *player) const
+{
+	// TODO
+}
+
+
+void CTFBotHintSentrygun::OnSentryGunDestroyed(CBaseEntity *ent)
+{
+	this->m_OnSentryGunDestroyed->FireOutput(ent, ent);
+}
