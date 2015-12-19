@@ -19,5 +19,6 @@ public:
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
 private:
-	// TODO
+	CHandle<CTFWeaponBase> m_hItem;  // +0x34
+	CountdownTimer m_ctInitialDelay; // +0x38
 };
