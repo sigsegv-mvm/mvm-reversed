@@ -65,7 +65,7 @@ ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::Update(CTFBot *actor, float dt)
 
 QueryResponse CTFBotSpyLeaveSpawnRoom::ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const
 {
-	return false;
+	return QueryResponse::NO;
 }
 
 
