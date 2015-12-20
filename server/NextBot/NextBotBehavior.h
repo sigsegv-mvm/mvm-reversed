@@ -154,6 +154,16 @@ struct EventDesiredResult : public ActionResult<T>
 			.severity   = level,
 		};
 	}
+	
+	static EventDesiredResult<T> Sustain(const char *why, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			.transition = ActionTransition::SUSTAIN,
+			.action     = nullptr,
+			.reason     = why,
+			.severity   = level,
+		};
+	}
 };
 
 
