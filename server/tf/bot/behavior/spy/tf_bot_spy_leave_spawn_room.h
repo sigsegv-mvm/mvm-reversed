@@ -9,7 +9,7 @@
 class CTFBotSpyLeaveSpawnRoom : public Action<CTFBot>
 {
 public:
-	CTFBotSpyLeaveSpawnRoom(/* TODO */);
+	CTFBotSpyLeaveSpawnRoom();
 	virtual ~CTFBotSpyLeaveSpawnRoom();
 	
 	virtual const char *GetName() const override;
@@ -20,8 +20,9 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// TODO
+	CountdownTimer m_ctTeleport; // +0x34
+	int m_nDistance;             // +0x40
 };
 
 
-// TODO: TeleportNearVictim(CTFBot *, CTFPlayer *, int)
+bool TeleportNearVictim(CTFBot *spy, CTFPlayer *victim, int i1);
