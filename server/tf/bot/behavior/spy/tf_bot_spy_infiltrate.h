@@ -30,5 +30,10 @@ public:
 private:
 	UNKNOWN FindHidingSpot(CTFBot *actor);
 	
-	// TODO
+	// 0034 CountdownTimer
+	// 0040 PathFollower
+	// 4814 
+	// 4818 CountdownTimer
+	// 4824 CountdownTimer
+	// 4830 
 };

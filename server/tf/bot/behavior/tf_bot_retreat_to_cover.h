@@ -28,7 +28,12 @@ public:
 private:
 	UNKNOWN FindCoverArea(CTFBot *actor);
 	
-	// TODO
+	// 0034 float -1.0f
+	// 0038 
+	// 003c PathFollower
+	// 4810 CountdownTimer
+	// 481c 
+	// 4820 CountdownTimer
 };
 
 

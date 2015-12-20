@@ -31,5 +31,10 @@ private:
 	void MonitorArmedStickybombs(CTFBot *actor);
 	bool ShouldOpportunisticallyTeleport(CTFBot *actor) const;
 	
-	// TODO
+	// 34 CountdownTimer
+	// 40 CountdownTimer
+	// 4c CountdownTimer
+	// 58 CountdownTimer
+	// 64 CountdownTimer
+	// 70 CountdownTimer
 };

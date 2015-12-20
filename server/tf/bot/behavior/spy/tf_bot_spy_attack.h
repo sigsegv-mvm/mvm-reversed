@@ -32,5 +32,9 @@ public:
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
 private:
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 ChasePath
+	// 4838 
+	// 483c CountdownTimer
+	// 4848 CountdownTimer
 };

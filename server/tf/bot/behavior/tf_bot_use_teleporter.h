@@ -25,5 +25,9 @@ public:
 private:
 	bool IsTeleporterAvailable() const;
 	
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 
+	// 003c PathFollower
+	// 4810 CountdownTimer
+	// 481c byte 0
 };

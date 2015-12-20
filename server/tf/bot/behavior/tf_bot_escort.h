@@ -30,5 +30,9 @@ public:
 	void SetWho(CBaseEntity *who);
 	
 private:
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 PathFollower
+	// 480c CountdownTimer
+	// 4818 CountdownTimer
+	// ...?
 };

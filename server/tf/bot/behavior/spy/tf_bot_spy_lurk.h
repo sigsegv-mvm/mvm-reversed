@@ -20,5 +20,5 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// TODO
+	// 34 CountdownTimer
 };

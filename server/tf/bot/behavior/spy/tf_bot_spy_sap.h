@@ -30,5 +30,7 @@ public:
 private:
 	bool AreAllDangerousSentriesSapped(CTFBot *actor) const;
 	
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 CountdownTimer
+	// 0044 PathFollower
 };

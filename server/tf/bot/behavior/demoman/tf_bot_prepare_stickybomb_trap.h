@@ -31,5 +31,7 @@ public:
 private:
 	void InitBombTargetAreas(CTFBot *actor);
 	
-	// TODO
+	// 34 
+	// 38 CUtlVector<BombTargetArea>
+	// 4c CountdownTimer
 };

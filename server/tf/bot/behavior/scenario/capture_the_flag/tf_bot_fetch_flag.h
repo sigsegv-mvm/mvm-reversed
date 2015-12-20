@@ -22,5 +22,6 @@ public:
 	
 private:
 	// 0032 bool (from ctor: change to AttackFlagDefenders if flag unreachable)
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
 };

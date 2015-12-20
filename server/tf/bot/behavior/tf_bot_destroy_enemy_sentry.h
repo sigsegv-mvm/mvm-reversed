@@ -29,7 +29,14 @@ private:
 	void ComputeCornerAttackSpot(CTFBot *actor);
 	void ComputeSafeAttackSpot(CTFBot *actor);
 	
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
+	// 4814 
+	// 4818 
+	// 481c 
+	// 4820 
+	// 4824 
+	// 4828 CHandle<T>
 };
 
 
@@ -51,7 +58,9 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
+	// 4814 CHandle<T>
 };
 
 

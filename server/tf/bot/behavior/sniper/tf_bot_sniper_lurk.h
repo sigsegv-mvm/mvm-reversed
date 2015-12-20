@@ -29,6 +29,21 @@ private:
 	UNKNOWN FindHint(CTFBot *actor);
 	UNKNOWN FindNewHome(CTFBot *actor);
 	
-	// TODO
+	// 0034 CountdownTimer
+	// 0040 CountdownTimer
+	// 004c PathFollower
+	// 4820 
+	// 4824 
+	// 4828 
+	// 482c 
+	// 4830 
+	// 4834 CountdownTimer
+	// 4840 
+	// 4844 
+	// 4848 
+	// 484c 
+	// 4850 
+	// 4854 
+	// 4858 CHandle<T>
 };
 

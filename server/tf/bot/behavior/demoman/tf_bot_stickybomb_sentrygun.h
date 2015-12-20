@@ -10,6 +10,7 @@ class CTFBotStickybombSentrygun : public Action<CTFBot>
 {
 public:
 	CTFBotStickybombSentrygun(CObjectSentrygun *sentry);
+	CTFBotStickybombSentrygun(CObjectSentrygun *sentry, float x, float y, float z);
 	virtual ~CTFBotStickybombSentrygun();
 	
 	virtual const char *GetName() const override;
@@ -29,5 +30,18 @@ public:
 private:
 	bool IsAimOnTarget(CTFBot *actor, float f1, float f2, float f3);
 	
-	// TODO
+	// 34 Vector
+	// 40 byte 1
+	// 44 CHandle<T>
+	// 48 
+	// 4c CountdownTimer
+	// 58 
+	// 5c 
+	// 60 
+	// 64 
+	// 68 
+	// 6c 
+	// 70 
+	// 74 
+	// 78 
 };

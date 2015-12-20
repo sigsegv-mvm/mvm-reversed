@@ -18,5 +18,12 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 
+	// 003c 
+	// 0040 
+	// 0044 
+	// 0048 CountdownTimer
+	// 0054 PathFollower
+	// 4828 CountdownTimer
 };

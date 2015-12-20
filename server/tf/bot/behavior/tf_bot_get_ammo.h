@@ -29,7 +29,9 @@ public:
 	static bool IsPossible(CTFBot *actor);
 	
 private:
-	// TODO
+	// 0034 PathFollower
+	// 4808 CHandle<T>
+	// 480c byte 0
 };
 
 

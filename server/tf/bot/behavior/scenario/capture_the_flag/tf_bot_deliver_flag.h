@@ -27,7 +27,12 @@ public:
 private:
 	bool UpgradeOverTime(CTFBot *actor);
 	
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
+	// 4814 
+	// 4818 CountdownTimer
+	// 4824 
+	// 4828 CountdownTimer
 };
 
 
@@ -45,5 +50,7 @@ public:
 	virtual EventDesiredResult<CTFBot> OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2) override;
 	
 private:
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
+	// 4814 
 };

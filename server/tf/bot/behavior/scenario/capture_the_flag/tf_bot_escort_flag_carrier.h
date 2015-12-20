@@ -18,7 +18,9 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// TODO
+	// 0034 PathFollower
+	// 4808 CountdownTimer
+	// 4814 CTFBotMeleeAttack
 };
 
 

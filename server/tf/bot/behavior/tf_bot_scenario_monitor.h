@@ -22,5 +22,6 @@ public:
 	virtual UNKNOWN DesiredScenarioAndClassAction(CTFBot *actor);
 	
 private:
-	// TODO
+	// 34 CountdownTimer
+	// 40 CountdownTimer
 };

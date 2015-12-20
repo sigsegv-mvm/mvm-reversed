@@ -21,5 +21,7 @@ public:
 private:
 	void DetonateStickiesWhenSet(CTFBot *actor, CTFPipebombLauncher *launcher) const;
 	
-	// TODO
+	// 0034 CHandle<T>
+	// 0038 PathFollower
+	// 480c CountdownTimer
 };

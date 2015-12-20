@@ -35,5 +35,9 @@ private:
 	UNKNOWN ChooseGoalArea(CTFBot *actor); // probably returns CTFNavArea *
 	void RecomputeSeekPath(CTFBot *actor);
 	
-	// TODO
+	// 0034 
+	// 0038 
+	// 003c PathFollower
+	// 4810 CountdownTimer
+	// 481c CountdownTimer
 };
