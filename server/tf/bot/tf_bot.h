@@ -135,7 +135,40 @@ public:
 	// TODO: SniperSpotInfo
 	// TODO: DelayedNoticeInfo
 	
-	// TODO
+	CTFBot();
+	virtual ~CTFBot();
+	
+	virtual int ShouldTransmit(const CCheckTransmitInfo *pInfo) override;
+	virtual void Spawn() override;
+	virtual void DrawDebugTextOverlays() override;
+	virtual void Event_Killed(const CTakeDamageInfo& info) override;
+	virtual void Touch(CBaseEntity *ent) override;
+	virtual void PhysicsSimulate() override;
+	virtual void UpdateOnRemove() override;
+	virtual bool ShouldGib(const CTakeDamageInfo& info) override;
+	virtual CNavArea *GetLastKnownArea() const override;
+	virtual void ChangeTeam(int iTeamNum, bool bAutoTeam, bool bSilent) override;
+	virtual int GetBotType() const override;
+	virtual bool IsAllowedToPickUpFlag() const override;
+	virtual int GetAllowedTauntPartnerTeam() const override;
+	virtual void InitClass() override;
+	
+	virtual bool IsDormantWhenDead() const override;
+	virtual void PressFireButton(float duration = -1.0f) override;
+	virtual void PressAltFireButton(float duration = -1.0f) override;
+	virtual void AvoidPlayers(CUserCmd *usercmd) override;
+	
+	virtual void FireGameEvent(IGameEvent *event) override;
+	
+	virtual ILocomotion *GetLocomotionInterface() const;
+	virtual IBody *GetBodyInterface() const;
+	virtual IIntention *GetIntentionInterface() const;
+	virtual IVision *GetVisionInterface() const;
+	virtual void OnWeaponFired(CBaseCombatCharacter *who, CBaseCombatWeapon *weapon);
+	virtual bool IsDebugFilterMatch(const char *filter) const;
+	
+	
+	// TODO: check whether member funcs are private
 	
 	float TransientlyConsistentRandomValue(float duration, int seed) const;
 	
@@ -157,16 +190,30 @@ public:
 	
 	void DisguiseAsMemberOfEnemyTeam();
 	
-	// TODO: make sure to check whether these are private
+	Action<CTFBot> *OpportunisticallyUseWeaponAbilities();
+	
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
-	// AddItem
+	// GetEventChangeAttributes
+	// OnEventChangeAttributes
+	
+	// TODO: squad funcs
+	// DeleteSquad
+	// IsSquadmate
+	// JoinSquad
+	// LeaveSquad
+	
+	// TODO: tag funcs
+	
 	// AddTag
 	// ClearTags
-	// DeleteSquad
-	// 
+	// HasTag
+	// RemoveTag
+	
+	// AddItem
 	
 	// IsAttentionFocused
 	// IsAttentionFocusedOn
+	
 	// IsSuspectedSpy
 	// IsKnownSpy
 	// SuspectSpy
@@ -174,7 +221,6 @@ public:
 	// ForgetSpy
 	// DeleyedThreatNotice
 	// UpdateDelayedThreatNotices
-	// Touch
 	
 	// CTFBot::AddItem was previously CTFBotSpawner::AddItemToBot
 	
@@ -191,6 +237,8 @@ public:
 	// HasMission
 	// IsOnAnyMission
 	// HasTag
+	
+	// TODO: non-virtual member funcs
 	
 private:
 	// base class layout
@@ -299,7 +347,8 @@ private:
 	// 0x2c04: CTFBot: CUtlString
 	
 	// 0x2c1c: CTFBot: CountdownTimer
-	// 0x2c40: CTFBot: CountdownTimer
+	
+	CountdownTimer m_ctUseWeaponAbilities; // +0x2c40
 	
 	float m_flVisionRange; // +0x2c3c
 	

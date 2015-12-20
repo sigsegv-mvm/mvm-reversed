@@ -373,3 +373,68 @@ void CTFBot::DisguiseAsMemberOfEnemyTeam()
 	
 	this->m_Shared.Disguise(GetEnemyTeam(this), classnum, false, false);
 }
+
+
+Action<CTFBot> *CTFBot::OpportunisticallyUseWeaponAbilities()
+{
+	if (!this->m_ctUseWeaponAbilities.IsElapsed()) {
+		return nullptr;
+	}
+	this->m_ctUseWeaponAbilities.Start(RandomFloat(0.1f, 0.2f));
+	
+	if (this->IsPlayerClass(TF_CLASS_DEMOMAN) && this->m_Shared.m_bShieldEquipped) {
+		Vector eye_vec;
+		this->EyeVectors(&eye_vec);
+		
+		if (this->GetLocomotionInterface()->IsPotentiallyTraversible(
+			this->GetAbsOrigin(), this->GetAbsOrigin() + (100.0f * eye_vec),
+			(ILocomotion::TraverseWhenType)0, nullptr)) {
+			if ((this->m_nBotAttrs & CTFBot::AttributeType::AIRCHARGEONLY) != 0) {
+				if (this->GetGroundEntity() == nullptr &&
+					this->GetAbsVelocity()->z <= 0.0f) {
+					this->PressAltFireButton();
+				}
+			} else {
+				this->PressAltFireButton();
+			}
+		}
+	}
+	
+	for (int i = 0; i < MAX_WEAPONS; ++i) {
+		CBaseCombatWeapon *weapon = player->GetWeapon(i);
+		if (weapon == nullptr) {
+			continue;
+		}
+		
+		if (weapon->GetWeaponID() == TF_WEAPON_BUFF_ITEM) {
+			CTFBuffItem *buff = static_cast<CTFBuffItem *>(weapon);
+			if (buff->IsFull()) {
+				return new CTFBotUseItem(weapon);
+			}
+			
+			continue;
+		}
+		
+		if (weapon->GetWeaponID() == TF_WEAPON_LUNCHBOX) {
+			if (!weapon->HasAmmo() || (this->IsPlayerClass(TF_CLASS_SCOUT) &&
+				this->m_Shared.m_flEnergyDrinkMeter < 100.0f)) {
+				continue;
+			}
+			
+			return new CTFBotUseItem(weapon);
+		}
+		
+		if (weapon->GetWeaponID() == TF_WEAPON_BAT_WOOD &&
+			this->GetAmmoCount(TF_AMMO_GRENADES1) > 0) {
+			const CKnownEntity *threat = this->GetVisionInterface()->
+				GetPrimaryKnownThreat(false);
+			if (threat == nullptr || !threat->IsVisibleRecently()) {
+				continue;
+			}
+			
+			this->PressAltFireButton();
+		}
+	}
+	
+	return nullptr;
+}

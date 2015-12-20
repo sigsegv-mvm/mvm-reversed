@@ -196,7 +196,7 @@ void CTFBotMainAction::Dodge(CTFBot *actor)
 		return;
 	}
 	
-	const CKnownEntity *threat = this->GetVisionInterface()->GetPrimaryKnownThreat();
+	const CKnownEntity *threat = this->GetVisionInterface()->GetPrimaryKnownThreat(false);
 	if (threat == nullptr || !threat->IsVisibleRecently()) {
 		return;
 	}
