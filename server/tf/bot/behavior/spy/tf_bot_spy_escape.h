@@ -9,7 +9,7 @@
 class CTFBotSpyEscape : public Action<CTFBot>
 {
 public:
-	CTFBotSpyEscape(/* TODO */);
+	CTFBotSpyEscape();
 	virtual ~CTFBotSpyEscape();
 	
 	virtual const char *GetName() const override;
@@ -18,7 +18,4 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
-	
-private:
-	// TODO
 };
