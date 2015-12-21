@@ -40,7 +40,6 @@ ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
 	// TODO
 }
 
-
 ActionResult<CTFBot> CTFBotMedicHeal::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	// probably ChasePath::Invalidate

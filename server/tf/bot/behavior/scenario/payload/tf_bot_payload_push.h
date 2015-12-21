@@ -16,12 +16,10 @@ public:
 	
 	virtual ActionResult<CTFBot> OnStart(CTFBot *actor, Action<CTFBot> *action) override;
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
-	
 	virtual ActionResult<CTFBot> OnResume(CTFBot *actor, Action<CTFBot> *action) override;
 	
 	virtual EventDesiredResult<CTFBot> OnMoveToSuccess(CTFBot *actor, const Path *path) override;
 	virtual EventDesiredResult<CTFBot> OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail) override;
-	
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;

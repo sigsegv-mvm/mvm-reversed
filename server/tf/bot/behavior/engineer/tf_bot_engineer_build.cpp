@@ -34,7 +34,6 @@ ActionResult<CTFBot> CTFBotEngineerBuild::Update(CTFBot *actor, float dt)
 	// TODO
 }
 
-
 ActionResult<CTFBot> CTFBotEngineerBuild::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	return ActionResult<CTFBot>::Continue();

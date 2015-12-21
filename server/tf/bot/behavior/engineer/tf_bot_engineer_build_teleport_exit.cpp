@@ -36,7 +36,6 @@ ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::Update(CTFBot *actor, floa
 	// TODO
 }
 
-
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	// TODO

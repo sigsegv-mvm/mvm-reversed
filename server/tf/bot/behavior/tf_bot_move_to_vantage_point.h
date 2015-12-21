@@ -19,7 +19,6 @@ public:
 	
 	virtual EventDesiredResult<CTFBot> OnMoveToSuccess(CTFBot *actor, const Path *path) override;
 	virtual EventDesiredResult<CTFBot> OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail) override;
-	
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
 	
 private:

@@ -49,7 +49,6 @@ void CTFBotEngineerBuilding::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 	actor->m_bLookAroundForEnemies = true;
 }
 
-
 ActionResult<CTFBot> CTFBotEngineerBuilding::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	return ActionResult<CTFBot>::Continue();

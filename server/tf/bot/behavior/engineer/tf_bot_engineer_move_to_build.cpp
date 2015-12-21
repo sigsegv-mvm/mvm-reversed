@@ -49,12 +49,10 @@ EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToFailure(CTFBot *ac
 	// TODO
 }
 
-
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnStuck(CTFBot *actor)
 {
 	return EventDesiredResult<CTFBot>::Continue();
 }
-
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnTerritoryLost(CTFBot *actor, int i1)
 {

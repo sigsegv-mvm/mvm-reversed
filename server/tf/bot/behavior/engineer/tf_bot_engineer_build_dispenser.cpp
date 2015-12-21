@@ -36,7 +36,6 @@ void CTFBotEngineerBuildDispenser::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 	actor->GetBodyInterface()->ClearPendingAimReply();
 }
 
-
 ActionResult<CTFBot> CTFBotEngineerBuildDispenser::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	// TODO

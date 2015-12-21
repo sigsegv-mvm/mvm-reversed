@@ -16,7 +16,6 @@ public:
 	
 	virtual ActionResult<CTFBot> OnStart(CTFBot *actor, Action<CTFBot> *action) override;
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
-	
 	virtual ActionResult<CTFBot> OnResume(CTFBot *actor, Action<CTFBot> *action) override;
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;

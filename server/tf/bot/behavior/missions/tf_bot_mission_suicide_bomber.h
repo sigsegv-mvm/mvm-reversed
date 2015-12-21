@@ -19,7 +19,6 @@ public:
 	virtual void OnEnd(CTFBot *actor, Action<CTFBot> *action) override;
 	
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
-	
 	virtual EventDesiredResult<CTFBot> OnKilled(CTFBot *actor, const CTakeDamageInfo& info) override;
 	
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;

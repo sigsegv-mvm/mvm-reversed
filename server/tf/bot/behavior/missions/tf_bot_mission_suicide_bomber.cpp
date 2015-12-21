@@ -148,7 +148,6 @@ EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnStuck(CTFBot *actor)
 	return EventDesiredResult<CTFBot>::Continue();
 }
 
-
 EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnKilled(CTFBot *actor, const CTakeDamageInfo& info)
 {
 	/* how we get here:

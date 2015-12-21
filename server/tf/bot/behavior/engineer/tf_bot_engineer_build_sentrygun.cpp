@@ -36,7 +36,6 @@ ActionResult<CTFBot> CTFBotEngineerBuildSentryGun::Update(CTFBot *actor, float d
 	// TODO
 }
 
-
 ActionResult<CTFBot> CTFBotEngineerBuildSentryGun::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
 	this->m_PathFollower.Invalidate();

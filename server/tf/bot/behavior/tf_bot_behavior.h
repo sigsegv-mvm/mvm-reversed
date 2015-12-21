@@ -20,9 +20,7 @@ public:
 	virtual Action<CTFBot> *InitialContainedAction(CTFBot *actor) override;
 	
 	virtual EventDesiredResult<CTFBot> OnContact(CTFBot *actor, CBaseEntity *ent, CGameTrace *trace) override;
-	
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
-	
 	virtual EventDesiredResult<CTFBot> OnInjured(CTFBot *actor, const CTakeDamageInfo& info) override;
 	virtual EventDesiredResult<CTFBot> OnOtherKilled(CTFBot *actor, CBaseCombatCharacter *who, const CTakeDamageInfo& info) override;
 	

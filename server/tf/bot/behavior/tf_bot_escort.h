@@ -19,9 +19,7 @@ public:
 	
 	virtual EventDesiredResult<CTFBot> OnMoveToSuccess(CTFBot *actor, const Path *path) override;
 	virtual EventDesiredResult<CTFBot> OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail) override;
-	
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
-	
 	virtual EventDesiredResult<CTFBot> OnCommandApproach(CTFBot *actor, const Vector& v1, float f1) override;
 	
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;

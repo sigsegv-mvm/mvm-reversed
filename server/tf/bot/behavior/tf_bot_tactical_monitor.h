@@ -20,9 +20,7 @@ public:
 	virtual Action<CTFBot> *InitialContainedAction(CTFBot *actor) override;
 	
 	virtual EventDesiredResult<CTFBot> OnOtherKilled(CTFBot *actor, CBaseCombatCharacter *who, const CTakeDamageInfo& info) override;
-	
 	virtual EventDesiredResult<CTFBot> OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2) override;
-	
 	virtual EventDesiredResult<CTFBot> OnCommandString(CTFBot *actor, const char *cmd) override;
 	
 private:

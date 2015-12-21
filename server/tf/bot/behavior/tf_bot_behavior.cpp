@@ -99,12 +99,10 @@ EventDesiredResult<CTFBot> CTFBotMainAction::OnContact(CTFBot *actor, CBaseEntit
 	return EventDesiredResult<CTFBot>::Continue();
 }
 
-
 EventDesiredResult<CTFBot> CTFBotMainAction::OnStuck(CTFBot *actor)
 {
 	// TODO
 }
-
 
 EventDesiredResult<CTFBot> CTFBotMainAction::OnInjured(CTFBot *actor, const CTakeDamageInfo& info)
 {
