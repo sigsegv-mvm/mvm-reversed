@@ -617,14 +617,14 @@ template<class T> void Action<T>::OnDrop(CBaseEntity *ent)
 	}
 }
 
-template<class T> void Action<T>::OnActorEmoted(CBaseCombatCharacter *who, int i1)
+template<class T> void Action<T>::OnActorEmoted(CBaseCombatCharacter *who, int concept)
 {
 	this->HandleEvent("OnActorEmoted", [&](Action<T> *action, T *actor) {
-			return action->OnActorEmoted(actor, who, i1);
+			return action->OnActorEmoted(actor, who, concept);
 		});
 	
 	FOR_EACH_RESPONDER {
-		responder->OnActorEmoted(who, i1);
+		responder->OnActorEmoted(who, concept);
 	}
 }
 
@@ -980,7 +980,7 @@ template<class T> EventDesiredResult<T> Action<T>::OnDrop(T *actor, CBaseEntity 
 	return EventDesiredResult<T>::Continue();
 }
 
-template<class T> EventDesiredResult<T> Action<T>::OnActorEmoted(T *actor, CBaseCombatCharacter *who, int i1)
+template<class T> EventDesiredResult<T> Action<T>::OnActorEmoted(T *actor, CBaseCombatCharacter *who, int concept)
 {
 	return EventDesiredResult<T>::Continue();
 }

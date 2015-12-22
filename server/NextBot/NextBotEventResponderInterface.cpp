@@ -200,10 +200,10 @@ void INextBotEventResponder::OnDrop(CBaseEntity *ent)
 	}
 }
 
-void INextBotEventResponder::OnActorEmoted(CBaseCombatCharacter *who, int i1)
+void INextBotEventResponder::OnActorEmoted(CBaseCombatCharacter *who, int concept)
 {
 	FOR_EACH_RESPONDER {
-		responder->OnActorEmoted(who, i1);
+		responder->OnActorEmoted(who, concept);
 	}
 }
 
