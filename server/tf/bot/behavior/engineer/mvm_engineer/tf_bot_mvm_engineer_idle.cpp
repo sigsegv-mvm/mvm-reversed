@@ -42,17 +42,17 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 
 QueryResponse CTFBotMvMEngineerIdle::ShouldHurry(const INextBot *nextbot) const
 {
-	// TODO
+	return QueryResponse::YES;
 }
 
 QueryResponse CTFBotMvMEngineerIdle::ShouldRetreat(const INextBot *nextbot) const
 {
-	// TODO
+	return QueryResponse::NO;
 }
 
 QueryResponse CTFBotMvMEngineerIdle::ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const
 {
-	// TODO
+	return QueryResponse::NO;
 }
 
 
