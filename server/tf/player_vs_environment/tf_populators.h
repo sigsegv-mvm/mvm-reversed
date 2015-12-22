@@ -123,8 +123,8 @@ private:
 	State m_iState;                  // +0x28
 	float m_flInitialCooldown;       // +0x2c
 	float m_flCooldownTime;          // +0x30
-	CountdownTimer m_ctTimer1;       // +0x34 (used for initial cooldown and subsequent cooldowns for non-busters)
-	CountdownTimer m_ctTimer2;       // +0x40 (used for subsequent cooldowns for busters)
+	CountdownTimer m_ctCooldown;     // +0x34 (used for initial cooldown and subsequent cooldowns for non-busters)
+	CountdownTimer m_ctSBCooldown;   // +0x40 (used for subsequent cooldowns for busters)
 	int m_iDesiredCount;             // +0x4c
 	int m_iBeginAtWave;              // +0x50
 	int m_iEndBeforeThisWave;        // +0x54
@@ -232,10 +232,10 @@ private:
 	// +0x020 byte 0
 	// +0x021 byte 0
 	int m_iTotalCountNonSupport;    // +0x024
-	// +0x028 dword (is incremented when CWaveSpawnPopulator spawns a tank)
-	// +0x02c 
+	int m_iTanksSpawned;            // +0x028
+	int m_iSentryBustersSpawned;    // +0x02c
 	int m_iEngiesTeleportedIn;      // +0x030
-	// +0x034 
+	int m_iSentryBustersKilled;     // +0x034
 	CUtlVector<WaveClassCount_t> m_ClassCounts; // +0x038
 	int m_iTotalCurrency;           // +0x04c
 	EventInfo *m_StartWaveOutput;   // +0x050

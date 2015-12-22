@@ -336,8 +336,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 	if (this->m_bDetLostAllHealth) {
 		CWave *wave = g_pPopulationManager->GetCurrentWave();
 		if (wave != nullptr) {
-			// TODO: name for CWave::field_34
-			++wave->field_34;
+			++wave->m_iSentryBustersKilled;
 		}
 	}
 }

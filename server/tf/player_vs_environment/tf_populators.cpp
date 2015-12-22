@@ -409,16 +409,16 @@ void CMissionPopulator::Update()
 	if (this->m_iState == State::NOT_STARTED) {
 		if (this->m_flInitialCooldown != 0.0f) {
 			this->m_iState = State::INITIAL;
-			this->m_ctTimer1.Start(this->m_flInitialCooldown);
+			this->m_ctCooldown.Start(this->m_flInitialCooldown);
 			return;
 		}
 	} else if (this->m_iState == State::INITIAL) {
-		if (!this->m_ctTimer1.IsElapsed()) {
+		if (!this->m_ctCooldown.IsElapsed()) {
 			return;
 		}
 		
 		this->m_iState = State::RUNNING;
-		this->m_ctTimer1.Invalidate();
+		this->m_ctCooldown.Invalidate();
 	}
 	
 	CTFBot::MissionType objective = this->m_Objective;
@@ -647,8 +647,8 @@ void CPeriodicSpawnPopulator::UnpauseSpawning()
 
 void CMissionPopulator::UnpauseSpawning()
 {
-	this->m_ctTimer1.Start(this->m_flCooldownTime);
-	this->m_ctTimer2.Start(RandomFloat(5.0f, 10.0f));
+	this->m_ctCooldown.Start(this->m_flCooldownTime);
+	this->m_ctSBCooldown.Start(RandomFloat(5.0f, 10.0f));
 }
 
 
@@ -712,11 +712,11 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 	}
 	
 	if (num_existing_bots_with_same_mission != 0) {
-		this->m_ctTimer1.Start(this->m_flCooldownTime);
+		this->m_ctCooldown.Start(this->m_flCooldownTime);
 		return false;
 	}
 	
-	if (!this->m_ctTimer1.IsElapsed()) {
+	if (!this->m_ctCooldown.IsElapsed()) {
 		return false;
 	}
 	
@@ -762,8 +762,7 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 					
 					bot->SetFlagTarget(nullptr);
 					bot->SetMission(mtype, true);
-					
-					// TODO: set bool @ CTFPlayer+0x2834 to true (mission bot)
+					bot->m_bMissionBot = true;
 					
 					if (TFObjectiveResource() != nullptr) {
 						// TODO: define bits for wave status flags
@@ -794,7 +793,7 @@ bool CMissionPopulator::UpdateMission(CTFBot::MissionType mtype)
 		}
 	}
 	
-	this->m_ctTimer1.Start(this->m_flCooldownTime);
+	this->m_ctCooldown.Start(this->m_flCooldownTime);
 	return true;
 }
 
@@ -802,7 +801,151 @@ bool CMissionPopulator::UpdateMissionDestroySentries()
 {
 	VPROF_BUDGET("CMissionPopulator::UpdateMissionDestroySentries", "NextBot");
 	
-	// TODO
+	if (!this->m_ctCooldown.IsElapsed()) {
+		return false;
+	}
+	
+	if (!this->m_ctSBCooldown.IsElapsed() || g_pPopulationManager->m_bIsPaused) {
+		return false;
+	}
+	this->m_ctSBCooldown.Start(RandomFloat(5.0f, 10.0f));
+	
+	CUtlVector<CObjectSentrygun *> sentries;
+	
+	int thresh_dmg;
+	int thresh_kills;
+	this->m_pPopMgr->GetSentryBusterDamageAndKillThreshold(thresh_dmg, thresh_kills);
+	
+	for (int i = 0; i < IBaseObjectAutoList::AutoList().Count(); ++i) {
+		CBaseObject *obj = static_cast<CBaseObject *>(IBaseObjectAutoList::AutoList()[i]);
+		
+		if (obj->GetType() == OBJ_SENTRYGUN && !obj->m_bDisposableBuilding &&
+			obj->GetTeamNumber() == TF_TEAM_RED) {
+			CTFPlayer *owner = obj->GetOwner();
+			if (owner != nullptr) {
+				if ((int)owner->m_flSentryDamage >= thresh_dmg ||
+					owner->m_nSentryKills >= thresh_kills) {
+					sentries.AddToTail(static_cast<CObjectSentrygun *>(obj));
+				}
+			}
+		}
+	}
+	
+	Vector<CTFPlayer *> blu_players;
+	CollectPlayers<CTFPlayer>(&blu_players, TF_TEAM_BLUE, true, false);
+	
+	bool spawned_buster = false;
+	FOR_EACH_VEC(sentries, i) {
+		CObjectSentrygun *sentry = sentries[i];
+		
+		bool already_has_buster = false;
+		FOR_EACH_VEC(blu_players, j) {
+			CTFBot *bot = dynamic_cast<CTFBot *>(blu_players[j]);
+			if (bot != nullptr) {
+				if (bot->m_nMission == CTFBot::MissionType::DESTROY_SENTRIES) {
+					if (sentry == bot->m_hSBTarget()) {
+						already_has_buster = true;
+						break;
+					}
+				}
+			}
+		}
+		
+		if (already_has_buster) {
+			continue;
+		}
+		
+		Vector where;
+		SpawnResult where_result =
+			this->m_Where->FindSpawnLocation(&where);
+		
+		if (where_result != SPAWN_FAIL) {
+			CUtlVector<CHandle<CBaseEntity>> spawned;
+			if (this->m_Spawner->Spawn(&where, &spawned) != 0) {
+				if (tf_populator_debug.GetBool()) {
+					DevMsg("MANN VS MACHINE: %3.2f: "
+						"<<<< Spawning Sentry Busting Mission >>>>\n",
+						gpGlobals->curtime);
+				}
+				
+				FOR_EACH_VEC(spawned, j) {
+					CBaseEntity *ent = spawned[j]();
+					
+					CTFBot *bot = ToTFBot(ent);
+					if (bot == nullptr) {
+						continue;
+					}
+					
+					bot->SetFlagTarget(nullptr);
+					bot->SetMission(CTFBot::MissionType::DESTROY_SENTRIES, true);
+					bot->m_hSBTarget = sentry;
+					bot->Update();
+					bot->m_bMissionBot = true;
+					
+					bot->PlayerClass.SetCustomModel(
+						"models/bots/demo/bot_sentry_buster.mdl", true);
+					bot->UpdateModel();
+					bot->SetBloodColor(DONT_BLEED);
+					
+					if (TFObjectiveResource() != nullptr) {
+						unsigned int flags = CLASSFLAG_MISSION;
+						if (bot->IsMiniBoss()) {
+							flags |= CLASSFLAG_MINIBOSS;
+						}
+						if ((bot->m_nBotAttrs & CTFBot::AttributeType::ALWAYSCRIT) != 0) {
+							flags |= CLASSFLAG_CRITICAL;
+						}
+						
+						TFObjectiveResource()->IncrementMannVsMachineWaveClassCount(
+							this->m_Spawner->GetClassIcon(j), flags);
+					}
+					
+					if (TFGameRules()!= nullptr) {
+						TFGameRules()->HaveAllPlayersSpeakConceptIfAllowed(
+							TLK_MVM_SENTRY_BUSTER, TF_TEAM_RED);
+					}
+					
+					spawned_buster = true;
+					
+					if (where_result == SPAWN_TELEPORT) {
+						OnBotTeleported(bot);
+					}
+				}
+			}
+		} else {
+			if (tf_populator_debug.GetBool()) {
+				DevMsg("MissionPopulator: %3.2f: "
+					"Can't find a place to spawn a sentry destroying squad\n",
+					gpGlobals->curtime);
+			}
+		}
+	}
+	
+	if (spawned_buster) {
+		float next_cooldown = this->m_flCooldownTime;
+		
+		CWave *wave = this->m_PopMgr->GetCurrentWave();
+		if (wave != nullptr) {
+			if (++wave->m_iSentryBustersSpawned <= 1) {
+				if (g_pGameRules != nullptr) {
+					g_pGameRules->BroadcastSound(255,
+						"Announcer.MVM_Sentry_Buster_Alert");
+				}
+			} else {
+				if (g_pGameRules != nullptr) {
+					g_pGameRules->BroadcastSound(255,
+						"Announcer.MVM_Sentry_Buster_Alert_Another");
+				}
+			}
+			
+			next_cooldown *= ((float)wave->m_iSentryBustersKilled + 1.0f);
+			wave->m_iSentryBustersKilled = 0;
+		}
+		
+		this->m_ctCooldown.Start(next_cooldown);
+	}
+	
+	return spawned_buster;
 }
 
 
