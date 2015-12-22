@@ -12,20 +12,20 @@ public:
 	
 	virtual void Invalidate() override;
 	
-	virtual void Update(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *v1);
+	virtual void Update(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *vec);
 	virtual float GetLeadRadius() const;
 	virtual float GetMaxPathLength() const;
 	virtual Vector PredictSubjectPosition(INextBot *nextbot, CBaseEntity *ent) const;
 	virtual bool IsRepathNeeded(INextBot *nextbot, CBaseEntity *ent) const;
 	virtual float GetLifetime() const;
 	
-	void RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *v1);
+	void RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *vec);
 	
 protected:
 	CountdownTimer m_ctTimer1; // +0x47d4
 	CountdownTimer m_ctTimer2; // +0x47e0
 	CountdownTimer m_ctTimer3; // +0x47ec
-	// 47f8 dword -1
+	CHandle<CBaseEntity> m_hChaseSubject;
 	// 47fc dword 0 or possibly 1
 };
 

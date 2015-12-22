@@ -23,9 +23,12 @@ void ChasePath::Invalidate()
 }
 
 
-void ChasePath::Update(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *v1)
+void ChasePath::Update(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *vec)
 {
-	// TODO
+	VPROF_BUDGET("ChasePath::Update", "NextBot");
+	
+	this->RefreshPath(nextbot, ent, cost_func, vec);
+	PathFollower::Update(nextbot);
 }
 
 float ChasePath::GetLeadRadius() const
@@ -113,7 +116,57 @@ float ChasePath::GetLifetime() const
 }
 
 
-void ChasePath::RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *v1)
+void ChasePath::RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost& cost_func, Vector *vec)
 {
-	// TODO
+	VPROF_BUDGET("ChasePath::RefreshPath", "NextBot");
+	
+	if (this->IsValid() && nextbot->GetLocomotionInterface()->IsUsingLadder()) {
+		if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+			DevMsg("%3.2f: bot(#%d) ChasePath::RefreshPath failed. Bot is on a ladder.\n",
+				gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()));
+		}
+		
+		this->m_ctTimer2.Start(1.0f);
+		return;
+	}
+	
+	if (ent == nullptr) {
+		if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+			/* misspelling is in original */
+			DevMsg("%3.2f: bot(#%d) CasePath::RefreshPath failed. No subject.\n",
+				gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()));
+		}
+	}
+	
+	if (this->m_ctTimer1.IsElapsed()) {
+		CBaseEntity *subject = this->m_hChaseSubject();
+		if (subject == nullptr || subject != ent) {
+			if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+				DevMsg("%3.2f: bot(#%d) ChasePath::RefreshPath subject changed (from %p to %p).\n",
+					gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()),
+					this->m_hChaseSubject(), ent);
+			}
+			
+			this->Invalidate();
+			this->m_ctTimer1.Invalidate();
+		}
+		
+		if (!this->IsValid() || this->m_ctTimer2.IsElapsed()) {
+			if (this->IsValid() && this->m_ctTimer3.HasStarted() &&
+				this->m_ctTimer3.IsElapsed()) {
+				this->Invalidate();
+			}
+			
+			if (!this->IsValid() || this->IsRepathNeeded(nextbot, ent)) {
+				// TODO
+				
+				
+				// eventually: this->Compute(...)
+			}
+			
+			// TODO
+		}
+		
+		// TODO
+	}
 }
