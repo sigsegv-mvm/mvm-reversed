@@ -65,29 +65,29 @@ public:
 	virtual CBaseEntity *GetEntity() const override;
 	
 	/* INextBotPlayerInput overrides */
-	virtual void PressFireButton(float duration) override;
+	virtual void PressFireButton(float duration = -1.0f) override;
 	virtual void ReleaseFireButton() override;
-	virtual void PressAltFireButton(float duration) override;
+	virtual void PressAltFireButton(float duration = -1.0f) override;
 	virtual void ReleaseAltFireButton() override;
-	virtual void PressMeleeButton(float duration) override;
+	virtual void PressMeleeButton(float duration = -1.0f) override;
 	virtual void ReleaseMeleeButton() override;
-	virtual void PressUseButton(float duration) override;
+	virtual void PressUseButton(float duration = -1.0f) override;
 	virtual void ReleaseUseButton() override;
-	virtual void PressReloadButton(float duration) override;
+	virtual void PressReloadButton(float duration = -1.0f) override;
 	virtual void ReleaseReloadButton() override;
-	virtual void PressForwardButton(float duration) override;
+	virtual void PressForwardButton(float duration = -1.0f) override;
 	virtual void ReleaseForwardButton() override;
-	virtual void PressBackwardButton(float duration) override;
+	virtual void PressBackwardButton(float duration = -1.0f) override;
 	virtual void ReleaseBackwardButton() override;
-	virtual void PressLeftButton(float duration) override;
+	virtual void PressLeftButton(float duration = -1.0f) override;
 	virtual void ReleaseLeftButton() override;
-	virtual void PressRightButton(float duration) override;
+	virtual void PressRightButton(float duration = -1.0f) override;
 	virtual void ReleaseRightButton() override;
-	virtual void PressJumpButton(float duration) override;
+	virtual void PressJumpButton(float duration = -1.0f) override;
 	virtual void ReleaseJumpButton() override;
-	virtual void PressCrouchButton(float duration) override;
+	virtual void PressCrouchButton(float duration = -1.0f) override;
 	virtual void ReleaseCrouchButton() override;
-	virtual void PressWalkButton(float duration) override;
+	virtual void PressWalkButton(float duration = -1.0f) override;
 	virtual void ReleaseWalkButton() override;
 	virtual void SetButtonScale(float forward, float side) override;
 	
