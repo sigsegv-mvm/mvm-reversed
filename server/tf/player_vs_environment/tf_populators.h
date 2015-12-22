@@ -257,5 +257,5 @@ private:
 EventInfo *ParseEvent(KeyValues *kv);
 void FireEvent(EventInfo *info, const char *name);
 
-SpawnResult DoTeleporterOverride(CBaseEntity *ent, Vector& vec);
+SpawnResult DoTeleporterOverride(CBaseEntity *teamspawn, Vector& vec);
 void OnBotTelported(CTFBot *bot);

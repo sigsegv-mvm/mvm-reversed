@@ -1107,7 +1107,7 @@ static CHandle<CBaseEntity> s_lastTeleporter;
 static float s_flLastTeleportTime;
 
 
-SpawnResult DoTeleporterOverride(CBaseEntity *ent, Vector& vec)
+SpawnResult DoTeleporterOverride(CBaseEntity *teamspawn, Vector& vec)
 {
 	CUtlVector<CBaseEntity *> teleporters;
 	
@@ -1118,15 +1118,35 @@ SpawnResult DoTeleporterOverride(CBaseEntity *ent, Vector& vec)
 		if (obj->GetType() == OBJ_TELEPORTER &&
 			obj->GetTeamNumber() == TF_TEAM_BLUE &&
 			!obj->IsBuilding() && !obj->HasSapper()) {
-			const char *ent_name = STRING(obj->GetEntityName());
+			CObjectTeleporter *tele = static_cast<CObjectTeleporter *>(obj);
+			const char *spawn_name = STRING(teamspawn->GetEntityName());
 			
+			/* CObjectTeleporter+0xaec: CUtlStringList m_TeleportWhere */
+			FOR_EACH_VEC(tele->m_TeleportWhere, j) {
+				if (V_stricmp(tele->m_TeleportWhere[j], spawn_name) == 0) {
+					teleporters.AddToTail(tele);
+					break;
+				}
+			}
 		}
 	}
 	
-	// CBaseObject+0xaec dword: 
-	// CBaseObject+0xaf8 dword: 
+	if (!teleporters.IsEmpty()) {
+		CBaseEntity *tele = teleporters.Random();
+		
+		vec = tele->WorldSpaceCenter();
+		s_lastTeleporter = tele;
+		
+		return SPAWN_TELEPORT;
+	}
 	
-	// TODO
+	CNavArea *area = TheNavMesh->GetNearestNavArea(teamspawn->WorldSpaceCenter());
+	if (area == nullptr) {
+		return SPAWN_FAIL;
+	}
+	
+	vec = area->GetCenter();
+	return SPAWN_NORMAL;
 }
 
 void OnBotTeleported(CTFBot *bot)

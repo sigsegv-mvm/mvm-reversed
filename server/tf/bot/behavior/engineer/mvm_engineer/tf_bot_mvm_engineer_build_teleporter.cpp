@@ -85,7 +85,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, f
 	tele->SetObjectMode(1);
 	tele->Spawn();
 	
-	/* CObjectTeleporter+0xaf8: CUtlStringList m_TeleportWhere */
+	/* CObjectTeleporter+0xaec: CUtlStringList m_TeleportWhere */
 	FOR_EACH_VEC(actor->m_TeleportWhere, i) {
 		tele->m_TeleportWhere.CopyAndAddToTail(actor->m_TeleportWhere[i]);
 	}
