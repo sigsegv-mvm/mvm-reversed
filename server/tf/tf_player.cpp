@@ -4,4 +4,18 @@
  */
 
 
+bool CTFPlayer::IsMiniBoss() const
+{
+	return this->m_bIsMiniBoss;
+}
 
+
+bool CTFPlayer::IsThreatAimingTowardMe(CBaseEntity *threat, float f1) const
+{
+	// TODO
+}
+
+bool CTFPlayer::IsThreatFiringAtMe(CBaseEntity *threat) const
+{
+	// TODO
+}

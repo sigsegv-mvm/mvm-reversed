@@ -10,6 +10,11 @@ class CTFPlayer : public CBaseMultiplayerPlayer, public IHasAttributes,
 public:
 	// TODO
 	
+	bool IsMiniBoss() const;
+	
+	bool IsThreatAimingTowardMe(CBaseEntity *threat) const;
+	bool IsThreatFiringAtMe(CBaseEntity *threat) const;
+	
 private:
 	// TODO
 	int m_nCurrency;          // +0x2838 NETPROP DT_TFLocalPlayerExclusive
