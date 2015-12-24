@@ -40,7 +40,7 @@ private:
 class CTFBotPushToCapturePoint : public Action<CTFBot>
 {
 public:
-	CTFBotPushToCapturePoint(Action<CTFBot> *action);
+	CTFBotPushToCapturePoint(Action<CTFBot> *done_action);
 	virtual ~CTFBotPushToCapturePoint();
 	
 	virtual const char *GetName() const override;
@@ -50,7 +50,7 @@ public:
 	virtual EventDesiredResult<CTFBot> OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2) override;
 	
 private:
-	// 0034 PathFollower
-	// 4808 CountdownTimer
-	// 4814 
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
+	Action<CTFBot *> *m_DoneAction;   // +0x4814
 };
