@@ -9,7 +9,7 @@
 class CTFBotMvMEngineerIdle : public Action<CTFBot>
 {
 public:
-	CTFBotMvMEngineerIdle(/* TODO */);
+	CTFBotMvMEngineerIdle();
 	virtual ~CTFBotMvMEngineerIdle();
 	
 	virtual const char *GetName() const override;
@@ -26,19 +26,19 @@ private:
 	void TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor);
 	void TryToDetonateStaleNest();
 	
-	PathFollower m_PathFollower; // +0x0034
+	PathFollower m_PathFollower;                 // +0x0034
 	// 4808 CountdownTimer
 	// 4814 CountdownTimer
 	// 4820 CountdownTimer
 	// 482c CountdownTimer
-	// 4838 CountdownTimer
-	// 4844 CountdownTimer
-	// 4850 
-	// 4854 
-	// 4858 dword -1
-	// 485c dword -1
-	// 4860 dword -1
-	// 4864 
+	CountdownTimer m_ctFindNestHint;             // +0x4838
+	CountdownTimer m_ctAdvanceNestSpot;          // +0x4844
+	int m_nTeleportAttempts;                     // +0x4850
+	bool m_bTeleportedToHint;                    // +0x4854
+	CHandle<CBaseTFBotHintEntity> m_hHintTele;   // +0x4858
+	CHandle<CBaseTFBotHintEntity> m_hHintSentry; // +0x485c
+	CHandle<CBaseTFBotHintEntity> m_hHintNest;   // +0x4860
+	bool m_bTriedToDetonateStaleNest;            // +0x4864
 };
 
 

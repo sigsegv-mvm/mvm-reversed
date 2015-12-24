@@ -13,9 +13,8 @@ ConCommand tf_bot_mvm_show_engineer_hint_region_command("tf_bot_mvm_show_enginee
 	"Show the nav areas MvM engineer bots will consider when selecting sentry and teleporter hints", FCVAR_CHEAT);
 
 
-CTFBotMvMEngineerIdle::CTFBotMvMEngineerIdle(/* TODO */)
+CTFBotMvMEngineerIdle::CTFBotMvMEngineerIdle()
 {
-	// TODO
 }
 
 CTFBotMvMEngineerIdle::~CTFBotMvMEngineerIdle()
@@ -31,11 +30,83 @@ const char *CTFBotMvMEngineerIdle::GetName() const
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange);
+	
+	actor->m_bLookAroundForEnemies = false;
+	
+	this->m_hHintSentry = nullptr;
+	this->m_hHintTele   = nullptr;
+	this->m_hHintNest   = nullptr;
+	
+	this->m_nTeleportAttempts = 0;
+	
+	this->m_bTeleportedToHint         = false;
+	this->m_bTriedToDetonateStaleNest = false;
+	
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 {
+	if (!actor->IsAlive()) {
+		DONE();
+	}
+	
+	// TODO: slot enum
+	CBaseCombatWeapon *w_melee = bot->Weapon_GetSlot(2);
+	if (w_melee != nullptr) {
+		actor->Weapon_Switch(w_melee);
+	}
+	
+	if (this->m_hHintNest() == nullptr || this->ShouldAdvanceNestSpot(actor)) {
+		if (this->m_ctFindNestHint.HasStarted()) {
+			if (!this->m_ctFindNestHint.IsElapsed()) {
+				CONTINUE();
+			}
+		}
+		this->m_ctFindNestHint.Start(RandomFloat(1.0f, 2.0f));
+		
+		CHandle<CTFBotHintEngineerNest> h_nest;
+		
+		bool box_check = (!this->m_bTeleportedToHint &&
+			(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0);
+		if (!CTFBotMvMEngineerHintFinder::FindHint(box_check,
+			(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) == 0,
+			&h_nest)) {
+			CONTINUE();
+		}
+		
+		CTFBotHintEngineerNest *old_nest = this->m_hHintNest();
+		if (old_nest != nullptr) {
+			old_nest->SetOwnerEntity(nullptr);
+		}
+		
+		this->m_hHintNest = h_nest;
+		
+		CTFBotHintEngineerNest *new_nest = h_nest();
+		new_nest->SetOwnerEntity(actor);
+		
+		CTFBotHintSentryGun *hint_sentry = this->m_hHintNest()->GetSentryHint();
+		this->m_hHintSentry = hint_sentry;
+		this->TakeOverStaleNest(hint_sentry, actor);
+		
+		if (!actor->m_TeleportWhere.IsEmpty()) {
+			CTFBotHintTeleporterExit *hint_tele = this->m_hHintNest()->GetTeleporterHint();
+			this->m_hHintTele = hint_tele;
+			this->TakeOverStaleNest(hint_tele, actor);
+		}
+	}
+	
+	if (!this->m_bTeleportedToHint &&
+		(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0) {
+		this->m_bTeleportedToHint = true;
+		SUSPEND_FOR(new CTFBotMvMEngineerTeleportSpawn(this->m_hHintNest(),
+			++this->m_nTeleportAttempts == 1), "In spawn area - "
+			"teleport to the teleporter hint");
+	}
+	
+	
+	
 	// TODO
 }
 
@@ -63,7 +134,14 @@ bool CTFBotMvMEngineerIdle::ShouldAdvanceNestSpot(CTFBot *actor)
 
 void CTFBotMvMEngineerIdle::TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor)
 {
-	// TODO
+	if (hint == nullptr || hint->OwnerObjectHasNoOwner()) {
+		return;
+	}
+	
+	CBaseObject *obj = static_cast<CBaseObject *>(hint->GetOwnerEntity());
+	obj->SetOwnerEntity(actor);
+	obj->SetBuilder(actor);
+	actor->AddObject(obj);
 }
 
 void CTFBotMvMEngineerIdle::TryToDetonateStaleNest()

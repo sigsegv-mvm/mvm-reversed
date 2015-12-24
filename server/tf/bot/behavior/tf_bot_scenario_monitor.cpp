@@ -129,7 +129,7 @@ Action<CTFBot> *CTFBotScenarioMonitor::DesiredScenarioAndClassAction(CTFBot *act
 		}
 		
 		if (actor->IsPlayerClass(TF_CLASS_ENGINEER)) {
-			return new CTFBotMvMEngineerIdle(/* TODO */);
+			return new CTFBotMvMEngineerIdle();
 		}
 		
 		if ((actor->m_nBotAttrs & CTFBot::AttributeType::AGGRESSIVE) != 0) {
