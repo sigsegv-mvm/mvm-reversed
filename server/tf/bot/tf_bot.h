@@ -193,21 +193,19 @@ public:
 	Action<CTFBot> *OpportunisticallyUseWeaponAbilities();
 	
 	void AddEventChangeAttributes(const EventChangeAttributes_t *ecattr);
-	// GetEventChangeAttributes
-	// OnEventChangeAttributes
+	const EventChangeAttributes_t *GetEventChangeAttributes(const char *name) const;
+	void OnEventChangeAttributes(const EventChangeAttributes_t *ecattr);
 	
-	// TODO: squad funcs
-	// DeleteSquad
-	// IsSquadmate
-	// JoinSquad
-	// LeaveSquad
+	bool IsSquadmate(CTFPlayer *player) const;
+	void JoinSquad(CTFBotSquad *squad);
+	void LeaveSquad();
+	void DeleteSquad();
 	
-	// TODO: tag funcs
+	bool HasTag(const char *tag);
+	void AddTag(const char *tag);
+	void RemoveTag(const char *tag);
+	void ClearTags();
 	
-	// AddTag
-	// ClearTags
-	// HasTag
-	// RemoveTag
 	
 	// AddItem
 	
@@ -236,7 +234,6 @@ public:
 	// functions revealed in game/server/nav_entities.cpp:
 	// HasMission
 	// IsOnAnyMission
-	// HasTag
 	
 	// TODO: non-virtual member funcs
 	
@@ -312,8 +309,9 @@ private:
 	// 0x2af4: CTFBot: CountdownTimer
 	// 0x2b04: CTFBot: CountdownTimer
 	
-	AttributeType m_nBotAttrs; // +0x2b14
-	DifficultyType m_iSkill;   // +0x2b18
+	WeaponRestriction m_nRestrict; // +0x2b10
+	AttributeType m_nBotAttrs;     // +0x2b14
+	DifficultyType m_iSkill;       // +0x2b18
 	
 	CTFBotSquad *m_Squad; // +0x2b2c
 	

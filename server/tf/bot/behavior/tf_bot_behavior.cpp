@@ -23,7 +23,11 @@ const char *CTFBotMainAction::GetName() const
 
 ActionResult<CTFBot> CTFBotMainAction::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	// TODO: handle @ 0x68 = nullptr
+	
 	// TODO
+	
+	this->m_bReloadingBarrage = false;
 	
 	CONTINUE();
 }
@@ -127,21 +131,64 @@ QueryResponse CTFBotMainAction::ShouldHurry(const INextBot *nextbot) const
 		return QueryResponse::DONTCARE;
 	}
 	
-	// CTFNavArea+0x1c4:
-	// if on red, tests 0x2 (bit 1)
-	// if on blu, tests 0x4 (bit 2)
+	if ((area->m_nAttributes & (actor->GetTeamNumber() == TF_TEAM_RED ?
+		RED_SPAWN_ROOM : BLUE_SPAWN_ROOM)) != 0) {
+		if (!g_pPopulationManager->m_bCanBotsAttackWhileInSpawnRoom) {
+			return QueryResponse::YES;
+		}
+	}
 	
-	// TODO
+	return QueryResponse::DONTCARE;
 }
 
 QueryResponse CTFBotMainAction::ShouldRetreat(const INextBot *nextbot) const
 {
+	CTFBot *actor = static_cast<CTFBot *>(nextbot->GetEntity());
+	
+	if (TheTFBots()->IsMeleeOnly() || actor->m_Shared.IsInvulnerable() ||
+		(actor->m_nBotAttrs & CTFBot::AttributeType::IGNOREENEMIES) != 0) {
+		return QueryResponse::NO;
+	}
+	
+	if (actor->m_Shared.IsControlStunned() || actor->m_Shared.IsLoserStateStunned()) {
+		return QueryResponse::YES;
+	}
+	
+	if (g_pGameRules->m_bInSetup) {
+		return QueryResponse::NO;
+	}
+	
+	if (actor->IsPlayerClass(TF_CLASS_SPY) &&
+		(actor->m_Shared.InCond(TF_COND_DISGUISED) ||
+		actor->m_Shared.InCond(TF_COND_DISGUISING) ||
+		actor->m_Shared.IsStealthed())) {
+		return QueryResponse::NO;
+	}
+	
 	// TODO
 }
 
 QueryResponse CTFBotMainAction::ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const
 {
-	// TODO
+	if (g_pPopulationManager == nullptr) {
+		return QueryResponse::YES;
+	}
+	
+	CTFBot *actor = ToTFBot(nextbot->GetEntity());
+	
+	CTFNavArea *area = static_cast<CTFNavArea *>(actor->GetLastKnownArea());
+	if (area == nullptr) {
+		return QueryResponse::YES;
+	}
+	
+	if ((area->m_nAttributes & (actor->GetTeamNumber() == TF_TEAM_RED ?
+		RED_SPAWN_ROOM : BLUE_SPAWN_ROOM)) != 0) {
+		if (!g_pPopulationManager->m_bCanBotsAttackWhileInSpawnRoom) {
+			return QueryResponse::NO;
+		}
+	}
+	
+	return QueryResponse::YES;
 }
 
 Vector CTFBotMainAction::SelectTargetPoint(const INextBot *nextbot, const CBaseCombatCharacter *them) const
@@ -472,7 +519,78 @@ const CKnownEntity *CTFBotMainAction::SelectCloserThreat(CTFBot *actor, const CK
 
 const CKnownEntity *CTFBotMainAction::SelectMoreDangerousThreatInternal(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const
 {
-	// TODO
+	CTFBot *actor = ToTFBot(nextbot->GetEntity());
+	
+	const CKnownEntity *closer = this->SelectCloserThreat(actor, threat1, threat2);
+	
+	if ((actor->m_nRestrict & CTFBot::WeaponRestriction::MELEEONLY) != 0) {
+		return closer;
+	}
+	
+	if (!TFGameRules()->IsMannVsMachineMode()) {
+		CObjectSentrygun *sentry1 = nullptr;
+		if (threat1->IsVisibleRecently() && !threat1->IsPlayer()) {
+			sentry1 = dynamic_cast<CObjectSentrygun *>(threat1->GetEntity());
+		}
+		CObjectSentrygun *sentry2 = nullptr;
+		if (threat2->IsVisibleRecently() && !threat2->IsPlayer()) {
+			sentry2 = dynamic_cast<CObjectSentrygun *>(threat2->GetEntity());
+		}
+		
+		bool sentry1_danger =
+			(sentry1 != nullptr && actor->IsRangeLessThan(sentry1, 1100.0f) &&
+			!sentry1->HasSapper() && !sentry1->m_bPlacing());
+		bool sentry2_danger =
+			(sentry2 != nullptr && actor->IsRangeLessThan(sentry2, 1100.0f) &&
+			!sentry2->HasSapper() && !sentry2->m_bPlacing());
+		
+		if (sentry1_danger && sentry2_danger) {
+			return closer;
+		} else if (sentry1_danger) {
+			return threat1;
+		} else if (sentry2_danger) {
+			return threat2;
+		}
+	}
+	
+	if (TFGameRules()->IsMannVsMachineMode()) {
+		const CKnownEntity *spy = SelectClosestSpyToMe(actor, threat1, threat2);
+		if (spy != nullptr && actor->IsRangeLessThan(spy->GetEntity(), 1000.0f)) {
+			return spy;
+		}
+	}
+	
+	bool imm1 = this->IsImmediateThreat(who, threat1);
+	bool imm2 = this->IsImmediateThreat(who, threat2);
+	
+	if (imm1 && imm2) {
+		const CKnownEntity *spy = SelectClosestSpyToMe(actor, threat1, threat2);
+		if (spy != nullptr) {
+			return spy;
+		}
+		
+		CTFPlayer *player1 = static_cast<CTFPlayer *>(threat1->GetEntity());
+		CTFPlayer *player2 = static_cast<CTFPlayer *>(threat2->GetEntity());
+		
+		bool firing1 = actor->IsFiringAtMe(player1);
+		bool firing2 = actor->IsFiringAtMe(player2);
+		
+		if (firing1 && firing2) {
+			return closer;
+		} else if (firing1) {
+			return threat1;
+		} else if (firing2) {
+			return threat2;
+		} else {
+			return closer;
+		}
+	} else if (imm1) {
+		return threat1;
+	} else if (imm2) {
+		return threat2;
+	} else {
+		return closer;
+	}
 }
 
 

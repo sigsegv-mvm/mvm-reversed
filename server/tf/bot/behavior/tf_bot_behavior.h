@@ -61,4 +61,7 @@ private:
 const CKnownEntity *SelectClosestSpyToMe(CTFBot *actor, const CKnownEntity *known1, const CKnownEntity *known2);
 
 
-// TODO: CCompareFriendFoeInfluence
+class CCompareFriendFoeInfluence : public IVision::IForEachKnownEntity
+{
+	// TODO
+};
