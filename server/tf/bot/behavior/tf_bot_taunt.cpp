@@ -25,7 +25,7 @@ ActionResult<CTFBot> CTFBotTaunt::OnStart(CTFBot *actor, Action<CTFBot> *action)
 	this->m_ctStart.Start(RandomFloat(0.0f, 1.0f));
 	this->m_bStartedTaunting = false;
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotTaunt::Update(CTFBot *actor, float dt)
@@ -34,5 +34,5 @@ ActionResult<CTFBot> CTFBotTaunt::Update(CTFBot *actor, float dt)
 		// TODO
 	}
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }

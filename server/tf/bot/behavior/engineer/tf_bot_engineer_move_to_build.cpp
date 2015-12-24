@@ -41,7 +41,7 @@ ActionResult<CTFBot> CTFBotEngineerMoveToBuild::Update(CTFBot *actor, float dt)
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToSuccess(CTFBot *actor, const Path *path)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail)
@@ -51,7 +51,7 @@ EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToFailure(CTFBot *ac
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnStuck(CTFBot *actor)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnTerritoryLost(CTFBot *actor, int i1)

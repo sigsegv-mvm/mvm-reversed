@@ -25,7 +25,7 @@ ActionResult<CTFBot> CTFBotMainAction::OnStart(CTFBot *actor, Action<CTFBot> *ac
 {
 	// TODO
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
@@ -33,17 +33,16 @@ ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
 	VPROF_BUDGET("CTFBotMainAction::Update", "NextBot");
 	
 	if (!actor->IsAlive()) {
-		return ActionResult<CTFBot>::ChangeTo(new CTFBotDead(), "I died!");
+		CHANGE_TO(new CTFBotDead(), "I died!");
 	}
 	
 	if (actor->GetTeamNumber() != TF_TEAM_BLUE &&
 		actor->GetTeamNumber() != TF_TEAM_RED) {
-		return ActionResult<CTFBot>::Done("Not on a playing team");
+		DONE("Not on a playing team");
 	}
 	
 	if (actor->FindPartnerTauntInitiator()) {
-		return ActionResult<CTFBot>::SuspendFor(new CTFBotTaunt(),
-			"Responding to teammate partner taunt");
+		SUSPEND_FOR(new CTFBotTaunt(), "Responding to teammate partner taunt");
 	}
 	
 	actor->GetVisionInterface()->SetFieldOfView(actor->GetFOV());
@@ -96,7 +95,7 @@ EventDesiredResult<CTFBot> CTFBotMainAction::OnContact(CTFBot *actor, CBaseEntit
 		}
 	}
 	
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 EventDesiredResult<CTFBot> CTFBotMainAction::OnStuck(CTFBot *actor)

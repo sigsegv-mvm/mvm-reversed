@@ -29,22 +29,21 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::OnStart(CTFBot *actor, Action<CTFB
 {
 	this->m_vecLeaderGoalDirection = vec3_origin;
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 {
 	if (dt < 0.0f) {
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	CTFBotSquad *squad = actor->m_Squad;
 	if (squad == nullptr) {
 		if (this->m_DoneAction != nullptr) {
-			return ActionResult<CTFBot>::ChangeTo(this->m_DoneAction,
-				"Not in a Squad");
+			CHANGE_TO(this->m_DoneAction, "Not in a Squad");
 		} else {
-			return ActionResult<CTFBot>::Done("Not in a Squad");
+			DONE("Not in a Squad");
 		}
 	}
 	
@@ -58,21 +57,19 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 		actor->LeaveSquad();
 		
 		if (this->m_DoneAction != nullptr) {
-			return ActionResult<CTFBot>::ChangeTo(this->m_DoneAction,
-				"Squad leader is dead");
+			CHANGE_TO(this->m_DoneAction, "Squad leader is dead");
 		} else {
-			return ActionResult<CTFBot>::Done("Squad leader is dead");
+			DONE("Squad leader is dead");
 		}
 	}
 	
 	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() &&
 		actor == leader) {
 		if ((actor->m_nBotAttrs & CTFBot::AttributeType::AGGRESSIVE) != 0) {
-			return ActionResult<CTFBot>::ChangeTo(
-				new CTFBotPushToCapturePoint(new CTFBotFetchFlag(false)),
+			CHANGE_TO(new CTFBotPushToCapturePoint(new CTFBotFetchFlag(false)),
 				"I'm now the squad leader! Going for the flag!");
 		} else {
-			return ActionResult<CTFBot>::ChangeTo(new CTFBotFetchFlag(false),
+			CHANGE_TO(new CTFBotFetchFlag(false),
 				"I'm now the squad leader! Going for the flag!");
 		}
 	}
@@ -83,7 +80,7 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 			if (actor->IsLineOfSightClear(leader, IGNORE_NOTHING)) {
 				ActionResult<CTFBot> result = this->m_MeleeAttack->Update(actor, dt);
 				if (result.transition == ActionTransition::CONTINUE) {
-					return ActionResult<CTFBot>::Continue();
+					CONTINUE();
 				}
 			}
 		}
@@ -105,7 +102,7 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 		this->m_bIsInFormation = false;
 		actor->m_flFormationError = 0.0f;
 		
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	const Path::Segment *leader_goal = leader_path->GetCurrentGoal();
@@ -195,7 +192,7 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 			actor->m_flFormationError = 0.0f;
 		} else {
 			actor->GetLocomotionInterface()->Approach(ideal_pos, 1.0f);
-			return ActionResult<CTFBot>::Continue();
+			CONTINUE();
 		}
 	}
 	
@@ -215,7 +212,7 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 	}
 	
 	this->m_PathFollower->Update(actor);
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 void CTFBotEscortSquadLeader::OnEnd(CTFBot *actor, Action<CTFBot> *action)
@@ -242,23 +239,23 @@ ActionResult<CTFBot> CTFBotWaitForOutOfPositionSquadMember::OnStart(CTFBot *acto
 {
 	this->m_ctTimeout.Start(2.0f);
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotWaitForOutOfPositionSquadMember::Update(CTFBot *actor, float dt)
 {
 	if (this->m_ctTimeout.IsElapsed()) {
-		return ActionResult<CTFBot>::Done("Timeout");
+		DONE("Timeout");
 	}
 	
 	CTFBotSquad *squad = actor->m_Squad;
 	if (squad == nullptr || actor != squad->GetLeader()) {
-		return ActionResult<CTFBot>::Done("No squad");
+		DONE("No squad");
 	}
 	
 	if (squad->IsInFormation()) {
-		return ActionResult<CTFBot>::Done("Everyone is in formation. Moving on.");
+		DONE("Everyone is in formation. Moving on.");
 	} else {
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 }

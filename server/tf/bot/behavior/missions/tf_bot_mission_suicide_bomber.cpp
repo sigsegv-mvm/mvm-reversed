@@ -45,14 +45,14 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 		this->m_hTarget = nullptr;
 	}
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float dt)
 {
 	if (this->m_ctDetonation.HasStarted()) {
 		if (!this->m_ctDetonation.IsElapsed()) {
-			return ActionResult<CTFBot>::Continue();
+			CONTINUE();
 		}
 		
 		this->m_vecDetonatePos = actor->GetAbsOrigin();
@@ -77,12 +77,12 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float dt)
 			}
 		}
 		
-		return ActionResult<CTFBot>::Done("KABOOM!");
+		DONE("KABOOM!");
 	}
 	
 	if (actor->GetHealth() == 1) {
 		this->StartDetonate(actor, false, true);
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	if (this->m_hTarget() != nullptr) {
@@ -131,7 +131,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::Update(CTFBot *actor, float dt)
 	}
 	
 	this->m_PathFollower.Update(actor);
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 void CTFBotMissionSuicideBomber::OnEnd(CTFBot *actor, Action<CTFBot> *action)
@@ -145,7 +145,7 @@ EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnStuck(CTFBot *actor)
 		this->StartDetonate(actor, false, false);
 	}
 	
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnKilled(CTFBot *actor, const CTakeDamageInfo& info)
@@ -174,7 +174,7 @@ EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnKilled(CTFBot *actor, c
 		}
 	}
 	
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 

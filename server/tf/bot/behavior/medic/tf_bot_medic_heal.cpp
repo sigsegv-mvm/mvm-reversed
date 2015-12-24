@@ -32,7 +32,7 @@ ActionResult<CTFBot> CTFBotMedicHeal::OnStart(CTFBot *actor, Action<CTFBot> *act
 {
 	// TODO
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
@@ -48,24 +48,23 @@ ActionResult<CTFBot> CTFBotMedicHeal::OnResume(CTFBot *actor, Action<CTFBot> *ac
 	
 	// TODO
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 
 EventDesiredResult<CTFBot> CTFBotMedicHeal::OnMoveToSuccess(CTFBot *actor, const Path *path)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 EventDesiredResult<CTFBot> CTFBotMedicHeal::OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
-
 
 EventDesiredResult<CTFBot> CTFBotMedicHeal::OnStuck(CTFBot *actor)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 

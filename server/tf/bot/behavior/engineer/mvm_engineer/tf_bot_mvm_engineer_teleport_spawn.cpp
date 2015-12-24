@@ -25,10 +25,10 @@ const char *CTFBotMvMEngineerTeleportSpawn::GetName() const
 ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
 	if ((actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) == 0) {
-		return ActionResult<CTFBot>::Done("Cannot teleport to hint with out Attributes TeleportToHint");
+		DONE("Cannot teleport to hint with out Attributes TeleportToHint");
 	}
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float dt)
@@ -42,16 +42,16 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	CBaseEntity *hint = this->m_hintEntity();
 	if (hint == nullptr) {
-		return ActionResult<CTFBot>::Done("Cannot teleport to hint as m_hintEntity is NULL");
+		DONE("Cannot teleport to hint as m_hintEntity is NULL");
 	}
 	
 	Vector tele_pos = hint->GetAbsOrigin();
@@ -84,5 +84,5 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 		}
 	}
 	
-	return ActionResult<CTFBot>::Done("Teleported");
+	DONE("Teleported");
 }

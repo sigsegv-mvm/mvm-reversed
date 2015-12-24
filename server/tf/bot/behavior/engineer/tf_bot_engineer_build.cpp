@@ -26,7 +26,7 @@ const char *CTFBotEngineerBuild::GetName() const
 
 ActionResult<CTFBot> CTFBotEngineerBuild::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotEngineerBuild::Update(CTFBot *actor, float dt)
@@ -36,7 +36,7 @@ ActionResult<CTFBot> CTFBotEngineerBuild::Update(CTFBot *actor, float dt)
 
 ActionResult<CTFBot> CTFBotEngineerBuild::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 
@@ -48,7 +48,7 @@ Action<CTFBot> *CTFBotEngineerBuild::InitialContainedAction(CTFBot *actor)
 
 EventDesiredResult<CTFBot> CTFBotEngineerBuild::OnTerritoryLost(CTFBot *actor, int i1)
 {
-	return EventDesiredResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 

@@ -24,14 +24,14 @@ const char *CTFBotMvMEngineerBuildSentryGun::GetName() const
 ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
 	actor->StartBuildingObjectOfType(OBJ_SENTRYGUN, 0);
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, float dt)
 {
 	CBaseEntity *hint = this->m_hintEntity();
 	if (hint == nullptr) {
-		return ActionResult<CTFBot>::Done("No hint entity");
+		DONE("No hint entity");
 	}
 	
 	float range_to_hint = actor->GetRangeTo(hint->GetAbsOrigin());
@@ -55,10 +55,10 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 		if (!this->m_PathFollower.IsValid()) {
 			/* BUG: one path failure ends the entire behavior...
 			 * could this be why engiebots sometimes zone out? */
-			return ActionResult<CTFBot>::Done("Path failed");
+			DONE("Path failed");
 		}
 		
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	if (!this->m_ctPushAway.HasStarted()) {
@@ -70,11 +70,11 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	actor->DetonateObjectOfType(OBJ_SENTRYGUN, 0, true);
@@ -82,7 +82,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 	CBaseEntity *ent = CreateEntityByName("obj_sentrygun");
 	if (ent == nullptr) {
 		/* BUG: no we didn't */
-		return ActionResult<CTFBot>::Done("Built a sentry");
+		DONE("Built a sentry");
 	}
 	
 	this->m_hSentry = static_cast<CObjectSentrygun *>(ent);
@@ -103,7 +103,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 	this->m_hintEntity()->SetOwnerEntity(this->m_hSentry());
 	
 	this->m_hSentry = nullptr;
-	return ActionResult<CTFBot>::Done("Built a sentry");
+	DONE("Built a sentry");
 }
 
 void CTFBotMvMEngineerBuildSentryGun::OnEnd(CTFBot *actor, Action<CTFBot> *action)

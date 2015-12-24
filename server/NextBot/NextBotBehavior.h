@@ -71,42 +71,6 @@ struct ActionResult
 	ActionTransition transition;
 	Action<T> *action;
 	const char *reason;
-	
-	static ActionResult<T> Continue()
-	{
-		return {
-			.transition = ActionTransition::CONTINUE,
-			.action     = nullptr,
-			.reason     = nullptr,
-		};
-	}
-	
-	static ActionResult<T> ChangeTo(Action<T> *next, const char *why)
-	{
-		return {
-			.transition = ActionTransition::CHANGE_TO,
-			.action     = next,
-			.reason     = why,
-		};
-	}
-	
-	static ActionResult<T> SuspendFor(Action<T> *next, const char *why)
-	{
-		return {
-			.transition = ActionTransition::SUSPEND_FOR,
-			.action     = next,
-			.reason     = why,
-		};
-	}
-	
-	static ActionResult<T> Done(const char *why)
-	{
-		return {
-			.transition = ActionTransition::DONE,
-			.action     = nullptr,
-			.reason     = why,
-		};
-	}
 };
 
 
@@ -114,57 +78,121 @@ template<class T>
 struct EventDesiredResult : public ActionResult<T>
 {
 	ResultSeverity severity;
-	
-	static EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
-	{
-		return {
-			.transition = ActionTransition::CONTINUE,
-			.action     = nullptr,
-			.reason     = nullptr,
-			.severity   = level,
-		};
-	}
-	
-	static EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why, ResultSeverity level = ResultSeverity::LOW)
-	{
-		return {
-			.transition = ActionTransition::CHANGE_TO,
-			.action     = next,
-			.reason     = why,
-			.severity   = level,
-		};
-	}
-	
-	static EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why, ResultSeverity level = ResultSeverity::LOW)
-	{
-		return {
-			.transition = ActionTransition::SUSPEND_FOR,
-			.action     = next,
-			.reason     = why,
-			.severity   = level,
-		};
-	}
-	
-	static EventDesiredResult<T> Done(const char *why, ResultSeverity level = ResultSeverity::LOW)
-	{
-		return {
-			.transition = ActionTransition::DONE,
-			.action     = nullptr,
-			.reason     = why,
-			.severity   = level,
-		};
-	}
-	
-	static EventDesiredResult<T> Sustain(const char *why, ResultSeverity level = ResultSeverity::LOW)
-	{
-		return {
-			.transition = ActionTransition::SUSTAIN,
-			.action     = nullptr,
-			.reason     = why,
-			.severity   = level,
-		};
-	}
 };
+
+
+template<class T>
+ActionResult<T> Continue()
+{
+	return {
+		.transition = ActionTransition::CONTINUE,
+		.action     = nullptr,
+		.reason     = nullptr,
+	};
+}
+
+template<class T>
+ActionResult<T> ChangeTo(Action<T> *next, const char *why = nullptr)
+{
+	return {
+		.transition = ActionTransition::CHANGE_TO,
+		.action     = next,
+		.reason     = why,
+	};
+}
+
+template<class T>
+ActionResult<T> SuspendFor(Action<T> *next, const char *why = nullptr)
+{
+	return {
+		.transition = ActionTransition::SUSPEND_FOR,
+		.action     = next,
+		.reason     = why,
+	};
+}
+
+template<class T>
+ActionResult<T> Done(const char *why = nullptr)
+{
+	return {
+		.transition = ActionTransition::DONE,
+		.action     = nullptr,
+		.reason     = why,
+	};
+}
+
+template<class T>
+ActionResult<T> Sustain(const char *why = nullptr)
+{
+	return {
+		.transition = ActionTransition::SUSTAIN,
+		.action     = nullptr,
+		.reason     = why,
+	};
+}
+
+
+template<class T>
+EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
+{
+	return {
+		.transition = ActionTransition::CONTINUE,
+		.action     = nullptr,
+		.reason     = nullptr,
+		.severity   = level,
+	};
+}
+
+template<class T>
+EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+{
+	return {
+		.transition = ActionTransition::CHANGE_TO,
+		.action     = next,
+		.reason     = why,
+		.severity   = level,
+	};
+}
+
+template<class T>
+EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+{
+	return {
+		.transition = ActionTransition::SUSPEND_FOR,
+		.action     = next,
+		.reason     = why,
+		.severity   = level,
+	};
+}
+
+template<class T>
+EventDesiredResult<T> Done(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+{
+	return {
+		.transition = ActionTransition::DONE,
+		.action     = nullptr,
+		.reason     = why,
+		.severity   = level,
+	};
+}
+
+template<class T>
+EventDesiredResult<T> Sustain(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+{
+	return {
+		.transition = ActionTransition::SUSTAIN,
+		.action     = nullptr,
+		.reason     = why,
+		.severity   = level,
+	};
+}
+
+
+#define CONTINUE(...)    return Continue(__VA_ARGS__)
+#define CHANGE_TO(...)   return ChangeTo(__VA_ARGS__)
+#define SUSPEND_FOR(...) return SuspendFor(__VA_ARGS__)
+#define DONE(...)        return Done(__VA_ARGS__)
+#define SUSTAIN(...)     return Sustain(__VA_ARGS__)
 
 
 // most Action event handlers                          return { 0, nullptr, nullptr, 1 }

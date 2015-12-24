@@ -28,7 +28,7 @@ ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::OnStart(CTFBot *actor, Action<CTFB
 	this->m_ctTeleport.Start(2.0f + RandomFloat(0.0f, 1.0f));
 	this->m_nDistance = 0;
 	
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::Update(CTFBot *actor, float dt)
@@ -36,7 +36,7 @@ ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::Update(CTFBot *actor, float dt)
 	VPROF_BUDGET("CTFBotSpyLeaveSpawnRoom::Update", "NextBot");
 	
 	if (!this->m_ctTeleport.IsElapsed()) {
-		return ActionResult<CTFBot>::Continue();
+		CONTINUE();
 	}
 	
 	CUtlVector<CTFPlayer *> enemies;
@@ -51,15 +51,14 @@ ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::Update(CTFBot *actor, float dt)
 	FOR_EACH_VEC(enemies2, i) {
 		CTFPlayer *enemy = enemies2[i];
 		if (TeleportNearVictim(actor, enemy, this->m_nDistance)) {
-			return ActionResult<CTFBot>::ChangeTo(new CTFBotSpyHide(enemy),
-				"Hiding!");
+			CHANGE_TO(new CTFBotSpyHide(enemy), "Hiding!");
 		}
 	}
 	
 	/* retry later */
 	++this->m_nDistance;
 	this->m_ctTeleport.Start(1.0f);
-	return ActionResult<CTFBot>::Continue();
+	CONTINUE();
 }
 
 
