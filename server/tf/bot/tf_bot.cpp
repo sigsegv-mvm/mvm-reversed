@@ -438,3 +438,42 @@ Action<CTFBot> *CTFBot::OpportunisticallyUseWeaponAbilities()
 	
 	return nullptr;
 }
+
+bool CTFBot::IsLineOfFireClear(CBaseEntity *to) const
+{
+	return this->IsLineOfFireClear(this->EyePosition(), to);
+}
+
+bool CTFBot::IsLineOfFireClear(const Vector& to) const
+{
+	return this->IsLineOfFireClear(this->EyePosition(), to);
+}
+
+bool CTFBot::IsLineOfFireClear(const Vector& from, CBaseEntity *to) const
+{
+	NextBotTraceFilterIgnoreActors filter(nullptr);
+	
+	trace_t trace;
+	UTIL_TraceLine(from, to->WorldSpaceCenter(),
+		MASK_SOLID_BRUSHONLY, &filter, &trace);
+	
+	if (trace.traction >= 1.0f && !trace.allsolid) {
+		return (!trace.startsolid || trace.m_pEnt == to);
+	}
+	
+	return false;
+}
+
+bool CTFBot::IsLineOfFireClear(const Vector& from, const Vector& to) const
+{
+	NextBotTraceFilterIgnoreActors filter(nullptr);
+	
+	trace_t trace;
+	UTIL_TraceLine(from, to, MASK_SOLID_BRUSHONLY, &filter, &trace);
+	
+	if (trace.fraction >= 1.0f && !trace.allsolid) {
+		return (!trace.startsolid);
+	}
+	
+	return false;
+}

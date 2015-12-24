@@ -206,6 +206,10 @@ public:
 	void RemoveTag(const char *tag);
 	void ClearTags();
 	
+	bool IsLineOfFireClear(CBaseEntity *to) const;
+	bool IsLineOfFireClear(const Vector& to) const;
+	bool IsLineOfFireClear(const Vector& from, CBaseEntity *to) const;
+	bool IsLineOfFireClear(const Vector& from, const Vector& to) const;
 	
 	// AddItem
 	
