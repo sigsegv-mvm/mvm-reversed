@@ -9,7 +9,7 @@
 class CTFBotScenarioMonitor : public Action<CTFBot>
 {
 public:
-	CTFBotScenarioMonitor(/* TODO */);
+	CTFBotScenarioMonitor();
 	virtual ~CTFBotScenarioMonitor();
 	
 	virtual const char *GetName() const override;
@@ -19,9 +19,9 @@ public:
 	
 	virtual Action<CTFBot> *InitialContainedAction(CTFBot *actor) override;
 	
-	virtual UNKNOWN DesiredScenarioAndClassAction(CTFBot *actor);
+	virtual Action<CTFBot> *DesiredScenarioAndClassAction(CTFBot *actor);
 	
 private:
-	// 34 CountdownTimer
-	// 40 CountdownTimer
+	CountdownTimer m_ctFetchFlagInitial; // +0x34
+	CountdownTimer m_ctFetchFlag;        // +0x40
 };

@@ -285,8 +285,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 		}
 	}
 	
-	// TODO: enum for (CTFBot::MissionType)0
-	actor->SetMission(0, false);
+	actor->SetMission(CTFBot::MissionType::NONE, false);
 	
 	actor->m_takedamage = DAMAGE_YES;
 	

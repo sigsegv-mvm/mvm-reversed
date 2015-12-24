@@ -9,7 +9,7 @@
 class CTFBotSeekAndDestroy : public Action<CTFBot>
 {
 public:
-	CTFBotSeekAndDestroy(float f1);
+	CTFBotSeekAndDestroy(float f1 = -1.0f);
 	virtual ~CTFBotSeekAndDestroy();
 	
 	virtual const char *GetName() const override;

@@ -69,7 +69,7 @@ public:
 		// some of these can be found in CFuncNavCost::IsApplicableTo
 		// in game/server/nav_entities.cpp
 		
-		// TODO: 0
+		NONE             = 0,
 		// TODO: 1
 		DESTROY_SENTRIES = 2,
 		SNIPER           = 3,
