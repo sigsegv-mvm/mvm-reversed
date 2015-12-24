@@ -53,7 +53,7 @@ CTFBotPathCost(CTFBot *actor, RouteType rtype)
 	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
 	
 	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
-		TheNavMesh()->CollectBuiltObjects(&this->m_EnemyObjects,
+		TheNavMesh->CollectBuiltObjects(&this->m_EnemyObjects,
 			GetEnemyTeam(actor));
 	} else {
 		this->m_EnemyObjects.RemoveAll();
@@ -100,10 +100,6 @@ inline CTFBot *ToTFBot(CBaseEntity *pEntity)
 	
 	return static_cast<CTFBot *>(player);
 }
-
-
-// TODO: GetBombInfo(BombInfo_t *)
-// TODO: BombInfo_t
 
 
 class CHeadlessHatmanBody : public IBody

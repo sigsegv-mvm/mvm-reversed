@@ -109,7 +109,7 @@ private:
 	IntervalTimer m_itCombat; // +0x21c
 	// 220 mark
 	// 224 
-	// 228 float
+	float m_flBombTargetDistance; // +0x228
 	
 	// TODO: static m_masterTFMark
 };

@@ -49,4 +49,13 @@ public:
 };
 
 
-// TODO: SelectOutOfRangeNest(const CUtlVector<CTFBotHintEngineerNest *>&)
+struct BombInfo_t
+{
+	Vector closest_pos;
+	float hatch_dist_back;
+	float hatch_dist_fwd;
+};
+
+
+CTFBotHintEngineerNest *SelectOutOfRangeNest(const CUtlVector<CTFBotHintEngineerNest *>& nests);
+bool GetBombInfo(BombInfo_t *info);

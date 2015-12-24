@@ -87,7 +87,7 @@ Vector ChasePath::PredictSubjectPosition(INextBot *nextbot, CBaseEntity *ent) co
 		}
 	}
 	
-	CNavArea *pred_area = TheNavMesh()->GetNearestNavArea(pred_ent_pos);
+	CNavArea *pred_area = TheNavMesh->GetNearestNavArea(pred_ent_pos);
 	if (pred_area == nullptr) {
 		return ent_pos;
 	}

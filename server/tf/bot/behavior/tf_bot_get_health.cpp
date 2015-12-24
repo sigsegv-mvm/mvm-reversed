@@ -30,7 +30,7 @@ bool CHealthFilter::IsSelected(const CBaseEntity *ent) const
 	}
 	
 	CNavArea *nearest =
-		TheNavMesh()->GetNearestNavArea(ent->WorldSpaceCenter(), 0);
+		TheNavMesh->GetNearestNavArea(ent->WorldSpaceCenter(), 0);
 	if (nearest == nullptr) {
 		return false;
 	}
