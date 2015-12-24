@@ -45,7 +45,7 @@ private:
 class CTFBotMvMEngineerHintFinder
 {
 public:
-	static bool FindHint(bool b1, bool b2, CHandle<CTFBotHintEngineerNest> *hint);
+	static bool FindHint(bool box_check, bool out_of_range_ok, CHandle<CTFBotHintEngineerNest> *the_hint);
 };
 
 

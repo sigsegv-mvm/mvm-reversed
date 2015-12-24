@@ -72,11 +72,79 @@ void CTFBotMvMEngineerIdle::TryToDetonateStaleNest()
 }
 
 
-bool CTFBotMvMEngineerHintFinder::FindHint(bool b1, bool b2, CHandle<CTFBotHintEngineerNest> *hint)
+bool CTFBotMvMEngineerHintFinder::FindHint(bool box_check, bool out_of_range_ok, CHandle<CTFBotHintEngineerNest> *the_hint)
 {
 	CUtlVector<CTFBotHintEngineerNest *> hints;
 	
-	// TODO
+	for (int i = 0; i < ITFBotHintEntityAutoList::AutoList().Count(); ++i) {
+		CBaseTFBotHintEntity *hint = static_cast<CBaseTFBotHintEntity *>(
+			ITFBotHintEntityAutoList::AutoList()[i]);
+		
+		if (hint->GetHintType() == CBaseTFBotHintEntity::HintType::SENTRY_GUN &&
+			!hint->m_bDisabled && hint->GetOwnerEntity() == nullptr) {
+			hints.AddToTail(static_cast<CTFBotHintEngineerNest *>(hint));
+		}
+	}
+	
+	BombInfo_t bomb_info;
+	GetBombInfo(&bomb_info);
+	
+	CUtlVector<CTFBotHintEngineerNest *> hints1; // in fwd~back, stale
+	CUtlVector<CTFBotHintEngineerNest *> hints2; // in fwd~back, within min bomb distance
+	CUtlVector<CTFBotHintEngineerNest *> hints3; // in fwd~infinity
+	CUtlVector<CTFBotHintEngineerNest *> hints4; // others
+	
+	FOR_EACH_VEC(hints, i) {
+		CTFBotHintEngineerNest *hint = hints[i];
+		
+		CTFNavArea *area = TheNavMesh->GetNearestNavArea(hint->GetAbsOrigin());
+		if (area == nullptr) {
+			Warning("Sentry hint has NULL nav area!\n");
+			continue;
+		}
+		
+		float dist = area->m_flBombTargetDistance;
+		if (dist > bomb_info.hatch_dist_back && dist < bomb_info.hatch_dist_fwd) {
+			CBaseEntity *pList[256];
+			if (box_check && UTIL_EntitiesInBox(pList, 256,
+				hint->GetAbsOrigin() + VEC_HULL_MIN,
+				hint->GetAbsOrigin() + VEC_HULL_MAX,
+				FL_OBJECT | FL_FAKECLIENT) > 0) {
+				continue;
+			}
+			
+			if (hint->IsStaleNest) {
+				hints1.AddToTail(hint);
+			} else {
+				if (hint->GetAbsOrigin()->DistTo(bomb_info.closest_pos) >=
+					tf_bot_engineer_mvm_hint_min_distance_from_bomb.GetFloat()) {
+					hints2.AddToTail(hint);
+				}
+			}
+		} else if (dist > bomb_info.hatch_dist_fwd) {
+			hints3.AddToTail(hint);
+		} else {
+			hints4.AddToTail(hint);
+		}
+	}
+	
+	CTFBotHintEngineerNest *hint;
+	if (!hints1.IsEmpty()) {
+		hint = hints1.Random();
+	} else if (!hints2.IsEmpty()) {
+		hint = hints2.Random();
+	} else if (out_of_range_ok) {
+		hint = SelectOutOfRangeNest(hints3);
+		if (hint == nullptr) {
+			hint = SelectOutOfRangeNest(hints4);
+		}
+	}
+	
+	if (the_hint != nullptr) {
+		*the_hint = hint;
+	}
+	
+	return (hint != nullptr);
 }
 
 
