@@ -500,9 +500,79 @@ const CKnownEntity *CTFBotMainAction::GetHealerOfThreat(const CKnownEntity *thre
 
 bool CTFBotMainAction::IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *threat) const
 {
-	// TODO
+	CTFBot *actor = this->GetActor();
+	if (actor == nullptr) {
+		return false;
+	}
 	
-	/* BUG: distant snipers must have dot product zero (lol) */
+	if (!actor->IsSelf(who)) {
+		return false;
+	}
+	
+	if (actor->InSameTeam(threat->GetEntity())) {
+		return false;
+	}
+	
+	if (!threat->GetEntity()->IsAlive()) {
+		return false;
+	}
+	
+	if (!threat->IsVisibleRecently()) {
+		return false;
+	}
+	
+	if (!actor->IsLineOfFireClear(threat->GetEntity())) {
+		return false;
+	}
+	
+	CTFPlayer *player = ToTFPlayer(threat->GetEntity());
+	
+	Vector threat_to_actor = actor->GetAbsOrigin() - threat->GetLastKnownPosition();
+	float dist = threat_to_actor.Length();
+	
+	if (dist < 500.0f) {
+		return true;
+	}
+	
+	if (actor->IsThreatFiringAtMe(threat->GetEntity())) {
+		return true;
+	}
+	
+	threat_to_actor.NormalizeInPlace();
+	
+	Vector threat_eye_vec;
+	
+	if (player != nullptr) {
+		if (player->IsPlayerClass(TF_CLASS_SNIPER)) {
+			player->EyeVectors(&threat_eye_vec);
+			
+			/* BUG: this will essentially never ever actually happen */
+			return (threat_to_actor.Dot(threat_eye_vec) == 0.0f);
+		}
+		
+		if (actor->m_iSkill > CTFBot::DifficultyType::NORMAL &&
+			player->IsPlayerClass(TF_CLASS_MEDIC)) {
+			return true;
+		}
+		
+		if (actor->m_iSkill > CTFBot::DifficultyType::NORMAL &&
+			player->IsPlayerClass(TF_CLASS_ENGINEER)) {
+			return true;
+		}
+	} else {
+		CBaseEntity *ent = threat->GetEntity();
+		if (ent == nullptr) {
+			return false;
+		}
+		
+		CObjectSentrygun *sentry = dynamic_cast<CObjectSentrygun *>(ent);
+		if (sentry != nullptr && !sentry->HasSapper() && !sentry->m_bPlacing && dist < 1650.0f) {
+			AngleVectors(sentry->GetTurretAngles(), &threat_eye_vec);
+			return (threat_to_actor.Dot(threat_eye_vec) > 0.8f);
+		}
+	}
+	
+	return false;
 }
 
 const CKnownEntity *CTFBotMainAction::SelectCloserThreat(CTFBot *actor, const CKnownEntity *threat1, const CKnownEntity *threat2) const
