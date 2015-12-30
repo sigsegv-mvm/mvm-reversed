@@ -9,7 +9,7 @@
 class CTFBotDefendPoint : public Action<CTFBot>
 {
 public:
-	CTFBotDefendPoint(/* TODO */);
+	CTFBotDefendPoint();
 	virtual ~CTFBotDefendPoint();
 	
 	virtual const char *GetName() const override;

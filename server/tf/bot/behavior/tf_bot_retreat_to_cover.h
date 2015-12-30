@@ -9,8 +9,8 @@
 class CTFBotRetreatToCover : public Action<CTFBot>
 {
 public:
-	CTFBotRetreatToCover(Action<CTFBot *> action);
-	CTFBotRetreatToCover(float f1);
+	CTFBotRetreatToCover(Action<CTFBot *> *done_action);
+	CTFBotRetreatToCover(float duration);
 	virtual ~CTFBotRetreatToCover();
 	
 	virtual const char *GetName() const override;

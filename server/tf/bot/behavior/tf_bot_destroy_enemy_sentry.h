@@ -9,7 +9,7 @@
 class CTFBotDestroyEnemySentry : public Action<CTFBot>
 {
 public:
-	CTFBotDestroyEnemySentry(/* TODO */);
+	CTFBotDestroyEnemySentry();
 	virtual ~CTFBotDestroyEnemySentry();
 	
 	virtual const char *GetName() const override;

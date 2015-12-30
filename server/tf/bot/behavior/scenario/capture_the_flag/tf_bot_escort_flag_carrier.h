@@ -9,7 +9,7 @@
 class CTFBotEscortFlagCarrier : public Action<CTFBot>
 {
 public:
-	CTFBotEscortFlagCarrier(/* TODO */);
+	CTFBotEscortFlagCarrier();
 	virtual ~CTFBotEscortFlagCarrier();
 	
 	virtual const char *GetName() const override;

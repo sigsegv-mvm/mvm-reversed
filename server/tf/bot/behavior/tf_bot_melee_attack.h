@@ -9,7 +9,7 @@
 class CTFBotMeleeAttack : public Action<CTFBot>
 {
 public:
-	CTFBotMeleeAttack(float f1);
+	CTFBotMeleeAttack(float range);
 	virtual ~CTFBotMeleeAttack();
 	
 	virtual const char *GetName() const override;

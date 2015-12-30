@@ -9,7 +9,7 @@
 class CTFBotMvMDeployBomb : public Action<CTFBot>
 {
 public:
-	CTFBotMvMDeployBomb(/* TODO */);
+	CTFBotMvMDeployBomb();
 	virtual ~CTFBotMvMDeployBomb();
 	
 	virtual const char *GetName() const override;

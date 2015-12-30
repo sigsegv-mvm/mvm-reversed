@@ -9,7 +9,7 @@
 class CTFBotDefendPointBlockCapture : public Action<CTFBot>
 {
 public:
-	CTFBotDefendPointBlockCapture(/* TODO */);
+	CTFBotDefendPointBlockCapture();
 	virtual ~CTFBotDefendPointBlockCapture();
 	
 	virtual const char *GetName() const override;

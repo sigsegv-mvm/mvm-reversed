@@ -9,7 +9,7 @@
 class CTFBotEngineerMoveToBuild : public Action<CTFBot>
 {
 public:
-	CTFBotEngineerMoveToBuild(/* TODO */);
+	CTFBotEngineerMoveToBuild();
 	virtual ~CTFBotEngineerMoveToBuild();
 	
 	virtual const char *GetName() const override;

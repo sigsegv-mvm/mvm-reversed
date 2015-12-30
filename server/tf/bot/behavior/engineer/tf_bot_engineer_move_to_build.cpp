@@ -12,7 +12,7 @@ ConVar tf_bot_min_teleport_travel("tf_bot_min_teleport_travel", "3000", FCVAR_CH
 	"Minimum travel distance between teleporter entrance and exit before engineer bot will build one");
 
 
-CTFBotEngineerMoveToBuild::CTFBotEngineerMoveToBuild(/* TODO */)
+CTFBotEngineerMoveToBuild::CTFBotEngineerMoveToBuild()
 {
 	// TODO
 }

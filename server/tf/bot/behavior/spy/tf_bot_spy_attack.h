@@ -9,7 +9,7 @@
 class CTFBotSpyAttack : public Action<CTFBot>
 {
 public:
-	CTFBotSpyAttack(CTFPlayer *player);
+	CTFBotSpyAttack(CTFPlayer *victim);
 	virtual ~CTFBotSpyAttack();
 	
 	virtual const char *GetName() const override;

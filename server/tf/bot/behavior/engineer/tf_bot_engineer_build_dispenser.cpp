@@ -5,7 +5,7 @@
  */
 
 
-CTFBotEngineerBuildDispenser::CTFBotEngineerBuildDispenser(/* TODO */)
+CTFBotEngineerBuildDispenser::CTFBotEngineerBuildDispenser()
 {
 	// TODO
 }

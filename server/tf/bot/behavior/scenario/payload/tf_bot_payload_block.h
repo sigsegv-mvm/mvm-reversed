@@ -9,7 +9,7 @@
 class CTFBotPayloadBlock : public Action<CTFBot>
 {
 public:
-	CTFBotPayloadBlock(/* TODO */);
+	CTFBotPayloadBlock();
 	virtual ~CTFBotPayloadBlock();
 	
 	virtual const char *GetName() const override;

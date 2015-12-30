@@ -9,7 +9,7 @@
 class CTFBotEngineerBuildDispenser : public Action<CTFBot>
 {
 public:
-	CTFBotEngineerBuildDispenser(/* TODO */);
+	CTFBotEngineerBuildDispenser();
 	virtual ~CTFBotEngineerBuildDispenser();
 	
 	virtual const char *GetName() const override;
