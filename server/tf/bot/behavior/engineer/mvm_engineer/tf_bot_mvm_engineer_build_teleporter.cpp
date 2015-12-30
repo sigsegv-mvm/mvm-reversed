@@ -26,14 +26,14 @@ const char *CTFBotMvMEngineerBuildTeleportExit::GetName() const
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	CONTINUE();
+	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, float dt)
 {
 	CBaseEntity *hint = this->m_hintEntity();
 	if (hint == nullptr) {
-		DONE("No hint entity");
+		return Done("No hint entity");
 	}
 	
 	if (actor->IsRangeGreaterThan(hint->GetAbsOrigin(), 25.0f)) {
@@ -49,10 +49,10 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, f
 		if (!this->m_PathFollower.IsValid()) {
 			/* BUG: one path failure ends the entire behavior...
 			 * could this be why engiebots sometimes zone out? */
-			DONE("Path failed");
+			return Done("Path failed");
 		}
 		
-		CONTINUE();
+		return Continue();
 	}
 	
 	if (!this->m_ctPushAway.HasStarted()) {
@@ -64,18 +64,18 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, f
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		CONTINUE();
+		return Continue();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		CONTINUE();
+		return Continue();
 	}
 	
 	actor->DetonateObjectOfType(OBJ_TELEPORTER, 1, true);
 	
 	CBaseEntity *ent = CreateEntityByName("obj_teleporter");
 	if (tele == nullptr) {
-		CONTINUE();
+		return Continue();
 	}
 	
 	CObjectTeleporter *tele = static_cast<CObjectTeleporter *>(ent);
@@ -108,5 +108,5 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, f
 	
 	this->m_hintEntity()->SetOwnerEntity(tele);
 	
-	DONE("Teleport exit built");
+	return Done("Teleport exit built");
 }

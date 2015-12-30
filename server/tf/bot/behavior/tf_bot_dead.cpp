@@ -24,29 +24,29 @@ ActionResult<CTFBot> CTFBotDead::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
 	this->m_itTimeSinceDeath.Start();
 	
-	CONTINUE();
+	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotDead::Update(CTFBot *actor, float dt)
 {
 	if (actor->IsAlive()) {
 		// TODO: figure out constructor args for CTFBotMainAction
-		CHANGE_TO(new CTFBotMainAction(/* TODO */), "This should not happen!");
+		return ChangeTo(new CTFBotMainAction(/* TODO */), "This should not happen!");
 	}
 	
 	if (!this->m_itTimeSinceDeath.IsGreaterThen(5.0f)) {
-		CONTINUE();
+		return Continue();
 	}
 	
 	if ((actor->m_nBotAttrs & CTFBot::AttributeType::REMOVEONDEATH) != 0) {
 		// TODO: kickid stuff
-		CONTINUE();
+		return Continue();
 	}
 	
 	if ((actor->m_nBotAttrs & CTFBot::AttributeType::BECOMESPECTATORONDEATH) == 0) {
-		CONTINUE();
+		return Continue();
 	}
 	
 	actor->ChangeTeam(TEAM_SPECTATOR, false, true);
-	DONE();
+	return Done();
 }

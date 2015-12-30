@@ -105,7 +105,7 @@ ActionResult<CTFBot> CTFBotPushToCapturePoint::Update(CTFBot *actor, float dt)
 EventDesiredResult<CTFBot> CTFBotPushToCapturePoint::OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2)
 {
 	if (area1 == nullptr || !area1->HasPrerequisite) {
-		CONTINUE();
+		return Continue();
 	}
 	
 	FOR_EACH_VEC(area1->GetPrerequisiteVector(), i) {
@@ -126,5 +126,5 @@ EventDesiredResult<CTFBot> CTFBotPushToCapturePoint::OnNavAreaChanged(CTFBot *ac
 		}
 	}
 	
-	CONTINUE();
+	return Continue();
 }

@@ -29,7 +29,7 @@ ActionResult<CTFBot> CTFBotMainAction::OnStart(CTFBot *actor, Action<CTFBot> *ac
 	
 	this->m_bReloadingBarrage = false;
 	
-	CONTINUE();
+	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
@@ -37,16 +37,16 @@ ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
 	VPROF_BUDGET("CTFBotMainAction::Update", "NextBot");
 	
 	if (!actor->IsAlive()) {
-		CHANGE_TO(new CTFBotDead(), "I died!");
+		return ChangeTo(new CTFBotDead(), "I died!");
 	}
 	
 	if (actor->GetTeamNumber() != TF_TEAM_BLUE &&
 		actor->GetTeamNumber() != TF_TEAM_RED) {
-		DONE("Not on a playing team");
+		return Done("Not on a playing team");
 	}
 	
 	if (actor->FindPartnerTauntInitiator()) {
-		SUSPEND_FOR(new CTFBotTaunt(), "Responding to teammate partner taunt");
+		return SuspendFor(new CTFBotTaunt(), "Responding to teammate partner taunt");
 	}
 	
 	actor->GetVisionInterface()->SetFieldOfView(actor->GetFOV());
@@ -99,7 +99,7 @@ EventDesiredResult<CTFBot> CTFBotMainAction::OnContact(CTFBot *actor, CBaseEntit
 		}
 	}
 	
-	CONTINUE();
+	return Continue();
 }
 
 EventDesiredResult<CTFBot> CTFBotMainAction::OnStuck(CTFBot *actor)

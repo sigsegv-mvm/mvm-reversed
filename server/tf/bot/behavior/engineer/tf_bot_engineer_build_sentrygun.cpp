@@ -41,5 +41,5 @@ ActionResult<CTFBot> CTFBotEngineerBuildSentryGun::OnResume(CTFBot *actor, Actio
 	this->m_PathFollower.Invalidate();
 	// TODO: CountdownTimer @ 0x58 .Invalidate()
 	
-	CONTINUE();
+	return Continue();
 }

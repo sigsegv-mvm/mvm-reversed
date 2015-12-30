@@ -43,13 +43,13 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::OnStart(CTFBot *actor, Action<CTFBot
 	this->m_bTeleportedToHint         = false;
 	this->m_bTriedToDetonateStaleNest = false;
 	
-	CONTINUE();
+	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 {
 	if (!actor->IsAlive()) {
-		DONE();
+		return Done();
 	}
 	
 	// TODO: slot enum
@@ -61,7 +61,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 	if (this->m_hHintNest() == nullptr || this->ShouldAdvanceNestSpot(actor)) {
 		if (this->m_ctFindNestHint.HasStarted()) {
 			if (!this->m_ctFindNestHint.IsElapsed()) {
-				CONTINUE();
+				return Continue();
 			}
 		}
 		this->m_ctFindNestHint.Start(RandomFloat(1.0f, 2.0f));
@@ -73,7 +73,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 		if (!CTFBotMvMEngineerHintFinder::FindHint(box_check,
 			(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) == 0,
 			&h_nest)) {
-			CONTINUE();
+			return Continue();
 		}
 		
 		CTFBotHintEngineerNest *old_nest = this->m_hHintNest();
@@ -100,7 +100,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 	if (!this->m_bTeleportedToHint &&
 		(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0) {
 		this->m_bTeleportedToHint = true;
-		SUSPEND_FOR(new CTFBotMvMEngineerTeleportSpawn(this->m_hHintNest(),
+		return SuspendFor(new CTFBotMvMEngineerTeleportSpawn(this->m_hHintNest(),
 			++this->m_nTeleportAttempts == 1), "In spawn area - "
 			"teleport to the teleporter hint");
 	}

@@ -188,13 +188,6 @@ EventDesiredResult<T> Sustain(const char *why = nullptr, ResultSeverity level = 
 }
 
 
-#define CONTINUE(...)    return Continue(__VA_ARGS__)
-#define CHANGE_TO(...)   return ChangeTo(__VA_ARGS__)
-#define SUSPEND_FOR(...) return SuspendFor(__VA_ARGS__)
-#define DONE(...)        return Done(__VA_ARGS__)
-#define SUSTAIN(...)     return Sustain(__VA_ARGS__)
-
-
 // most Action event handlers                          return { 0, nullptr, nullptr, 1 }
 // CTFBotMvMDeployBomb::OnContact                      return { 4, nullptr, nullptr, 3 }
 // CTFBotDeliverFlag::OnContact                        return { 2, new CTFBotMvMDeployBomb(), "Delivering the bomb!", 3 }

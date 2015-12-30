@@ -22,12 +22,12 @@ const char *CTFBotSpyEscape::GetName() const
 
 ActionResult<CTFBot> CTFBotSpyEscape::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	CONTINUE();
+	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotSpyEscape::Update(CTFBot *actor, float dt)
 {
-	CONTINUE();
+	return Continue();
 }
 
 
