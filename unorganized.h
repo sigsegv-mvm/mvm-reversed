@@ -1,9 +1,3 @@
-class IPathCost
-{
-public:
-	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const = 0;
-};
-
 class CHeadlessHatmanPathCost : public IPathCost
 {
 	// TODO
@@ -15,53 +9,6 @@ class CMerasmusPathCost : public IPathCost
 };
 
 class CRobotPathCost : public IPathCost
-{
-	// TODO
-};
-
-class CTFBotPathCost : public IPathCost
-{
-public:
-	// TODO: enum RouteType (at base scope, from public server/nav_pathfind.h)
-	
-	CTFBotPathCost(CTFBot *actor, RouteType rtype);
-	~CTFBotPathCost();
-	
-	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const override;
-	
-	// CTFBotPathCost ctor is only in certain versions
-	// (e.g. ServerLinux 20140619a)
-	
-	// ctor is called by:
-	// CTFBotPushToCapturePoint::Update (RouteType=1)
-	// CTFBotDeliverFlag::Update (RouteType=1)
-	
-private:
-	CTFBot *m_Actor;                          // +0x04
-	RouteType m_iRouteType;                   // +0x08
-	float m_flStepHeight;                     // +0x0c
-	float m_flMaxJumpHeight;                  // +0x10
-	float m_flDeathDropHeight;                // +0x14
-	CUtlVector<CBaseObject *> m_EnemyObjects; // +0x18
-};
-
-CTFBotPathCost(CTFBot *actor, RouteType rtype)
-	: m_Actor(actor), m_iRouteType(rtype)
-{
-	this->m_flStepHeight      = actor->GetLocomotionInterface()->GetStepHeight();
-	this->m_flMaxJumpHeight   = actor->GetLocomotionInterface()->GetMaxJumpHeight();
-	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
-	
-	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
-		TheNavMesh->CollectBuiltObjects(&this->m_EnemyObjects,
-			GetEnemyTeam(actor));
-	} else {
-		this->m_EnemyObjects.RemoveAll();
-	}
-}
-
-
-class CTFPlayertPathCost : public IPathCost
 {
 	// TODO
 };

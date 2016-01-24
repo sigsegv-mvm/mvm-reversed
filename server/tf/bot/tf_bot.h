@@ -4,6 +4,33 @@
  */
 
 
+class CTFBotPathCost : public IPathCost
+{
+public:
+	// TODO: enum RouteType (at base scope, from public server/nav_pathfind.h)
+	
+	CTFBotPathCost(CTFBot *actor, RouteType rtype);
+	~CTFBotPathCost();
+	
+	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const override;
+	
+	// CTFBotPathCost ctor is only in certain versions
+	// (e.g. ServerLinux 20140619a)
+	
+	// ctor is called by:
+	// CTFBotPushToCapturePoint::Update (RouteType=1)
+	// CTFBotDeliverFlag::Update (RouteType=1)
+	
+private:
+	CTFBot *m_Actor;                          // +0x04
+	RouteType m_iRouteType;                   // +0x08
+	float m_flStepHeight;                     // +0x0c
+	float m_flMaxJumpHeight;                  // +0x10
+	float m_flDeathDropHeight;                // +0x14
+	CUtlVector<CBaseObject *> m_EnemyObjects; // +0x18
+};
+
+
 class CTFBot : public NextBotPlayer<CTFPlayer>, public CGameEventListener
 {
 public:

@@ -4,6 +4,12 @@
  */
 
 
+class CTFPlayertPathCost : public IPathCost
+{
+	// TODO
+};
+
+
 class CTFPlayer : public CBaseMultiplayerPlayer, public IHasAttributes,
 	public IInventoryUpdateListener
 {

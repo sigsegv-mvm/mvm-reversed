@@ -43,6 +43,22 @@ ConCommand tf_bot_warp_team_to_me("tf_bot_warp_team_to_me", &CMD_BotWarpTeamToMe
 	"", FCVAR_CHEAT | FCVAR_GAMEDLL);
 
 
+CTFBotPathCost(CTFBot *actor, RouteType rtype)
+	: m_Actor(actor), m_iRouteType(rtype)
+{
+	this->m_flStepHeight      = actor->GetLocomotionInterface()->GetStepHeight();
+	this->m_flMaxJumpHeight   = actor->GetLocomotionInterface()->GetMaxJumpHeight();
+	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
+	
+	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
+		TheNavMesh->CollectBuiltObjects(&this->m_EnemyObjects,
+			GetEnemyTeam(actor));
+	} else {
+		this->m_EnemyObjects.RemoveAll();
+	}
+}
+
+
 CTFBot::CTFBotIntention::CTFBotIntention(CTFBot *actor)
 	: IIntention(actor)
 {

@@ -4,6 +4,13 @@
  */
 
 
+class IPathCost
+{
+public:
+	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const = 0;
+};
+
+
 class IPathOpenGoalSelector
 {
 public:
