@@ -297,7 +297,13 @@ template<class T> void Behavior<T>::Update(T *actor, float dt)
 			this->m_strName.m_szBuf, this->m_MainAction->DebugString()))
 	}
 	
-	this->m_Actions.PurgeAndDeleteElements();
+	this->m_DestroyedActions.PurgeAndDeleteElements();
+}
+
+/* inlined except in ClientOSX >= 20160121a */
+template<class T> void Behavior<T>::DestroyAction(Action<T> *action)
+{
+	this->m_DestroyedActions.AddToTail(action);
 }
 
 
@@ -1114,7 +1120,7 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 			result.action->InvokeOnStart(actor, behavior, this, this->m_ActionWeSuspended);
 		
 		if (result.action != this) {
-			behavior->m_Actions.AddToTail(this);
+			behavior->DestroyAction(this);
 		}
 		
 		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
@@ -1206,10 +1212,10 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 				this->m_ActionWeSuspended->PrintStateToConsole();
 			}
 			
-			behavior->m_Actions.AddToTail(this);
+			behavior->DestroyAction(this);
 			return this->m_ActionWeSuspended->ApplyResult(actor, behavior, result2);
 		} else {
-			behavior->m_Actions.AddToTail(this);
+			behavior->DestroyAction(this);
 			return nullptr;
 		}
 	} else {
@@ -1432,9 +1438,7 @@ template<class T> Action<T> *Action<T>::InvokeOnSuspend(T *actor, Behavior<T> *b
 	ActionResult<T> result = this->OnSuspend(actor, action);
 	if (result.transition == ActionTransition::DONE) {
 		this->InvokeOnEnd(actor, behavior, nullptr);
-		
-		this->m_Behavior->AddToTail(this);
-		
+		behavior->DestroyAction(this);
 		return this->m_ActionWeSuspended;
 	} else {
 		return this;
