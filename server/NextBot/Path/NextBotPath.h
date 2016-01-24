@@ -70,6 +70,7 @@ public:
 		
 		SegmentType m_Type;  // +0x18
 		
+		Vector m_vecDirection; // +0x1c
 		// 1c Vector, accessed in Draw, seems to be a unit vector (length == 1.0f) indicating the direction
 		// from the start of the segment to the end of the segment
 		
@@ -85,10 +86,10 @@ public:
 	
 	struct CursorData
 	{
-		// 00 Vector: Segment::m_vecStart
-		// 0c Vector: Segment+1c
-		// 18 float:  Segment+30
-		Segment *m_pSegment; // +0x1c
+		Vector m_vecSegStart;     // +0x00 (Segment::m_vecStart)
+		Vector m_vecSegDirection; // +0x0c (Segment::m_vecDirection)
+		// 18 float: Segment+30
+		Segment *m_pSegment;      // +0x1c
 	};
 	
 	Path();

@@ -34,7 +34,7 @@ public:
 	
 	void CollectAmbushAreas(CUtlVector<CTFNavArea *> *areas, CTFNavArea *area, int i1, float f1, float f2) const;
 	void CollectAreaWithinBombTravelRange(CUtlVector<CTFNavArea *> *areas, float f1, float f2) const;
-	void CollectBuiltObjects(CUtlVector<CBaseObject> *objects, int i1);
+	void CollectBuiltObjects(CUtlVector<CBaseObject *> *objects, int i1);
 	void CollectSpawnRoomThresholdAreas(CUtlVector<CTFNavArea *> *areas, int i1) const;
 	
 	bool IsSentryGunHere(CTFNavArea *area) const;

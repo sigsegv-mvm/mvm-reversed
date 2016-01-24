@@ -35,16 +35,16 @@ private:
 	CUtlVectorAutoPurge<Action<T> *> m_DestroyedActions; // +0x3c
 };
 
-template<> class Behavior<CBotNPCArcher>;
-template<> class Behavior<CBotNPCDecoy>;
-template<> class Behavior<CEyeballBoss>;
-template<> class Behavior<CGhost>;
-template<> class Behavior<CHeadlessHatman>;
-template<> class Behavior<CMerasmus>;
-template<> class Behavior<CSimpleBot>;
-template<> class Behavior<CTFBot>;
-template<> class Behavior<CTFRobotDestruction_Robot>;
-template<> class Behavior<CZombie>;
+//template<> class Behavior<CBotNPCArcher>;
+//template<> class Behavior<CBotNPCDecoy>;
+//template<> class Behavior<CEyeballBoss>;
+//template<> class Behavior<CGhost>;
+//template<> class Behavior<CHeadlessHatman>;
+//template<> class Behavior<CMerasmus>;
+//template<> class Behavior<CSimpleBot>;
+//template<> class Behavior<CTFBot>;
+//template<> class Behavior<CTFRobotDestruction_Robot>;
+//template<> class Behavior<CZombie>;
 
 
 enum class ActionTransition : int
@@ -60,6 +60,7 @@ enum class ActionTransition : int
 enum class ResultSeverity : int
 {
 	/* this is 100% guesswork */
+	ZERO     = 0,
 	LOW      = 1,
 	MEDIUM   = 2,
 	CRITICAL = 3,
@@ -72,6 +73,51 @@ struct ActionResult
 	ActionTransition transition;
 	Action<T> *action;
 	const char *reason;
+	
+	static ActionResult<T> Continue()
+	{
+		return {
+			ActionTransition::CONTINUE,
+			nullptr,
+			nullptr,
+		};
+	}
+	
+	static ActionResult<T> ChangeTo(Action<T> *next, const char *why = nullptr)
+	{
+		return {
+			ActionTransition::CHANGE_TO,
+			next,
+			why,
+		};
+	}
+	
+	static ActionResult<T> SuspendFor(Action<T> *next, const char *why = nullptr)
+	{
+		return {
+			ActionTransition::SUSPEND_FOR,
+			next,
+			why,
+		};
+	}
+	
+	static ActionResult<T> Done(const char *why = nullptr)
+	{
+		return {
+			ActionTransition::DONE,
+			nullptr,
+			why,
+		};
+	}
+	
+	static ActionResult<T> Sustain(const char *why = nullptr)
+	{
+		return {
+			ActionTransition::SUSTAIN,
+			nullptr,
+			why,
+		};
+	}
 };
 
 
@@ -79,114 +125,57 @@ template<class T>
 struct EventDesiredResult : public ActionResult<T>
 {
 	ResultSeverity severity;
+	
+	static EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			ActionTransition::CONTINUE,
+			nullptr,
+			nullptr,
+			level,
+		};
+	}
+	
+	static EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			ActionTransition::CHANGE_TO,
+			next,
+			why,
+			level,
+		};
+	}
+	
+	static EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			ActionTransition::SUSPEND_FOR,
+			next,
+			why,
+			level,
+		};
+	}
+	
+	static EventDesiredResult<T> Done(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			ActionTransition::DONE,
+			nullptr,
+			why,
+			level,
+		};
+	}
+	
+	static EventDesiredResult<T> Sustain(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
+	{
+		return {
+			ActionTransition::SUSTAIN,
+			nullptr,
+			why,
+			level,
+		};
+	}
 };
-
-
-template<class T>
-ActionResult<T> Continue()
-{
-	return {
-		.transition = ActionTransition::CONTINUE,
-		.action     = nullptr,
-		.reason     = nullptr,
-	};
-}
-
-template<class T>
-ActionResult<T> ChangeTo(Action<T> *next, const char *why = nullptr)
-{
-	return {
-		.transition = ActionTransition::CHANGE_TO,
-		.action     = next,
-		.reason     = why,
-	};
-}
-
-template<class T>
-ActionResult<T> SuspendFor(Action<T> *next, const char *why = nullptr)
-{
-	return {
-		.transition = ActionTransition::SUSPEND_FOR,
-		.action     = next,
-		.reason     = why,
-	};
-}
-
-template<class T>
-ActionResult<T> Done(const char *why = nullptr)
-{
-	return {
-		.transition = ActionTransition::DONE,
-		.action     = nullptr,
-		.reason     = why,
-	};
-}
-
-template<class T>
-ActionResult<T> Sustain(const char *why = nullptr)
-{
-	return {
-		.transition = ActionTransition::SUSTAIN,
-		.action     = nullptr,
-		.reason     = why,
-	};
-}
-
-
-template<class T>
-EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
-{
-	return {
-		.transition = ActionTransition::CONTINUE,
-		.action     = nullptr,
-		.reason     = nullptr,
-		.severity   = level,
-	};
-}
-
-template<class T>
-EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
-{
-	return {
-		.transition = ActionTransition::CHANGE_TO,
-		.action     = next,
-		.reason     = why,
-		.severity   = level,
-	};
-}
-
-template<class T>
-EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
-{
-	return {
-		.transition = ActionTransition::SUSPEND_FOR,
-		.action     = next,
-		.reason     = why,
-		.severity   = level,
-	};
-}
-
-template<class T>
-EventDesiredResult<T> Done(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
-{
-	return {
-		.transition = ActionTransition::DONE,
-		.action     = nullptr,
-		.reason     = why,
-		.severity   = level,
-	};
-}
-
-template<class T>
-EventDesiredResult<T> Sustain(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
-{
-	return {
-		.transition = ActionTransition::SUSTAIN,
-		.action     = nullptr,
-		.reason     = why,
-		.severity   = level,
-	};
-}
 
 
 // most Action event handlers                          return { 0, nullptr, nullptr, 1 }
@@ -395,13 +384,13 @@ private:
 	bool m_bSuspended;              // +0x31
 };
 
-template<> class Action<CBotNPCArcher>;
-template<> class Action<CBotNPCDecoy>;
-template<> class Action<CEyeballBoss>;
-template<> class Action<CGhost>;
-template<> class Action<CHeadlessHatman>;
-template<> class Action<CMerasmus>;
-template<> class Action<CSimpleBot>;
-template<> class Action<CTFBot>;
-template<> class Action<CTFRobotDestruction_Robot>;
-template<> class Action<CZombie>;
+//template<> class Action<CBotNPCArcher>;
+//template<> class Action<CBotNPCDecoy>;
+//template<> class Action<CEyeballBoss>;
+//template<> class Action<CGhost>;
+//template<> class Action<CHeadlessHatman>;
+//template<> class Action<CMerasmus>;
+//template<> class Action<CSimpleBot>;
+//template<> class Action<CTFBot>;
+//template<> class Action<CTFRobotDestruction_Robot>;
+//template<> class Action<CZombie>;

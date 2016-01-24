@@ -29,7 +29,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 	this->m_bDetReachedGoal   = false;
 	this->m_bDetLostAllHealth = false;
 	
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange);
+	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	this->m_ctDetonation->Invalidate();
 	this->m_nConsecutivePathFailures = 0;
