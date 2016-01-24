@@ -307,9 +307,18 @@ private:
 	  // 0x24c4: CTFPlayerShared: CEconItemView
 	// 0x26ec: CTFPlayer: CTFPlayerClass
 	
-	// 0x2834: CTFPlayer: byte  true for mission-populator-spawned bots
+	enum DeployBombState : int
+	{
+		// 0 initial
+		// 1 ?
+		// 2 ?
+		// 3 ?
+	}
+	DeployBombState m_iDeployBombState; // +0x2830
+	
+	// 0x2834: CTFPlayer: byte, true for mission-populator-spawned bots
 	// (causes no money to drop, and determines when decrementing the wave class count whether flag 1 or 4 should be set)
-	// 0x2836: CTFPlayer: byte  true for "Support Limited" bots
+	// 0x2836: CTFPlayer: byte, true for "Support Limited" bots
 	// 0x2838: CTFPlayer: int m_nCurrency
 	// 0x2840: CTFPlayer: int m_nExperienceLevel
 	// 0x2844: CTFPlayer: int m_nExperienceLevelProgress

@@ -23,8 +23,6 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// 34 CountdownTimer
-	// 40 
-	// 44 
-	// 48 
+	CountdownTimer m_ctDelay; // +0x34
+	// 40 Vector
 };
