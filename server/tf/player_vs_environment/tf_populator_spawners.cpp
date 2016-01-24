@@ -493,6 +493,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 		
 		// TODO bot offset 0x9c0 byte = 0
 		
+		/* this is where CTFPlayer::Spawn is ultimately called */
 		bot->HandleCommand_JoinClass(GetPlayerClassData(this->m_iClass)->m_szClassName);
 		
 		bot->GetPlayerClass()->m_iszClassIcon = STRING(this->GetClassIcon(-1));

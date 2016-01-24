@@ -238,6 +238,8 @@ public:
 	bool IsLineOfFireClear(const Vector& from, CBaseEntity *to) const;
 	bool IsLineOfFireClear(const Vector& from, const Vector& to) const;
 	
+	CCaptureFlag *GetFlagToFetch();
+	
 	// AddItem
 	
 	// IsAttentionFocused
