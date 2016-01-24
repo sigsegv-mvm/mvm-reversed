@@ -314,6 +314,7 @@ private:
 	// 0x2840: CTFPlayer: int m_nExperienceLevel
 	// 0x2844: CTFPlayer: int m_nExperienceLevelProgress
 	// 0x284c: CTFPlayer: dword, probably CWaveSpawnPopulator*
+	// 0x2890: CTFPlayer: IntervalTimer m_itCalledForMedic
 	// 0x2894: CTFPlayer: CountdownTimer m_ctSapNotice
 	// 0x2920: CTFPlayer: float m_flSentryDamage
 	// 0x2924: CTFPlayer: int   m_nSentryKills
