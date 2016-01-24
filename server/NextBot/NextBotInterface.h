@@ -96,19 +96,19 @@ public:
 protected:
 	void UpdateImmobileStatus();
 	
-	INextBotComponent *m_ComponentList; // +0x04
-	PathFollower *m_CurrentPath;        // +0x08
-	// 0c int, default -1, from NextBotManager::Register
-	// 10 byte
-	// 14 dword -999
-	// 18 
-	int m_iDebugTextOffset;             // +0x1c
-	Vector m_vecLastPosition;           // +0x20
-	CountdownTimer m_ctImmobileCheck;   // +0x2c
-	IntervalTimer m_itImmobileEpoch;    // +0x38
-	ILocomotion *m_LocoInterface;       // +0x3c
-	IBody *m_BodyInterface;             // +0x40
-	IIntention *m_IntentionInterface;   // +0x44
-	IVision *m_VisionInterface;         // +0x48
-	// 4c CUtlVector<NextBotDebugLineType *>
+	INextBotComponent *m_ComponentList;              // +0x04
+	PathFollower *m_CurrentPath;                     // +0x08
+	int m_iManagerIndex;                             // +0x0c
+	uint8_t m_Byte10;                                // +0x10
+	int m_Int14;                                     // +0x14
+	int m_Dword18;                                   // +0x18 (reset to 0 in INextBot::Reset)
+	int m_iDebugTextOffset;                          // +0x1c
+	Vector m_vecLastPosition;                        // +0x20
+	CountdownTimer m_ctImmobileCheck;                // +0x2c
+	IntervalTimer m_itImmobileEpoch;                 // +0x38
+	ILocomotion *m_LocoInterface;                    // +0x3c
+	IBody *m_BodyInterface;                          // +0x40
+	IIntention *m_IntentionInterface;                // +0x44
+	IVision *m_VisionInterface;                      // +0x48
+	CUtlVector<NextBotDebugLineType *> m_DebugLines; // +0x4c
 };
