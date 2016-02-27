@@ -23,15 +23,15 @@ const char *CTFBotUseItem::GetName() const
 
 ActionResult<CTFBot> CTFBotUseItem::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	actor->PushRequiredWeapon(this->m_hItem());
-	this->m_ctInitialDelay.Start(0.25f + (this->m_hItem()->m_flNextPrimaryAttack));
+	actor->PushRequiredWeapon(this->m_hItem);
+	this->m_ctInitialDelay.Start(0.25f + (this->m_hItem->m_flNextPrimaryAttack - gpGlobals->curtime));
 	
 	return Continue();
 }
 
 ActionResult<CTFBot> CTFBotUseItem::Update(CTFBot *actor, float dt)
 {
-	if (this->m_hItem() == nullptr ||
+	if (this->m_hItem == nullptr ||
 		actor->m_Shared.GetActiveTFWeapon() == nullptr) {
 		return Done("NULL item");
 	}
