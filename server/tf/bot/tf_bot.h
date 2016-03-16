@@ -12,7 +12,7 @@ public:
 	CTFBotPathCost(CTFBot *actor, RouteType rtype);
 	~CTFBotPathCost();
 	
-	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const override;
+	virtual float operator()(CNavArea *area, CNavArea *fromArea, const CNavLadder *ladder, const CFuncElevator *elevator, float length) const override;
 	
 	// CTFBotPathCost ctor is only in certain versions
 	// (e.g. ServerLinux 20140619a)

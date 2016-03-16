@@ -58,6 +58,110 @@ CTFBotPathCost::CTFBotPathCost(CTFBot *actor, RouteType rtype)
 	}
 }
 
+float CTFBotPathCost::operator()(CNavArea *area, CNavArea *fromArea, const CNavLadder *ladder, const CFuncElevator *elevator, float length) const
+{
+	VPROF_BUDGET("CTFBotPathCost::operator()", "NextBot");
+	
+	CTFNavArea *tfArea = static_cast<CTFNavArea *>(area);
+	
+	if (fromArea == nullptr) {
+		/* first area in path; zero cost */
+		return 0.0f;
+	}
+	
+	if (!this->m_Actor->GetLocomotionInterface()->IsAreaTraversable(area)) {
+		/* dead end */
+		return -1.0f;
+	}
+	
+	if (TFGameRules()->IsInTraining() && tfArea->HasTFAttributes(CONTROL_POINT) && !this->m_Actor->IsAnyPointBeingCaptured() && !this->m_Actor->IsPlayClass(TF_CLASS_ENGINEER)) {
+		/* dead end */
+		return -1.0f;
+	}
+	
+	if ((this->m_Actor->GetTeamNumber() == TF_TEAM_RED && tfArea->HasTFAttributes(BLUE_SPAWN_ROOM)) ||
+		(this->m_Actor->GetTeamNumber() == TF_TEAM_BLUE && tfArea->HasTFAttributes(RED_SPAWN_ROOM))) {
+		if (TeamplayRoundBasedRules()->State_Get() != GR_STATE_TEAM_WIN) {
+			/* dead end */
+			return -1.0f;
+		}
+	}
+	
+	float dist;
+	if (ladder != nullptr) {
+		dist = ladder->m_length;
+	} else if (length != 0.0f) {
+		dist = length;
+	} else {
+		dist = (area->GetCenter() - fromArea->GetCenter()).Length();
+	}
+	
+	float delta_z = fromArea->ComputeAdjacentConnectionHeightChange(area);
+	if (delta_z >= this->m_flStepHeight) {
+		if (delta_z >= this->m_flMaxJumpHeight) {
+			return -1.0f;
+		}
+		
+		/* x2 distance penalty for going up steps */
+		dist *= 2;
+	} else {
+		if (delta_z < -this->m_flDeathDropHeight) {
+			return -1.0f;
+		}
+	}
+	
+	float multiplier = 1.0f;
+	
+	if (this->m_iRouteType == DEFAULT_ROUTE) {
+		if (!this->m_Actor->IsMiniBoss()) {
+			/* very similar to CTFBot::TransientlyConsistentRandomValue */
+			int seed = (int)(gpGlobals->curtime * 0.1f) + 1;
+			seed *= area->GetID();
+			seed *= ENTINDEX(this);
+			
+			/* huge random cost modifier [0, 100] for non-giant bots! */
+			multiplier += (pfFastCos((float)seed) + 1.0f) * 50.0f;
+		}
+	}
+	
+	if (this->m_iRouteType == SAFEST_ROUTE) {
+		if (tfArea->IsInCombat()) {
+			dist *= 4.0f * tfArea->GetCombatIntensity();
+		}
+		
+		if ((this->m_Actor->GetTeamNumber() == TF_TEAM_RED && tfArea->HasTFAttributes(BLUE_SENTRY)) ||
+			(this->m_Actor->GetTeamNumber() == TF_TEAM_BLUE && tfArea->HasTFAttributes(RED_SENTRY))) {
+			dist *= 5.0f;
+		}
+	}
+	
+	/* BUG: why are we not using the list of objects we collected in the ctor? */
+	if (this->m_Actor->IsPlayerClass(TF_CLASS_SPY)) {
+		int enemy_team = GetEnemyTeam(this->m_Actor);
+		
+		for (int i = 0; i < IBaseObjectAutoList::AutoList().Count(); ++i) {
+			CBaseObject *obj = static_cast<CBaseObject *>(IBaseObjectAutoList::AutoList()[i]);
+			
+			if (obj->GetType() == OBJ_SENTRYGUN && obj->GetTeamNumber() == enemy_team) {
+				obj->UpdateLastKnownArea();
+				if (area == obj->GetLastKnownArea()) {
+					dist *= 10.0f;
+				}
+			}
+		}
+		
+		dist += (dist * 10.0f * area->GetPlayerCount(this->m_Actor->GetTeamNumber()));
+	}
+	
+	float cost = dist * multiplier;
+	
+	if (area->HasAttributes(NAV_MESH_FUNC_COST)) {
+		cost *= area->ComputeFuncNavCost(this->m_Actor);
+	}
+	
+	return fromArea->GetCostSoFar() + cost;
+}
+
 
 CTFBot::CTFBotIntention::CTFBotIntention(CTFBot *actor)
 	: IIntention(actor)
