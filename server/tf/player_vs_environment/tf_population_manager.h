@@ -6,8 +6,15 @@
 
 // TODO: class/struct CMvMBotUpgrade (sizeof: 0x54 probably)
 // (which file does this belong in? is it shared with the client?)
-// TODO: class/struct CUpgradeInfo (sizeof: 0x20 probably)
-// (which file does this belong in? is it shared with the client?)
+
+// TODO: which file does this belong in? is it shared with the client?
+struct CUpgradeInfo
+{
+	// 00 int, tf2 class index
+	// 04 short, item def index
+	// 08 int, upgrade tier
+	// 0c int, upgrade cost
+};
 
 
 class CPopulationManager : public CPointEntity, public CGameEventListener
@@ -15,17 +22,16 @@ class CPopulationManager : public CPointEntity, public CGameEventListener
 public:
 	struct PlayerUpgradeHistory
 	{
-		// sizeof: 0x20
-		// has a CUtlVector<CUpgradeInfo> @ 0x8 I think
-		// has an int @ 0x1c which is returned by GetPlayerCurrencySpent
+		// 00 uint64_t steamid
+		// 08 CUtlVector<CUpgradeInfo>
+		// 1c int, returned by GetPlayerCurrencySpent
 	};
 	
 	struct CheckpointSnapshotInfo
 	{
-		// TODO
-		// sizeof: at least 0x1c
-		
-		// see: static var init for CPopulationManager::m_checkpointSnapshot
+		// 00 CSteamID
+		// 08 int, same as PlayerUpgradeHistory+0x1c
+		// 0c CUtlVector<CUpgradeInfo>
 	};
 	
 	CPopulationManager();
@@ -148,7 +154,7 @@ private:
 	// 6b8 
 	// 6bc CUtlVector<const CTFPlayer *> (used in PlayerDoneViewingLoot)
 	// 6d0 CUtlString, set to "Default" in reset, almost undoubtably the current eventchangeattributes set name
-	// 6d4 CUtlRBTree<CUtlMap<unsigned long long, int, unsigned short>::Node_t, ...> (don't know size of this), seems to store number of respec credits for each player
+	// 6d4 CUtlMap<uint64_t, int>, to store number of respec credits for each player
 	// 6d8 ptr to something of size 0x294
 	// 6dc 
 	// 6e0 
