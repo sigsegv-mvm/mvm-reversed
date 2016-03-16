@@ -110,3 +110,63 @@ private:
 	CNetworkVarEmbedded(CAttributeList, m_NetworkedDynamicAttributesForDemos); // +0x8c
 	CNetworkVar(bool,           m_bOnlyIterateItemViewAttributes); // +0xa8
 };
+
+
+
+
+
+// C_EconItemView @ osx client 20151223
+
+
+// sizeof: 0xe0
+class C_EconItemView
+{
+	// 00 vtable1
+	// 04 vtable2 CDefaultClientRenderable
+	// 08 
+	// 0c vtable3 CMaterialOverrideContainer<IEconItemInterface>
+	// 10 CMaterialReference
+	// 14 CMaterialReference
+	// 18 CMaterialReference
+	// 1c CMaterialReference
+	// 20 m_iItemDefinitionIndex
+	// 24 
+	// 28 m_iItemLevel
+	// 2c 
+	// 30 
+	// 34 m_iItemIDHigh
+	// 38 m_iItemIDLow
+	// 3c m_iAccountID
+	// 40 
+	// 44 CEconItemHandle
+	
+	// 94 dword
+	// 98 byte
+	// 
+	
+	// a4 m_AttributeList
+	// c0 m_NetworkedDynamicAttributesForDemos
+	// dc byte
+};
+
+
+// sizeof: 0x28
+struct Something
+{
+	// 00 dword
+	// 04 dword
+	// 08 dword
+	// 0c dword
+	// 10 dword
+	// 14 dword
+	// 18 byte
+	// 1c dword CHandle<T>?
+	// 20 dword CHandle<T>?
+	// 24 dword CHandle<T>?
+};
+// @ CHudUpgradePanel+0x1e0
+// @ CHudUpgradePanel+0x208
+// @ CHudUpgradePanel+0x230
+// @ CHudUpgradePanel+0x258
+// @ CHudUpgradePanel+0x280
+// @ CHudUpgradePanel+0x2a8
