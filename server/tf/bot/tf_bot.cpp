@@ -43,7 +43,7 @@ ConCommand tf_bot_warp_team_to_me("tf_bot_warp_team_to_me", &CMD_BotWarpTeamToMe
 	"", FCVAR_CHEAT | FCVAR_GAMEDLL);
 
 
-CTFBotPathCost(CTFBot *actor, RouteType rtype)
+CTFBotPathCost::CTFBotPathCost(CTFBot *actor, RouteType rtype)
 	: m_Actor(actor), m_iRouteType(rtype)
 {
 	this->m_flStepHeight      = actor->GetLocomotionInterface()->GetStepHeight();

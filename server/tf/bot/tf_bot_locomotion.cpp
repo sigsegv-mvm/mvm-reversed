@@ -85,7 +85,7 @@ float CTFBotLocomotion::GetRunSpeed() const
 
 bool CTFBotLocomotion::IsAreaTraversable(const CNavArea *area) const
 {
-	CBaseEntity *actor = this->GetBot()->GetEntity();
+	CBaseCombatCharacter *actor = this->GetBot()->GetEntity();
 	
 	if (area->IsBlocked(actor->GetTeamNumber())) {
 		return false;

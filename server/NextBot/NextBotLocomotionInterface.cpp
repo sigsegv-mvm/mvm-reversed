@@ -423,3 +423,12 @@ void ILocomotion::StuckMonitor()
 		}
 	}
 }
+
+
+void ILocomotion::TraceHull(const Vector& start, const Vector& end, const Vector& mins, const Vector& maxs, unsigned int mask, ITraceFilter *filter, CGameTrace *trace)
+{
+	Ray_t ray;
+	ray.Init(start + maxs, end + maxs, mins, maxs);
+	
+	enginetrace->TraceRay(ray, mask, filter, trace);
+}

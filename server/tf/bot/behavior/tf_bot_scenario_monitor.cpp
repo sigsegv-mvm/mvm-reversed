@@ -186,7 +186,7 @@ Action<CTFBot> *CTFBotScenarioMonitor::DesiredScenarioAndClassAction(CTFBot *act
 			return new CTFBotDefendPoint(/* TODO */);
 		}
 		
-		DefMsg("%3.2f: %s: Gametype is CP, but I can't find a point to capture or defend!\n",
+		DevMsg("%3.2f: %s: Gametype is CP, but I can't find a point to capture or defend!\n",
 			gpGlobals->curtime, actor->GetDebugIdentifier());
 		return new CTFBotCapturePoint();
 	}

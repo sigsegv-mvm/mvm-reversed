@@ -346,7 +346,7 @@ void CTFBotVision::UpdatePotentiallyVisibleNPCVector()
 	
 	bool ignore_teleporters = false;
 	if (TFGameRules()->IsMannVsMachineMode()) {
-		CBaseEntity *actor = this->GetBot()->GetEntity();
+		CBaseCombatCharacter *actor = this->GetBot()->GetEntity();
 		ignore_teleporters = (actor->GetTeamNumber() == TF_TEAM_BLUE);
 	}
 	
@@ -364,7 +364,7 @@ void CTFBotVision::UpdatePotentiallyVisibleNPCVector()
 	TheNextBots()->CollectAllBots(&nextbots);
 	
 	FOR_EACH_VEC(nextbots, i) {
-		CBaseEntity *ent = nextbots[i]->GetEntity();
+		CBaseCombatCharacter *ent = nextbots[i]->GetEntity();
 		if (ent != nullptr && !ent->IsPlayer()) {
 			this->m_PVNPCs.AddToTail(ent);
 		}

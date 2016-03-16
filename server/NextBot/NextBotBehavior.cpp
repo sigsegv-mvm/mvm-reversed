@@ -22,15 +22,10 @@ template<class T> Behavior<T>::~Behavior()
 			this->m_Actor = nullptr;
 		}
 		
-		Action<T> *action = this->m_MainAction->m_ActionWeSuspended;
-		if (action != nullptr) {
-			while (action->m_ActionWeSuspended != nullptr) {
-				action = action->m_ActionWeSuspended;
-			}
-		} else {
-			action = this->m_MainAction;
+		Action<T> *action = this->m_MainAction;
+		while (action->m_ActionWeSuspended != nullptr) {
+			action = action->m_ActionWeSuspended;
 		}
-		
 		delete action;
 	}
 }

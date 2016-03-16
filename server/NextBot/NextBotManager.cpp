@@ -39,6 +39,9 @@ static int g_nSlid = 0;
 static int g_nRun = 0;
 
 
+NextBotManager *NextBotManager::sInstance = nullptr;
+
+
 NextBotManager *TheNextBots()
 {
 	static NextBotManager manager;

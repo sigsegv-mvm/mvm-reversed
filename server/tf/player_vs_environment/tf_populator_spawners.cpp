@@ -788,7 +788,7 @@ bool CRandomChoiceSpawner::IsVarious()
 
 int IPopulationSpawner::GetClass(int index)
 {
-	return 0;
+	return TF_CLASS_UNDEFINED;
 }
 
 int CTFBotSpawner::GetClass(int index)
@@ -799,7 +799,7 @@ int CTFBotSpawner::GetClass(int index)
 int CSquadSpawner::GetClass(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return TF_CLASS_UNDEFINED;
+		return IPopulationSpawner::GetClass(index);
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -816,12 +816,12 @@ int CSquadSpawner::GetClass(int index)
 int CRandomChoiceSpawner::GetClass(int index)
 {
 	if (index < 0) {
-		return TF_CLASS_UNDEFINED;
+		return IPopulationSpawner::GetClass(index);
 	}
 	
 	this->GenerateRandomIndexes(index);
 	
-	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	IPopulationSpawner *spawner = this->m_SubSpawners[this->m_Indexes[index]];
 	if (!spawner->IsVarious()) {
 		return spawner->GetClass(-1);
 	} else {
@@ -853,7 +853,7 @@ string_t CTFBotSpawner::GetClassIcon(int index)
 string_t CSquadSpawner::GetClassIcon(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return NULL_STRING;
+		return IPopulationSpawner::GetClassIcon(index);
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -870,12 +870,12 @@ string_t CSquadSpawner::GetClassIcon(int index)
 string_t CRandomChoiceSpawner::GetClassIcon(int index)
 {
 	if (index < 0) {
-		return NULL_STRING;
+		return IPopulationSpawner::GetClassIcon(index);
 	}
 	
 	this->GenerateRandomIndexes(index);
 	
-	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	IPopulationSpawner *spawner = this->m_SubSpawners[this->m_Indexes[index]];
 	if (!spawner->IsVarious()) {
 		return spawner->GetClassIcon(-1);
 	} else {
@@ -903,7 +903,7 @@ int CTFBotSpawner::GetHealth(int index)
 int CSquadSpawner::GetHealth(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return 0;
+		return IPopulationSpawner::GetHealth(index);
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -920,12 +920,12 @@ int CSquadSpawner::GetHealth(int index)
 int CRandomChoiceSpawner::GetHealth(int index)
 {
 	if (index < 0) {
-		return 0;
+		return IPopulationSpawner::GetHealth(index);
 	}
 	
 	this->GenerateRandomIndexes(index);
 	
-	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	IPopulationSpawner *spawner = this->m_SubSpawners[this->m_Indexes[index]];
 	if (!spawner->IsVarious()) {
 		return spawner->GetHealth(-1);
 	} else {
@@ -953,7 +953,7 @@ bool CTFBotSpawner::IsMiniBoss(int index)
 bool CSquadSpawner::IsMiniBoss(int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return false;
+		return IPopulationSpawner::IsMiniBoss(index);
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -970,12 +970,12 @@ bool CSquadSpawner::IsMiniBoss(int index)
 bool CRandomChoiceSpawner::IsMiniBoss(int index)
 {
 	if (index < 0) {
-		return false;
+		return IPopulationSpawner::IsMiniBoss(index);
 	}
 	
 	this->GenerateRandomIndexes(index);
 	
-	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	IPopulationSpawner *spawner = this->m_SubSpawners[this->m_Indexes[index]];
 	if (!spawner->IsVarious()) {
 		return spawner->IsMiniBoss(-1);
 	} else {
@@ -998,7 +998,7 @@ bool CTFBotSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 bool CSquadSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 {
 	if (index < 0 || this->m_SubSpawners.IsEmpty()) {
-		return false;
+		return IPopulationSpawner::HasAttribute(attr, index);
 	}
 	
 	index %= this->m_SubSpawners.Count();
@@ -1016,12 +1016,12 @@ bool CSquadSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 bool CRandomChoiceSpawner::HasAttribute(CTFBot::AttributeType attr, int index)
 {
 	if (index < 0) {
-		return false;
+		return IPopulationSpawner::HasAttribute(attr, index);
 	}
 	
 	this->GenerateRandomIndexes(index);
 	
-	IPopulationSpawner *spawner = this->m_SubSpawners[index];
+	IPopulationSpawner *spawner = this->m_SubSpawners[this->m_Indexes[index]];
 	if (!spawner->IsVarious()) {
 		/* likely bug: passing index thru to the sub-spawner (rather than -1) */
 		return spawner->HasAttribute(attr, index);
@@ -1177,7 +1177,7 @@ bool CTFBotSpawner::ParseEventChangeAttributes(KeyValues *kv)
 }
 
 
-void CRandomChoiceSpawner::GenerateRandomIndexes(int index)
+int CRandomChoiceSpawner::GenerateRandomIndexes(int index)
 {
 	/* ensure that m_Indexes has been random generated at least enough so that
 	 * an access to m_Indexes[index] can succeed */

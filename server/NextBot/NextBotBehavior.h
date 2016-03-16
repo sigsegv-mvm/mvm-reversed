@@ -70,53 +70,57 @@ enum class ResultSeverity : int
 template<class T>
 struct ActionResult
 {
+	ActionResult() = default;
+	ActionResult(ActionTransition transition, Action<T> *action, const char *reason) :
+		transition(transition), action(action), reason(reason) {}
+	
 	ActionTransition transition;
 	Action<T> *action;
 	const char *reason;
 	
 	static ActionResult<T> Continue()
 	{
-		return {
+		return ActionResult<T>(
 			ActionTransition::CONTINUE,
 			nullptr,
-			nullptr,
-		};
+			nullptr
+		);
 	}
 	
 	static ActionResult<T> ChangeTo(Action<T> *next, const char *why = nullptr)
 	{
-		return {
+		return ActionResult<T>(
 			ActionTransition::CHANGE_TO,
 			next,
-			why,
-		};
+			why
+		);
 	}
 	
 	static ActionResult<T> SuspendFor(Action<T> *next, const char *why = nullptr)
 	{
-		return {
+		return ActionResult<T>(
 			ActionTransition::SUSPEND_FOR,
 			next,
-			why,
-		};
+			why
+		);
 	}
 	
 	static ActionResult<T> Done(const char *why = nullptr)
 	{
-		return {
+		return ActionResult<T>(
 			ActionTransition::DONE,
 			nullptr,
-			why,
-		};
+			why
+		);
 	}
 	
 	static ActionResult<T> Sustain(const char *why = nullptr)
 	{
-		return {
+		return ActionResult<T>(
 			ActionTransition::SUSTAIN,
 			nullptr,
-			why,
-		};
+			why
+		);
 	}
 };
 
@@ -124,56 +128,60 @@ struct ActionResult
 template<class T>
 struct EventDesiredResult : public ActionResult<T>
 {
+	EventDesiredResult() = default;
+	EventDesiredResult(ActionTransition transition, Action<T> *action, const char *reason, ResultSeverity severity) :
+		ActionResult<T>(transition, action, reason), severity(severity) {}
+	
 	ResultSeverity severity;
 	
 	static EventDesiredResult<T> Continue(ResultSeverity level = ResultSeverity::LOW)
 	{
-		return {
+		return EventDesiredResult<T>(
 			ActionTransition::CONTINUE,
 			nullptr,
 			nullptr,
-			level,
-		};
+			level
+		);
 	}
 	
 	static EventDesiredResult<T> ChangeTo(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
 	{
-		return {
+		return EventDesiredResult<T>(
 			ActionTransition::CHANGE_TO,
 			next,
 			why,
-			level,
-		};
+			level
+		);
 	}
 	
 	static EventDesiredResult<T> SuspendFor(Action<T> *next, const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
 	{
-		return {
+		return EventDesiredResult<T>(
 			ActionTransition::SUSPEND_FOR,
 			next,
 			why,
-			level,
-		};
+			level
+		);
 	}
 	
 	static EventDesiredResult<T> Done(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
 	{
-		return {
+		return EventDesiredResult<T>(
 			ActionTransition::DONE,
 			nullptr,
 			why,
-			level,
-		};
+			level
+		);
 	}
 	
 	static EventDesiredResult<T> Sustain(const char *why = nullptr, ResultSeverity level = ResultSeverity::LOW)
 	{
-		return {
+		return EventDesiredResult<T>(
 			ActionTransition::SUSTAIN,
 			nullptr,
 			why,
-			level,
-		};
+			level
+		);
 	}
 };
 
@@ -354,6 +362,7 @@ public:
 	virtual bool IsAbleToBlockMovementOf(const INextBot *nextbot) const;
 	
 protected:
+	Behavior<T> *GetBehavior() const;
 	T *GetActor() const;
 	
 private:
@@ -382,6 +391,8 @@ private:
 	EventDesiredResult<T> m_Result; // +0x20
 	bool m_bStarted;                // +0x30
 	bool m_bSuspended;              // +0x31
+	
+	template<class U> friend class IHotplugAction;
 };
 
 //template<> class Action<CBotNPCArcher>;

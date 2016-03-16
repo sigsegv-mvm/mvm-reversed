@@ -229,7 +229,7 @@ void Path::MoveCursorToEnd()
 
 void Path::MoveCursor(float dist, MoveCursorType mctype)
 {
-	if (mctype == MoveCursorType::RELATIVE) {
+	if (mctype == MoveCursorType::REL) {
 		dist += this->m_flCursorPosition;
 	}
 	
@@ -385,7 +385,7 @@ void Path::DrawInterpolated(float from, float to)
 	do {
 		dist += NextBotPathDrawIncrement.GetFloat();
 		
-		this->MoveCursor(dist, MoveCursorType::ABSOLUTE);
+		this->MoveCursor(dist, MoveCursorType::ABS);
 		const CursorData *cur_data = this->GetCursorData();
 		
 		// TODO: better name for this, plus name for field_18
@@ -477,7 +477,7 @@ bool Path::ComputeWithOpenGoal(INextBot *nextbot, const IPathCost& cost_func, co
 	
 	int nb_teamnum = nextbot->GetEntity()->GetTeamNumber();
 	
-	CNavArea *nb_area = static_cast<CBaseCombatCharacter *>(nextbot->GetEntity())->GetLastKnownArea();
+	CNavArea *nb_area = nextbot->GetEntity()->GetLastKnownArea();
 	if (nb_area == nullptr) {
 		return false;
 	}
@@ -573,6 +573,26 @@ void Path::InsertSegment(Segment seg, int index)
 template<class PathCost> bool Path::Compute(INextBot *nextbot, const Vector& vec, PathCost& cost_func, float maxPathLength, bool b1)
 {
 	VPROF_BUDGET("Path::Compute(goal)", "NextBotSpiky");
+	
+	this->Invalidate();
+	
+	Vector& pos = nextbot->GetPosition();
+	CBaseCombatCharacter *actor = nextbot->GetEntity();
+	
+	CNavArea *area_actor = actor->GetLastKnownArea();
+	if (area_actor == nullptr) {
+		this->OnPathChanged(nextbot, MoveToFailureType::FAIL_FELL_OFF);
+		return false;
+	}
+	
+	CNavArea *area_goal = TheNavMesh->GetNearestNavArea(vec, true, 200.0f, true, true);
+	if (area_actor == area_goal) {
+		this->BuildTrivialPath(nextbot, vec);
+		return true;
+	}
+	
+	
+	
 	
 	// TODO
 }

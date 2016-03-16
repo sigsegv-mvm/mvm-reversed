@@ -62,7 +62,7 @@ public:
 	/* INextBot overrides */
 	virtual void Update() override;
 	virtual bool IsRemovedOnReset() const override;
-	virtual CBaseEntity *GetEntity() const override;
+	virtual CBaseCombatCharacter *GetEntity() const override;
 	
 	/* INextBotPlayerInput overrides */
 	virtual void PressFireButton(float duration = -1.0f) override;

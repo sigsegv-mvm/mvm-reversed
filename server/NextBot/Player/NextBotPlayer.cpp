@@ -198,7 +198,7 @@ template<class T> void NextBotPlayer<T>::PhysicsSimulate()
 		.forwardmove    = forwardmove,
 		.sidemove       = sidemove,
 		.upmove         = upmove,
-		.command_number = gpGLobals->tickcount,
+		.command_number = gpGlobals->tickcount,
 		.buttons        = buttons,
 		.random_seed    = random_valve->RandomInt(0, INT_MAX),
 	};
@@ -305,9 +305,9 @@ template<class T> bool NextBotPlayer<T>::IsRemovedOnReset() const
 	return false;
 }
 
-template<class T> CBaseEntity *NextBotPlayer<T>::GetEntity() const
+template<class T> CBaseCombatCharacter *NextBotPlayer<T>::GetEntity() const
 {
-	return static_cast<INextBot *>(this);
+	return this;
 }
 
 

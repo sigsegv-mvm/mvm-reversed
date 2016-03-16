@@ -7,14 +7,14 @@
 class IPathCost
 {
 public:
-	virtual float operator()(CNavArea *area1, CNavArea *area2, const CNavLadder *ladder, const CFuncElevator *elevator, float f1) const = 0;
+	virtual float operator()(CNavArea *area, CNavArea *fromArea, const CNavLadder *ladder, const CFuncElevator *elevator, float length) const = 0;
 };
 
 
 class IPathOpenGoalSelector
 {
 public:
-	virtual CNavArea *operator()(CNavArea *area1, CNavArea *area2) const;
+	virtual CNavArea *operator()(CNavArea *area, CNavArea *fromArea) const;
 };
 
 
@@ -41,8 +41,8 @@ public:
 	
 	enum class MoveCursorType : int
 	{
-		ABSOLUTE = 0,
-		RELATIVE = 1,
+		ABS = 0,
+		REL = 1,
 		MAX,
 	};
 	
@@ -52,13 +52,18 @@ public:
 		ZERO = 0,
 	};
 	
+	#define UNKNOWN_PTR void*
+	#define PAD(n, x) char n[x]
+	
 	struct Segment
 	{
+		
 		UNKNOWN_PTR m_Pointer00; // +0x00
 		//    - sizeof >= 0x58
 		//    - bitfield at +0x54
 		
 		// 04 ?
+		PAD(pad1, 0x4);
 		
 		Vector m_vecStart;   // +0x08 coordinates of the start of this segment
 		
@@ -68,6 +73,8 @@ public:
 		//    ...?
 		// AHA: this might be a struct Ray (see nav.h), or a struct Extent
 		
+		PAD(pad2, 0x4);
+		
 		SegmentType m_Type;  // +0x18
 		
 		Vector m_vecDirection; // +0x1c
@@ -76,6 +83,8 @@ public:
 		
 		float m_flLength;    // +0x28 length of this segment
 		float m_flStartDist; // +0x2c distance from the start of the path to the start of this segment
+		
+		PAD(pad3, 0x14);
 		
 		// 30 float, might possibly be negative sometimes perhaps?
 		// 34 ?
@@ -89,6 +98,7 @@ public:
 		Vector m_vecSegStart;     // +0x00 (Segment::m_vecStart)
 		Vector m_vecSegDirection; // +0x0c (Segment::m_vecDirection)
 		// 18 float: Segment+30
+		PAD(pad1, 0x4);
 		Segment *m_pSegment;      // +0x1c
 	};
 	
@@ -156,4 +166,12 @@ protected:
 	bool m_bCursorDataDirty;         // +0x4444
 	IntervalTimer m_itAge;           // +0x4448
 	CHandle<CBaseEntity> m_hSubject; // +0x444c
+	// 4450 
+	// ...
+	// 4750 dword
+	
+	#define UNKNOWN_PTR void*
+	#define PAD(n, x) char n[x]
+	
+	PAD(pad1, 0x304);
 };

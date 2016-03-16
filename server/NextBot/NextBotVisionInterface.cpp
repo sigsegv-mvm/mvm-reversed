@@ -527,7 +527,7 @@ void IVision::UpdateKnownEntities()
 					this->GetBot()->OnLostSight(known.GetEntity());
 				}
 				
-				if (!known.HastLastKnownPositionBeenSeen() &&
+				if (!known.HasLastKnownPositionBeenSeen() &&
 					this->IsAbleToSee(known.GetLastKnownPosition(),
 						FieldOfViewCheckType::USE_FOV)) {
 					known.MarkLastKnownPositionAsSeen();

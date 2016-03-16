@@ -630,8 +630,8 @@ const CKnownEntity *CTFBotMainAction::SelectMoreDangerousThreatInternal(const IN
 		}
 	}
 	
-	bool imm1 = this->IsImmediateThreat(who, threat1);
-	bool imm2 = this->IsImmediateThreat(who, threat2);
+	bool imm1 = this->IsImmediateThreat(them, threat1);
+	bool imm2 = this->IsImmediateThreat(them, threat2);
 	
 	if (imm1 && imm2) {
 		const CKnownEntity *spy = SelectClosestSpyToMe(actor, threat1, threat2);
@@ -639,11 +639,8 @@ const CKnownEntity *CTFBotMainAction::SelectMoreDangerousThreatInternal(const IN
 			return spy;
 		}
 		
-		CTFPlayer *player1 = static_cast<CTFPlayer *>(threat1->GetEntity());
-		CTFPlayer *player2 = static_cast<CTFPlayer *>(threat2->GetEntity());
-		
-		bool firing1 = actor->IsFiringAtMe(player1);
-		bool firing2 = actor->IsFiringAtMe(player2);
+		bool firing1 = actor->IsThreatFiringAtMe(threat1->GetEntity());
+		bool firing2 = actor->IsThreatFiringAtMe(threat2->GetEntity());
 		
 		if (firing1 && firing2) {
 			return closer;

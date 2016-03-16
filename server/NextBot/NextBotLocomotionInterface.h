@@ -78,6 +78,9 @@ public:
 	virtual void AdjustPosture(const Vector& v1);
 	virtual void StuckMonitor();
 	
+	void TraceHull(const Vector& start, const Vector& end, const Vector& mins, const Vector& maxs, unsigned int mask, ITraceFilter *filter, CGameTrace *trace);
+	// TODO
+	
 protected:
 	Vector m_vecMotion;         // +0x14
 	Vector m_vecGroundMotion;   // +0x20

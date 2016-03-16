@@ -47,18 +47,23 @@ public:
 	int Register(INextBot *nextbot);
 	void UnRegister(INextBot *nextbot);
 	
-	static NextBotManager *sInstance = nullptr;
+	static NextBotManager *sInstance;
+	
+	INextBot *GetSelectedBot() const { return this->m_SelectedBot; }
 	
 protected:
 	void Reset();
+	
+	#define PAD(n, x) char n[x]
 	
 	// TODO
 	// 04 CUtlLinkedList<INextBot *> (sizeof: 0x1c)
 	// 20 
 	// ...
-	unsigned int m_nDebugMask; // +0x34
-	// 38 CUtlVector<DebugFilter>
-	// 4c 
+	PAD(pad1, 0x30);
+	unsigned int m_nDebugMask;              // +0x34
+	CUtlVector<DebugFilter> m_DebugFilters; // +0x38
+	INextBot *m_SelectedBot;                // +0x4c
 };
 
 

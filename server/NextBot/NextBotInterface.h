@@ -38,7 +38,7 @@ public:
 	
 	virtual bool IsRemovedOnReset() const;
 	
-	virtual CBaseEntity *GetEntity() const = 0;
+	virtual CBaseCombatCharacter *GetEntity() const = 0;
 	virtual NextBotCombatCharacter *GetNextBotCombatCharacter() const;
 	
 	virtual ILocomotion *GetLocomotionInterface() const;

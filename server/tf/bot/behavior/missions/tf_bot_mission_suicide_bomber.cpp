@@ -29,7 +29,7 @@ ActionResult<CTFBot> CTFBotMissionSuicideBomber::OnStart(CTFBot *actor, Action<C
 	this->m_bDetReachedGoal   = false;
 	this->m_bDetLostAllHealth = false;
 	
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	this->m_ctDetonation->Invalidate();
 	this->m_nConsecutivePathFailures = 0;
@@ -164,9 +164,9 @@ EventDesiredResult<CTFBot> CTFBotMissionSuicideBomber::OnKilled(CTFBot *actor, c
 			/* BUG: probably bad to call Detonate when m_bDetonating is false
 			 * and we haven't called StartDetonate... */
 			if (this->m_ctDetonation.IsElapsed()) {
-				this->Detonate();
+				this->Detonate(actor);
 			} else {
-				if (actor->GetTeamNumber != TEAM_SPECTATOR) {
+				if (actor->GetTeamNumber() != TEAM_SPECTATOR) {
 					actor->m_lifeState = LIFE_ALIVE;
 					actor->SetHealth(1);
 				}
@@ -270,7 +270,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 	TheNextBots()->CollectAllBots(&nextbots);
 	FOR_EACH_VEC(nextbots, i) {
 		INextBot *nextbot = nextbots[i];
-		CBaseEntity *ent = nextbot->GetEntity();
+		CBaseCombatCharacter *ent = nextbot->GetEntity();
 		
 		if (!ent->IsPlayer() && ent->IsAlive()) {
 			potential_victims.AddToTail(ent);

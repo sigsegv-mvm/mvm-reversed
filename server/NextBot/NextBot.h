@@ -14,7 +14,7 @@ public:
 	
 	/* INextBot overrides */
 	virtual void OnNavAreaChanged(CNavArea *area1, CNavArea *area2) override;
-	virtual CBaseEntity *GetEntity() const override;
+	virtual CBaseCombatCharacter *GetEntity() const override;
 	virtual NextBotCombatCharacter *GetNextBotCombatCharacter() const override;
 	
 	// TODO: non-virtual functions

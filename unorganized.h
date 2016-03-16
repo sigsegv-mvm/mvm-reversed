@@ -39,7 +39,7 @@ inline CTFPlayer *ToTFPlayer(CBaseEntity *pEntity)
 
 inline CTFBot *ToTFBot(CBaseEntity *pEntity)
 {
-	CBasePlayer *player = ToBasePlayer(pEntity);
+	CTFPlayer *player = ToTFPlayer(pEntity);
 	
 	if (player == nullptr || !player->IsBotOfType(1337)) {
 		return nullptr;
@@ -333,13 +333,46 @@ public:
 
 class NextBotTraceFilterOnlyActors : public CTraceFilterSimple
 {
+public:
+	NextBotTraceFilterOnlyActors(/* ??? */)
+		: CTraceFilterSimple(/* ??? */)
+	{
+		// TODO
+	}
+	
+	virtual bool ShouldHitEntity(IHandleEntity *pEntity, int contentsMask) override
+	{
+		if (!CTraceFilterSimple::ShouldHitEntity(pEntity, contentsMask)) {
+			return false;
+		}
+		
+		// TODO
+	}
+	
+	virtual TraceType_t GetTraceType() const override { return TRACE_ENTITIES_ONLY; }
+	
+private:
 	// TODO
 };
 
 
 class NextBotTraversableTraceFilter : public CTraceFilterSimple
 {
-	// TODO
+public:
+	NextBotTraversableTraceFilter(/* ??? */)
+		: CTraceFilterSimple(/* ??? */)
+	{
+		// TODO
+	}
+	
+	virtual bool ShouldHitEntity(IHandleEntity *pEntity, int contentsMask) override
+	{
+		// TODO
+	}
+	
+private:
+	// 10 INextBot *
+	// 14 ILocomotion::TraverseWhenType
 };
 
 
