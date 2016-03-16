@@ -44,13 +44,22 @@ ActionResult<CTFBot> CTFBotDeliverFlag::Update(CTFBot *actor, float dt)
 
 void CTFBotDeliverFlag::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	/* BUG: will make bots that are intended to have SuppressFire lose it */
+	actor->m_nBotAttrs &= ~CTFBot::AttributeType::SUPPRESSFIRE;
+	
+	if (TFGameRules() && TFGameRules()->IsMannVsMachineMode()) {
+		actor->m_Shared.ResetSoldierBuffs();
+	}
 }
 
 
 EventDesiredResult<CTFBot> CTFBotDeliverFlag::OnContact(CTFBot *actor, CBaseEntity *ent, CGameTrace *trace)
 {
-	// TODO
+	if (TFGameRules()->IsMannVsMachineMode() && ent != nullptr && ent->ClassMatches("func_capturezone")) {
+		return EventDesiredResult<CTFBot>::SuspendFor(new CTFBotMvMDeployBomb(), "Delivering the bomb!", ResultSeverity::CRITICAL);
+	}
+	
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 
@@ -76,6 +85,20 @@ QueryResponse CTFBotDeliverFlag::ShouldAttack(const INextBot *nextbot, const CKn
 
 bool CTFBotDeliverFlag::UpgradeOverTime(CTFBot *actor)
 {
+	if (!TFGameRules()->IsMannVsMachineMode()) {
+		return false;
+	}
+	
+	if (this->int_0x4824 == -1) {
+		return false;
+	}
+	
+	CTFNavArea *area = actor->GetLastKnownArea();
+	if (area != nullptr && (area->m_nAttributes & ((actor->GetTeamNumber() == TF_TEAM_RED) ? RED_SPAWN_ROOM : BLUE_SPAWN_ROOM)) != 0) {
+		this->m_ctUnknown2.Start(tf_mvm_bot_flag_carrier_interval_to_1st_upgrade.GetFloat());
+		TFObjectiveResource()->m_flMvMNextBombUpgradeTime = 
+	}
+	
 	// TODO
 }
 
@@ -105,7 +128,7 @@ ActionResult<CTFBot> CTFBotPushToCapturePoint::Update(CTFBot *actor, float dt)
 EventDesiredResult<CTFBot> CTFBotPushToCapturePoint::OnNavAreaChanged(CTFBot *actor, CNavArea *area1, CNavArea *area2)
 {
 	if (area1 == nullptr || !area1->HasPrerequisite) {
-		return Continue();
+		return EventDesiredResult<CTFBot>::Continue();
 	}
 	
 	FOR_EACH_VEC(area1->GetPrerequisiteVector(), i) {
@@ -116,15 +139,15 @@ EventDesiredResult<CTFBot> CTFBotPushToCapturePoint::OnNavAreaChanged(CTFBot *ac
 		}
 		
 		if (prereq->IsTask(CFuncNavPrerequisite::TaskType::WAIT)) {
-			SUSPEND_FOR(new CTFBotNavEntMoveTo(prereq,
+			return EventDesiredResult<CTFBot>::SuspendFor(new CTFBotNavEntMoveTo(prereq,
 				"Prerequisite commands me to move to an entity"));
 		}
 		
 		if (prereq->IsTask(CFuncNavPrerequisite::TaskType::MOVE_TO)) {
-			SUSPEND_FOR(new CTFBotNavEntWait(prereq,
+			return EventDesiredResult<CTFBot>::SuspendFor(new CTFBotNavEntWait(prereq,
 				"Prerequisite commands me to wait"));
 		}
 	}
 	
-	return Continue();
+	return EventDesiredResult<CTFBot>::Continue();
 }

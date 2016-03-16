@@ -37,6 +37,21 @@ ActionResult<CTFBot> CTFBotMedicHeal::OnStart(CTFBot *actor, Action<CTFBot> *act
 
 ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
 {
+	if (actor->m_Squad != nullptr) {
+		// TODO
+	} else {
+		actor->SetMission(CTFBot::MissionType::NONE, false);
+	}
+	
+	this->m_hPatient = this->SelectPatient(actor, this->m_hPatient);
+	
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode()) {
+		if (this->m_hPatient->IsPlayerClass(TF_CLASS_MEDIC)) {
+			// TODO
+			// stack space for the CUtlVector is shared with path computation junk, ugh
+		}
+	}
+	
 	// TODO
 }
 

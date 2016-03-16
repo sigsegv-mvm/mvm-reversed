@@ -29,9 +29,9 @@ private:
 	
 	// 0034 PathFollower
 	// 4808 CountdownTimer
-	// 4814 
+	// 4814 float
 	// 4818 CountdownTimer
-	// 4824 
+	// 4824 int
 	// 4828 CountdownTimer
 };
 

@@ -57,9 +57,54 @@ ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
 		actor->GiveAmmo(1000, 3, true);
 	}
 	
-	actor->EyeAngles();
+	// TODO: tf_bot_sniper_aim_steady_rate EyeAngles IntervalTimer stuff
 	
-	// TODO
+	if (TFGameRules()->IsMannVsMachineMode() && actor->GetTeamNumber() == TF_TEAM_BLUE) {
+		// TODO: enum for param 2, default for param 3
+		actor->GiveAmmo(100, 3, true);
+		actor->m_Shared.AddToSpyCloakMeter(100.0, false);
+		
+		CTFNavArea *area = actor->GetLastKnownArea();
+		if (area != nullptr) {
+			if ((area->m_nAttributes & (actor->GetTeamNumber() == TF_TEAM_RED ?
+				RED_SPAWN_ROOM : BLUE_SPAWN_ROOM)) != 0) {
+				actor->m_Shared.AddCond(TF_COND_INVULNERABLE,                     0.5f);
+				actor->m_Shared.AddCond(TF_COND_INVULNERABLE_HIDE_UNLESS_DAMAGED, 0.5f);
+				actor->m_Shared.AddCond(TF_COND_INVULNERABLE_WEARINGOFF,          0.5f);
+			}
+			
+			if (area->GetZ(actor->GetAbsOrigin()) - actor->GetAbsOrigin().z > 100.0f) {
+				if (!this->m_itUnderground.HasStarted()) {
+					this->m_itUnderground.Start();
+				} else {
+					if (this->m_itUnderground.IsGreaterThen(3.0f)) {
+						UTIL_LogPrintf("\"%s<%i><%s><%s>\" underground (position \"%3.2f %3.2f %3.2f\")\n",
+							/* TODO */);
+						actor->SetAbsOrigin(area->GetCenter());
+					}
+				}
+			}
+		} else {
+			this->m_itUnderground.Invalidate();
+		}
+		
+		if (actor->ShouldAutoJump()) {
+			actor->GetLocomotionInterface()->Jump();
+		}
+	}
+	
+	if (!actor->IsFiringWeapon()) {
+		// TODO
+	}
+	
+	actor->EquipRequiredWeapon();
+	actor->UpdateLookingAroundForEnemies();
+	this->FireWeaponAtEnemy(actor);
+	this->Dodge(actor);
+	
+	// actor + 0x271c + 0x9b = !actor->IsPlayerClass(TF_CLASS_DEMOMAN)
+	
+	return Continue();
 }
 
 

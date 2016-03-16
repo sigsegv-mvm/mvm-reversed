@@ -54,7 +54,7 @@ private:
 	bool m_bReloadingBarrage; // +0x64
 	// TODO 68 CHandle<CBaseEntity>, set in OnContact to the entity touching us
 	// TODO 6c float, set in OnContact to the time when we touched a solid non-player entity
-	// TODO 70 IntervalTimer
+	IntervalTimer m_itUnderground; // +0x70
 };
 
 
