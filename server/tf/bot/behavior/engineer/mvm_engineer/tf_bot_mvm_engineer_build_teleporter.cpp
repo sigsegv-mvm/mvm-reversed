@@ -26,62 +26,60 @@ const char *CTFBotMvMEngineerBuildTeleportExit::GetName() const
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, float dt)
 {
-	CBaseEntity *hint = this->m_hintEntity();
-	if (hint == nullptr) {
-		return Done("No hint entity");
+	if (this->m_hintEntity == nullptr) {
+		return ActionResult<CTFBot>::Done("No hint entity");
 	}
 	
-	if (actor->IsRangeGreaterThan(hint->GetAbsOrigin(), 25.0f)) {
+	if (actor->IsRangeGreaterThan(this->m_hintEntity->GetAbsOrigin(), 25.0f)) {
 		if (this->m_ctRecomputePath.IsElapsed()) {
 			this->m_ctRecomputePath.Start(RandomFloat(1.0f, 2.0f));
 			
 			CTFBotPathCost cost_func(actor, FASTEST_ROUTE);
 			this->m_PathFollower.Compute<CTFBotPathCost>(actor,
-				this->m_hintEntity()->GetAbsOrigin(), cost_func, 0.0f, true);
+				this->m_hintEntity->GetAbsOrigin(), cost_func, 0.0f, true);
 		}
 		
 		this->m_PathFollower.Update(actor);
 		if (!this->m_PathFollower.IsValid()) {
 			/* BUG: one path failure ends the entire behavior...
 			 * could this be why engiebots sometimes zone out? */
-			return Done("Path failed");
+			return ActionResult<CTFBot>::Done("Path failed");
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (!this->m_ctPushAway.HasStarted()) {
 		this->m_ctPushAway.Start(0.1f);
 		
-		hint = this->m_hintEntity();
-		if (hint != nullptr) {
-			TFGameRules()->PushAllPlayersAway(hint->GetAbsOrigin(),
+		if (this->m_hintEntity != nullptr) {
+			TFGameRules()->PushAllPlayersAway(this->m_hintEntity->GetAbsOrigin(),
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	actor->DetonateObjectOfType(OBJ_TELEPORTER, 1, true);
 	
 	CBaseEntity *ent = CreateEntityByName("obj_teleporter");
 	if (tele == nullptr) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	CObjectTeleporter *tele = static_cast<CObjectTeleporter *>(ent);
 	
-	tele->SetAbsOrigin(this->m_hintEntity()->GetAbsOrigin());
-	tele->SetAbsAngles(this->m_hintEntity()->GetAbsAngles());
+	tele->SetAbsOrigin(this->m_hintEntity->GetAbsOrigin());
+	tele->SetAbsAngles(this->m_hintEntity->GetAbsAngles());
 	tele->SetObjectMode(1);
 	tele->Spawn();
 	
@@ -106,7 +104,9 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildTeleportExit::Update(CTFBot *actor, f
 	tele->SetMaxHealth(max_health);
 	tele->SetHealth(max_health);
 	
-	this->m_hintEntity()->SetOwnerEntity(tele);
+	this->m_hintEntity->SetOwnerEntity(tele);
 	
-	return Done("Teleport exit built");
+	actor->EmitSound("Engineer.MVM_AutoBuildingTeleporter02");
+	
+	return ActionResult<CTFBot>::Done("Teleport exit built");
 }

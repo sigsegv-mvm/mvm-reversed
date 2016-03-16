@@ -18,7 +18,7 @@ public:
 	void OnSentryGunDestroyed(CBaseEntity *ent);
 	
 private:
-	// 36c byte 0
+	bool m_isSticky; // +0x36c
 	// 370 dword 0
 	COutputEvent m_OnSentryGunDestroyed; // +0x374
 	// 38c CHandle<?>

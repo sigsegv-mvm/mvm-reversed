@@ -24,21 +24,20 @@ const char *CTFBotMvMEngineerBuildSentryGun::GetName() const
 ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
 	actor->StartBuildingObjectOfType(OBJ_SENTRYGUN, 0);
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, float dt)
 {
-	CBaseEntity *hint = this->m_hintEntity();
-	if (hint == nullptr) {
-		return Done("No hint entity");
+	if (this->m_hintEntity == nullptr) {
+		return ActionResult<CTFBot>::Done("No hint entity");
 	}
 	
-	float range_to_hint = actor->GetRangeTo(hint->GetAbsOrigin());
+	float range_to_hint = actor->GetRangeTo(this->m_hintEntity->GetAbsOrigin());
 	
 	if (range_to_hint < 200.0f) {
 		actor->PressCrouchButton();
-		actor->GetBodyInterface()->AimHeadTowards(this->m_hintEntity()->GetAbsOrigin(),
+		actor->GetBodyInterface()->AimHeadTowards(this->m_hintEntity->GetAbsOrigin(),
 			IBody::LookAtPriorityType::OVERRIDE, 0.1f, nullptr, "Placing sentry");
 	}
 	
@@ -48,33 +47,32 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 			
 			CTFBotPathCost cost_func(actor, SAFEST_ROUTE);
 			this->m_PathFollower.Compute<CTFBotPathCost>(actor,
-				this->m_hintEntity()->GetAbsOrigin(), cost_func, 0.0f, true);
+				this->m_hintEntity->GetAbsOrigin(), cost_func, 0.0f, true);
 		}
 		
 		this->m_PathFollower.Update(actor);
 		if (!this->m_PathFollower.IsValid()) {
 			/* BUG: one path failure ends the entire behavior...
 			 * could this be why engiebots sometimes zone out? */
-			return Done("Path failed");
+			return ActionResult<CTFBot>::Done("Path failed");
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (!this->m_ctPushAway.HasStarted()) {
 		this->m_ctPushAway.Start(0.1f);
 		
-		hint = this->m_hintEntity();
-		if (hint != nullptr) {
-			TFGameRules()->PushAllPlayersAway(hint->GetAbsOrigin(),
+		if (this->m_hintEntity != nullptr) {
+			TFGameRules()->PushAllPlayersAway(this->m_hintEntity->GetAbsOrigin(),
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	actor->DetonateObjectOfType(OBJ_SENTRYGUN, 0, true);
@@ -82,36 +80,35 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 	CBaseEntity *ent = CreateEntityByName("obj_sentrygun");
 	if (ent == nullptr) {
 		/* BUG: no we didn't */
-		return Done("Built a sentry");
+		return ActionResult<CTFBot>::Done("Built a sentry");
 	}
 	
 	this->m_hSentry = static_cast<CObjectSentrygun *>(ent);
-	this->m_hSentry()->SetName(this->m_hintEntity()->GetEntityName());
+	this->m_hSentry->SetName(this->m_hintEntity->GetEntityName());
 	
 	// TODO:
-	// ++this->m_hintEntity()->dword_0x370
+	// ++this->m_hintEntity->dword_0x370
 	
-	this->m_hSentry()->m_nDefaultUpgradeLevel = 2;
+	this->m_hSentry->m_nDefaultUpgradeLevel = 2;
 	
-	this->m_hSentry()->SetAbsOrigin(this->m_hintEntity()->GetAbsOrigin());
-	this->m_hSentry()->SetAbsAngles(this->m_hintEntity()->GetAbsAngles());
-	this->m_hSentry()->Spawn();
+	this->m_hSentry->SetAbsOrigin(this->m_hintEntity->GetAbsOrigin());
+	this->m_hSentry->SetAbsAngles(this->m_hintEntity->GetAbsAngles());
+	this->m_hSentry->Spawn();
 	
-	this->m_hSentry()->StartPlacement(actor);
-	this->m_hSentry()->StartBuilding(actor);
+	this->m_hSentry->StartPlacement(actor);
+	this->m_hSentry->StartBuilding(actor);
 	
-	this->m_hintEntity()->SetOwnerEntity(this->m_hSentry());
+	this->m_hintEntity->SetOwnerEntity(this->m_hSentry);
 	
 	this->m_hSentry = nullptr;
-	return Done("Built a sentry");
+	return ActionResult<CTFBot>::Done("Built a sentry");
 }
 
 void CTFBotMvMEngineerBuildSentryGun::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 {
-	CObjectSentrygun *sentry = this->m_hSentry();
-	if (sentry != nullptr) {
-		sentry->DropCarriedObject(actor);
-		UTIL_Remove(this->m_hSentry());
+	if (this->m_hSentry != nullptr) {
+		this->m_hSentry->DropCarriedObject(actor);
+		UTIL_Remove(this->m_hSentry);
 		this->m_hSentry = nullptr;
 	}
 }

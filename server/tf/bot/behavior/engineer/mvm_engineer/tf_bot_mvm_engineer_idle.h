@@ -27,10 +27,10 @@ private:
 	void TryToDetonateStaleNest();
 	
 	PathFollower m_PathFollower;                 // +0x0034
-	// 4808 CountdownTimer
-	// 4814 CountdownTimer
-	// 4820 CountdownTimer
-	// 482c CountdownTimer
+	CountdownTimer m_ctRecomputePath;            // +0x4808
+	CountdownTImer m_ctSentrySafe;               // +0x4814
+	CountdownTimer m_ctSentryCooldown;           // +0x4820
+	CountdownTimer m_ctTeleCooldown;             // +0x482c
 	CountdownTimer m_ctFindNestHint;             // +0x4838
 	CountdownTimer m_ctAdvanceNestSpot;          // +0x4844
 	int m_nTeleportAttempts;                     // +0x4850

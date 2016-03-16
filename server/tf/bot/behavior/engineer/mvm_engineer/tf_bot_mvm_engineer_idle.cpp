@@ -43,71 +43,192 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::OnStart(CTFBot *actor, Action<CTFBot
 	this->m_bTeleportedToHint         = false;
 	this->m_bTriedToDetonateStaleNest = false;
 	
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 {
 	if (!actor->IsAlive()) {
-		return Done();
+		return ActionResult<CTFBot>::Done();
 	}
 	
 	// TODO: slot enum
-	CBaseCombatWeapon *w_melee = bot->Weapon_GetSlot(2);
+	CBaseCombatWeapon *w_melee = bot->Weapon_GetSLot(2);
 	if (w_melee != nullptr) {
 		actor->Weapon_Switch(w_melee);
 	}
 	
-	if (this->m_hHintNest() == nullptr || this->ShouldAdvanceNestSpot(actor)) {
-		if (this->m_ctFindNestHint.HasStarted()) {
-			if (!this->m_ctFindNestHint.IsElapsed()) {
-				return Continue();
-			}
+	if (this->m_hHintNest == nullptr || this->ShouldAdvanceNestSpot(actor)) {
+		if (this->m_ctFindNestHint.HasStarted() && !this->m_ctFindNestHint.IsElapsed()) {
+			return ActionResult<CTFBot>::Continue();
 		}
 		this->m_ctFindNestHint.Start(RandomFloat(1.0f, 2.0f));
 		
-		CHandle<CTFBotHintEngineerNest> h_nest;
-		
-		bool box_check = (!this->m_bTeleportedToHint &&
-			(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0);
-		if (!CTFBotMvMEngineerHintFinder::FindHint(box_check,
-			(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) == 0,
-			&h_nest)) {
-			return Continue();
+		bool box_check       = false;
+		bool out_of_range_ok = true;
+		if ((actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0) {
+			if (!this->m_bTeleportedToHint) {
+				box_check = true;
+			}
+			out_of_range_ok = false;
 		}
 		
-		CTFBotHintEngineerNest *old_nest = this->m_hHintNest();
-		if (old_nest != nullptr) {
-			old_nest->SetOwnerEntity(nullptr);
+		CHandle<CTFBotHintEngineerNest> h_nest;
+		if (!CTFBotMvMEngineerHintFinder::FindHint(box_check, out_of_range_ok, &h_nest)) {
+			return ActionResult<CTFBot>::Continue();
+		}
+		
+		if (this->m_hHintNest != nullptr) {
+			this->m_hHintNest->SetOwnerEntity(nullptr);
 		}
 		
 		this->m_hHintNest = h_nest;
+		h_nest->SetOwnerEntity(actor);
 		
-		CTFBotHintEngineerNest *new_nest = h_nest();
-		new_nest->SetOwnerEntity(actor);
-		
-		CTFBotHintSentryGun *hint_sentry = this->m_hHintNest()->GetSentryHint();
-		this->m_hHintSentry = hint_sentry;
-		this->TakeOverStaleNest(hint_sentry, actor);
+		this->m_hHintSentry = this->m_hHintNest->GetSentryHint();
+		this->TakeOverStaleNest(this->m_hHintSentry, actor);
 		
 		if (!actor->m_TeleportWhere.IsEmpty()) {
-			CTFBotHintTeleporterExit *hint_tele = this->m_hHintNest()->GetTeleporterHint();
-			this->m_hHintTele = hint_tele;
-			this->TakeOverStaleNest(hint_tele, actor);
+			this->m_hHintTele = this->m_hHintNest->GetTeleporterHint();
+			this->TakeOverStaleNest(this->m_hHintTele, actor);
 		}
 	}
 	
 	if (!this->m_bTeleportedToHint &&
 		(actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) != 0) {
 		this->m_bTeleportedToHint = true;
-		return SuspendFor(new CTFBotMvMEngineerTeleportSpawn(this->m_hHintNest(),
-			++this->m_nTeleportAttempts == 1), "In spawn area - "
-			"teleport to the teleporter hint");
+		++this->m_nTeleportAttempts;
+		
+		return ActionResult<CTFBot>::SuspendFor(new CTFBotMvMEngineerTeleportSpawn(
+			this->m_hHintNest, (this->m_nTeleportAttempts == 1),
+			"In spawn area - teleport to the teleporter hint"));
 	}
 	
+	CObjectSentrygun *sentry = nullptr;
 	
+	if (this->m_hHintSentry != nullptr) {
+		if (this->m_hHintSentry->GetOwnerEntity() != nullptr &&
+			this->m_hHintSentry->GetOwnerEntity()->IsBaseObject()) {
+			/* sentry exists; start the retreat timer so we will retreat if we
+			 * should lose it in the future */
+			this->m_ctSentryCooldown.Start(3.0f);
+			
+			sentry = static_cast<CObjectSentrygun *>(this->m_hHintSentry->GetOwnerEntity());
+		} else {
+			if (this->m_hHintSentry->GetOwnerEntity() != nullptr &&
+				this->m_hHintSentry->GetOwnerEntity()->IsBaseObject()) {
+				/* not sure under what circumstances this code would actually be
+				 * reached; perhaps the static_cast in the if statement earlier
+				 * is actually an assert_cast and they were naively expecting it
+				 * to return nullptr if the owner wasn't a sentry? */
+				sentry = static_cast<CObjectSentrygun *>(this->m_hHintSentry->GetOwnerEntity());
+				sentry->SetOwnerEntity(actor);
+			} else {
+				/* do not have a sentry; retreat for a few seconds if we had a
+				 * sentry before this; then build a new sentry */
+				
+				if (this->m_ctSentryCooldown.IsElapsed()) {
+					return ActionResult<CTFBot>::SuspendFor(
+						new CTFBotMvMEngineerBuildSentryGun(this->m_hHintSentry),
+						"No sentry - building a new one");
+				} else {
+					return ActionResult<CTFBot>::SuspendFor(
+						new CTFBotRetreatToCover(1.0f),
+						"Lost my sentry - retreat!");
+				}
+			}
+		}
+		
+		/* NOTE: this is m_flHealth, not m_iHealth */
+		if (sentry->GetMaxHealth() > sentry->m_flHealth && !sentry->m_bBuilding) {
+			this->m_ctSentrySafe.Start(3.0f);
+		}
+	}
 	
-	// TODO
+	CObjectTeleporter *tele = nullptr;
+	
+	if (this->m_hHintTele != nullptr && this->m_ctSentrySafe.IsElapsed()) {
+		if (this->m_hHintTele->GetOwnerEntity() != nullptr &&
+			this->m_hHintTele->GetOwnerEntity()->IsBaseObject()) {
+			this->m_ctTeleCooldown.Start(3.0f);
+			
+			tele = static_cast<CObjectTeleporter *>(this->m_hHintTele->GetOwnerEntity());
+		} else {
+			if (this->m_ctTeleCooldown.IsElapased()) {
+				return ActionResult<CTFBot>::SuspendFor(
+					new CTFBotMvMEngineerBuildTeleportExit(this->m_hHintTele),
+					"Sentry is safe - building a teleport exit");
+			}
+		}
+	}
+	
+	if (tele != nullptr && this->m_ctSentrySafe.IsElapsed()) {
+		/* NOTE: this is m_flHealth, not m_iHealth */
+		if (tele->GetMaxHealth() > tele->m_flHealth && !tele->m_bBuilding) {
+			float dist = actor->GetAbsOrigin().DistTo(tele->GetAbsOrigin());
+			
+			if (dist < 90.0f) {
+				actor->PressCrouchButton();
+			}
+			
+			if (this->m_ctRecomputePath.IsElapsed()) {
+				this->m_ctRecomputePath.Start(RandomFloat(1.0f, 2.0f));
+				
+				Vector dir = (tele->GetAbsOrigin() - actor->GetAbsOrigin());
+				dir.NormalizeInPlace();
+				
+				Vector goal = tele->GetAbsOrigin() - (50.0f * dir);
+				
+				CTFBotPathCost cost_func(actor, SAFEST_ROUTE);
+				this->m_PathFollower.Compute(actor, goal, cost_func, 0.0f, true);
+			}
+			
+			this->m_PathFollower.Update(actor);
+			
+			if (dist < 75.0f) {
+				actor->GetBodyInterface()->AimHeadTowards(tele->WorldSpaceCenter(),
+					IBody::LookAtPriorityType::CRITICAL, 1.0f, nullptr, "Work on my Teleporter");
+				actor->PressFireButton();
+			}
+			
+			this->TryToDetonateStaleNest();
+			return ActionResult<CTFBot>::Continue();
+		}
+	}
+	
+	if (sentry != nullptr) {
+		float dist = actor->GetAbsOrigin().DistTo(sentry->GetAbsOrigin());
+		
+		if (dist < 90.0f) {
+			actor->PressCrouchButton();
+		}
+		
+		if (this->m_ctRecomputePath.IsElapsed()) {
+			this->m_ctRecomputePath.Start(RandomFloat(1.0f, 2.0f));
+			
+			Vector dir;
+			AngleVectors(sentry->GetTurretAngles(), &dir);
+			
+			Vector goal = sentry->GetAbsOrigin() - (50.0f * dir);
+			
+			CTFBotPathCost cost_func(actor, SAFEST_ROUTE);
+			this->m_PathFollower.Compute(actor, goal, cost_func, 0.0f, true);
+		}
+		
+		this->m_PathFollower.Update(actor);
+		
+		if (dist < 75.0f) {
+			actor->GetBodyInterface()->AimHeadTowards(sentry->WorldSpaceCenter(),
+				IBody::LookAtPriorityType::CRITICAL, 1.0f, nullptr, "Work on my Sentry");
+			actor->PressFireButton();
+		}
+		
+		this->TryToDetonateStaleNest();
+		return ActionResult<CTFBot>::Continue();
+	}
+	
+	this->TryToDetonateStaleNest();
+	return ActionResult<CTFBot>::Continue();
 }
 
 

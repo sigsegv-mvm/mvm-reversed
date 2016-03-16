@@ -33,5 +33,5 @@ private:
 	
 	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_SentryHints; // +0x36c
 	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_TeleHints;   // +0x380
-	// 394 byte 0
+	bool m_bHasActiveTeleporter;                             // +0x394
 };

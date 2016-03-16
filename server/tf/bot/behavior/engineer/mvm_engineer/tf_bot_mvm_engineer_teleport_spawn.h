@@ -18,7 +18,7 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	CountdownTimer m_ctPushAway;       // +0x34
-	CHandle<CBaseEntity> m_hintEntity; // +0x40 (actual name)
-	bool m_bNonSilent;                 // +0x44
+	CountdownTimer m_ctPushAway;                // +0x34
+	CHandle<CBaseTFBotHintEntity> m_hintEntity; // +0x40 (actual name)
+	bool m_bNonSilent;                          // +0x44
 };

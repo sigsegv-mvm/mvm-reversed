@@ -25,10 +25,10 @@ const char *CTFBotMvMEngineerTeleportSpawn::GetName() const
 ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
 	if ((actor->m_nBotAttrs & CTFBot::AttributeType::TELEPORTTOHINT) == 0) {
-		return Done("Cannot teleport to hint with out Attributes TeleportToHint");
+		return ActionResult<CTFBot>::Done("Cannot teleport to hint with out Attributes TeleportToHint");
 	}
 	
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float dt)
@@ -36,26 +36,24 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 	if (!this->m_ctPushAway.HasStarted()) {
 		this->m_ctPushAway.Start(0.1f);
 		
-		CBaseEntity *hint = this->m_hintEntity();
-		if (hint != nullptr) {
-			TFGameRules()->PushAllPlayersAway(hint->GetAbsOrigin(),
+		if (this->m_hintEntity != nullptr) {
+			TFGameRules()->PushAllPlayersAway(this->m_hintEntity->GetAbsOrigin(),
 				400.0f, 500.0f, TF_TEAM_RED, nullptr);
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (!this->m_ctPushAway.IsElapsed()) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
-	CBaseEntity *hint = this->m_hintEntity();
-	if (hint == nullptr) {
-		return Done("Cannot teleport to hint as m_hintEntity is NULL");
+	if (this->m_hintEntity == nullptr) {
+		return ActionResult<CTFBot>::Done("Cannot teleport to hint as m_hintEntity is NULL");
 	}
 	
-	Vector tele_pos = hint->GetAbsOrigin();
-	QAngle tele_ang = hint->GetAbsAngles();
+	Vector tele_pos = this->m_hintEntity->GetAbsOrigin();
+	QAngle tele_ang = this->m_hintEntity->GetAbsAngles();
 	
 	actor->Teleport(tele_pos, tele_ang, nullptr);
 	
@@ -67,7 +65,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 	if (this->m_bNonSilent) {
 		TE_TFParticleEffect(filter, 0.0f, "teleported_mvm_bot", tele_pos, vec3_angle);
 		actor->EmitSound("Engineer.MvM_BattleCry07");
-		this->m_hintEntity()->EmitSound("MvM.Robot_Engineer_Spawn");
+		this->m_hintEntity->EmitSound("MvM.Robot_Engineer_Spawn");
 		
 		if (g_pPopulationManager != nullptr) {
 			CWave *wave = g_pPopulationManager->GetCurrentWave();
@@ -84,5 +82,5 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 		}
 	}
 	
-	return Done("Teleported");
+	return ActionResult<CTFBot>::Done("Teleported");
 }
