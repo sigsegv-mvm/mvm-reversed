@@ -148,7 +148,7 @@ public:
 		CUtlString m_strName;                // +0x00
 		DifficultyType m_iSkill;             // +0x04
 		WeaponRestriction m_nWeaponRestrict; // +0x08
-		// TODO: 0x0c
+		// TODO: 0x0c m_nMission, not parsed, defaults to 0
 		// TODO: 0x10
 		AttributeType m_nBotAttrs;  // +0x14
 		float m_flVisionRange;      // +0x18
@@ -158,9 +158,77 @@ public:
 		CUtlStringList m_Tags;  // +0x58
 	};
 	
-	// TODO: SuspectedSpyInfo_t
+	/* whoever wrote this class was a fucking idiot */
+	class SuspectedSpyInfo_t
+	{
+	public:
+		SuspectedSpyInfo_t(CTFPlayer *spy)
+			: m_hSpy(spy) {}
+		
+		void Suspect()
+		{
+			this->m_Times.AddToHead((int)floor(gpGlobals->curtime));
+		}
+		
+		bool IsCurrentlySuspected()
+		{
+			if (this->m_Times.IsEmpty()) {
+				return false;
+			}
+			
+			return ((float)this->m_Times.Head() > (gpGlobals->curtime - tf_bot_suspect_spy_forget_cooldown.GetFloat()));
+		}
+		
+		bool TestForRealizing()
+		{
+			int t_now = (int)floor(gpGlobals->curtime);
+			int t_first = t_now - tf_bot_suspect_spy_touch_interval.GetInt();
+			
+			FOR_EACH_VEC_BACK(this->m_Times, i) {
+				if (this->m_Times[i] <= t_first) {
+					this->m_Times.Remove(i);
+				}
+			}
+			
+			this->m_Times.AddToHead(t_now);
+			
+			CUtlVector<bool> checks;
+			
+			checks.SetCount(tf_bot_suspect_spy_touch_interval.GetInt());
+			FOR_EACH_VEC(checks, i) {
+				checks[i] = false;
+			}
+			
+			FOR_EACH_VEC(this->m_Times, i) {
+				int idx = t_now - this->m_Times[i];
+				if (checks.IsValidIndex(idx)) {
+					checks[idx] = true;
+				}
+			}
+			
+			bool realized = true;
+			FOR_EACH_VEC(checks, i) {
+				if (!checks[i]) {
+					realized = false;
+					break;
+				}
+			}
+			
+			return realized;
+		}
+		
+	private:
+		CHandle<CTFPlayer> m_hSpy;  // +0x00
+		CUtlVector<int>    m_Times; // +0x04
+	};
+	
+	struct DelayedNoticeInfo
+	{
+		CHandle<CBaseEntity> m_hEnt; // +0x00
+		float m_flWhen;              // +0x04
+	};
+	
 	// TODO: SniperSpotInfo
-	// TODO: DelayedNoticeInfo
 	
 	CTFBot();
 	virtual ~CTFBot();
@@ -245,13 +313,16 @@ public:
 	// IsAttentionFocused
 	// IsAttentionFocusedOn
 	
-	// IsSuspectedSpy
-	// IsKnownSpy
-	// SuspectSpy
-	// RealizeSpy
-	// ForgetSpy
-	// DeleyedThreatNotice
-	// UpdateDelayedThreatNotices
+	SuspectedSpyInfo_t *IsSuspectedSpy(CTFPlayer *spy);
+	void SuspectSpy(CTFPlayer *spy);
+	void StopSuspectingSpy(CTFPlayer *spy);
+	
+	bool IsKnownSpy(CTFPlayer *spy) const;
+	void RealizeSpy(CTFPlayer *spy);
+	void ForgetSpy(CTFPlayer *spy);
+	
+	void DelayedThreatNotice(CHandle<CBaseEntity> ent, float delay);
+	void UpdateDelayedThreatNotices();
 	
 	// CTFBot::AddItem was previously CTFBotSpawner::AddItemToBot
 	
@@ -356,7 +427,25 @@ private:
 	AttributeType m_nBotAttrs;     // +0x2b14
 	DifficultyType m_iSkill;       // +0x2b18
 	
+	// 2b1c something related to pvp engie
+	// 2b20 movement goal
+	// 2b24 handle to CTFBotProxy
+	// 2b28 handle to CTFBotGenerator
+	
 	CTFBotSquad *m_Squad; // +0x2b2c
+	
+	// 2b30 bool related to changing class after death
+	// 2b34 handle to sentry who killed us
+	// 2b38 Vector position of sentry who killed us
+	
+	CUtlVectorAutoPurge<SuspectedSpyInfo_t *> m_SuspectedSpies; // +0x2b44
+	CUtlVector<CHandle<CTFPlayer>>            m_KnownSpies;     // +0x2b58
+	
+	// 2b6c CUtlVector<SniperSpotInfo> sniper spots
+	// 2b80 CUtlVector<CTFNavArea *> related to sniper spots
+	// 2b94 CUtlVector<CTFNavArea *> related to sniper spots
+	// 2ba8 sniper spot related
+	// 2bac Vector related to sniper spots
 	
 	// 0x2bb8: CTFBot: CountdownTimer
 	
@@ -390,6 +479,8 @@ private:
 	// 0x2c04: CTFBot: CUtlString
 	
 	// 0x2c1c: CTFBot: CountdownTimer
+	
+	CUtlVector<DelayedNoticeInfo> m_DelayedThreatNotices; // +0x2c28
 	
 	CountdownTimer m_ctUseWeaponAbilities; // +0x2c40
 	

@@ -597,3 +597,133 @@ bool CTFBot::IsLineOfFireClear(const Vector& from, const Vector& to) const
 	
 	return false;
 }
+
+
+SuspectedSpyInfo_t *CTFBot::IsSuspectedSpy(CTFPlayer *spy)
+{
+	FOR_EACH_VEC(this->m_SuspectedSpies, i) {
+		SuspectedSpyInfo_t *info = this->m_SuspectedSpies[i];
+		
+		CTFPlayer *spy2 = info->m_hSpy;
+		if (spy2 != nullptr) {
+			if (ENTINDEX(spy2) == ENTINDEX(spy)) {
+				return info;
+			}
+		}
+	}
+	
+	return nullptr;
+}
+
+void CTFBot::SuspectSpy(CTFPlayer *spy)
+{
+	SuspectedSpyInfo_t *info = this->IsSuspectedSpy(spy);
+	if (info == nullptr) {
+		info = new SuspectedSpyInfo_t(spy);
+		this->m_SuspectedSpies.AddToHead(info);
+	}
+	
+	info->Suspect();
+	if (info->TestForRealizing()) {
+		this->RealizeSpy(spy);
+	}
+}
+
+void CTFBot::StopSuspectingSpy(CTFPlayer *spy)
+{
+	FOR_EACH_VEC(this->m_SuspectedSpies, i) {
+		SuspectedSpyInfo_t *info = this->m_SuspectedSpies[i];
+		
+		CTFPlayer *spy2 = info->m_hSpy;
+		if (spy2 != nullptr) {
+			if (ENTINDEX(spy2) == ENTINDEX(spy)) {
+				delete info;
+				this->m_SuspectedSpies.Remove(i);
+				return;
+			}
+		}
+	}
+}
+
+
+bool CTFBot::IsKnownSpy(CTFPlayer *spy) const
+{
+	return this->m_KnownSpies.HasElement(spy);
+}
+
+void CTFBot::RealizeSpy(CTFPlayer *spy)
+{
+	if (this->IsKnownSpy(spy)) {
+		return;
+	}
+	this->m_KnownSpies.AddToHead(spy);
+	
+	this->SpeakConceptIfAllowed(MP_CONCEPT_PLAYER_CLOAKEDSPY);
+	
+	SuspectedSpyInfo_t *info = this->IsSuspectedSpy(spy);
+	if (info != nullptr && info->IsCurrentlySuspected()) {
+		CUtlVector<CTFPlayer *> teammates;
+		CollectPlayers<CTFPlayer>(&teammates, this->GetTeamNumber(), true, false);
+		
+		FOR_EACH_VEC(teammates, i) {
+			/* BUG: IsBot() == true is insufficient to establish that a
+			 * CTFPlayer is a CTFBot; they may just be a puppet bot, in which
+			 * case this could potentially cause a crash */
+			if (teammates[i]->IsBot()) {
+				CTFBot *teammate = static_cast<CTFBot *>(teammates[i]);
+				
+				if (this->EyePosition().DistToSqr(teammate->EyePosition()) < (512.0f * 512.0f)) {
+					if (!teammate->IsKnownSpy(spy)) {
+						teammate->SuspectSpy(spy);
+						teammate->RealizeSpy(spy);
+					}
+				}
+			}
+		}
+	}
+}
+
+void CTFBot::ForgetSpy(CTFPlayer *spy)
+{
+	this->StopSuspectingSpy(spy);
+	this->m_KnownSpies.FindAndFastRemove(spy);
+}
+
+
+void CTFBot::DelayedThreatNotice(CHandle<CBaseEntity> ent, float delay)
+{
+	float when = gpGlobals->curtime + delay;
+	
+	FOR_EACH_VEC(this->m_DelayedThreatNotices, i) {
+		if (ent.Get() == this->m_DelayedThreatNotices[i].Get()) {
+			if (when < info->m_flWhen) {
+				info->m_flWhen = when;
+			}
+			return;
+		}
+	}
+	
+	this->m_DelayedThreatNotices.AddToTail({ ent, delay });
+}
+
+void CTFBot::UpdateDelayedThreatNotices()
+{
+	FOR_EACH_VEC(this->m_DelayedThreatNotices, i) {
+		DelayedNoticeInfo *info = this->m_DelayedThreatNotices[i];
+		
+		if (gpGlobals->curtime >= info->m_flWhen) {
+			CBaseEntity *ent = info->m_hEnt;
+			if (ent != nullptr) {
+				CTFPlayer *player = ToTFPlayer(ent);
+				if (player != nullptr && player->IsPlayerClass(TF_CLASS_SPY)) {
+					this->RealizeSpy(player);
+				}
+				
+				this->GetVisionInterface()->AddKnownEntity(ent);
+			}
+			
+			/* BUG: removing while in the loop means we'll skip a notice */
+			this->m_DelayedThreatNotices.Remove(i);
+		}
+	}
+}
