@@ -49,7 +49,7 @@ private:
 	void RevertOfflinePracticeConvars();
 	
 	// TODO
-	// 50 
+	float m_flQuotaTime; // +0x50
 	// 54 
 	// 58 CUtlVector<CBaseEntity *>
 	// 6c CUtlVector<ArcherAssignmentInfo>
