@@ -10,7 +10,7 @@
 class CTFBotAttackFlagDefenders : public CTFBotAttack
 {
 public:
-	CTFBotAttackFlagDefenders(float f1);
+	CTFBotAttackFlagDefenders(float duration = -1.0f);
 	virtual ~CTFBotAttackFlagDefenders();
 	
 	virtual const char *GetName() const override;
@@ -19,9 +19,9 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// 9014 CountdownTimer
-	// 9020 CountdownTimer
-	// 902c CHandle<T>
-	// 9030 PathFollower
-	// d804 CountdownTimer
+	CountdownTimer m_ctActionDuration; // +0x9014
+	CountdownTimer m_ctCheckFlag;      // +0x9020
+	CHandle<CTFPlayer> m_hTarget;      // +0x902c
+	PathFollower m_PathFollower;       // +0x9030
+	CountdownTimer m_ctRecomputePath;  // +0xd804
 };
