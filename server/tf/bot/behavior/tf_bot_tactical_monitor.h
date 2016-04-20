@@ -25,14 +25,14 @@ public:
 	
 private:
 	void AvoidBumpingEnemies(CTFBot *actor);
-	UNKNOWN FindNearbyTeleporter(CTFBot *actor);
+	CObjectTeleporter *FindNearbyTeleporter(CTFBot *actor);
 	void MonitorArmedStickybombs(CTFBot *actor);
 	bool ShouldOpportunisticallyTeleport(CTFBot *actor) const;
 	
 	// 34 CountdownTimer
-	// 40 CountdownTimer
-	// 4c CountdownTimer
-	// 58 CountdownTimer
+	// 40 CountdownTimer (related to taunting at humans)
+	// 4c CountdownTimer (related to taunting at humans)
+	// 58 CountdownTimer (related to taunting at humans)
 	// 64 CountdownTimer
 	// 70 CountdownTimer
 };
