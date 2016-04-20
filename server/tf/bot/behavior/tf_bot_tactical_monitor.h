@@ -9,7 +9,7 @@
 class CTFBotTacticalMonitor : public Action<CTFBot>
 {
 public:
-	CTFBotTacticalMonitor(/* TODO */);
+	CTFBotTacticalMonitor();
 	virtual ~CTFBotTacticalMonitor();
 	
 	virtual const char *GetName() const override;

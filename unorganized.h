@@ -430,3 +430,4 @@ inline int GetEnemyTeam(CBaseEntity *ent)
 	
 	return enemy_team;
 }
+// check out CTFPlayer::GetOpposingTFTeam!

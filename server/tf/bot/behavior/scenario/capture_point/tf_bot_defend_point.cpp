@@ -12,4 +12,3 @@ ConVar tf_bot_max_point_defend_range("tf_bot_max_point_defend_range", "1250", FC
 ConVar tf_bot_defense_debug("tf_bot_defense_debug", "0", FCVAR_CHEAT);
 
 
-
