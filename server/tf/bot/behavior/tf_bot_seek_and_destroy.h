@@ -32,9 +32,9 @@ private:
 	CTFNavArea *ChooseGoalArea(CTFBot *actor);
 	void RecomputeSeekPath(CTFBot *actor);
 	
-	// 0034 
-	// 0038 
+	CTFNavArea *m_GoalArea;            // +0x0034
+	bool m_bPointLocked;               // +0x0038
 	PathFollower m_PathFollower;       // +0x003c
-	// 4810 CountdownTimer
+	CountdownTimer m_ctRecomputePath;  // +0x4810
 	CountdownTimer m_ctActionDuration; // +0x481c
 };
