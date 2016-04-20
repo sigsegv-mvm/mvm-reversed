@@ -29,12 +29,12 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 private:
-	UNKNOWN ChooseGoalArea(CTFBot *actor); // probably returns CTFNavArea *
+	CTFNavArea *ChooseGoalArea(CTFBot *actor);
 	void RecomputeSeekPath(CTFBot *actor);
 	
 	// 0034 
 	// 0038 
-	// 003c PathFollower
+	PathFollower m_PathFollower;       // +0x003c
 	// 4810 CountdownTimer
-	// 481c CountdownTimer
+	CountdownTimer m_ctActionDuration; // +0x481c
 };
