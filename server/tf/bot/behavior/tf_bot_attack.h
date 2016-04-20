@@ -25,7 +25,7 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 private:
-	// 0034 PathFollower
-	// 4808 ChasePath
-	// 9008 CountdownTimer
+	PathFollower m_PathFollower;      // +0x0034
+	ChasePath m_ChasePath;            // +0x4808
+	CountdownTimer m_ctRecomputePath; // +0x9008
 };
