@@ -31,7 +31,7 @@ ActionResult<CTFBot> CTFBotScenarioMonitor::OnStart(CTFBot *actor, Action<CTFBot
 	this->m_ctFetchFlagInitial.Start(20.0f);
 	this->m_ctFetchFlag.Invalidate();
 	
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotScenarioMonitor::Update(CTFBot *actor, float dt)
@@ -39,23 +39,23 @@ ActionResult<CTFBot> CTFBotScenarioMonitor::Update(CTFBot *actor, float dt)
 	if (actor->HasTheFlag(false, false)) {
 		if (tf_bot_flag_kill_on_touch.GetBool()) {
 			actor->CommitSuicide(false, true);
-			return Done("Flag kill");
+			return ActionResult<CTFBot>::Done("Flag kill");
 		}
 		
 		// TODO: parameters for CTFBotDeliverFlag ctor
-		return SuspendFor(new CTFBotDeliverFlag(/* TODO */),
+		return ActionResult<CTFBot>::SuspendFor(new CTFBotDeliverFlag(/* TODO */),
 			"I've picked up the flag! Running it in...");
 	}
 	
 	if (actor->m_nMission != CTFBot::MissionType::NONE) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (this->m_ctFetchFlagInitial.IsElapsed() &&
 		actor->IsAllowedToPickUpFlag()) {
 		CCaptureFlag *flag = actor->GetFlagToFetch();
 		if (flag == nullptr) {
-			return Continue();
+			return ActionResult<CTFBot>::Continue();
 		}
 		
 		CTFPlayer *owner = ToTFPlayer(flag->GetOwnerEntity());
@@ -67,7 +67,7 @@ ActionResult<CTFBot> CTFBotScenarioMonitor::Update(CTFBot *actor, float dt)
 					this->m_ctFetchFlag.Invalidate();
 					
 					if (actor->MedicGetHealTarget() == nullptr) {
-						return SuspendFor(new CTFBotFetchFlag(true),
+						return ActionResult<CTFBot>::SuspendFor(new CTFBotFetchFlag(true),
 							"Fetching lost flag...");
 					}
 				}
@@ -77,7 +77,7 @@ ActionResult<CTFBot> CTFBotScenarioMonitor::Update(CTFBot *actor, float dt)
 		}
 	}
 	
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 

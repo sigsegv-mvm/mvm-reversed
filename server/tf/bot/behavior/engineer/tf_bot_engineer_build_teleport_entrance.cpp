@@ -29,7 +29,7 @@ const char *CTFBotEngineerBuildTeleportEntrance::GetName() const
 
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::Update(CTFBot *actor, float dt)
@@ -42,5 +42,5 @@ EventDesiredResult<CTFBot> CTFBotEngineerBuildTeleportEntrance::OnStuck(CTFBot *
 {
 	this->m_PathFollower.Invalidate();
 	
-	return Continue();
+	return EventDesiredResult<CTFBot>::Continue();
 }

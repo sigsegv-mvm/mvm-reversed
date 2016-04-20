@@ -26,14 +26,14 @@ ActionResult<CTFBot> CTFBotUseItem::OnStart(CTFBot *actor, Action<CTFBot> *actio
 	actor->PushRequiredWeapon(this->m_hItem);
 	this->m_ctInitialDelay.Start(0.25f + (this->m_hItem->m_flNextPrimaryAttack - gpGlobals->curtime));
 	
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotUseItem::Update(CTFBot *actor, float dt)
 {
 	if (this->m_hItem == nullptr ||
 		actor->m_Shared.GetActiveTFWeapon() == nullptr) {
-		return Done("NULL item");
+		return ActionResult<CTFBot>::Done("NULL item");
 	}
 	
 	if (this->m_ctInitialDelay.HasStarted()) {
@@ -42,14 +42,14 @@ ActionResult<CTFBot> CTFBotUseItem::Update(CTFBot *actor, float dt)
 			this->m_ctInitialDelay.Invalidate();
 		}
 		
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
 	if (actor->m_Shared.InCond(TF_COND_TAUNTING)) {
-		return Continue();
+		return ActionResult<CTFBot>::Continue();
 	}
 	
-	return Done("Item used");
+	return ActionResult<CTFBot>::Done("Item used");
 }
 
 void CTFBotUseItem::OnEnd(CTFBot *actor, Action<CTFBot> *action)

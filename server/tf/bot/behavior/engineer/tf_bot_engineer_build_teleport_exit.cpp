@@ -46,5 +46,5 @@ EventDesiredResult<CTFBot> CTFBotEngineerBuildTeleportExit::OnStuck(CTFBot *acto
 {
 	this->m_PathFollower.Invalidate();
 	
-	return Continue();
+	return EventDesiredResult<CTFBot>::Continue();
 }

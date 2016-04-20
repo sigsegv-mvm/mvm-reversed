@@ -51,18 +51,18 @@ void CTFBotEngineerBuilding::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 
 ActionResult<CTFBot> CTFBotEngineerBuilding::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 
 EventDesiredResult<CTFBot> CTFBotEngineerBuilding::OnTerritoryCaptured(CTFBot *actor, int i1)
 {
-	return Continue();
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 EventDesiredResult<CTFBot> CTFBotEngineerBuilding::OnTerritoryLost(CTFBot *actor, int i1)
 {
-	return Continue();
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 

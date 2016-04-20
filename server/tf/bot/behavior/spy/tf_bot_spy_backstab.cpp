@@ -22,12 +22,12 @@ const char *CTFBotSpyBackstab::GetName() const
 
 ActionResult<CTFBot> CTFBotSpyBackstab::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotSpyBackstab::Update(CTFBot *actor, float dt)
 {
-	return Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 

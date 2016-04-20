@@ -38,7 +38,7 @@ static CSchemaFieldHandle<CEconItemDefinition> pItemDef_GiantFlamethrower("MVM G
 		// TODO
 	}
 	
-	return ActionResult::Continue();
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMvMDeployBomb::Update(CTFBot *actor, float dt)
