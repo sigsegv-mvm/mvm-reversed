@@ -33,6 +33,8 @@ private:
 	CFmtStrN<32> m_strName;                              // +0x0c
 	T *m_Actor;                                          // +0x38
 	CUtlVectorAutoPurge<Action<T> *> m_DestroyedActions; // +0x3c
+	
+	friend class IHotplugAction;
 };
 
 //template<> class Behavior<CBotNPCArcher>;
@@ -392,7 +394,7 @@ private:
 	bool m_bStarted;                // +0x30
 	bool m_bSuspended;              // +0x31
 	
-	template<class U> friend class IHotplugAction;
+	friend class IHotplugAction;
 };
 
 //template<> class Action<CBotNPCArcher>;
