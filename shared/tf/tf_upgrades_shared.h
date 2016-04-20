@@ -35,7 +35,8 @@ private:
 	UNKNOWN GetAttributeIndexByName(const char *name);
 	UNKNOWN ParseUpgradeBlockForUIGroup(KeyValues *kv, int ui_group);
 	
-	// TODO
+	CUtlVector<CMannVsMachineUpgrades> m_Upgrades; // +0x0c
+	CUtlMap<const char *, int> m_UpgradeMap;       // +0x24
 };
 
 
