@@ -35,7 +35,7 @@ private:
 	bool IsVisibleToEnemy(CTFBot *actor, const Vector& v1) const;
 	CTFPlayer *SelectPatient(CTFBot *actor, CTFPlayer *old_patient);
 	
-	ChasePath m_ChasePath; // +0x0034
+	ChasePath m_ChasePath;         // +0x0034
 	// 0x4834 CountdownTimer
 	// 0x4840 CountdownTimer
 	CHandle<CTFPlayer> m_hPatient; // +0x484c
@@ -43,8 +43,8 @@ private:
 	// 0x485c CountdownTimer
 	// 0x4868 dword
 	// 0x486c CountdownTimer
-	PathFollower m_PathFollower; // +0x4878
-	Vector m_vecFollowPosition;  // +0x904c
+	PathFollower m_PathFollower;   // +0x4878
+	Vector m_vecFollowPosition;    // +0x904c
 };
 
 

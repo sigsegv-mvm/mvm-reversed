@@ -30,38 +30,222 @@ const char *CTFBotMedicHeal::GetName() const
 
 ActionResult<CTFBot> CTFBotMedicHeal::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	this->m_ChasePath.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
+	
+	// Vector @ 0x4850 = vec3_origin
+	this->m_hPatient = nullptr;
+	// dword @ 0x4868 = 0
+	// CountdownTimer @ 0x485c .Invalidate()
 	
 	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
 {
-	if (actor->m_Squad != nullptr) {
-		// TODO
+	CTFBotSquad *squad = actor->m_Squad;
+	if (squad != nullptr) {
+		if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode()) {
+			if (actor == squad->m_hLeader) {
+				return ActionResult<CTFBot>::ChangeTo(new CTFBotFetchFlag(false),
+					"I'm now a squad leader! Going for the flag!");
+			}
+		}
+		
+		if (!squad->m_bShouldPreserveSquad) {
+			CUtlVector<CTFBot *> members;
+			squad->CollectMembers(&members);
+			
+			bool all_medics = true;
+			FOR_EACH_VEC(members, i) {
+				if (!members[i]->IsPlayerClass(TF_CLASS_MEDIC)) {
+					all_medics = false;
+					break;
+				}
+			}
+			
+			if (all_medics) {
+				FOR_EACH_VEC(members, i) {
+					members[i]->LeaveSquad();
+				}
+			}
+		}
 	} else {
 		actor->SetMission(CTFBot::MissionType::NONE, false);
 	}
 	
 	this->m_hPatient = this->SelectPatient(actor, this->m_hPatient);
 	
-	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode()) {
-		if (this->m_hPatient->IsPlayerClass(TF_CLASS_MEDIC)) {
-			// TODO
-			// stack space for the CUtlVector is shared with path computation junk, ugh
+	/* try very hard to avoid healing medics; handle healbeam loops safely */
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() &&
+		this->m_hPatient != nullptr && this->m_hPatient->IsPlayerClass(TF_CLASS_MEDIC)) {
+		CUtlVector<CBaseEntity *> patients;
+		patients.AddToTail(this->m_hPatient);
+		
+		CBaseEntity *patient;
+		while (ToTFPlayer(patient = this->m_hPatient->MedicGetHealTarget()) != nullptr) {
+			if (!patients.IsEmpty()) {
+				bool loop = false;
+				FOR_EACH_VEC(patients, i) {
+					if (patient == patients[i]) {
+						loop = true;
+						break;
+					}
+				}
+				
+				if (loop) break;
+			}
+			
+			patients.AddToTail(patient);
+			
+			this->m_hPatient = ToTFPlayer(patient);
 		}
 	}
 	
-	// TODO
+	// LABEL_23
+	
+	if (this->m_hPatient != nullptr) {
+		if (/* Vector @ 0x4850 to patient absorigin dist sqr > Square(200.0f) */) {
+			
+		}
+		
+		if (this->m_hPatient->m_Shared.InCond(TF_COND_SELECTED_TO_TELEPORT)) {
+			CUtlVector<CBaseObject *> objs;
+			TheNavMesh->CollectBuiltObjects(&objs, actor->GetTeamNumber());
+			
+			CObjectTeleporter *best_tele = nullptr;
+			float best_dsqr              = FLT_MAX;
+			
+			FOR_EACH_VEC(objs, i) {
+				if (objs[i]->GetType() != OBJ_TELEPORTER) {
+					continue;
+				}
+				
+				auto tele = static_cast<CObjectTeleporter *>(objs[i]);
+				
+				if (tele->m_iTeleportType != 1 || !tele->IsReady()) {
+					continue;
+				}
+				
+				float dsqr = (this->m_hPatient->GetAbsOrigin() - tele->GetAbsOrigin()).LengthSqr();
+				if (dsqr < best_dsqr) {
+					best_tele = tele;
+					best_dsqr = dsqr;
+				}
+			}
+			
+			if (best_tele != nullptr) {
+				// TODO: enum name for (CTFBotUseTeleporter::UseHowType)1
+				return ActionResult<CTFBot>::SuspendFor(new CTFBotUseTeleporter(best_tele, 1),
+					"Following my patient through a teleporter");
+			}
+		}
+		
+		// LABEL_89 / LABEL_90
+		
+		const CKnownEntity *threat = actor->GetVisionInterface()->GetPrimaryKnownThreat(false);
+		
+		// TODO: names for these
+		bool bool1 = true;
+		bool bool2 = false;
+		
+		CWeaponMedigun *medigun = nullptr;
+		
+		CTFWeaponBase *weapon = actor->m_Shared.GetActiveTFWeapon();
+		if (weapon != nullptr) {
+			medigun = dynamic_cast<CWeaponMedigun *>(weapon);
+			if (medigun != nullptr) {
+				if (medigun->GetMedigunType() == 3) {
+					// TODO: bunch of branch spaghetti for cycling resist type
+					// based on bot attributes
+					
+					// 100000 VACCINATORBULLETS
+					// 200000 VACCINATORBLAST
+					// 400000 VACCINATORFIRE
+				}
+				
+				if (!medigun->IsReleasingCharge()) {
+					// TODO
+				}
+				
+				actor->GetBodyInterface()->AimHeadTowards(this->m_hPatient,
+					IBody::LookAtPriorityType::CRITICAL, 1.0f, nullptr,
+					"Aiming at my patient");
+				
+				if (medigun->GetHealTarget() != nullptr &&
+					medigun->GetHealTarget() != this->m_hPatient) {
+					actor->PressFireButton();
+					
+					bool2 = (medigun->GetHealTarget() != nullptr);
+					bool1 = false;
+				} else {
+					if (/* CountdownTimer @ 0x4834 IsElapsed */) {
+						// TODO
+						
+						// RandomFloat etc
+					} else {
+						actor->PressFireButton();
+						
+						bool2 = false;
+						bool1 = true;
+					}
+				}
+				
+				if (!this->IsReadyToDeployUber(medigun)) {
+					// TODO
+					
+					if (this->IsReadyToDeployUber(medigun) ||
+						actor->m_Shared.InCond(TF_COND_INVULNERABLE) ||
+						bool2 || (!bool3 && !out_of_range && !bool4)) {
+						CBaseCombatWeapon *secondary = actor->Weapon_GetSlot(1);
+						if (secondary != nullptr) {
+							actor->Weapon_Switch(secondary);
+						}
+					} else {
+						// TODO
+						// aiming at enemy
+					}
+					
+					// TODO
+				}
+				
+				// TODO
+			}
+		}
+		
+		if (medigun != nullptr && this->IsReadyToDeployUber(medigun)) {
+			if (medigun->GetMedigunType() == 3) {
+				// TODO
+			} else {
+				// TODO
+			}
+		}
+		
+		// L_medigun_is_nullptr
+		
+		// TODO
+		// is visible recently
+		// path stuff
+		// etc
+		
+		return ActionResult<CTFBot>::Continue();
+	}
+	
+	if (TFGameRules()->IsMannVsMachineMode()) {
+		return ActionResult<CTFBot>::ChangeTo(new CTFBotFetchFlag(false),
+			"Everyone is gone! Going for the flag");
+	}
+	
+	if (!TFGameRules()->IsPVEModeActive()) {
+		return ActionResult<CTFBot>::SuspendFor(new CTFBotMedicRetreat(),
+			"Retreating to find another patient to heal");
+	}
+	
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotMedicHeal::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
-	// probably ChasePath::Invalidate
-	// (seems to be inlined; invalidates a couple CountdownTimers,
-	// then calls PathFollower::Invalidate)
-	
-	// TODO
+	this->m_ChasePath.Invalidate();
 	
 	return ActionResult<CTFBot>::Continue();
 }
