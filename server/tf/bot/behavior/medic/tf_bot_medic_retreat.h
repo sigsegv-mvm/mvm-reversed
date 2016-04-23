@@ -9,7 +9,7 @@
 class CTFBotMedicRetreat : public Action<CTFBot>
 {
 public:
-	CTFBotMedicRetreat(/* TODO */);
+	CTFBotMedicRetreat();
 	virtual ~CTFBotMedicRetreat();
 	
 	virtual const char *GetName() const override;
@@ -25,9 +25,18 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// 0034 PathFollower
-	// 4808 CountdownTimer
+	PathFollower m_PathFollower;        // +0x0034
+	CountdownTimer m_ctLookForPatients; // +0x4808
 };
 
 
-// TODO: CUsefulHealTargetFilter
+class CUsefulHealTargetFilter : public INextBotEntityFilter
+{
+public:
+	CUsefulHealTargetFilter(int teamnum);
+	
+	virtual bool IsAllowed(CBaseEntity *ent) const override;
+	
+private:
+	int m_iTeamNum; // +0x04
+};

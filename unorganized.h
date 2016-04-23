@@ -231,45 +231,12 @@ public:
 	virtual bool IsAllowed(CBaseEntity *ent) const = 0;
 };
 
-class CUsefulHealTargetFilter : public INextBotEntityFilter
-{
-public:
-	CUsefulHealTargetFilter(int teamnum);
-	
-	virtual bool IsAllowed(CBaseEntity *ent) const override;
-	
-private:
-	int m_iTeamNum; // +0x04
-};
-
 
 class INextBotFilter
 {
 public:
 	virtual bool IsSelected(const CBaseEntity *ent) const = 0;
 };
-
-
-CUsefulHealTargetFilter::CUsefulHealTargetFilter(int teamnum)
-	: m_iTeamNum(teamnum)
-{
-}
-
-
-bool CUsefulHealTargetFilter::IsAllowed(CBaseEntity *ent) const
-{
-	if (ent == nullptr || !ent->IsPlayer() ||
-		ent->GetTeamNumber() != this->m_iTeamNum) {
-		return false;
-	}
-	
-	if (ToTFPlayer(ent)->IsPlayerClass(TF_CLASS_MEDIC) ||
-		ToTFPlayer(ent)->IsPlayerClass(TF_CLASS_SNIPER)) {
-		return false;
-	}
-	
-	return true;
-}
 
 
 class INextBotReply

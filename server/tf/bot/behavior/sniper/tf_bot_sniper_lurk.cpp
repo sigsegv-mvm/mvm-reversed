@@ -127,7 +127,7 @@ ActionResult<CTFBot> CTFBotSniperLurk::Update(CTFBot *actor, float dt)
 			// increment int @ 0x4820
 			
 			if (this->FindNewHome(actor)) {
-				// vcall actor+0x728 with 0x20
+				actor->SpeakConceptIfAllowed(MP_CONCEPT_PLAYER_NEGATIVE);
 				
 				this->m_ctPatience.Start(RandomFloat(0.9f, 1.1f) * tf_bot_sniper_patience_duration.GetFloat());
 			} else {
@@ -202,7 +202,7 @@ ActionResult<CTFBot> CTFBotSniperLurk::OnSuspend(CTFBot *actor, Action<CTFBot> *
 
 ActionResult<CTFBot> CTFBotSniperLurk::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
-	// CountdownTimer @ 0x0040: .Invalidate()
+	this->m_ctRecomputePath.Invalidate();
 	
 	this->m_hHint = nullptr;
 	this->FindNewHome(actor);
