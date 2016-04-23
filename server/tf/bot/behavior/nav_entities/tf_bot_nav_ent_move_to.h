@@ -18,12 +18,10 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// 0034 CHandle<T>
-	// 0038 
-	// 003c 
-	// 0040 
-	// 0044 
-	// 0048 CountdownTimer
-	// 0054 PathFollower
-	// 4828 CountdownTimer
+	CHandle<CFuncNavPrerequisite> m_hPrereq; // +0x0034
+	Vector m_vecGoalPos;                     // +0x0038
+	CNavArea *m_GoalArea;                    // +0x0044
+	CountdownTimer m_ctWaitDuration;         // +0x0048
+	PathFollower m_PathFollower;             // +0x0054
+	CountdownTimer m_ctRecomputePath;        // +0x4828
 };
