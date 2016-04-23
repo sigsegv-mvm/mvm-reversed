@@ -206,12 +206,12 @@ ActionResult<CTFBot> CTFBotEscortSquadLeader::Update(CTFBot *actor, float dt)
 			actor->m_bIsInFormation = true;
 		}
 		
-		if (this->m_PathFollower->GetLength() > 750.0f) {
+		if (this->m_PathFollower.GetLength() > 750.0f) {
 			actor->m_bIsInFormation = true;
 		}
 	}
 	
-	this->m_PathFollower->Update(actor);
+	this->m_PathFollower.Update(actor);
 	return ActionResult<CTFBot>::Continue();
 }
 

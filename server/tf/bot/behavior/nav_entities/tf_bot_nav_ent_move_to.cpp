@@ -28,7 +28,7 @@ ActionResult<CTFBot> CTFBotNavEntMoveTo::OnStart(CTFBot *actor, Action<CTFBot> *
 		return ActionResult<CTFBot>::Done("Prerequisite has been removed before we started");
 	}
 	
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	this->m_ctWaitDuration.Invalidate();
 	

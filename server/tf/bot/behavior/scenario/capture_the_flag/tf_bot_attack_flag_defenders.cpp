@@ -30,7 +30,7 @@ const char *CTFBotAttackFlagDefenders::GetName() const
 
 ActionResult<CTFBot> CTFBotAttackFlagDefenders::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	this->m_hTarget = nullptr;
 	

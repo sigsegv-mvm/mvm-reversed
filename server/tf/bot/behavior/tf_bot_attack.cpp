@@ -41,7 +41,7 @@ const char *CTFBotAttack::GetName() const
 
 ActionResult<CTFBot> CTFBotAttack::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	return ActionResult<CTFBot>::Continue();
 }

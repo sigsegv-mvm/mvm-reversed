@@ -30,7 +30,7 @@ const char *CTFBotMvMEngineerIdle::GetName() const
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower->SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	actor->m_bLookAroundForEnemies = false;
 	
