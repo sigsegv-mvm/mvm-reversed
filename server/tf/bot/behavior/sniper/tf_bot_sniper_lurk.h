@@ -9,7 +9,7 @@
 class CTFBotSniperLurk : public Action<CTFBot>
 {
 public:
-	CTFBotSniperLurk(/* TODO */);
+	CTFBotSniperLurk();
 	virtual ~CTFBotSniperLurk();
 	
 	virtual const char *GetName() const override;
@@ -25,24 +25,18 @@ public:
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
 private:
-	UNKNOWN FindHint(CTFBot *actor);
-	UNKNOWN FindNewHome(CTFBot *actor);
+	CTFBotHint *FindHint(CTFBot *actor);
+	bool FindNewHome(CTFBot *actor);
 	
-	// 0034 CountdownTimer
-	// 0040 CountdownTimer
-	// 004c PathFollower
-	// 4820 
-	// 4824 
-	// 4828 
-	// 482c 
-	// 4830 
+	CountdownTimer m_ctPatience;             // +0x0034
+	CountdownTimer m_ctRecomputePath;        // +0x0040
+	PathFollower m_PathFollower;             // +0x004c
+	// 4820 int
+	Vector m_vecHome;                        // +0x4824
+	bool m_bHasHome;                         // +0x4830
+	bool m_bNearHome;                        // +0x4831
 	// 4834 CountdownTimer
-	// 4840 
-	// 4844 
-	// 4848 
-	// 484c 
-	// 4850 
-	// 4854 
-	// 4858 CHandle<T>
+	bool m_bOpportunistic;                   // +0x4840
+	CUtlVector<CHandle<CTFBotHint>> m_Hints; // +0x4844
+	CHandle<CTFBotHint> m_hHint;             // +0x4858
 };
-
