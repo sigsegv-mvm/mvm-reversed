@@ -18,10 +18,10 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// 0034 PathFollower
-	// 4808 CountdownTimer
-	// 4814 CTFBotMeleeAttack
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
+	CTFBotMeleeAttack m_MeleeAttack;  // +0x4814
 };
 
 
-UNKNOWN GetBotEscortCount(int i1);
+int GetBotEscortCount(int teamnum);
