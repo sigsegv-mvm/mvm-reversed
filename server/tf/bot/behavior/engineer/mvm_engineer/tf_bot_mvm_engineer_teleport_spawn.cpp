@@ -71,10 +71,10 @@ ActionResult<CTFBot> CTFBotMvMEngineerTeleportSpawn::Update(CTFBot *actor, float
 			CWave *wave = g_pPopulationManager->GetCurrentWave();
 			if (wave != nullptr) {
 				if (wave->m_iEngiesTeleportedIn == 0) {
-					g_pGameRules->BroadcastSound(255,
+					TFGameRules()->BroadcastSound(255,
 						"Announcer.MvM_First_Engineer_Teleport_Spawned");
 				} else {
-					g_pGameRules->BroadcastSound(255,
+					TFGameRules()->BroadcastSound(255,
 						"Announcer.MvM_Another_Engineer_Teleport_Spawned");
 				}
 				++wave->m_iEngiesTeleportedIn;

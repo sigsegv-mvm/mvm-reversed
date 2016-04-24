@@ -622,7 +622,7 @@ void CWave::Update()
 {
 	VPROF_BUDGET("CWave::Update", "NextBot");
 	
-	gamerules_roundstate_t roundstate = g_pGameRules->State_Get();
+	gamerules_roundstate_t roundstate = TFGameRules()->State_Get();
 	
 	if (roundstate == GR_STATE_RND_RUNNING) {
 		this->ActiveWaveUpdate();
@@ -927,13 +927,13 @@ bool CMissionPopulator::UpdateMissionDestroySentries()
 		CWave *wave = this->m_PopMgr->GetCurrentWave();
 		if (wave != nullptr) {
 			if (++wave->m_iSentryBustersSpawned <= 1) {
-				if (g_pGameRules != nullptr) {
-					g_pGameRules->BroadcastSound(255,
+				if (TFGameRules() != nullptr) {
+					TFGameRules()->BroadcastSound(255,
 						"Announcer.MVM_Sentry_Buster_Alert");
 				}
 			} else {
-				if (g_pGameRules != nullptr) {
-					g_pGameRules->BroadcastSound(255,
+				if (TFGameRules() != nullptr) {
+					TFGameRules()->BroadcastSound(255,
 						"Announcer.MVM_Sentry_Buster_Alert_Another");
 				}
 			}
@@ -1088,7 +1088,7 @@ void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newsta
 	
 	if (newstate == InternalStateType::PRE_SPAWN_DELAY) {
 		if (this->m_strStartWaveWarningSound.Length() > 0) {
-			g_pGameRules->BroadcastSound(255,
+			TFGameRules()->BroadcastSound(255,
 				this->m_strStartWaveWarningSound());
 		}
 		
@@ -1100,7 +1100,7 @@ void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newsta
 		}
 	} else if (newstate == InternalStateType::SPAWNING) {
 		if (this->m_strFirstSpawnWarningSound.Length() > 0) {
-			g_pGameRules->BroadcastSound(255,
+			TFGameRules()->BroadcastSound(255,
 				this->m_strFirstSpawnWarningSound());
 		}
 		
@@ -1112,7 +1112,7 @@ void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newsta
 		}
 	} else if (newstate == InternalStateType::WAIT_FOR_ALL_DEAD) {
 		if (this->m_strLastSpawnWarningSound.Length() > 0) {
-			g_pGameRules->BroadcastSound(255,
+			TFGameRules()->BroadcastSound(255,
 				this->m_strLastSpawnWarningSound());
 		}
 		
@@ -1124,7 +1124,7 @@ void CWaveSpawnPopulator::SetState(CWaveSpawnPopulator::InternalStateType newsta
 		}
 	} else if (newstate == InternalStateType::DONE) {
 		if (this->m_strDoneWarningSound.Length() > 0) {
-			g_pGameRules->BroadcastSound(255,
+			TFGameRules()->BroadcastSound(255,
 				this->m_strDoneWarningSound());
 		}
 		

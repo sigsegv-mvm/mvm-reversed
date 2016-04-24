@@ -161,7 +161,7 @@ Action<CTFBot> *CTFBotScenarioMonitor::DesiredScenarioAndClassAction(CTFBot *act
 		return new CTFBotFetchFlag(false);
 	}
 	
-	if (g_pGameRules->GetGameType() == TF_GAMETYPE_ESCORT) {
+	if (TFGameRules()->GetGameType() == TF_GAMETYPE_ESCORT) {
 		if (actor->GetTeamNumber() == TF_TEAM_BLUE) {
 			return new CTFBotPayloadPush(/* TODO */);
 		} else if (actor->GetTeamNumber() == TF_TEAM_RED) {
@@ -171,7 +171,7 @@ Action<CTFBot> *CTFBotScenarioMonitor::DesiredScenarioAndClassAction(CTFBot *act
 		}
 	}
 	
-	if (g_pGameRules->GetGameType() == TF_GAMETYPE_CP) {
+	if (TFGameRules()->GetGameType() == TF_GAMETYPE_CP) {
 		CUtlVector<CTeamControlPoint *> capture_points;
 		TFGameRules()->CollectCapturePoints(actor, &capture_points);
 		

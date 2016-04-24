@@ -51,7 +51,7 @@ ActionResult<CTFBot> CTFBotMainAction::Update(CTFBot *actor, float dt)
 	
 	actor->GetVisionInterface()->SetFieldOfView(actor->GetFOV());
 	
-	if (g_pGameRules->IsInTraining() && actor->GetTeamNumber() == TF_TEAM_BLUE) {
+	if (TFGameRules()->IsInTraining() && actor->GetTeamNumber() == TF_TEAM_BLUE) {
 		// TODO: enum for GiveAmmo param 2?
 		// TODO: default val for GiveAmmo param 3?
 		actor->GiveAmmo(1000, 3, true);
@@ -199,7 +199,7 @@ QueryResponse CTFBotMainAction::ShouldRetreat(const INextBot *nextbot) const
 		return QueryResponse::YES;
 	}
 	
-	if (g_pGameRules->m_bInSetup) {
+	if (TFGameRules()->InSetup()) {
 		return QueryResponse::NO;
 	}
 	
@@ -416,7 +416,7 @@ void CTFBotMainAction::FireWeaponAtEnemy(CTFBot *actor)
 	}
 	
 	if (!actor->GetIntentionInterface()->ShouldAttack(actor, threat) ||
-		g_pGameRules->InSetup()) {
+		TFGameRules()->InSetup()) {
 		return;
 	}
 	

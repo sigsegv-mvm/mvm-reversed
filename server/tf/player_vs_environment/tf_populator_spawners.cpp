@@ -416,7 +416,7 @@ int CTFBotSpawner::Spawn(const Vector& where, CUtlVector<CHandle<CBaseEntity>> *
 	}
 	
 	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() &&
-		g_pGameRules->m_iRoundState != GR_STATE_RND_RUNNING) {
+		TFGameRules()->State_Get() != GR_STATE_RND_RUNNING) {
 		return 0;
 	}
 	
