@@ -9,7 +9,7 @@
 class CTFBotMeleeAttack : public Action<CTFBot>
 {
 public:
-	CTFBotMeleeAttack(float range);
+	CTFBotMeleeAttack(float abandon_range = -1.0f);
 	virtual ~CTFBotMeleeAttack();
 	
 	virtual const char *GetName() const override;
@@ -18,6 +18,6 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// 0034 
-	// 0038 ChasePath
+	float m_flAbandonRange; // +0x0034
+	ChasePath m_ChasePath;  // +0x0038
 };
