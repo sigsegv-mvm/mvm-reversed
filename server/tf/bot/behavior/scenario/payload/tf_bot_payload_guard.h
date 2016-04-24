@@ -9,7 +9,7 @@
 class CTFBotPayloadGuard : public Action<CTFBot>
 {
 public:
-	CTFBotPayloadGuard(/* TODO */);
+	CTFBotPayloadGuard();
 	virtual ~CTFBotPayloadGuard();
 	
 	virtual const char *GetName() const override;
@@ -29,10 +29,28 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 private:
-	UNKNOWN FindVantagePoint(CTFBot *actor, CBaseEntity *ent);
+	Vector FindVantagePoint(CTFBot *actor, CBaseEntity *target);
 	
-	// TODO
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
+	// 4814 Vector
+	// 4820 CountdownTimer
+	// 482c CountdownTimer
 };
 
 
-// TODO: CCollectPayloadGuardVantagePoints
+class CCollectPayloadGuardVantagePoints : public ISearchSurroundingAreasFunctor
+{
+public:
+	CCollectPayloadGuardVantagePoints(CTFBot *actor, CBaseEntity *target) :
+		m_Actor(actor), m_Target(target) {}
+	
+	virtual bool operator()(CNavArea *area, CNavArea *priorArea, float travelDistanceSoFar) override;
+	
+	Vector GetResult() const;
+	
+private:
+	CTFBot *m_Actor;                    // +0x04
+	CBaseEntity *m_Target;              // +0x08
+	CUtlVector<Vector> m_VantagePoints; // +0x0c
+};
