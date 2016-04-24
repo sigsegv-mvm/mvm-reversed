@@ -9,7 +9,7 @@
 class CTFBotFetchFlag : public Action<CTFBot>
 {
 public:
-	CTFBotFetchFlag(bool attack_if_unreachable);
+	CTFBotFetchFlag(bool give_up_when_done);
 	virtual ~CTFBotFetchFlag();
 	
 	virtual const char *GetName() const override;
@@ -21,7 +21,7 @@ public:
 	virtual QueryResponse ShouldRetreat(const INextBot *nextbot) const override;
 	
 private:
-	// 0032 bool (from ctor: change to AttackFlagDefenders if flag unreachable)
-	// 0034 PathFollower
-	// 4808 CountdownTimer
+	bool m_bGiveUpWhenDone;           // +0x0032
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
 };
