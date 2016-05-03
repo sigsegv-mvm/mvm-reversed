@@ -6,11 +6,11 @@
 
 
 // sizeof: 0x4818
-class CTFBotSap : public Action<CTFBot>
+class CTFBotSpySap : public Action<CTFBot>
 {
 public:
-	CTFBotSap(CBaseObject *building);
-	virtual ~CTFBotSap();
+	CTFBotSpySap(CBaseObject *target);
+	virtual ~CTFBotSpySap();
 	
 	virtual const char *GetName() const override;
 	
@@ -29,7 +29,7 @@ public:
 private:
 	bool AreAllDangerousSentriesSapped(CTFBot *actor) const;
 	
-	// 0034 CHandle<T>
-	// 0038 CountdownTimer
-	// 0044 PathFollower
+	CHandle<CBaseObject> m_hTarget;   // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x0038
+	PathFollower m_PathFollower;      // +0x0044
 };
