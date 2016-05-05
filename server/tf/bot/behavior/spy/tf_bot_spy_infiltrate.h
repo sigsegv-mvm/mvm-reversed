@@ -6,11 +6,11 @@
 
 
 // sizeof: 0x4834
-class CTFBotInfiltrate : public Action<CTFBot>
+class CTFBotSpyInfiltrate : public Action<CTFBot>
 {
 public:
-	CTFBotInfiltrate(/* TODO */);
-	virtual ~CTFBotInfiltrate();
+	CTFBotSpyInfiltrate();
+	virtual ~CTFBotSpyInfiltrate();
 	
 	virtual const char *GetName() const override;
 	
@@ -27,12 +27,12 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	UNKNOWN FindHidingSpot(CTFBot *actor);
+	bool FindHidingSpot(CTFBot *actor);
 	
-	// 0034 CountdownTimer
-	// 0040 PathFollower
-	// 4814 
-	// 4818 CountdownTimer
-	// 4824 CountdownTimer
-	// 4830 
+	CountdownTimer m_ctRecomputePath;  // +0x0034
+	PathFollower m_PathFollower;       // +0x0040
+	CTFNavArea *m_HidingArea;          // +0x4814
+	CountdownTimer m_ctFindHidingArea; // +0x4818
+	CountdownTimer m_ctWait;           // +0x4824
+	bool m_bCloaked;                   // +0x4830
 };
