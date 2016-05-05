@@ -9,7 +9,7 @@
 class CTFBotSpyHide : public Action<CTFBot>
 {
 public:
-	CTFBotSpyHide(CTFPlayer *player);
+	CTFBotSpyHide(CTFPlayer *victim);
 	virtual ~CTFBotSpyHide();
 	
 	virtual const char *GetName() const override;
@@ -24,18 +24,28 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	UNKNOWN FindHidingSpot(CTFBot *actor);
+	bool FindHidingSpot(CTFBot *actor);
 	
-	// 0034 CHandle<T>
-	// 0038 
-	// 003c CountdownTimer
-	// 0048 PathFollower
-	// 481c CountdownTimer
-	// 4828 
-	// 482c 
-	// 4830 CountdownTimer
+	CHandle<CTFPlayer> m_hVictim;      // +0x0034
+	HidingSpot *m_HidingSpot;          // +0x0038
+	CountdownTimer m_ctFindHidingSpot; // +0x003c
+	PathFollower m_PathFollower;       // +0x0048
+	CountdownTimer m_ctRecomputePath;  // +0x481c
+	bool m_bAtHidingSpot;              // +0x4828
+	float m_flEnemyIncursionDistance;  // +0x482c
+	CountdownTimer m_ctTeaseVictim;    // +0x4830
 };
 
 
-// TODO: IncursionEntry_t
-// TODO: SpyHideIncursionDistanceLess (sort functor)
+struct IncursionEntry_t
+{
+	int teamnum;      // +0x00
+	CTFNavArea *area; // +0x04
+};
+
+
+class SpyHideIncursionDistanceLess
+{
+public:
+	bool Less(const IncursionEntry_t& lhs, const IncursionEntry_t& rhs, void *ctx);
+};
