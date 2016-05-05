@@ -9,7 +9,7 @@
 class CTFBotSpyLurk : public Action<CTFBot>
 {
 public:
-	CTFBotSpyLurk(/* TODO */);
+	CTFBotSpyLurk();
 	virtual ~CTFBotSpyLurk();
 	
 	virtual const char *GetName() const override;
@@ -20,5 +20,5 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// 34 CountdownTimer
+	CountdownTimer m_ctPatience; // +0x34
 };
