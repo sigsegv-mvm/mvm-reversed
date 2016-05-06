@@ -6,5 +6,9 @@
 
 class CTFTankBossBody : public IBody
 {
+public:
+	// TODO
+	
+private:
 	// TODO
 };
