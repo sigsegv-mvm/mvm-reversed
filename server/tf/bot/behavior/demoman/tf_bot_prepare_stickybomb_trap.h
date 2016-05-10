@@ -9,7 +9,11 @@
 class CTFBotPrepareStickybombTrap : public Action<CTFBot>
 {
 public:
-	// TODO: CTFBotPrepareStickybombTrap::BombTargetArea
+	struct BombTargetArea
+	{
+		CTFNavArea *area;
+		int stickies;
+	};
 	
 	CTFBotPrepareStickybombTrap();
 	virtual ~CTFBotPrepareStickybombTrap();
@@ -30,7 +34,25 @@ public:
 private:
 	void InitBombTargetAreas(CTFBot *actor);
 	
-	// 34 
-	// 38 CUtlVector<BombTargetArea>
-	// 4c CountdownTimer
+	bool m_bReload;                               // +0x32
+	CTFNavArea *m_LastKnownArea;                  // +0x34
+	CUtlVector<BombTargetArea> m_BombTargetAreas; // +0x38
+	CountdownTimer m_ctAimTimeout;                // +0x4c
+};
+
+
+class PlaceStickyBombReply : public INextBotReply
+{
+public:
+	PlaceStickyBombReply();
+	
+	virtual void OnSuccess(INextBot *nextbot) override;
+	virtual void OnFail(INextBot *nextbot, FailureReason reason) override;
+	
+	void Init(BombTargetArea *target, CountdownTimer *timer);
+	void Reset();
+	
+private:
+	BombTargetArea *m_pBombTargetArea; // +0x04
+	CountdownTimer *m_pctAimTimeout;   // +0x08
 };
