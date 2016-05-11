@@ -5,11 +5,11 @@
  */
 
 
-// sizeof: TODO
+// sizeof: 0x481c
 class CTFBotApproachObject : public Action<CTFBot>
 {
 public:
-	CTFBotApproachObject(CBaseEntity *ent, float f1);
+	CTFBotApproachObject(CBaseEntity *object, float dist);
 	virtual ~CTFBotApproachObject();
 	
 	virtual const char *GetName() const override;
@@ -18,5 +18,8 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	// TODO
+	CHandle<CBaseEntity> m_hObject;   // +0x0034
+	float m_flDist;                   // +0x0038
+	PathFollower m_PathFollower;      // +0x003c
+	CountdownTimer m_ctRecomputePath; // +0x4810
 };
