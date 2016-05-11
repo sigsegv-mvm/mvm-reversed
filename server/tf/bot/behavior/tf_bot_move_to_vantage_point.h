@@ -5,11 +5,11 @@
  */
 
 
-// sizeof: TODO
+// sizeof: 0x481c
 class CTFBotMoveToVantagePoint : public Action<CTFBot>
 {
 public:
-	CTFBotMoveToVantagePoint(float f1);
+	CTFBotMoveToVantagePoint(float max_cost);
 	virtual ~CTFBotMoveToVantagePoint();
 	
 	virtual const char *GetName() const override;
@@ -22,5 +22,8 @@ public:
 	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
 	
 private:
-	// TODO
+	float m_flMaxCost;                // +0x0034
+	PathFollower m_PathFollower;      // +0x0038
+	CountdownTimer m_ctRecomputePath; // +0x480c
+	CTFNavArea *m_VantagePoint;       // +0x4818
 };
