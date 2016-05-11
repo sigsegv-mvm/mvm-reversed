@@ -18,7 +18,7 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	CountdownTimer m_ctStart;  // +0x34
-	CountdownTimer m_ctTimer2; // +0x40
-	bool m_bStartedTaunting;   // +0x4c
+	CountdownTimer m_ctWait;  // +0x34
+	CountdownTimer m_ctTaunt; // +0x40
+	bool m_bTaunting;         // +0x4c
 };
