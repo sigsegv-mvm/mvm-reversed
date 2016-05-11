@@ -9,7 +9,7 @@
 class CTFBotEscort : public Action<CTFBot>
 {
 public:
-	CTFBotEscort(CBaseEntity *ent);
+	CTFBotEscort(CBaseEntity *who);
 	virtual ~CTFBotEscort();
 	
 	virtual const char *GetName() const override;
@@ -28,9 +28,8 @@ public:
 	void SetWho(CBaseEntity *who);
 	
 private:
-	// 0034 CHandle<T>
-	// 0038 PathFollower
+	CBaseEntity *m_hWho;              // +0x0034
+	PathFollower m_PathFollower;      // +0x0038
 	// 480c CountdownTimer
-	// 4818 CountdownTimer
-	// ...?
+	CountdownTimer m_ctRecomputePath; // +0x4818
 };
