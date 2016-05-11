@@ -10,7 +10,7 @@ class CTFBotRetreatToCover : public Action<CTFBot>
 {
 public:
 	CTFBotRetreatToCover(Action<CTFBot *> *done_action);
-	CTFBotRetreatToCover(float duration);
+	CTFBotRetreatToCover(float duration = -1.0f);
 	virtual ~CTFBotRetreatToCover();
 	
 	virtual const char *GetName() const override;
@@ -25,16 +25,44 @@ public:
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
 	
 private:
-	UNKNOWN FindCoverArea(CTFBot *actor);
+	CTFNavArea *FindCoverArea(CTFBot *actor);
 	
-	// 0034 float -1.0f
-	// 0038 
-	// 003c PathFollower
-	// 4810 CountdownTimer
-	// 481c 
-	// 4820 CountdownTimer
+	float m_flDuration;                // +0x0034
+	Action<CTFBot> *m_DoneAction;      // +0x0038
+	PathFollower m_PathFollower;       // +0x003c
+	CountdownTimer m_ctRecomputePath;  // +0x4810
+	CTFNavArea *m_CoverArea;           // +0x481c
+	CountdownTimer m_ctActionDuration; // +0x4820
 };
 
 
-// TODO: CSearchForCover
-// TODO: CTestAreaAgainstThreats
+class CSearchForCover : public ISearchSurroundingAreasFunctor
+{
+public:
+	CSearchForCover(/* TODO */);
+	virtual ~CSearchForCover();
+	
+	virtual bool operator()(CNavArea *area, CNavArea *priorArea, float travelDistanceSoFar) override;
+	virtual bool ShouldSearch(CNavArea *adjArea, CNavArea *currentArea, float travelDistanceSoFar) override;
+	virtual void PostSearch() override;
+	
+private:
+	CTFBot *m_Actor;                  // +0x04
+	CUtlVector<CTFNavArea *> m_Areas; // +0x08
+	// 1c dword
+};
+
+
+class CTestAreaAgainstThreats : public IVision::IForEachKnownEntity
+{
+public:
+	CTestAreaAgainstThreats(/* TODO */);
+	virtual ~CTestAreaAgainstThreats();
+	
+	virtual bool Inspect(const CKnownEntity& known) override;
+	
+private:
+	CTFBot *m_Actor;  // +0x04
+	CNavArea *m_Area; // +0x08
+	int m_nVisible;   // +0x0c
+};
