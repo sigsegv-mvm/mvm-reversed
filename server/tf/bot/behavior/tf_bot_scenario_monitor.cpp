@@ -2,6 +2,8 @@
  * based on TF2 version 20151007a
  * server/tf/bot/behavior/tf_bot_scenario_monitor.cpp
  * used in MvM: TODO
+ * 
+ * initial contained action of CTFBotTacticalMonitor
  */
 
 
@@ -143,7 +145,7 @@ Action<CTFBot> *CTFBotScenarioMonitor::DesiredScenarioAndClassAction(CTFBot *act
 		return new CTFBotSpyInfiltrate(/* TODO */);
 	}
 	
-	if (!TheTFBots()->IsMeleeOnly()) {
+	if (!TheTFBots().IsMeleeOnly()) {
 		if (actor->IsPlayerClass(TF_CLASS_SNIPER)) {
 			return new CTFBotSniperLurk(/* TODO */);
 		}

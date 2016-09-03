@@ -44,8 +44,8 @@ ActionResult<CTFBot> CTFBotSpyLurk::Update(CTFBot *actor, float dt)
 		}
 	}
 	
-	if (actor->m_hSentryKilledUs != nullptr && !actor->m_hSentryKilledUs->HasSapper()) {
-		return ActionResult<CTFBot>::SuspendFor(new CTFBotSpySap(actor->m_hSentryKilledUs),
+	if (actor->m_hTargetSentry != nullptr && !actor->m_hTargetSentry->HasSapper()) {
+		return ActionResult<CTFBot>::SuspendFor(new CTFBotSpySap(actor->m_hTargetSentry),
 			"Sapping a Sentry");
 	}
 	

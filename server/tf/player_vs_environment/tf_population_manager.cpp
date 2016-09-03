@@ -1,11 +1,14 @@
 /* reverse engineering by sigsegv
- * based on TF2 version 20151007a
+ * based on TF2 version 20160428a
  * server/tf/player_vs_environment/tf_population_manager.cpp
  */
 
 
 // global static s_iLastKnownMission
 // global static s_iLastKnownMissionCategory
+
+
+// TODO: re-check all convars and concommands from this file, check for new ones too
 
 
 ConVar tf_mvm_missioncyclefile("tf_mvm_missioncyclefile", "tf_mvm_missioncycle.res", FCVAR_NONE,
@@ -54,4 +57,53 @@ ConCommand tf_mvm_debugstats_command("tf_mvm_debugstats", &tf_mvm_debugstats,
 // TODO: server class init for CPopulationManager ("info_populator")
 
 
-
+void CPopulationManager::UpdateObjectiveResource()
+{
+	if (this->m_Waves.IsEmpty() || g_pObjectiveResource == nullptr) {
+		return;
+	}
+	
+	g_pObjectiveResource->m_nMvMEventPopfileType = this->m_bEventPopfile;
+	
+	if (this->IsInEndlessWaves()) {
+		g_pObjectiveResource->m_nMannVsMachineMaxWaveCount = 0;
+	} else {
+		g_pObjectiveResource->m_nMannVsMachineMaxWaveCount = this->m_Waves.Count();
+	}
+	
+	g_pObjectiveResource->m_nMannVsMachineWaveCount = this->m_iCurrentWave + 1;
+	
+	CWave *wave = this->GetCurrentWave();
+	if (wave == nullptr) {
+		return;
+	}
+	
+	g_pObjectiveResource->MannVsMachineWaveEnemyCount = wave->m_iTotalCountNonSupport;
+	
+	g_pObjectiveResource->ClearMannVsMachineWaveClassFlags();
+	
+	int i;
+	bool has_engineer = false;
+	for (i = 0; i < wave->m_ClassCounts.Count() && i < 24; ++i) {
+		if (!has_engineer && V_stricmp(STRING(wave->m_ClassCounts[i].icon), "engineer") == 0) {
+			has_engineer = true;
+		}
+		
+		g_pObjectiveResource->SetMannVsMachineWaveClassName (i, wave->m_ClassCounts[i].icon);
+		g_pObjectiveResource->SetMannVsMachineWaveClassCount(i, wave->m_ClassCounts[i].count);
+		g_pObjectiveResource->SetMannVsMachineWaveClassFlags(i, wave->m_ClassCounts[i].flags);
+	}
+	
+	if (has_engineer && i < 24) {
+		g_pObjectiveResource->SetMannVsMachineWaveClassName (i, g_pObjectiveResource->m_iszTeleporterName);
+		g_pObjectiveResource->SetMannVsMachineWaveClassCount(i, 0);
+		g_pObjectiveResource->SetMannVsMachineWaveClassFlags(i, CLASSFLAG_MISSION);
+		++i;
+	}
+	
+	for ( ; i < 24; ++i) {
+		g_pObjectiveResource->SetMannVsMachineWaveClassName (i, NULL_STRING);
+		g_pObjectiveResource->SetMannVsMachineWaveClassCount(i, 0);
+		g_pObjectiveResource->SetMannVsMachineWaveClassFlags(i, 0);
+	}
+}

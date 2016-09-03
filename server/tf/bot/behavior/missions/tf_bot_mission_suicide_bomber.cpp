@@ -267,7 +267,7 @@ void CTFBotMissionSuicideBomber::Detonate(CTFBot *actor)
 	}
 	
 	CUtlVector<INextBot *> nextbots;
-	TheNextBots()->CollectAllBots(&nextbots);
+	TheNextBots().CollectAllBots(&nextbots);
 	FOR_EACH_VEC(nextbots, i) {
 		INextBot *nextbot = nextbots[i];
 		CBaseCombatCharacter *ent = nextbot->GetEntity();

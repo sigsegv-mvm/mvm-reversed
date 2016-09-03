@@ -9,15 +9,15 @@ class INextBot : public INextBotEventResponder
 public:
 	enum NextBotDebugType : unsigned int
 	{
-		BEHAVIOR   = (1 << 0), // NextBotBehavior
-		LOOK_AT    = (1 << 1), // NextBotBodyInterface
-		PATH       = (1 << 2), // NextBotPath, NextBotPathFollow, NextBotChasePath
-		ANIMATION  = (1 << 3),
-		LOCOMOTION = (1 << 4), // NextBotLocomotionInterface
-		VISION     = (1 << 5), // NextBotVisionInterface
-		HEARING    = (1 << 6),
-		EVENTS     = (1 << 7), // NextBotEventResponderInterface
-		ERRORS     = (1 << 8),
+		DEBUG_BEHAVIOR   = (1 << 0), // NextBotBehavior
+		DEBUG_LOOK_AT    = (1 << 1), // NextBotBodyInterface
+		DEBUG_PATH       = (1 << 2), // NextBotPath, NextBotPathFollow, NextBotChasePath
+		DEBUG_ANIMATION  = (1 << 3),
+		DEBUG_LOCOMOTION = (1 << 4), // NextBotLocomotionInterface
+		DEBUG_VISION     = (1 << 5), // NextBotVisionInterface
+		DEBUG_HEARING    = (1 << 6),
+		DEBUG_EVENTS     = (1 << 7), // NextBotEventResponderInterface
+		DEBUG_ERRORS     = (1 << 8),
 	};
 	
 	struct NextBotDebugLineType
@@ -93,14 +93,14 @@ public:
 	
 	void RegisterComponent(INextBotComponent *component);
 	
-protected:
+private:
 	void UpdateImmobileStatus();
 	
 	INextBotComponent *m_ComponentList;              // +0x04
 	PathFollower *m_CurrentPath;                     // +0x08
 	int m_iManagerIndex;                             // +0x0c
-	uint8_t m_Byte10;                                // +0x10
-	int m_Int14;                                     // +0x14
+	bool m_bScheduledForNextTick;                    // +0x10
+	int m_iLastUpdateTick;                           // +0x14
 	int m_Dword18;                                   // +0x18 (reset to 0 in INextBot::Reset)
 	int m_iDebugTextOffset;                          // +0x1c
 	Vector m_vecLastPosition;                        // +0x20

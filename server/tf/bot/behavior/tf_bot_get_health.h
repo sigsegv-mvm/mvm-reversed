@@ -9,7 +9,7 @@
 class CTFBotGetHealth : public Action<CTFBot>
 {
 public:
-	CTFBotGetHealth(/* TODO */);
+	CTFBotGetHealth();
 	virtual ~CTFBotGetHealth();
 	
 	virtual const char *GetName() const override;
@@ -26,7 +26,8 @@ public:
 	static bool IsPossible(CTFBot *actor);
 	
 private:
-	// 0034 PathFollower
+	PathFollower m_PathFollower;    // +0x0034
+	CHandle<CBaseEntity> m_hHealth; // +0x4808
 	// 4808 CHandle<T>
 	// 480c 
 };
@@ -40,5 +41,5 @@ public:
 	virtual bool IsSelected(const CBaseEntity *ent) const override;
 	
 private:
-	CBaseEntity *m_Actor;
+	CBaseEntity *m_Actor; // +0x04
 };

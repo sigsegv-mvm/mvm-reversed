@@ -20,14 +20,15 @@ public:
 	NextBotManager();
 	virtual ~NextBotManager();
 	
-	virtual void Update(); // has static int iCurFrame = -1
+	virtual void Update();
 	virtual void OnMapLoaded();
 	virtual void OnRoundRestart();
 	virtual void OnBeginChangeLevel();
+	
 	virtual void OnKilled(CBaseCombatCharacter *who, const CTakeDamageInfo& info);
 	virtual void OnSound(CBaseEntity *ent, const Vector& where, KeyValues *kv);
 	virtual void OnSpokeConcept(CBaseCombatCharacter *who, const char *s1, AI_Response *a1);
-	virtual void OnWeaponFired(CBaseCombatCharacter *who1, CBaseCombatCharacter *who2);
+	virtual void OnWeaponFired(CBaseCombatCharacter *who, CBaseCombatWeapon *weapon);
 	
 	void CollectAllBots(CUtlVector<INextBot *> *nextbots);
 	
@@ -51,23 +52,29 @@ public:
 	
 	INextBot *GetSelectedBot() const { return this->m_SelectedBot; }
 	
+	// TODO: ForEachCombatCharacter
+	// TODO: ForEachBot
+	// (see: L4D)
+	
 protected:
 	void Reset();
 	
 	#define PAD(n, x) char n[x]
 	
-	// TODO
-	// 04 CUtlLinkedList<INextBot *> (sizeof: 0x1c)
-	// 20 
-	// ...
-	PAD(pad1, 0x30);
+	CUtlLinkedList<INextBot *> m_NextBots; // +0x04
+	int m_iTickRate;                       // +0x20
+	// 24 double (NotifyEndUpdate)
+	// 2c double (ShouldUpdate)
+	
+	PAD(pad1, 0x10);
+	
 	unsigned int m_nDebugMask;              // +0x34
 	CUtlVector<DebugFilter> m_DebugFilters; // +0x38
 	INextBot *m_SelectedBot;                // +0x4c
 };
 
 
-NextBotManager *TheNextBots();
+NextBotManager& TheNextBots();
 
 
 // TODO: TargetScan

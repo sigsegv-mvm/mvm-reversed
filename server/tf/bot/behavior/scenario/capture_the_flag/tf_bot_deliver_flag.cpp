@@ -12,9 +12,8 @@ ConVar tf_mvm_bot_flag_carrier_interval_to_3rd_upgrade("tf_mvm_bot_flag_carrier_
 ConVar tf_mvm_bot_flag_carrier_health_regen("tf_mvm_bot_flag_carrier_health_regen", "45.0f", FCVAR_CHEAT);
 
 
-CTFBotDeliverFlag::CTFBotDeliverFlag(/* TODO */)
+CTFBotDeliverFlag::CTFBotDeliverFlag()
 {
-	// TODO
 }
 
 CTFBotDeliverFlag::~CTFBotDeliverFlag()
@@ -30,6 +29,21 @@ const char *CTFBotDeliverFlag::GetName() const
 
 ActionResult<CTFBot> CTFBotDeliverFlag::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	this->m_ctRecomputePath.Invalidate();
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
+	
+	if (!tf_mvm_bot_allow_flag_carrier_to_fight.GetBool()) {
+		actor->m_nBotAttrs |= CTFBot::AttributeType::SUPPRESSFIRE;
+	}
+	
+	if (actor->IsMiniBoss()) {
+		// 4824 = -1
+		
+		
+	} else {
+		
+	}
+	
 	// TODO
 }
 
@@ -96,7 +110,9 @@ bool CTFBotDeliverFlag::UpgradeOverTime(CTFBot *actor)
 	CTFNavArea *area = actor->GetLastKnownArea();
 	if (area != nullptr && (area->m_nAttributes & ((actor->GetTeamNumber() == TF_TEAM_RED) ? RED_SPAWN_ROOM : BLUE_SPAWN_ROOM)) != 0) {
 		this->m_ctUnknown2.Start(tf_mvm_bot_flag_carrier_interval_to_1st_upgrade.GetFloat());
-		TFObjectiveResource()->m_flMvMNextBombUpgradeTime = 
+		TFObjectiveResource()->m_flMvMNextBombUpgradeTime = // TODO
+		
+		
 	}
 	
 	// TODO
@@ -132,7 +148,7 @@ EventDesiredResult<CTFBot> CTFBotPushToCapturePoint::OnNavAreaChanged(CTFBot *ac
 	}
 	
 	FOR_EACH_VEC(area1->GetPrerequisiteVector(), i) {
-		CFuncNavPrerequisite *prereq = area1->GetPrerequisiteVector()[i]();
+		CFuncNavPrerequisite *prereq = area1->GetPrerequisiteVector()[i];
 		if (prereq == nullptr || prereq->m_isDisabled ||
 			!prereq->PassesTriggerFilters(actor)) {
 			continue;

@@ -23,16 +23,14 @@ private:
 	// 0034 CountdownTimer
 	// 0040 CountdownTimer
 	// 004c CountdownTimer
-	// 0058 CountdownTimer
+	CountdownTimer m_ctRecomputePath; // +0x0058
 	// 0064 CountdownTimer
-	// 0070 
-	PathFollower m_PathFollower; // +0x0074
-	// 4848 
-	// 484c 
-	// 4850 
-	// 4854 
-	// 4858 
-	// 485c 
+	// 0070 int
+	PathFollower m_PathFollower;      // +0x0074
+	CTFBotHintSentrygun *m_pHint;     // +0x4848
+	Vector m_vecTarget;               // +0x484c
+	// 4858 int
+	// 485c bool
 	// 4860 
 	// 4864 
 	// 4868 

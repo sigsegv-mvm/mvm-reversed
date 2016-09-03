@@ -27,9 +27,9 @@ public:
 	static bool IsPossible(CTFBot *actor);
 	
 private:
-	// 0034 PathFollower
-	// 4808 CHandle<T>
-	// 480c byte 0
+	PathFollower m_PathFollower;  // +0x0034
+	CHandle<CBaseEntity> m_hAmmo; // +0x4808
+	// 480c bool
 };
 
 
@@ -41,8 +41,6 @@ public:
 	virtual bool IsSelected(const CBaseEntity *ent) const override;
 	
 private:
-	CBaseEntity *m_Actor;
+	CBaseEntity *m_Actor; // +0x04
+	// 08 CTFNavArea *
 };
-
-
-// TODO: CClosestTFPlayer

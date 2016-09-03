@@ -32,7 +32,7 @@ ActionResult<CTFBot> CTFBotCapturePoint::OnStart(CTFBot *actor, Action<CTFBot> *
 {
 	VPROF_BUDGET("CTFBotCapturePoint::OnStart", "NextBot");
 	
-	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	this->m_PathFollower.Invalidate();
 	
 	return ActionResult<CTFBot>::Continue();

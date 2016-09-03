@@ -279,7 +279,6 @@ bool CWaveSpawnPopulator::Parse(KeyValues *kv)
 
 bool CWave::Parse(KeyValues *kv)
 {
-	
 	FOR_EACH_SUBKEY(kv, subkey) {
 		/* this is crustier then the other parsers:
 		 * keeps calling subkey->GetName() instead of storing it in a local;

@@ -30,7 +30,6 @@ public:
 	void ResolvePlayerCollision(CTFPlayer *player);
 	
 private:
-	// ???
 	// 8b8 m_outputOnHealthBelow90Percent
 	// 8d0 m_outputOnHealthBelow80Percent
 	// 8e8 m_outputOnHealthBelow70Percent
@@ -50,7 +49,6 @@ private:
 	// 9c0 
 	// ...
 	// 9cc CTFBaseBossLocomotion *
-	// ???
 };
 
 
@@ -60,9 +58,7 @@ public:
 	CTFBaseBossLocomotion();
 	virtual ~CTFBaseBossLocomotion();
 	
-	
-	// virtual overrides
-	FaceTowards
+	virtual void FaceTowards(const Vector& v1) override;
 	virtual float GetStepHeight() const override;
 	virtual float GetMaxJumpHeight() const override;
 	virtual float GetRunSpeed() const override;

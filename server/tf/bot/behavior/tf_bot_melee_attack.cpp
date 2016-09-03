@@ -35,7 +35,7 @@ const char *CTFBotMeleeAttack::GetName() const
 
 ActionResult<CTFBot> CTFBotMeleeAttack::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_ChasePath.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_ChasePath.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	return ActionResult<CTFBot>::Continue();
 }

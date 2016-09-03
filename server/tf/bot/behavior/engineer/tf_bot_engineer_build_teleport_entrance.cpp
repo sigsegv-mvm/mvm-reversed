@@ -11,9 +11,8 @@ ConVar tf_bot_teleport_build_surface_normal_limit("tf_bot_teleport_build_surface
 	"If the ground normal Z component is less that this value, Engineer bots won't place their entrance teleporter");
 
 
-CTFBotEngineerBuildTeleportEntrance::CTFBotEngineerBuildTeleportEntrance(/* TODO */)
+CTFBotEngineerBuildTeleportEntrance::CTFBotEngineerBuildTeleportEntrance()
 {
-	// TODO
 }
 
 CTFBotEngineerBuildTeleportEntrance::~CTFBotEngineerBuildTeleportEntrance()

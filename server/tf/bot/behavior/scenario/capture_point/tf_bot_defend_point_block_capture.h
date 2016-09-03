@@ -31,5 +31,6 @@ public:
 private:
 	bool IsPointSafe(CTFBot *actor);
 	
-	// TODO
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
 };

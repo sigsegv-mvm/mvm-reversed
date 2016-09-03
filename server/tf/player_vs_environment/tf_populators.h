@@ -217,9 +217,9 @@ public:
 private:
 	struct WaveClassCount_t
 	{
-		// 00 int count
-		// 04 string_t icon
-		// 08 unsigned int flags
+		int count;          // +0x00
+		string_t icon;      // +0x04
+		unsigned int flags; // +0x08
 	};
 	
 	void ActiveWaveUpdate();

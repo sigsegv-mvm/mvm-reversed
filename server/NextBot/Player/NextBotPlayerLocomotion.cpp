@@ -64,7 +64,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 	ILocomotion::Approach(dst, 1.0f);
 	this->AdjustPosture(dst);
 	
-	if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+	if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 		NDebugOverlay::Line(this->GetFeet(), dst, RGB_YELLOW, true, 0.1f);
 	}
 	
@@ -102,7 +102,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		if (forward > 0.25f) {
 			input->PressForwardButton();
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
@@ -111,7 +111,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		} else if (forward < -0.25f) {
 			input->PressBackwardButton();
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy.x * 50.0f, eye_xy.y * 50.0f, 0.0f),
@@ -122,7 +122,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		if (side <= -0.25f) {
 			input->PressLeftButton();
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() -
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),
@@ -131,7 +131,7 @@ void PlayerLocomotion::Approach(const Vector& dst, float f1)
 		} else if (size >= 0.25f) {
 			input->PressRightButton();
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 				NDebugOverlay::HorzArrow(this->m_Player->GetAbsOrigin(),
 					this->m_Player->GetAbsOrigin() +
 					Vector(eye_xy_90.x * 50.0f, eye_xy_90.y * 50.0f, 0.0f),
@@ -167,7 +167,7 @@ void PlayerLocomotion::JumpAcrossGap(const Vector& v1, const Vector& v2)
 {
 	this->Jump();
 	this->GetBot()->GetBodyInterface()->AimHeadTowards(v1,
-		IBody::LookAtPriorityType::OVERRIDE, 1.0f, nullptr,
+		IBody::LookAtPriorityType::OVERRIDE_ALL, 1.0f, nullptr,
 		"Looking forward while jumping a gap");
 	this->m_bGapJumping = true;
 	// TODO: bool @ +0x7c = false
@@ -176,7 +176,7 @@ void PlayerLocomotion::JumpAcrossGap(const Vector& v1, const Vector& v2)
 
 void PlayerLocomotion::Jump()
 {
-	// TODO: set byte @ +0x5c to true
+	this->m_bJumping = true;
 	
 	this->m_ctJump.Start(0.5f);
 	

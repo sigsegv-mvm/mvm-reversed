@@ -25,7 +25,7 @@ const char *CTFBotPayloadPush::GetName() const
 
 ActionResult<CTFBot> CTFBotPayloadPush::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	this->m_PathFollower.Invalidate();
 	
 	// float @ 0x4814 = 180.0f

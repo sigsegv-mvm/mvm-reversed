@@ -52,7 +52,7 @@ void PlayerBody::Reset()
 void PlayerBody::Upkeep()
 {
 	static ConVarRef bot_mimic("bot_mimic");
-	if (bot_mimic.IsValid() && bot_mimic.GetDefault() == nullptr) {
+	if (bot_mimic.IsValid() && !bot_mimic.GetBool()) {
 		return;
 	}
 	
@@ -79,7 +79,7 @@ void PlayerBody::Upkeep()
 		head_steady = true;
 	}
 	
-	if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT) && this->IsHeadSteady()) {
+	if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT) && this->IsHeadSteady()) {
 		float radius = Clamp(this->GetHeadSteadyDuration * (1.0f / 3.0f),
 			0.0f, 1.0f) * 10.0f;
 		NDebugOverlay::Circle(actor->EyePosition(),
@@ -138,7 +138,7 @@ void PlayerBody::Upkeep()
 	QAngle ang_to_target;
 	VectorAngles(eye_to_target, ang_to_target);
 	
-	if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+	if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 		NDebugOverlay::Line(this->GetEyePosition(),
 			this->GetEyePosition() + (100.0f * eye_vec),
 			RGB_YELLOW, false, 2 * frametime);
@@ -161,7 +161,7 @@ void PlayerBody::Upkeep()
 		
 		if (!this->m_bSightedIn) {
 			this->m_bSightedIn = true;
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 				ConColorMsg(COLOR_ORANGE, "%3.2f: %s Look At SIGHTED IN\n",
 					gpGlobals->curtime, this->m_Player->GetPlayerName());
 			}
@@ -233,7 +233,7 @@ void PlayerBody::AimHeadTowards(const Vector& vec, IBody::LookAtPriorityType pri
 				INextBotReply::FailureReason::REJECTED);
 		}
 		
-		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+		if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
 				"previous aim not %s\n",
 				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason,
@@ -258,7 +258,7 @@ void PlayerBody::AimHeadTowards(const Vector& vec, IBody::LookAtPriorityType pri
 			this->m_itAimStart.Start();
 			this->m_bHeadOnTarget = false;
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 				NDebugOverlay::Cross3D(vec,
 					2.0f, RGB_LTYELLOW, true, 2 * duration);
 				
@@ -291,7 +291,7 @@ void PlayerBody::AimHeadTowards(const Vector& vec, IBody::LookAtPriorityType pri
 				INextBotReply::FailureReason::REJECTED);
 		}
 		
-		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+		if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
 				"higher priority aim in progress\n",
 				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason);
@@ -313,7 +313,7 @@ void PlayerBody::AimHeadTowards(CBaseEntity *ent, IBody::LookAtPriorityType prio
 				INextBotReply::FailureReason::REJECTED);
 		}
 		
-		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+		if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
 				"previous aim not %s\n",
 				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason,
@@ -338,7 +338,7 @@ void PlayerBody::AimHeadTowards(CBaseEntity *ent, IBody::LookAtPriorityType prio
 			this->m_itAimStart.Start();
 			this->m_bHeadOnTarget = false;
 			
-			if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+			if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 				NDebugOverlay::Cross3D(this->m_vecAimTarget,
 					2.0f, RGB_GRAY100, true, duration);
 				
@@ -371,7 +371,7 @@ void PlayerBody::AimHeadTowards(CBaseEntity *ent, IBody::LookAtPriorityType prio
 				INextBotReply::FailureReason::REJECTED);
 		}
 		
-		if (this->GetBot()->IsDebugging(NextBotDebugType::LOOK_AT)) {
+		if (this->GetBot()->IsDebugging(DEBUG_LOOK_AT)) {
 			ConColorMsg(COLOR_RED, "%3.2f: %s Look At '%s' rejected - "
 				"higher priority aim in progress\n",
 				gpGlobals->curtime, this->m_Player->GetPlayerName(), reason);

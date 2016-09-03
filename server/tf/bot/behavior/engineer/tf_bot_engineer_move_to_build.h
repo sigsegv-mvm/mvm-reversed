@@ -26,16 +26,14 @@ private:
 	void CollectBuildAreas(CTFBot *actor);
 	void SelectBuildLocation(CTFBot *actor);
 	
-	// 0034 
-	// 0038 
-	// 003c 
-	// 0040 
-	PathFollower m_PathFollower; // +0x0044
+	// 0034 CHandle<T>
+	// 0038 Vector
+	PathFollower m_PathFollower;           // +0x0044
 	// 4818 CountdownTimer
-	// 4824 CUtlVector<CTFNavArea *>
+	CUtlVector<CTFNavArea *> m_BuildAreas; // +0x4824
 	// 4838 
 	// 483c CountdownTimer
 };
 
 
-// TODO: CompareRangeToPoint(CTFNavArea *const *, CTFNavArea *const *)
+bool CompareRangeToPoint(CTFNavArea *const *area1, CTFNavArea *const *area2);

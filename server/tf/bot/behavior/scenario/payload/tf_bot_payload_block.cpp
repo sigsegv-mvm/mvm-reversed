@@ -22,7 +22,7 @@ const char *CTFBotPayloadBlock::GetName() const
 
 ActionResult<CTFBot> CTFBotPayloadBlock::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	this->m_PathFollower.Invalidate();
 	
 	this->m_ctBlockDuration.Start(RandomFloat(3.0f, 5.0f));

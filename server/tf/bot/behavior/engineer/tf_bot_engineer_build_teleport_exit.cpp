@@ -7,12 +7,16 @@
 
 CTFBotEngineerBuildTeleportExit::CTFBotEngineerBuildTeleportExit()
 {
-	// TODO
+	// 4808 = false
 }
 
 CTFBotEngineerBuildTeleportExit::CTFBotEngineerBuildTeleportExit(const Vector& v1, float f1)
 {
-	// TODO
+	// TODO: names for parameters
+	
+	// 4808 = true
+	// 480c = v1
+	// 4818 = f1
 }
 
 CTFBotEngineerBuildTeleportExit::~CTFBotEngineerBuildTeleportExit()
@@ -28,7 +32,15 @@ const char *CTFBotEngineerBuildTeleportExit::GetName() const
 
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	if (!/* 4808 */) {
+		// 480c = actor->GetAbsOrigin()
+	}
+	
+	// 481c .Start(3.1f)
+	
+	this->m_PathFollower.Invalidate();
+	
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::Update(CTFBot *actor, float dt)
@@ -38,7 +50,10 @@ ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::Update(CTFBot *actor, floa
 
 ActionResult<CTFBot> CTFBotEngineerBuildTeleportExit::OnResume(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	// 481c .Reset()
+	this->m_PathFollower.Invalidate();
+	
+	return ActionResult<CTFBot>::Continue();
 }
 
 

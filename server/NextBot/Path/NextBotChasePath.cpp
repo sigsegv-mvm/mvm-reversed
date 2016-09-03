@@ -121,7 +121,7 @@ void ChasePath::RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost
 	VPROF_BUDGET("ChasePath::RefreshPath", "NextBot");
 	
 	if (this->IsValid() && nextbot->GetLocomotionInterface()->IsUsingLadder()) {
-		if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+		if (nextbot->IsDebugging(DEBUG_PATH)) {
 			DevMsg("%3.2f: bot(#%d) ChasePath::RefreshPath failed. Bot is on a ladder.\n",
 				gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()));
 		}
@@ -131,7 +131,7 @@ void ChasePath::RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost
 	}
 	
 	if (ent == nullptr) {
-		if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+		if (nextbot->IsDebugging(DEBUG_PATH)) {
 			/* misspelling is in original */
 			DevMsg("%3.2f: bot(#%d) CasePath::RefreshPath failed. No subject.\n",
 				gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()));
@@ -141,7 +141,7 @@ void ChasePath::RefreshPath(INextBot *nextbot, CBaseEntity *ent, const IPathCost
 	if (this->m_ctTimer1.IsElapsed()) {
 		CBaseEntity *subject = this->m_hChaseSubject();
 		if (subject == nullptr || subject != ent) {
-			if (nextbot->IsDebugging(NextBotDebugType::PATH)) {
+			if (nextbot->IsDebugging(DEBUG_PATH)) {
 				DevMsg("%3.2f: bot(#%d) ChasePath::RefreshPath subject changed (from %p to %p).\n",
 					gpGlobals->curtime, ENTINDEX(nextbot->GetEntity()),
 					this->m_hChaseSubject(), ent);

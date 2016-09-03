@@ -81,7 +81,7 @@ void PathFollower::AdjustSpeed(INextBot *nextbot)
 	// TODO
 }
 
-Vector Avoid(PathFollower::INextBot *nextbot, const Vector& v1, const Vector& v2, const Vector& v3)
+Vector PathFollower::Avoid(PathFollower::INextBot *nextbot, const Vector& v1, const Vector& v2, const Vector& v3)
 {
 	VPROF_BUDGET("PathFollower::Avoid", "NextBotExpensive");
 	

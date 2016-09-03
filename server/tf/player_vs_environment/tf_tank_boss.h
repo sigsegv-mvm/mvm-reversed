@@ -37,8 +37,8 @@ private:
 	// TODO: everything else
 	
 	// 9d0 CTFTankBossBody *
-	// 9d4 
-	// 9d8 
+	// 9d4 CHandle<T>
+	// 9d8 CHandle<T>
 	CHandle<CPathTrack> m_hCurrentNode; // +0x9dc
 	CUtlVector<float> m_NodeDists;      // +0x9e0
 	float m_flTotalDistance;            // +0x9f4
@@ -47,36 +47,30 @@ private:
 	// a00 byte
 	// a04 
 	int m_iSmokeAttachment; // +0xa08
-	// a0c 
+	// a0c byte
+	// a0d byte
+	// a0e byte
+	// a0f byte
 	int m_iLastHealth; // +0xa10
 	int m_iModelIndex; // +0xa14
 	// a18 
-	// a1c 
-	// a20 
+	// a1c char[8]
 	Vector m_vecTrackR; // +0xa24
 	Vector m_vecTrackL; // +0xa30
-	// a3c 
-	// a40 
-	// a44 
+	// a3c CountdownTimer
 	EventInfo m_OnKilledOutput;             // +0xa48
 	EventInfo m_OnBombDroppedOutput;        // +0xc60
 	CHandle<CDynamicProp> m_hBombMechanism; // +0xe78
 	CHandle<CDynamicProp> m_hTrackL;        // +0xe7c
 	CHandle<CDynamicProp> m_hTrackR;        // +0xe80
-	// e84 
-	// e88 
-	// e8c 
-	// e90 
+	CountdownTimer m_ctCollisionCheck;      // +0xe84
+	CWaveSpawnPopulator *m_pWaveSpawn;      // +0xe90
 	Vector m_vecCollisionMins; // +0xe94
 	Vector m_vecCollisionMaxs; // +0xea0
 	// eac float
-	// eb0 
-	// eb4 
-	// eb8 
-	// ebc 
-	// ec0 
+	// eb0 CUtlVector<EntityHistory_t>
 	// ec4 
-	// ec8 
+	// ec8 byte
 };
 
 

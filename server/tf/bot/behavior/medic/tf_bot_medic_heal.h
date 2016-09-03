@@ -39,7 +39,7 @@ private:
 	// 0x4834 CountdownTimer
 	// 0x4840 CountdownTimer
 	CHandle<CTFPlayer> m_hPatient; // +0x484c
-	// 0x4850 Vector
+	Vector m_vecPatientPosition;   // +0x4850
 	// 0x485c CountdownTimer
 	// 0x4868 dword
 	// 0x486c CountdownTimer

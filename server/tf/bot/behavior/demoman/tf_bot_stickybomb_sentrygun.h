@@ -27,20 +27,17 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	bool IsAimOnTarget(CTFBot *actor, float f1, float f2, float f3);
+	bool IsAimOnTarget(CTFBot *actor, float pitch, float yaw, float speed);
 	
-	// 34 Vector
-	// 40 byte 1
-	// 44 CHandle<T>
-	// 48 
-	// 4c CountdownTimer
-	// 58 
-	// 5c 
-	// 60 
-	// 64 
-	// 68 
-	// 6c 
-	// 70 
-	// 74 
-	// 78 
+	// 34 Vector/QAngle
+	bool m_bOpportunistic;               // +0x40
+	bool m_bReload;                      // +0x41
+	CHandle<CObjectSentrygun> m_hSentry; // +0x44
+	// 48 bool
+	CountdownTimer m_ctAimTimeout;       // +0x4c
+	// 58 bool
+	Vector m_vecAimTarget;               // +0x5c
+	// 68 Vector/QAngle
+	float m_flChargeLevel;               // +0x74
+	// 78 dword
 };

@@ -26,7 +26,7 @@ const char *CTFBotPayloadGuard::GetName() const
 
 ActionResult<CTFBot> CTFBotPayloadGuard::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	this->m_PathFollower.Invalidate();
 	
 	// Vector @ 0x4814 = actor->GetAbsOrigin()

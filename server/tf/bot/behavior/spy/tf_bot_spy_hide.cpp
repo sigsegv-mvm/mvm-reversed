@@ -23,6 +23,8 @@ const char *CTFBotSpyHide::GetName() const
 
 ActionResult<CTFBot> CTFBotSpyHide::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	/* BUG: doesn't set PathFollower's min lookahead distance */
+	
 	this->m_HidingSpot = nullptr;
 	this->m_ctFindHidingSpot.Invalidate();
 	this->m_bAtHidingSpot = false;

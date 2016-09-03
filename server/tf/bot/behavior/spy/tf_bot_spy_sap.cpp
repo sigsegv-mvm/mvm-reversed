@@ -23,6 +23,8 @@ const char *CTFBotSpySap::GetName() const
 
 ActionResult<CTFBot> CTFBotSpySap::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	/* BUG: doesn't set PathFollower's min lookahead distance */
+	
 	actor->m_bLookAroundForEnemies = false;
 	
 	if (actor->m_Shared.IsStealthed()) {
@@ -79,7 +81,7 @@ ActionResult<CTFBot> CTFBotSpySap::Update(CTFBot *actor, float dt)
 		}
 		
 		actor->GetBodyInterface()->AimHeadTowards(this->m_hTarget,
-			IBody::LookAtPriorityType::OVERRIDE, 0.1f, nullptr, "Aiming my sapper");
+			IBody::LookAtPriorityType::OVERRIDE_ALL, 0.1f, nullptr, "Aiming my sapper");
 		
 		actor->PressFireButton();
 	}

@@ -210,12 +210,25 @@ void CTFTankBoss::UpdateCollisionBounds()
 
 int CTFTankBoss::GetCurrencyValue()
 {
-	// TODO
+	// TODO: double check this logic
+	
+	if (this->m_hCurrentNode == nullptr && !/* byte @ 0xa0d */) {
+		return 0;
+	}
+	
+	if (this->m_pWaveSpawn != nullptr) {
+		return this->m_pWaveSpawn->GetCurrencyAmountPerDeath();
+	} else {
+		return 125;
+	}
 }
 
 void CTFTankBoss::ModifyDamage(CTakeDamageInfo *info) const
 {
-	// TODO
+	auto weapon = dynamic_cast<CTFWeaponBase *>(info->GetWeapon());
+	if (weapon != nullptr && weapon->GetWeaponID() == TF_WEAPON_MINIGUN) {
+		info->ScaleDamage(0.25f);
+	}
 }
 
 
@@ -254,27 +267,94 @@ void CTFTankBoss::TankBossThink()
 	Vector up;
 	this->GetVectors(&fwd, &rt, &up);
 	
-	if (/* handle at 0xe7c is not nullptr */) {
+	if (this->m_hTrackL != nullptr) {
 		Vector v = this->GetAbsOrigin() - (rt * (180.0f / M_PI));
 		
-		float v153 = (v - /* Vector @ 0xa30 */).Length() / gpGlobals->frametime;
-		if (v153 >= 80.0f) {
-			// handle at 0xe7c: netvar @ 0x388 = 1.0f
+		float speed = (v - this->m_vecTrackL).Length() / gpGlobals->frametime;
+		if (speed >= 80.0f) {
+			this->m_hTrackL->SetPlaybackRate(1.0f);
 		} else {
-			// handle at 0xe7c: netvar @ 0x388 = v153 / 80.0f
+			this->m_hTrackL->SetPlaybackRate(speed / 80.0f);
 		}
 		
-		// Vector @ 0xa30 = v
+		this->m_vecTrackL = v;
 	}
 	
-	// LABEL_24
+	if (this->m_hTrackR != nullptr) {
+		Vector v = this->GetAbsOrigin() + (rt * (180.0f / M_PI));
+		
+		float speed = (v - this->m_vecTrackR).Length() / gpGlobals->frametime;
+		if (speed >= 80.0f) {
+			this->m_hTrackR->SetPlaybackRate(1.0f);
+		} else {
+			this->m_hTrackR->SetPlaybackRate(speed / 80.0f);
+		}
+		
+		this->m_vecTrackR = v;
+	}
 	
-	// there's another, very similar block
-	// (presumably for the other tread I guess)
+	if (this->m_hCurrentNode != nullptr) {
+		// TODO: wsc and vector stuff (sqrt, min, etc)
+		
+		if (TFGameRules() != nullptr) {
+			// TODO
+		}
+		
+		// TODO
+	}
 	
-	// TODO
+	// L_28
 	
+	if (/* byte @ 0xa00 */ && this->IsSequenceFinished()) {
+		this->FirePopFileEvent(&this->m_OnBombDroppedOutput);
+		
+		// a00 = false
+		
+		TFGameRules()->BroadcastSound(255, "Announcer.MVM_Tank_Planted");
+	}
 	
+	if (this->m_iSmokeAttachment > 0) {
+		Vector attach;
+		this->GetAttachment(this->m_iSmokeAttachment, attach);
+		
+		trace_t tr;
+		UTIL_TraceLine(attach, attach + Vector(0.0f, 0.0f, 300.0f),
+			MASK_SOLID_BRUSHONLY, this, 0, &tr);
+		
+		if (tr.fraction < 1.0f || tr.allsolid || tr.startsolid) {
+			if (/* byte @ 0xa0c */) {
+				StopParticleEffects(this);
+				// 0xa0c = false
+			}
+		} else {
+			if (!/* byte @ 0xa0c */) {
+				DispatchParticleEffect("smoke_train", PATTACH_POINT_FOLLOW,
+					this, this->m_iSmokeAttachment);
+				// 0xa0c = true
+			}
+		}
+	}
+	
+	if (this->m_ctCollisionCheck.IsElapsed()) {
+		this->m_ctCollisionCheck.Start(0.5f);
+		
+		CBaseEntity *ents[0x40];
+		int count = UTIL_EntitiesInBox(ents, 0x40,
+			this->CollisionProp()->OBBMins() + this->GetAbsOrigin(),
+			this->CollisionProp()->OBBMaxs() + this->GetAbsOrigin(),
+			(FL_FAKECLIENT | FL_KILLME));
+		
+		for (int i = 0; i != count; ++i) {
+			if (ents[i] == nullptr) continue;
+			
+			CTakeDamageInfo dmginfo(this, this, 4 * Max(ents[i]->GetHealth(), ents[i]->GetMaxHealth()), DMG_GENERIC);
+			ents[i]->TakeDamage(dmginfo);
+		}
+	}
+	
+	this->UpdatePingSound();
+	
+	CTFBaseBoss::BossThink();
 }
 
 

@@ -2,6 +2,8 @@
  * based on TF2 version 20151007a
  * server/tf/bot/behavior/squad/tf_bot_escort_squad_leader.cpp
  * used in MvM: TODO
+ * 
+ * initial contained action of CTFBotScenarioMonitor (for non-medic squad members)
  */
 
 
@@ -27,6 +29,8 @@ const char *CTFBotEscortSquadLeader::GetName() const
 
 ActionResult<CTFBot> CTFBotEscortSquadLeader::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	/* BUG: doesn't set PathFollower's min lookahead distance */
+	
 	this->m_vecLeaderGoalDirection = vec3_origin;
 	
 	return ActionResult<CTFBot>::Continue();

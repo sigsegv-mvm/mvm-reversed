@@ -2,6 +2,16 @@
  * based on TF2 version 20151007a
  * server/tf/bot/behavior/tf_bot_seek_and_destroy.cpp
  * used in MvM: TODO
+ * 
+ * Initial contained action of CTFBotScenarioMonitor (fallback for modes without specific actions)
+ * SuspendFor from CTFBotTacticalMonitor::Update     (chase down losers after winning round)
+ * SuspendFor from CTFBotCapturePoint::Update        (too early to capture)
+ * SuspendFor from CTFBotCapturePoint::Update        (no points available yet)
+ * SuspendFor from CTFBotDefendPoint::Update         (point is locked)
+ * SuspendFor from CTFBotDefendPoint::Update         (no points available yet)
+ * SuspendFor from CTFBotDefendPoint::Update         (attacking while ubered)
+ * SuspendFor from CTFBotDefendPoint::Update         (lots of time on the clock)
+ * SuspendFor from CTFBotDefendPoint::Update         (force pyro to chase enemies down)
  */
 
 

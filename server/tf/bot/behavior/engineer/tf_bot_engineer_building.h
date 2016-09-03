@@ -30,15 +30,15 @@ private:
 	
 	// 0034 CountdownTimer
 	// 0040 CountdownTimer
-	// 004c CountdownTimer
+	CountdownTimer m_ctRecomputePath;      // +0x004c
 	// 0058 CountdownTimer
-	// 0064 
-	// 0068 CountdownTimer
-	// 0074 CountdownTimer
-	PathFollower m_PathFollower; // +0x0080
-	// 4854 
-	// 4858 
-	// 485c 
-	// 4860 CountdownTimer
-	// 486c 
+	// 0064 int
+	CountdownTimer m_ctBuildDispenser;     // +0x0068
+	CountdownTimer m_ctBuildTeleEntrance;  // +0x0074
+	PathFollower m_PathFollower;           // +0x0080
+	CHandle<CTFBotHintSentrygun> m_hHint;  // +0x4854
+	// 4858 bool
+	// 485c dword
+	CountdownTimer m_ctCheckOutOfPosition; // +0x4860
+	// 486c bool
 };

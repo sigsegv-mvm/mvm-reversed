@@ -42,12 +42,12 @@ void ILocomotion::Update()
 
 void ILocomotion::Approach(const Vector& v1, float f1)
 {
-	this->m_itUnknown.Start();
+	this->m_itApproach.Start();
 }
 
 void ILocomotion::DriveTo(const Vector& v1)
 {
-	this->m_itUnknown.Start();
+	this->m_itApproach.Start();
 }
 
 bool ILocomotion::ClimbUpToLedge(const Vector& v1, const Vector& v2, const CBaseEntity *ent)
@@ -359,7 +359,7 @@ void ILocomotion::ClearStuckStatus(char const *s1)
 	
 	this->m_itStuck.Start();
 	
-	if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+	if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 		DevMsg("%3.2f: ClearStuckStatus: %s %s\n",
 			gpGlobals->curtime, this->GetBot()->GetDebugIdentifier(), s1);
 	}
@@ -367,8 +367,8 @@ void ILocomotion::ClearStuckStatus(char const *s1)
 
 bool ILocomotion::IsAttemptingToMove() const
 {
-	if (this->m_itUnknown.HasStarted()) {
-		return this->m_itUnknown.IsLessThen(0.25f);
+	if (this->m_itApproach.HasStarted()) {
+		return this->m_itApproach.IsLessThen(0.25f);
 	} else {
 		return false;
 	}
@@ -389,7 +389,7 @@ void ILocomotion::StuckMonitor()
 	// TODO: this function needs significant refactoring
 	// extract some of these if statements into bools and flatten it out
 	
-	if (this->m_itUnknown.IsGreaterThen(0.25f)) {
+	if (this->m_itApproach.IsGreaterThen(0.25f)) {
 		this->m_vecStuck = this->GetFeet();
 		this->m_itStuck.Start();
 	} else {
@@ -399,7 +399,7 @@ void ILocomotion::StuckMonitor()
 			} else {
 				if (this->m_ctUnknown.IsElapsed()) {
 					this->m_ctUnknown.Start(1.0f);
-					if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+					if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 						// TODO
 					}
 					
@@ -409,12 +409,12 @@ void ILocomotion::StuckMonitor()
 		} else {
 			if (this->GetBot()->IsRangeGreaterThan(this->m_vecStuck, 100.0f)) {
 				this->m_vecStuck = this->GetFeet();
-				if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+				if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 					// TODO: Cross3D
 				}
 				this->m_itStuck.Start();
 			} else {
-				if (this->GetBot()->IsDebugging(NextBotDebugType::LOCOMOTION)) {
+				if (this->GetBot()->IsDebugging(DEBUG_LOCOMOTION)) {
 					// TODO
 				}
 				

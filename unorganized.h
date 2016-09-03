@@ -244,8 +244,9 @@ class INextBotReply
 public:
 	enum class FailureReason : int
 	{
-		REJECTED  = 0, // AimHeadTowards denied the aim
-		PREEMPTED = 1, // a higher priority aim preempted our aim
+		REJECTED      = 0, // AimHeadTowards denied the aim
+		PREEMPTED     = 1, // a higher priority aim preempted our aim
+		UNIMPLEMENTED = 2, // subclass didn't override IBody::AimHeadTowards
 	};
 	
 	virtual void OnSuccess(INextBot *nextbot);
@@ -275,13 +276,6 @@ class PressJumpButtonReply : public INextBotReply
 {
 public:
 	virtual void OnSuccess(INextBot *nextbot) override;
-};
-
-class PlaceStickyBombReply : public INextBotReply
-{
-public:
-	virtual void OnSuccess(INextBot *nextbot) override;
-	virtual void OnFail(INextBot *nextbot, FailureReason reason) override;
 };
 
 
@@ -398,3 +392,21 @@ inline int GetEnemyTeam(CBaseEntity *ent)
 	return enemy_team;
 }
 // check out CTFPlayer::GetOpposingTFTeam!
+
+
+class CClosestTFPlayer
+{
+public:
+	CClosestTFPlayer(const Vector& origin, int teamnum = TEAM_ANY) :
+		m_vecOrigin(origin), m_iTeamNum(teamnum) {}
+	
+	bool operator()(CBasePlayer *player)
+	{
+		// TODO
+	}
+	
+	Vector m_vecOrigin;             // +0x00
+	float m_flMinDist = FLT_MAX;    // +0x0c
+	CTFPlayer *m_pPlayer = nullptr; // +0x10
+	int m_iTeamNum;                 // +0x14
+};

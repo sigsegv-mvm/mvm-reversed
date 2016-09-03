@@ -9,7 +9,7 @@
 class CTFBotEngineerBuildTeleportEntrance : public Action<CTFBot>
 {
 public:
-	CTFBotEngineerBuildTeleportEntrance(/* TODO */);
+	CTFBotEngineerBuildTeleportEntrance();
 	virtual ~CTFBotEngineerBuildTeleportEntrance();
 	
 	virtual const char *GetName() const override;

@@ -25,8 +25,8 @@ public:
 private:
 	bool IsTeleporterAvailable() const;
 	
-	// 0034 CHandle<T>
-	// 0038 
+	CHandle<CObjectTeleporter> m_hTele; // +0x0034
+	UseHowType m_How;                   // +0x0038
 	// 003c PathFollower
 	// 4810 CountdownTimer
 	// 481c byte 0

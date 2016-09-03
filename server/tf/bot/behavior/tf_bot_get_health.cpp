@@ -2,10 +2,9 @@
  * based on TF2 version 20151007a
  * server/tf/bot/behavior/tf_bot_get_health.cpp
  * used in MvM: TODO
+ * 
+ * SuspendFor from CTFBotTacticalMonitor::Update
  */
-
-
-// TODO: static s_possibleHealth = -1
 
 
 ConVar tf_bot_health_critical_ratio("tf_bot_health_critical_ratio", "0.3", FCVAR_CHEAT);
@@ -14,9 +13,13 @@ ConVar tf_bot_health_search_near_range("tf_bot_health_search_near_range", "1000"
 ConVar tf_bot_health_search_far_range("tf_bot_health_search_far_range", "2000", FCVAR_CHEAT);
 
 
-CTFBotGetHealth::CTFBotGetHealth(/* TODO */)
+static CHandle<T> s_possibleHealth; // TODO: T
+static CTFBot *s_possibleBot;
+static int s_possibleFrame;
+
+
+CTFBotGetHealth::CTFBotGetHealth()
 {
-	// TODO
 }
 
 CTFBotGetHealth::~CTFBotGetHealth()
@@ -69,6 +72,13 @@ bool CTFBotGetHealth::IsPossible(CTFBot *actor)
 {
 	VPROF_BUDGET("CTFBotGetHealth::IsPossible", "NextBot");
 	
+	if (actor->m_Shared.m_nNumHealers > 0 || TFGameRules()->IsMannVsMachineMode()) {
+		return false;
+	}
+	
+	float ratio = Clamp((((float)this->GetHealth() / (float)this->GetMaxHealth()) - tf_bot_health_critical_ratio.GetFloat()) /
+		(tf_bot_health_ok_ratio.GetFloat() - tf_bot_health_critical_ratio.GetFloat()), 0.0f, 1.0f);
+	
 	// TODO
 }
 
@@ -85,8 +95,7 @@ bool CHealthFilter::IsSelected(const CBaseEntity *ent) const
 		return false;
 	}
 	
-	CNavArea *nearest =
-		TheNavMesh->GetNearestNavArea(ent->WorldSpaceCenter(), 0);
+	CNavArea *nearest = TheNavMesh->GetNearestNavArea(ent->WorldSpaceCenter());
 	if (nearest == nullptr) {
 		return false;
 	}

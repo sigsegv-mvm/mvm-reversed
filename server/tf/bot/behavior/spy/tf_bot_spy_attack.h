@@ -19,7 +19,7 @@ public:
 	virtual ActionResult<CTFBot> OnResume(CTFBot *actor, Action<CTFBot> *action) override;
 	
 	virtual EventDesiredResult<CTFBot> OnContact(CTFBot *actor, CBaseEntity *ent, CGameTrace *trace) override;
-	virtual EventDesiredResult<CTFBot> OnUnStuck(CTFBot *actor) override;
+	virtual EventDesiredResult<CTFBot> OnStuck(CTFBot *actor) override;
 	virtual EventDesiredResult<CTFBot> OnInjured(CTFBot *actor, const CTakeDamageInfo& info) override;
 	
 	virtual QueryResponse ShouldHurry(const INextBot *nextbot) const override;
@@ -29,9 +29,9 @@ public:
 	virtual const CKnownEntity *SelectMoreDangerousThreat(const INextBot *nextbot, const CBaseCombatCharacter *them, const CKnownEntity *threat1, const CKnownEntity *threat2) const override;
 	
 private:
-	// 0034 CHandle<T>
-	// 0038 ChasePath
-	// 4838 
+	CHandle<CTFPlayer> m_hVictim; // +0x0034
+	ChasePath m_ChasePath;        // +0x0038
+	// 4838 bool
 	// 483c CountdownTimer
 	// 4848 CountdownTimer
 };

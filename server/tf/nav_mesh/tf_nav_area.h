@@ -96,6 +96,9 @@ public:
 	
 	bool IsValidForWanderingPopulation() const;
 	
+	// float GetIncursionDistance(int teamnum)
+	// (returns -1.0f if teamnum is out of bounds [0,3])
+	
 private:
 	// 160 
 	// 164 

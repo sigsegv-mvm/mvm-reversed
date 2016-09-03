@@ -30,7 +30,7 @@ const char *CTFBotMvMEngineerIdle::GetName() const
 
 ActionResult<CTFBot> CTFBotMvMEngineerIdle::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	this->m_PathFollower.SetMinLookaheadDistance(actor->GetDesiredPathLookAheadRange());
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	
 	actor->m_bLookAroundForEnemies = false;
 	
@@ -53,7 +53,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerIdle::Update(CTFBot *actor, float dt)
 	}
 	
 	// TODO: slot enum
-	CBaseCombatWeapon *w_melee = bot->Weapon_GetSLot(2);
+	CBaseCombatWeapon *w_melee = bot->Weapon_GetSlot(2);
 	if (w_melee != nullptr) {
 		actor->Weapon_Switch(w_melee);
 	}

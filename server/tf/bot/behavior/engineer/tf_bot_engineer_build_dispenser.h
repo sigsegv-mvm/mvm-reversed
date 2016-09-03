@@ -22,7 +22,7 @@ public:
 private:
 	// 0034 CountdownTimer
 	// 0040 CountdownTimer
-	// 004c CountdownTimer
-	// 0058 
-	PathFollower m_PathFollower; // +0x005c
+	CountdownTimer m_ctRecomputePath; // +0x004c
+	// 0058 int
+	PathFollower m_PathFollower;      // +0x005c
 };

@@ -29,7 +29,6 @@ float Path::GetLength() const
 		return 0.0f;
 	}
 	
-	// TODO: name for field_2c
 	return this->m_Segments[this->m_iSegCount - 1].m_flStartDist;
 }
 

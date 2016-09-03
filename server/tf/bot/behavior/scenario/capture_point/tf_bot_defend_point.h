@@ -28,13 +28,30 @@ public:
 	
 private:
 	bool IsPointThreatened(CTFBot *actor);
-	UNKNOWN SelectAreaToDefendFrom(CTFBot *actor);
+	CTFNavArea *SelectAreaToDefendFrom(CTFBot *actor);
 	bool WillBlockCapture(CTFBot *actor) const;
 	
-	// TODO
+	PathFollower m_PathFollower; // +0x0034
+	ChasePath m_ChasePath;       // +0x4808
+	// 9008 CountdownTimer
+	// 9014 CountdownTimer
+	// 9020 CountdownTimer
+	CTFNavArea *m_DefenseArea;   // +0x902c
+	bool m_bShouldRoam;          // +0x9030
 };
 
 
-// NOTE: ISearchSurroundingAreasFunctor is in the public SDK
-
-// TODO: CSelectDefenseAreaForPoint
+class CSelectDefenseAreaForPoint : public ISearchSurroundingAreasFunctor
+{
+public:
+	CSelectDefenseAreaForPoint(/* TODO */);
+	
+	virtual bool operator()(CNavArea *area, CNavArea *priorArea, float travelDistanceSoFar) override;
+	virtual bool ShouldSearch(CNavArea *adjArea, CNavArea *currentArea, float travelDistanceSoFar) override;
+	
+private:
+	// 04 ptr to CTeamControlPoint? I think?
+	// 08 CUtlVector<CTFNavArea *> * results (where the hell is this alloc'd or free'd?)
+	// 0c float
+	int m_iTeamNum; // +0x10
+};

@@ -11,19 +11,19 @@ public:
 	CTFBotHint();
 	virtual ~CTFBotHint();
 	
-	virtual UNKNOWN Spawn() override;
+	virtual void Spawn() override;
 	
-	virtual UNKNOWN UpdateOnRemove() override;
+	virtual void UpdateOnRemove() override;
 	
 	// TODO: InputEnable
 	// TODO: InputDisable
 	
-	UNKNOWN IsFor(CTFBot *bot) const;
+	bool IsFor(CTFBot *bot) const;
 	
 private:
-	UNKNOWN UpdateNavDecoration();
+	void UpdateNavDecoration();
 	
-	// 360 
-	// 364 
-	// 368 byte 0
+	int m_team;        // +0x360
+	int m_hint;        // +0x364
+	bool m_isDisabled; // +0x368
 };

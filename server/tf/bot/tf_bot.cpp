@@ -51,10 +51,9 @@ CTFBotPathCost::CTFBotPathCost(CTFBot *actor, RouteType rtype)
 	this->m_flDeathDropHeight = actor->GetLocomotionInterface()->GetDeathDropHeight();
 	
 	if (actor->IsPlayerClass(TF_CLASS_SPY)) {
-		TheNavMesh->CollectBuiltObjects(&this->m_EnemyObjects,
-			GetEnemyTeam(actor));
+		TheNavMesh->CollectBuiltObjects(&this->m_Objects, GetEnemyTeam(actor));
 	} else {
-		this->m_EnemyObjects.RemoveAll();
+		this->m_Objects.RemoveAll();
 	}
 }
 

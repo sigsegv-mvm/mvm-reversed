@@ -9,7 +9,7 @@
 class CTFBotDeliverFlag : public Action<CTFBot>
 {
 public:
-	CTFBotDeliverFlag(/* TODO */);
+	CTFBotDeliverFlag();
 	virtual ~CTFBotDeliverFlag();
 	
 	virtual const char *GetName() const override;
@@ -27,8 +27,8 @@ public:
 private:
 	bool UpgradeOverTime(CTFBot *actor);
 	
-	// 0034 PathFollower
-	// 4808 CountdownTimer
+	PathFollower m_PathFollower;      // +0x0034
+	CountdownTimer m_ctRecomputePath; // +0x4808
 	// 4814 float
 	// 4818 CountdownTimer
 	// 4824 int
@@ -52,5 +52,5 @@ public:
 private:
 	PathFollower m_PathFollower;      // +0x0034
 	CountdownTimer m_ctRecomputePath; // +0x4808
-	Action<CTFBot *> *m_DoneAction;   // +0x4814
+	Action<CTFBot> *m_DoneAction;     // +0x4814
 };

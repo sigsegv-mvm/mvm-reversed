@@ -1,5 +1,5 @@
 /* reverse engineering by sigsegv
- * based on TF2 version 20151007a
+ * based on TF2 version 20160428a
  * server/tf/player_vs_environment/tf_population_manager.h
  */
 
@@ -10,13 +10,14 @@
 // TODO: which file does this belong in? is it shared with the client?
 struct CUpgradeInfo
 {
-	// 00 int, tf2 class index
-	// 04 short, item def index
-	// 08 int, upgrade tier
-	// 0c int, upgrade cost
+	int class_index;  // +0x00
+	short item_index; // +0x04
+	int upgrade_tier; // +0x08
+	int upgrade_cost; // +0x0c
 };
 
 
+// sizeof: 0x724
 class CPopulationManager : public CPointEntity, public CGameEventListener
 {
 public:
@@ -111,8 +112,14 @@ private:
 	void ShowNextWaveDescription();
 	void UpdateObjectiveResource();
 	
+	// TODO: re-check functions
+	
 	// +0x000: vtable CBaseEntity
 	// +0x360: vtable CGameEventListener
+	
+	// TODO: sizeof went from 0x6fc to 0x724
+	
+	// INSERT 4 bytes (from CBaseEntity)
 	
 	// 364 byte
 	CUtlVectorAutoPurge<IPopulator *> m_Populators; // +0x368 (used for MissionPopulators and RandomPlacementPopulators)

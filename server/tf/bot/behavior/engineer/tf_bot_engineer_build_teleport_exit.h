@@ -23,11 +23,9 @@ public:
 	
 private:
 	PathFollower m_PathFollower; // +0x0034
-	// 4808 byte
-	// 480c 
-	// 4810 
-	// 4814 
-	// 4818 
+	// 4808 bool
+	// 480c Vector
+	// 4818 float
 	// 481c CountdownTimer
 	// 4828 CountdownTimer
 	// 4834 CountdownTimer

@@ -15,7 +15,7 @@ ConCommand SetDebugFilter("nb_debug_filter", &CC_SetDebugFilter,
 	"Add items to the NextBot debug filter. Items can be entindexes or part of the indentifier of one or more bots.", FCVAR_CHEAT);
 ConCommand SelectBot("nb_select", &CC_SelectBot,
 	"Select the bot you are aiming at for further debug operations.", FCVAR_CHEAT);
-ComCommand ForceLookAt("nb_force_look_at", &CC_ForceLookAt,
+ConCommand ForceLookAt("nb_force_look_at", &CC_ForceLookAt,
 	"Force selected bot to look at the local player's position", FCVAR_CHEAT);
 ConCommand WarpSelectedHere("nb_warp_selected_here", &CC_WarpSelectedHere,
 	"Teleport the selected bot to your cursor position", FCVAR_CHEAT);
@@ -31,6 +31,7 @@ static const char *const debugTypeName[] = {
 	"HEARING",
 	"EVENTS",
 	"ERRORS",
+	nullptr,
 };
 
 
@@ -42,7 +43,7 @@ static int g_nRun = 0;
 NextBotManager *NextBotManager::sInstance = nullptr;
 
 
-NextBotManager *TheNextBots()
+NextBotManager& TheNextBots()
 {
 	static NextBotManager manager;
 	return manager;

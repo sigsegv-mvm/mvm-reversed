@@ -5,7 +5,7 @@
  */
 
 
-// sizeof: TODO
+// sizeof: 0x40+
 class CTFBotSniperAttack : public Action<CTFBot>
 {
 public:
@@ -26,7 +26,7 @@ public:
 	static bool IsPossible(CTFBot *actor);
 	
 private:
-	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *known) const;
+	bool IsImmediateThreat(const CBaseCombatCharacter *who, const CKnownEntity *threat) const;
 	
-	// TODO
+	CountdownTimer m_ctLinger; // +0x34
 };

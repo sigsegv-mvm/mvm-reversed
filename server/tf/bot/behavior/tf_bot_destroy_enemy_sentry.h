@@ -28,14 +28,14 @@ private:
 	void ComputeCornerAttackSpot(CTFBot *actor);
 	void ComputeSafeAttackSpot(CTFBot *actor);
 	
-	// 0034 PathFollower
-	// 4808 CountdownTimer
+	PathFollower m_PathFollower;         // +0x0034
+	CountdownTimer m_ctRecomputePath;    // +0x4808
 	// 4814 
-	// 4818 
-	// 481c 
-	// 4820 
-	// 4824 
-	// 4828 CHandle<T>
+	Vector m_vecAttackSpot;              // +0x4818
+	// 4824 bool, whether we have a valid computed attack spot
+	// 4825 bool
+	// 4826 bool
+	CHandle<CObjectSentrygun> m_hSentry; // +0x4828
 };
 
 
@@ -57,14 +57,29 @@ public:
 	virtual QueryResponse ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const override;
 	
 private:
-	// 0034 PathFollower
-	// 4808 CountdownTimer
-	// 4814 CHandle<T>
+	bool m_bSavedIgnoreEnemies;          // +0x0032
+	PathFollower m_PathFollower;         // +0x0034
+	CountdownTimer m_ctRecomputePath;    // +0x4808
+	CHandle<CObjectSentrygun> m_hSentry; // +0x4814
 };
 
 
-UNKNOWN FindGrenadeAim(CTFBot *bot, CBaseEntity *ent, float *f1, float *f2);
-UNKNOWN FindStickybombAim(CTFBot *bot, CBaseEntity *ent, float *f1, float *f2, float *f3);
+class FindSafeSentryApproachAreaScan : public ISearchSurroundingAreasFunctor
+{
+public:
+	FindSafeSentryApproachAreaScan(/* ??? */);
+	virtual ~FindSafeSentryApproachAreaScan();
+	
+	virtual bool operator()(CNavArea *area, CNavArea *priorArea, float travelDistanceSoFar) override;
+	virtual bool ShouldSearch(CNavArea *adjArea, CNavArea *currentArea, float travelDistanceSoFar) override;
+	virtual void PostSearch() override;
+	
+private:
+	CTFBot *m_Actor;                  // +0x04
+	CUtlVector<CTFNavArea *> m_Areas; // +0x08
+	// 1c bool
+};
 
 
-// TODO: FindSafeSentryApproachAreaScan
+bool FindGrenadeAim(CTFBot *bot, CBaseEntity *target, float *pYaw, float *pPitch);
+bool FindStickybombAim(CTFBot *bot, CBaseEntity *target, float *pYaw, float *pPitch, float *f3);

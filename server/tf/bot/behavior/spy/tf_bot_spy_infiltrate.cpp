@@ -25,6 +25,8 @@ const char *CTFBotSpyInfiltrate::GetName() const
 
 ActionResult<CTFBot> CTFBotSpyInfiltrate::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	/* BUG: doesn't set PathFollower's min lookahead distance */
+	
 	this->m_HidingArea = nullptr;
 	this->m_bCloaked = false;
 	
@@ -57,8 +59,8 @@ ActionResult<CTFBot> CTFBotSpyInfiltrate::Update(CTFBot *actor, float dt)
 		}
 	}
 	
-	if (actor->m_hSentryKilledUs != nullptr && !actor->m_hSentryKilledUs->HasSapper()) {
-		return ActionResult<CTFBot>::SuspendFor(new CTFBotSpySap(actor->m_hSentryKilledUs),
+	if (actor->m_hTargetSentry != nullptr && !actor->m_hTargetSentry->HasSapper()) {
+		return ActionResult<CTFBot>::SuspendFor(new CTFBotSpySap(actor->m_hTargetSentry),
 			"Sapping a Sentry");
 	}
 	

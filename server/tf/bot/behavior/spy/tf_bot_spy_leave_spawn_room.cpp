@@ -22,6 +22,8 @@ const char *CTFBotSpyLeaveSpawnRoom::GetName() const
 
 ActionResult<CTFBot> CTFBotSpyLeaveSpawnRoom::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
+	/* BUG: doesn't set PathFollower's min lookahead distance */
+	
 	actor->DisguiseAsMemberOfEnemyTeam();
 	actor->PressAltFireButton();
 	

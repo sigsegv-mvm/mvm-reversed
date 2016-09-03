@@ -5,4 +5,39 @@
  */
 
 
+CTFBotNavEntDestroyEntity::CTFBotNavEntDestroyEntity(const CFuncNavPrerequisite *prereq)
+{
+	this->m_hPrereq = prereq;
+}
 
+CTFBotNavEntDestroyEntity::~CTFBotNavEntDestroyEntity()
+{
+}
+
+
+const char *CTFBotNavEntDestroyEntity::GetName() const
+{
+	return "NavEntDestroyEntity";
+}
+
+
+ActionResult<CTFBot> CTFBotNavEntDestroyEntity::OnStart(CTFBot *actor, Action<CTFBot> *action)
+{
+	// TODO
+}
+
+ActionResult<CTFBot> CTFBotNavEntDestroyEntity::Update(CTFBot *actor, float dt)
+{
+	// TODO
+}
+
+void CTFBotNavEntDestroyEntity::OnEnd(CTFBot *actor, Action<CTFBot> *action)
+{
+	// TODO
+}
+
+
+void CTFBotNavEntDestroyEntity::DetonateStickiesWhenSet(CTFBot *actor, CTFPipebombLauncher *launcher) const
+{
+	// TODO
+}

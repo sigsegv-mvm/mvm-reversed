@@ -21,5 +21,5 @@ public:
 private:
 	CObjectSentrygun *SelectSentryTarget(CTFBot *actor);
 	
-	// TODO
+	CHandle<CObjectSentrygun> m_hSentry; // +0x34
 };

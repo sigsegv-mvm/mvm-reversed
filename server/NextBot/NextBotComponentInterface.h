@@ -16,7 +16,7 @@ public:
 	virtual INextBot *GetBot() const;
 	
 protected:
-	int m_Dword04;                      // +0x04
+	float m_Dword04;                    // +0x04
 	float m_flTickInterval;             // +0x08
 	INextBot *m_NextBot;                // +0x0c
 	INextBotComponent *m_NextComponent; // +0x10

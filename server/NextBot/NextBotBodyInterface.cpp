@@ -129,8 +129,8 @@ void IBody::SetDesiredPosture(PostureType posture)
 
 PostureType IBody::GetDesiredPosture() const
 {
-	// TODO
-	// need values for IBody::PostureType
+	// TODO: need values for IBody::PostureType
+	return 0;
 }
 
 bool IBody::IsDesiredPosture(PostureType posture) const
@@ -145,8 +145,8 @@ bool IBody::IsInDesiredPosture() const
 
 PostureType IBody::GetActualPosture() const
 {
-	// TODO
-	// need values for IBody::PostureType
+	// TODO: need values for IBody::PostureType
+	return 0;
 }
 
 bool IBody::IsActualPosture(PostureType posture) const
@@ -170,8 +170,8 @@ void IBody::SetArousal(ArousalType arousal)
 
 ArousalType IBody::GetArousal() const
 {
-	// TODO
-	// need values for IBody::ArousalType
+	// TODO: need values for IBody::ArousalType
+	return 0;
 }
 
 bool IBody::IsArousal(ArousalType arousal) const
@@ -187,7 +187,6 @@ float IBody::GetHullWidth() const
 float IBody::GetHullHeight() const
 {
 	// TODO
-	// need values for IBody::PostureType
 }
 
 float IBody::GetStandHullHeight() const

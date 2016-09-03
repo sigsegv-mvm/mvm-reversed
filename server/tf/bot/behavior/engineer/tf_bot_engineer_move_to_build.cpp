@@ -14,7 +14,6 @@ ConVar tf_bot_min_teleport_travel("tf_bot_min_teleport_travel", "3000", FCVAR_CH
 
 CTFBotEngineerMoveToBuild::CTFBotEngineerMoveToBuild()
 {
-	// TODO
 }
 
 CTFBotEngineerMoveToBuild::~CTFBotEngineerMoveToBuild()
@@ -30,12 +29,25 @@ const char *CTFBotEngineerMoveToBuild::GetName() const
 
 ActionResult<CTFBot> CTFBotEngineerMoveToBuild::OnStart(CTFBot *actor, Action<CTFBot> *action)
 {
-	// TODO
+	this->m_PathFollower.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
+	
+	this->SelectBuildLocation(actor);
+	
+	return ActionResult<CTFBot>::Continue();
 }
 
 ActionResult<CTFBot> CTFBotEngineerMoveToBuild::Update(CTFBot *actor, float dt)
 {
+	
+	
 	// TODO
+	
+	// CTFGameRules
+	// 220 GetGameType
+	// 2d0 IsInKothMode
+	
+	// CBaseObject
+	// 568 DestroyObject
 }
 
 
@@ -46,7 +58,9 @@ EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToSuccess(CTFBot *ac
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnMoveToFailure(CTFBot *actor, const Path *path, MoveToFailureType fail)
 {
-	// TODO
+	this->SelectBuildLocation(actor);
+	
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnStuck(CTFBot *actor)
@@ -56,7 +70,9 @@ EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnStuck(CTFBot *actor)
 
 EventDesiredResult<CTFBot> CTFBotEngineerMoveToBuild::OnTerritoryLost(CTFBot *actor, int i1)
 {
-	// TODO
+	// ct 483c .Start(0.2f)
+	
+	return EventDesiredResult<CTFBot>::Continue();
 }
 
 
@@ -67,5 +83,19 @@ void CTFBotEngineerMoveToBuild::CollectBuildAreas(CTFBot *actor)
 
 void CTFBotEngineerMoveToBuild::SelectBuildLocation(CTFBot *actor)
 {
+	this->m_PathFollower.Invalidate();
+	
+	// 0034 = nullptr
+	
+	// 0038 = vec3_origin
+	
+	// TODO
+}
+
+
+bool CompareRangeToPoint(CTFNavArea *const *area1, CTFNavArea *const *area2)
+{
+	// TODO: static Vector(?) s_pointCentroid
+	
 	// TODO
 }

@@ -38,7 +38,7 @@ ActionResult<CTFBot> CTFBotMvMEngineerBuildSentryGun::Update(CTFBot *actor, floa
 	if (range_to_hint < 200.0f) {
 		actor->PressCrouchButton();
 		actor->GetBodyInterface()->AimHeadTowards(this->m_hintEntity->GetAbsOrigin(),
-			IBody::LookAtPriorityType::OVERRIDE, 0.1f, nullptr, "Placing sentry");
+			IBody::LookAtPriorityType::OVERRIDE_ALL, 0.1f, nullptr, "Placing sentry");
 	}
 	
 	if (range_to_hint > 25.0f) {

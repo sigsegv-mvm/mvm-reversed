@@ -286,7 +286,7 @@ template<class T> void Behavior<T>::Update(T *actor, float dt)
 	ActionResult<T> result = this->m_MainAction->InvokeUpdate(actor, this, dt);
 	this->m_MainAction = this->m_MainAction->ApplyResult(actor, this, result);
 	
-	if (this->m_MainAction != nullptr && actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
+	if (this->m_MainAction != nullptr && actor->IsDebugging(DEBUG_BEHAVIOR)) {
 		CFmtStrN<256> fmtstr;
 		actor->DisplayDebugText(fmtstr.sprintf("%s: %s",
 			this->m_strName.m_szBuf, this->m_MainAction->DebugString()))
@@ -1081,31 +1081,31 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 			return this;
 		}
 		
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 				gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 			
 			if (result.action == this) {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_RED, "START ");
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, this->GetName());
 			} else {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, this->GetName());
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_RED, " CHANGE_TO ");
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, result.action->GetName());
 			}
 			
 			if (result.reason != nullptr) {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_LTGREEN, "  (%s)\n",
 					result.reason);
 			} else {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, "\n");
 			}
 		}
@@ -1118,7 +1118,7 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 			behavior->DestroyAction(this);
 		}
 		
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
+		if (actor->IsDebugging(DEBUG_BEHAVIOR)) {
 			result.action->PrintStateToConsole();
 		}
 		
@@ -1129,30 +1129,30 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 			action = action->m_ActionSuspendedUs;
 		}
 		
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 				gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 			
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, this->GetName());
 			
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_MAGENTA, " caused ");
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, action->GetName());
 			
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_MAGENTA, " to SUSPEND_FOR ");
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, result.action->GetName());
 			
 			if (result.reason != nullptr) {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_LTGREEN, "  (%s)\n",
 					result.reason);
 			} else {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, "\n");
 			}
 		}
@@ -1161,7 +1161,7 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 		ActionResult<T> result2 =
 			result.action->InvokeOnStart(actor, behavior, next, next);
 		
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
+		if (actor->IsDebugging(DEBUG_BEHAVIOR)) {
 			result.action->PrintStateToConsole();
 		}
 		
@@ -1171,30 +1171,30 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 		
 		this->InvokeOnEnd(actor, behavior, this->m_ActionWeSuspended);
 		
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 				gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 			
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, this->GetName());
 			
 			if (this->m_ActionWeSuspended != nullptr) {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_GREEN, " DONE, RESUME ");
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, this->m_ActionWeSuspended->GetName());
 			} else {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_GREEN, " DONE.");
 			}
 			
 			if (result.reason != nullptr) {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_LTGREEN, "  (%s)\n",
 					result.reason);
 			} else {
-				actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+				actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 					COLOR_WHITE, "\n");
 			}
 		}
@@ -1203,7 +1203,7 @@ template<class T> Action<T> *Action<T>::ApplyResult(T *actor, Behavior<T> *behav
 			ActionResult<T> result2 =
 				this->m_ActionWeSuspended->InvokeOnResume(actor, behavior, this);
 			
-			if (actor->IsDebugging(NextBotDebugType::BEHAVIOR)) {
+			if (actor->IsDebugging(DEBUG_BEHAVIOR)) {
 				this->m_ActionWeSuspended->PrintStateToConsole();
 			}
 			
@@ -1235,16 +1235,16 @@ template<class T> ActionResult<T> Action<T>::InvokeOnStart(T *actor, Behavior<T>
 	// action2 = the ended action's previously suspended action, if any
 	
 	
-	if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+	if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 			gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 		
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_GREEN, " STARTING ");
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, this->GetName());
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, "\n");
 	}
 	
@@ -1335,16 +1335,16 @@ template<class T> void Action<T>::InvokeOnEnd(T *actor, Behavior<T> *behavior, A
 	
 	
 	if (this->m_bStarted) {
-		if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 				gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 			
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_MAGENTA, " ENDING ");
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, this->GetName());
-			actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, "\n");
 		}
 		
@@ -1373,16 +1373,16 @@ template<class T> ActionResult<T> Action<T>::InvokeOnResume(T *actor, Behavior<T
 	// action = the action that previously suspended us, who just ended
 	
 	
-	if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+	if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 			gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 		
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_MAGENTA, " RESUMING ");
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, this->GetName());
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, "\n");
 	}
 	
@@ -1411,16 +1411,16 @@ template<class T> Action<T> *Action<T>::InvokeOnSuspend(T *actor, Behavior<T> *b
 	// action = the action we're suspending for
 	
 	
-	if (actor->IsDebugging(NextBotDebugType::BEHAVIOR) || NextBotDebugHistory.GetBool()) {
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+	if (actor->IsDebugging(DEBUG_BEHAVIOR) || NextBotDebugHistory.GetBool()) {
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_LTYELLOW, "%3.2f: %s:%s: ",
 			gpGlobals->curtime, actor->GetDebugIdentifier(), behavior->m_strName());
 		
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_MAGENTA, " SUSPENDING ");
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, this->GetName());
-		actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+		actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 			COLOR_WHITE, "\n");
 	}
 	
@@ -1443,16 +1443,16 @@ template<class T> Action<T> *Action<T>::InvokeOnSuspend(T *actor, Behavior<T> *b
 
 template<class T> char *Action<T>::BuildDecoratedName(char buf[256], const Action<T> *action) const
 {
-	V_strncat(buf, action->GetName(), sizeof(buf));
+	V_strncat(buf, action->GetName(), 256);
 	
 	if (action->m_ActionChild != nullptr) {
-		V_strncat(buf, "( ", sizeof(buf));
+		V_strncat(buf, "( ", 256);
 		this->BuildDecoratedName(buf, action->m_ActionChild);
-		V_strncat(buf, " )", sizeof(buf));
+		V_strncat(buf, " )", 256);
 	}
 	
 	if (action->m_ActionWeSuspended != nullptr) {
-		V_strncat(buf, "<<", sizeof(buf));
+		V_strncat(buf, "<<", 256);
 		this->BuildDecoratedName(buf, action->m_ActionWeSuspended);
 	}
 	
@@ -1461,14 +1461,15 @@ template<class T> char *Action<T>::BuildDecoratedName(char buf[256], const Actio
 
 template<class T> char *Action<T>::DebugString() const
 {
-	static char strconst[256];
+	static char str[256];
+	str[0] = '\0';
 	
 	Action<T> *action = this;
 	while (action->m_ActionParent != nullptr) {
 		action = action->m_ActionParent;
 	}
 	
-	return this->BuildDecoratedName(strconst, action);
+	return this->BuildDecoratedName(str, action);
 }
 
 template<class T> void Action<T>::PrintStateToConsole() const
@@ -1531,8 +1532,8 @@ template<class T> void Action<T>::HandleEvent(const char *name, const std::funct
 	Action<T> *action = this;
 	do {
 		if (action->m_Actor != nullptr) {
-			if (action->m_Actor->IsDebugging(NextBotDebugType::EVENTS) || NextBotDebugHistory.GetBool()) {
-				action->m_Actor->DebugConColorMsg(NextBotDebugType::EVENTS,
+			if (action->m_Actor->IsDebugging(DEBUG_EVENTS) || NextBotDebugHistory.GetBool()) {
+				action->m_Actor->DebugConColorMsg(DEBUG_EVENTS,
 					COLOR_GRAY100, "%3.2f: %s:%s: %s received EVENT %s\n",
 					gpGlobals->curtime, action->m_Actor->GetDebugIdentifier(), this->m_Behavior->m_strName(),
 					action->GetFullName(), name);
@@ -1548,15 +1549,15 @@ template<class T> void Action<T>::HandleEvent(const char *name, const std::funct
 	} while (result.transition != ActionTransition::CONTINUE);
 	
 	if (action->m_Actor != nullptr) {
-		if (action->m_Actor->IsDebugging(NextBotDebugType::BEHAVIOR) ||
+		if (action->m_Actor->IsDebugging(DEBUG_BEHAVIOR) ||
 			(NextBotDebugHistory.GetBool() && result.transition <= ActionTransition::DONE)) {
-			action->m_Actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			action->m_Actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_YELLOW, "%3.2f: %s:%s: ",
 				gpGlobals->curtime, action->m_Actor->GetDebugIdentifier(), this->m_Behavior->m_strName());
 			
-			action->m_Actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			action->m_Actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_WHITE, "%s ", action->GetFullName());
-			action->m_Actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			action->m_Actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_YELLOW, "responded to EVENT %s with ",
 				name);
 			
@@ -1581,7 +1582,7 @@ template<class T> void Action<T>::HandleEvent(const char *name, const std::funct
 				break;
 			}
 			
-			action->m_Actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			action->m_Actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_RED, "%s %s ",
 				s_transition, s_action);
 			
@@ -1590,7 +1591,7 @@ template<class T> void Action<T>::HandleEvent(const char *name, const std::funct
 				s_reason = result.reason;
 			}
 			
-			action->m_Actor->DebugConColorMsg(NextBotDebugType::BEHAVIOR,
+			action->m_Actor->DebugConColorMsg(DEBUG_BEHAVIOR,
 				COLOR_GREEN, "%s\n", s_reason);
 		}
 	}

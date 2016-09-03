@@ -9,6 +9,8 @@ ConVar tf_bot_stickybomb_density("tf_bot_stickybomb_density", 0.0001, FCVAR_CHEA
 	"Number of stickies to place per square inch");
 
 
+/* BUG: use of a static variable for the aim reply means that multiple bots
+ * can't be aiming stickies at the same time */
 PlaceStickyBombReply bombReply;
 
 
@@ -91,7 +93,7 @@ ActionResult<CTFBot> CTFBotPrepareStickybombTrap::Update(CTFBot *actor, float dt
 		
 		actor->PressReloadButton();
 	} else {
-		if (launcher->m_iPipebombCount >= 8 || actor->GetAmmoCount(TF_AMMO_SECONDARY) <= 0) {
+		if (launcher->GetPipeBombCount() >= 8 || actor->GetAmmoCount(TF_AMMO_SECONDARY) <= 0) {
 			return ActionResult<CTFBot>::Done("Max sticky bombs reached");
 		} else {
 			if (this->m_ctAimTimeout.IsElapsed()) {
@@ -157,7 +159,7 @@ static bool CTFBotPrepareStickybombTrap::IsPossible(CTFBot *actor)
 	
 	auto launcher = dynamic_cast<CTFPipebombLauncher *>(actor->Weapon_GetSlot(1));
 	if (launcher != nullptr && !actor->IsWeaponRestricted(launcher)) {
-		if (launcher->m_iPipebombCount >= 8) {
+		if (launcher->GetPipeBombCount() >= 8) {
 			return false;
 		}
 		

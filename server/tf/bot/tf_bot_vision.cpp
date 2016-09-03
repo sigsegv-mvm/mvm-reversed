@@ -182,6 +182,7 @@ bool CTFBotVision::IsIgnored(CBaseEntity *ent) const
 		
 		/* players who are burning/jarated/bleeding, or who are cloaked and
 		 * bump into something, are not ignored */
+		// BUG: bots ignore milked and wet players
 		if (player->m_Shared.InCond(TF_COND_BURNING) ||
 			player->m_Shared.InCond(TF_COND_URINE) ||
 			player->m_Shared.InCond(TF_COND_STEALTHED_BLINK) ||
@@ -260,6 +261,7 @@ bool CTFBotVision::IsVisibleEntityNoticed(CBaseEntity *ent) const
 	
 	/* players who are burning/jarated/bleeding, or who are cloaked and
 	 * bump into something, are always noticed */
+	// BUG: bots don't notice milked or wet players
 	if (player->m_Shared.InCond(TF_COND_BURNING) ||
 		player->m_Shared.InCond(TF_COND_URINE) ||
 		player->m_Shared.InCond(TF_COND_STEALTHED_BLINK) ||
@@ -361,7 +363,7 @@ void CTFBotVision::UpdatePotentiallyVisibleNPCVector()
 	}
 	
 	CUtlVector<INextBot *> nextbots;
-	TheNextBots()->CollectAllBots(&nextbots);
+	TheNextBots().CollectAllBots(&nextbots);
 	
 	FOR_EACH_VEC(nextbots, i) {
 		CBaseCombatCharacter *ent = nextbots[i]->GetEntity();

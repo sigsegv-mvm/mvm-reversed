@@ -48,7 +48,6 @@ public:
 	// SetFlagCarrierUpgradeLevel(int)
 	// SetNextMvMBombUpgradeTime(float)
 	
-private:
 	CNetworkVar(int,   m_nMannVsMachineMaxWaveCount);                 // +0x0fa4
 	CNetworkVar(int,   m_nMannVsMachineWaveCount);                    // +0x0fa8
 	CNetworkVar(int,   m_nMannVsMachineWaveEnemyCount);               // +0x0fac

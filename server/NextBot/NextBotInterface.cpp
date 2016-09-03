@@ -16,7 +16,7 @@ INextBot::INextBot()
 INextBot::~INextBot()
 {
 	this->ResetDebugHistory();
-	TheNextBots()->UnRegister(this);
+	TheNextBots().UnRegister(this);
 	
 	if (this->m_IntentionInterface != nullptr) {
 		delete this->m_IntentionInterface;
@@ -313,8 +313,8 @@ float INextBot::GetRangeSquaredTo(const Vector& vec) const
 
 bool INextBot::IsDebugging(unsigned int type) const
 {
-	if ((TheNextBots()->m_nDebugMask & type) != 0) {
-		return TheNextBots()->IsDebugFilterMatch(this);
+	if ((TheNextBots().m_nDebugMask & type) != 0) {
+		return TheNextBots().IsDebugFilterMatch(this);
 	}
 	
 	return false;
@@ -351,8 +351,8 @@ void INextBot::DisplayDebugText(const char *text) const
 
 bool INextBot::BeginUpdate()
 {
-	if (TheNextBots()->ShouldUpdate(this)) {
-		TheNextBots()->NotifyBeginUpdate(this);
+	if (TheNextBots().ShouldUpdate(this)) {
+		TheNextBots().NotifyBeginUpdate(this);
 		return true;
 	}
 	
@@ -361,7 +361,7 @@ bool INextBot::BeginUpdate()
 
 void INextBot::EndUpdate()
 {
-	TheNextBots()->NotifyEndUpdate(this);
+	TheNextBots().NotifyEndUpdate(this);
 }
 
 

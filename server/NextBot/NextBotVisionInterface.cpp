@@ -500,7 +500,7 @@ void IVision::UpdateKnownEntities()
 				
 				if (known.GetTimeSinceBecameVisible() >= this->GetMinRecognizeTime()) {
 					if ((this->m_flLastUpdate - known.GetTimeWhenBecameVisible()) <= this->GetMinRecognizeTime()) {
-						if (this->GetBot()->IsDebugging(NextBotDebugType::VISION)) {
+						if (this->GetBot()->IsDebugging(DEBUG_VISION)) {
 							ConColorMsg(COLOR_GREEN, "%3.2f: %s caught sight of %s(#%d)\n",
 								gpGlobals->curtime, this->GetBot->GetDebugIdentifier(),
 								known.GetEntity()->GetClassname(), ENTINDEX(known.GetEntity());
@@ -518,7 +518,7 @@ void IVision::UpdateKnownEntities()
 				if (known.IsVisibleInFOVNow()) {
 					known.UpdateVisibilityStatus(false);
 					
-					if (this->GetBot()->IsDebugging(NextBotDebugType::VISION)) {
+					if (this->GetBot()->IsDebugging(DEBUG_VISION)) {
 						ConColorMsg(COLOR_RED, "%3.2f: %s lost sight of %s(#%d)\n",
 							gpGlobals->curtime, this->GetBot->GetDebugIdentifier(),
 							known.GetEntity()->GetClassname(), ENTINDEX(known.GetEntity());

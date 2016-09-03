@@ -22,12 +22,12 @@ public:
 	// CTFBotDeliverFlag::Update (RouteType=1)
 	
 private:
-	CTFBot *m_Actor;                          // +0x04
-	RouteType m_iRouteType;                   // +0x08
-	float m_flStepHeight;                     // +0x0c
-	float m_flMaxJumpHeight;                  // +0x10
-	float m_flDeathDropHeight;                // +0x14
-	CUtlVector<CBaseObject *> m_EnemyObjects; // +0x18
+	CTFBot *m_Actor;                     // +0x04
+	RouteType m_iRouteType;              // +0x08
+	float m_flStepHeight;                // +0x0c
+	float m_flMaxJumpHeight;             // +0x10
+	float m_flDeathDropHeight;           // +0x14
+	CUtlVector<CBaseEntity *> m_Objects; // +0x18
 };
 
 
@@ -255,12 +255,12 @@ public:
 	
 	virtual void FireGameEvent(IGameEvent *event) override;
 	
-	virtual ILocomotion *GetLocomotionInterface() const;
-	virtual IBody *GetBodyInterface() const;
-	virtual IIntention *GetIntentionInterface() const;
-	virtual IVision *GetVisionInterface() const;
-	virtual void OnWeaponFired(CBaseCombatCharacter *who, CBaseCombatWeapon *weapon);
-	virtual bool IsDebugFilterMatch(const char *filter) const;
+	virtual ILocomotion *GetLocomotionInterface() const override;
+	virtual IBody *GetBodyInterface() const override;
+	virtual IIntention *GetIntentionInterface() const override;
+	virtual IVision *GetVisionInterface() const override;
+	virtual void OnWeaponFired(CBaseCombatCharacter *who, CBaseCombatWeapon *weapon) override;
+	virtual bool IsDebugFilterMatch(const char *filter) const override;
 	
 	
 	// TODO: check whether member funcs are private
@@ -380,6 +380,8 @@ private:
 	  // 0x24c4: CTFPlayerShared: CEconItemView
 	// 0x26ec: CTFPlayer: CTFPlayerClass
 	
+	// 0x2774: CTFPlayer: float, timestamp of last spawn
+	
 	enum DeployBombState : int
 	{
 		// 0 initial
@@ -421,13 +423,14 @@ private:
 	// 0x2af0: CTFBot: CTFBotVision*
 	
 	// 0x2af4: CTFBot: CountdownTimer
-	// 0x2b04: CTFBot: CountdownTimer
+	CTFNavArea *m_HomeArea; // +0x2b00
+	// 0x2b04: CTFBot: CountdownTimer, used in CTFBotDefendPoint::IsPointThreatened
 	
 	WeaponRestriction m_nRestrict; // +0x2b10
 	AttributeType m_nBotAttrs;     // +0x2b14
 	DifficultyType m_iSkill;       // +0x2b18
 	
-	// 2b1c something related to pvp engie
+	// 2b1c Vector *, related to pvp engie
 	// 2b20 movement goal
 	// 2b24 handle to CTFBotProxy
 	// 2b28 handle to CTFBotGenerator
@@ -435,7 +438,7 @@ private:
 	CTFBotSquad *m_Squad; // +0x2b2c
 	
 	// 2b30 bool related to changing class after death
-	// 2b34 handle to sentry who killed us
+	CHandle<CObjectSentryGun> m_hTargetSentry; // +0x2b34
 	// 2b38 Vector position of sentry who killed us
 	
 	CUtlVectorAutoPurge<SuspectedSpyInfo_t *> m_SuspectedSpies; // +0x2b44

@@ -32,7 +32,7 @@ ActionResult<CTFBot> CTFBotMedicHeal::OnStart(CTFBot *actor, Action<CTFBot> *act
 {
 	this->m_ChasePath.SetMinLookAheadDistance(actor->GetDesiredPathLookAheadRange());
 	
-	// Vector @ 0x4850 = vec3_origin
+	this->m_vecPatientPosition = vec3_origin;
 	this->m_hPatient = nullptr;
 	// dword @ 0x4868 = 0
 	// CountdownTimer @ 0x485c .Invalidate()
@@ -104,8 +104,10 @@ ActionResult<CTFBot> CTFBotMedicHeal::Update(CTFBot *actor, float dt)
 	// LABEL_23
 	
 	if (this->m_hPatient != nullptr) {
-		if (/* Vector @ 0x4850 to patient absorigin dist sqr > Square(200.0f) */) {
+		if (this->m_hPatient->GetAbsOrigin() - this->m_vecPatientPosition).LengthSqr > Square(200.0f)) {
+			this->m_vecPatientPosition = this->m_hPatient->GetAbsOrigin();
 			
+			// CountdownTimer @ 0x485c .Start(3.0f)
 		}
 		
 		if (this->m_hPatient->m_Shared.InCond(TF_COND_SELECTED_TO_TELEPORT)) {

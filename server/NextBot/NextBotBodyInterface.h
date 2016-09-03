@@ -9,11 +9,11 @@ class IBody : public INextBotComponent
 public:
 	enum class LookAtPriorityType : int
 	{
-		BORING      = 0,
-		INTERESTING = 1,
-		IMPORTANT   = 2,
-		CRITICAL    = 3,
-		OVERRIDE    = 4, // lacks a string
+		BORING       = 0,
+		INTERESTING  = 1,
+		IMPORTANT    = 2,
+		CRITICAL     = 3,
+		OVERRIDE_ALL = 4, // lacks a string
 	};
 	
 	enum class PostureType : int

@@ -48,18 +48,13 @@ private:
 	void MaintainBotQuota();
 	void RevertOfflinePracticeConvars();
 	
-	// TODO
 	float m_flQuotaTime; // +0x50
 	// 54 
 	// 58 CUtlVector<CBaseEntity *>
 	// 6c CUtlVector<ArcherAssignmentInfo>
-	// 80 
-	// 84 
-	// 88 
+	// 80 CountdownTimer
 	// 8c CUtlVector<CStuckBot *>
-	// a0 
-	// a4 
-	// a8 
+	// a0 CountdownTimer
 };
 
 

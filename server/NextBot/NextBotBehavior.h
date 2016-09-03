@@ -395,6 +395,7 @@ private:
 	bool m_bSuspended;              // +0x31
 	
 	friend class IHotplugAction;
+	friend class PleaseRemoveThis;
 };
 
 //template<> class Action<CBotNPCArcher>;

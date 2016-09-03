@@ -5,7 +5,7 @@
  */
 
 
-// sizeof: TODO (>=0x4818)
+// sizeof: TODO (>=0x4819)
 class CTFBotNavEntDestroyEntity : public Action<CTFBot>
 {
 public:
@@ -21,7 +21,8 @@ public:
 private:
 	void DetonateStickiesWhenSet(CTFBot *actor, CTFPipebombLauncher *launcher) const;
 	
-	// 0034 CHandle<T>
-	// 0038 PathFollower
-	// 480c CountdownTimer
+	CHandle<CFuncNavPrerequisite> m_hPrereq; // +0x0034
+	PathFollower m_PathFollower;             // +0x0038
+	CountdownTimer m_ctRecomputePath;        // +0x480c
+	// 4818 bool
 };

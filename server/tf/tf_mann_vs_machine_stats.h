@@ -16,13 +16,22 @@ enum eMannVsMachineEvent : int
 };
 
 
+/* used in array in CMannVsMachineStats */
+struct ???
+{
+	// 00 deaths
+	// 04 damage to bots
+	// 08 damage to giants
+	// 0c damage to tanks
+};
+
+
 // sizeof: 0x1c
 class CMannVsMachineWaveStats
 {
 public:
 	UNKNOWN ClearStats();
 	
-private:
 	// 0x04 int m_nCreditsDropped
 	// 0x08 int m_nCreditsAcquired
 	// 0x0c int m_nCreditsBonus
@@ -32,16 +41,12 @@ private:
 };
 
 
-// sizeof: 0x1c
+// sizeof: 0x0c
 struct CPlayerWaveSpendingStats
 {
-	// 00 
-	// 04 
-	// 08 
-	// 0c 
-	// 10 buyback spending
-	// 14 bottle spending
-	// 18 upgrade spending
+	int buyback_spending; // +0x00
+	int bottle_spending;  // +0x04
+	int upgrade_spending; // +0x08
 };
 
 
@@ -67,7 +72,7 @@ public:
 	int GetBonusCredits(int wave);
 	int GetMissedCredits(int wave);
 	
-	int *GetSpending(int wave, uint64_t player_id); // returns a ptr to CPlayerWaveSpendingStats + 0x10?
+	CPlayerWaveSpendingStats *GetSpending(int wave, uint64_t player_id);
 	int GetBuyBackSpending(CTFPlayer *player);
 	int GetBottleSpending(CTFPlayer *player);
 	int GetUpgradeSpending(CTFPlayer *player);
@@ -82,10 +87,10 @@ public:
 	
 	void SendUpgradesToPlayer(CTFPlayer *player, CUtlVector<CUpgradeInfo> *upgrades);
 	void NotifyPlayerActiveUpgradeCosts(CTFPlayer *player, int i1);
-	void NotifyPlayerEvent(CTFPlayer *player, unsigned int i1, eMannVsMachineEvent event, int i2, int i3);
-	void NotifyTargetPlayerEvent(CTFPlayer *player, unsigned int i1, eMannVsMachineEvent event, int i2);
+	void NotifyPlayerEvent(CTFPlayer *player, unsigned int wave, eMannVsMachineEvent event, int i2, int i3);
+	void NotifyTargetPlayerEvent(CTFPlayer *player, unsigned int wave, eMannVsMachineEvent event, int i2);
 	
-	void PlayerEvent_BoughtInstantRespawn(CTFPlayer *player, int i1);
+	void PlayerEvent_BoughtInstantRespawn(CTFPlayer *player, int cost);
 	void PlayerEvent_DealtDamageToBots(CTFPlayer *player, int damage);
 	void PlayerEvent_DealtDamageToGiants(CTFPlayer *player, int damage);
 	void PlayerEvent_DealtDamageToTanks(CTFPlayer *player, int damage);
@@ -110,27 +115,27 @@ private:
 	CNetworkVar(CMannVsMachineStats, m_currentWaveStats);            // +0x5c0
 	CNetworkVar(int,                 m_iCurrentWaveIdx);             // +0x5dc
 	CNetworkVar(int,                 m_iServerWaveID);               // +0x5e0
-	// 5e4 CUtlMap<uint64_t, CPlayerWaveSpendingStats>
-	// 600 CUtlMap<uint64_t, CPlayerWaveSpendingStats>
-	// 61c CUtlMap<uint64_t, CPlayerWaveSpendingStats>
+	// 5e4 CUtlMap<uint64_t, CPlayerWaveSpendingStats> (current wave)
+	// 600 CUtlMap<uint64_t, CPlayerWaveSpendingStats> (prev wave)
+	// 61c CUtlMap<uint64_t, CPlayerWaveSpendingStats> (all waves possibly?)
 	CNetworkVar(int,                 m_iCurrencyCollectedForRespec); // +0x638
 	CNetworkVar(short,               m_nRespecsAwardedInWave);       // +0x63c
 	// TODO
 };
 
 
-UNKNOWN MannVsMachineStats_GetAcquiredCredits(int i1);
-UNKNOWN MannVsMachineStats_GetCurrentWave();
-UNKNOWN MannVsMachineStats_GetDroppedCredits(int i1);
-UNKNOWN MannVsMachineStats_GetInstance();
-UNKNOWN MannVsMachineStats_GetMissedCredits(int i1);
-UNKNOWN MannVsMachineStats_Init();
-UNKNOWN MannVsMachineStats_PlayerEvent_BoughtInstantRespawn(CTFPlayer *player, int i1);
-UNKNOWN MannVsMachineStats_PlayerEvent_Died(CTFPlayer *player);
-UNKNOWN MannVsMachineStats_PlayerEvent_PickedUpCredits(CTFPlayer *player, unsigned int i1, int i2);
-UNKNOWN MannVsMachineStats_PlayerEvent_PointsChanged(CTFPlayer *player, int i1);
-UNKNOWN MannVsMachineStats_PlayerEvent_Upgraded(CTFPlayer *player, unsigned short i1, unsigned short i2, unsigned short i3, short i4, bool is_canteen);
+int MannVsMachineStats_GetAcquiredCredits(int wave);
+int MannVsMachineStats_GetCurrentWave();
+int MannVsMachineStats_GetDroppedCredits(int wave);
+CMannVsMachineStats *MannVsMachineStats_GetInstance();
+int MannVsMachineStats_GetMissedCredits(int wave);
+void MannVsMachineStats_Init();
+void MannVsMachineStats_PlayerEvent_BoughtInstantRespawn(CTFPlayer *player, int cost);
+void MannVsMachineStats_PlayerEvent_Died(CTFPlayer *player);
+void MannVsMachineStats_PlayerEvent_PickedUpCredits(CTFPlayer *player, unsigned int i1, int i2);
+void MannVsMachineStats_PlayerEvent_PointsChanged(CTFPlayer *player, int i1);
+void MannVsMachineStats_PlayerEvent_Upgraded(CTFPlayer *player, unsigned short i1, unsigned short i2, unsigned short i3, short i4, bool is_canteen);
 UNKNOWN MannVsMachineStats_RemoveRespecFromPlayer(CTFPlayer *player);
-UNKNOWN MannVsMachineStats_ResetPlayerEvents(CTFPlayer *player);
-UNKNOWN MannVsMachineStats_RoundEvent_CreditsDropped(unsigned int i1, int i2);
-UNKNOWN MannVsMachineStats_SetPopulationFile(const char *s1);
+void MannVsMachineStats_ResetPlayerEvents(CTFPlayer *player);
+void MannVsMachineStats_RoundEvent_CreditsDropped(unsigned int wave, int i2);
+void MannVsMachineStats_SetPopulationFile(const char *s1);
