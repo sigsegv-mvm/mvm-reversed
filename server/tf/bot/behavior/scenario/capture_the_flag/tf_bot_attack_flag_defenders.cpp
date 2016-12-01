@@ -10,9 +10,7 @@ ConVar tf_bot_flag_escort_range("tf_bot_flag_escort_range", "500", FCVAR_CHEAT);
 
 CTFBotAttackFlagDefenders::CTFBotAttackFlagDefenders(float duration)
 {
-	// BUG: apparent default parameter doesn't match this check
-	// (see also: CTFBotSeekAndDestroy)
-	if (duration != 0.0f) {
+	if (duration > 0.0f) {
 		this->m_ctActionDuration.Start(duration);
 	}
 }

@@ -19,9 +19,9 @@ public:
 	
 	virtual Action<CTFBot> *InitialContainedAction(CTFBot *actor) override;
 	
+private:
 	virtual Action<CTFBot> *DesiredScenarioAndClassAction(CTFBot *actor);
 	
-private:
 	CountdownTimer m_ctFetchFlagInitial; // +0x34
 	CountdownTimer m_ctFetchFlag;        // +0x40
 };

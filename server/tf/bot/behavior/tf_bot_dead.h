@@ -18,5 +18,5 @@ public:
 	virtual ActionResult<CTFBot> Update(CTFBot *actor, float dt) override;
 	
 private:
-	InvervalTimer m_itDeathEpoch; // +0x34
+	IntervalTimer m_itDeathEpoch; // +0x34
 };

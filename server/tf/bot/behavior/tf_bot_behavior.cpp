@@ -273,14 +273,31 @@ const CKnownEntity *CTFBotMainAction::SelectMoreDangerousThreat(const INextBot *
 	
 	const CKnownEntity *result = this->SelectMoreDangerousThreatInternal(actor, them, threat1, threat2);
 	
-	if (actor->m_iSkill != CTFBot::DifficultyType::EASY &&
-		actor->m_iSkill != CTFBot::DifficultyType::NORMAL) {
-		if (actor->TransientlyConsistentRandomValue(10.0f, 0) >= 0.5f) {
-			return this->GetHealerOfThreat(result);
-		}
+	bool target_healer_of_threat;
+	switch (actor->m_iSkill) {
+	
+	// 0% chance to target healer of threat
+	case CTFBot::DifficultyType::EASY:
+		target_healer_of_threat = false;
+		break;
+	
+	// 50% chance to target healer of threat
+	case CTFBot::DifficultyType::NORMAL:
+		target_healer_of_threat = (actor->TransientlyConsistentRandomValue(10.0f, 0) >= 0.5f);
+		break;
+	
+	// 100% chance to target healer of threat
+	case CTFBot::DifficultyType::HARD:
+	case CTFBot::DifficultyType::EXPERT:
+		target_healer_of_threat = true;
+		break;
 	}
 	
-	return result;
+	if (target_healer_of_threat) {
+		return this->GetHealerOfThreat(result);
+	} else {
+		return result;
+	}
 }
 
 
@@ -611,9 +628,7 @@ bool CTFBotMainAction::IsImmediateThreat(const CBaseCombatCharacter *who, const 
 	if (player != nullptr) {
 		if (player->IsPlayerClass(TF_CLASS_SNIPER)) {
 			player->EyeVectors(&threat_eye_vec);
-			
-			/* BUG: this will essentially never ever actually happen */
-			return (threat_to_actor.Dot(threat_eye_vec) == 0.0f);
+			return (threat_to_actor.Dot(threat_eye_vec) > 0.0f);
 		}
 		
 		if (actor->m_iSkill > CTFBot::DifficultyType::NORMAL &&

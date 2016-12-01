@@ -230,7 +230,7 @@ private:
 	
 	CUtlVectorAutoPurge<CWaveSpawnPopulator *> m_WaveSpawns;
 	// +0x020 byte 0
-	// +0x021 byte 0
+	bool m_bFiredInitWaveOutput;    // +0x021
 	int m_iTotalCountNonSupport;    // +0x024
 	int m_iTanksSpawned;            // +0x028
 	int m_iSentryBustersSpawned;    // +0x02c
@@ -250,7 +250,7 @@ private:
 	// +0x28c byte 0
 	// +0x290 CountdownTimer
 	// +0x29c byte 0
-	// +0x2a0 dword/float
+	// +0x2a0 float
 };
 
 
@@ -258,4 +258,4 @@ EventInfo *ParseEvent(KeyValues *kv);
 void FireEvent(EventInfo *info, const char *name);
 
 SpawnResult DoTeleporterOverride(CBaseEntity *teamspawn, Vector& vec);
-void OnBotTelported(CTFBot *bot);
+void OnBotTeleported(CTFBot *bot);

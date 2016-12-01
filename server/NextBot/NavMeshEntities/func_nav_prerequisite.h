@@ -23,10 +23,10 @@ public:
 	// TODO
 	
 private:
-	// 484 
+	// 484 vtable 2
 	TaskType m_task;           // +0x488
 	string_t m_taskEntityName; // +0x48c
-	// 490 m_taskValue
+	// 490 float m_taskValue
 	bool m_isDisabled; // +0x494
 	// 498 CHandle<T>
 };

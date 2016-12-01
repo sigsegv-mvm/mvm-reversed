@@ -20,9 +20,7 @@ ConVar tf_bot_debug_seek_and_destroy("tf_bot_debug_seek_and_destroy", "0", FCVAR
 
 CTFBotSeekAndDestroy::CTFBotSeekAndDestroy(float duration)
 {
-	// BUG: apparent default parameter doesn't match this check
-	// (see also: CTFBotAttackFlagDefenders)
-	if (duration != 0.0f) {
+	if (duration > 0.0f) {
 		this->m_ctActionDuration.Start(duration);
 	}
 }

@@ -477,7 +477,7 @@ private:
 	float m_flScale; // +0x2bf4
 	
 	// 0x2bf8: CTFBot: MissionType m_nMission
-	// 0x2bfc: CTFBot: 
+	// 0x2bfc: CTFBot: MissionType, previous mission
 	CHandle<CBaseEntity> m_hSBTarget; // +0x2c00
 	// 0x2c04: CTFBot: CUtlString
 	
@@ -487,7 +487,7 @@ private:
 	
 	CountdownTimer m_ctUseWeaponAbilities; // +0x2c40
 	
-	float m_flVisionRange; // +0x2c3c
+	float m_flVisionRange; // +0x2c4c
 	
 	float m_flFormationError; // +0x2c50
 	bool m_bIsInFormation;    // +0x2c54
