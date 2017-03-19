@@ -77,7 +77,7 @@ ActionResult<CTFBot> CTFBotSpyInfiltrate::Update(CTFBot *actor, float dt)
 			if (victim_area != nullptr && victim->GetTeamNumber() < TF_TEAM_COUNT &&
 				victim_area->GetIncursionDistance(victim->GetTeamNumber()) > area->GetIncursionDistance(victim->GetTeamNumber())) {
 				if (actor->m_Shared.IsStealthed()) {
-					return ActionResult<CTFBot>::SuspendFor(new CTFBotRetreatToCovar(new CTFBotSpyAttack(victim)),
+					return ActionResult<CTFBot>::SuspendFor(new CTFBotRetreatToCover(new CTFBotSpyAttack(victim)),
 						"Hiding to decloak before going after a backstab victim");
 				} else {
 					return ActionResult<CTFBot>::SuspendFor(new CTFBotSpyAttack(victim),

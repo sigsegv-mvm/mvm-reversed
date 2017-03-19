@@ -20,6 +20,8 @@ public:
 	CBaseTFBotHintEntity();
 	virtual ~CBaseTFBotHintEntity();
 	
+	virtual HintType GetHintType() const = 0;
+	
 	void InputEnable(inputdata_t& inputdata);
 	void InputDisable(inputdata_t& inputdata);
 	
@@ -28,5 +30,5 @@ public:
 	
 protected:
 	bool m_bDisabled; // +0x364
-	// 368 dword -1
+	// 368 CHandle<T> (unused)
 };

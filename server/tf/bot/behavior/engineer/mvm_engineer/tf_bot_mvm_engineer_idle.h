@@ -52,8 +52,8 @@ public:
 struct BombInfo_t
 {
 	Vector closest_pos;
-	float hatch_dist_back;
 	float hatch_dist_fwd;
+	float hatch_dist_back;
 };
 
 

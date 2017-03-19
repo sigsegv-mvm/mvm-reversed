@@ -9,8 +9,10 @@ ConVar tf_bot_engineer_mvm_sentry_hint_bomb_forward_range("tf_bot_engineer_mvm_s
 ConVar tf_bot_engineer_mvm_sentry_hint_bomb_backward_range("tf_bot_engineer_mvm_sentry_hint_bomb_backward_range", "3000", FCVAR_CHEAT);
 ConVar tf_bot_engineer_mvm_hint_min_distance_from_bomb("tf_bot_engineer_mvm_hint_min_distance_from_bomb", "1300", FCVAR_CHEAT);
 
-ConCommand tf_bot_mvm_show_engineer_hint_region_command("tf_bot_mvm_show_engineer_hint_region", &tf_bot_mvm_show_engineer_hint_region,
-	"Show the nav areas MvM engineer bots will consider when selecting sentry and teleporter hints", FCVAR_CHEAT);
+CON_COMMAND_F(tf_bot_mvm_show_engineer_hint_region, "Show the nav areas MvM engineer bots will consider when selecting sentry and teleporter hints", FCVAR_CHEAT)
+{
+	// TODO
+}
 
 
 CTFBotMvMEngineerIdle::CTFBotMvMEngineerIdle()
@@ -250,7 +252,34 @@ QueryResponse CTFBotMvMEngineerIdle::ShouldAttack(const INextBot *nextbot, const
 
 bool CTFBotMvMEngineerIdle::ShouldAdvanceNestSpot(CTFBot *actor)
 {
-	// TODO
+	if (this->m_hHintNest == nullptr) return false;
+	
+	if (!this->m_ctAdvanceNestSpot.HasStarted()) {
+		this->m_ctAdvanceNestSpot.Start(5.0f);
+		return false;
+	}
+	
+	for (int i = 0; i < actor->GetObjectCount(); ++i) {
+		CBaseObject *obj = actor->GetObject(i);
+		if (obj == nullptr) continue;
+		
+		if (obj->m_flHealth < obj->GetMaxHealth()) {
+			this->m_ctAdvanceNestSpot.Start(5.0f);
+			return false;
+		}
+	}
+	
+	if (this->m_ctAdvanceNestSpot.IsElapsed()) {
+		this->m_ctAdvanceNestSpot.Invalidate();
+	}
+	
+	BonbInfo_t bombinfo;
+	if (!GetBombInfo(&bombinfo)) return false;
+	
+	CTFNavArea *hint_area = TheNavMesh->GetNearestNavArea(this->m_hHintNest->GetAbsOrigin(), false, 1000.0f);
+	if (hint_area == nullptr) return false;
+	
+	return (hint_area->m_flBombTargetDistance > bombinfo.hatch_dist_fwd);
 }
 
 void CTFBotMvMEngineerIdle::TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot *actor)
@@ -267,7 +296,35 @@ void CTFBotMvMEngineerIdle::TakeOverStaleNest(CBaseTFBotHintEntity *hint, CTFBot
 
 void CTFBotMvMEngineerIdle::TryToDetonateStaleNest()
 {
-	// TODO
+	if (this->m_bTriedToDetonateStaleNest) {
+		return;
+	}
+	
+	CTFBotHintSentrygun *hint_sentry = this->m_hHintSentry;
+	if (hint_sentry == nullptr || hint_sentry->OwnerObjectFinishBuilding()) {
+		CTFBotHintTeleporterExit *hint_tele = this->m_hHintTele;
+		if (hint_tele == nullptr || hint_tele->OwnerObjectFinishBuilding()) {
+			CUtlVector<CTFBotHintEngineerNest *> nests;
+			
+			for (int i = 0; i < ITFBotHintEntityAutoList::AutoList().Count(); ++i) {
+				CBaseTFBotHintEntity *hint = static_cast<CBaseTFBotHintEntity *>(
+					ITFBotHintEntityAutoList::AutoList()[i]);
+				if (hint->GetHintType() != CBaseTFBotHintEntity::HintType::ENGINEER_NEST || nest->m_bDisabled || nest->GetOwnerEntity() == nullptr) {
+					continue;
+				}
+				
+				nests.AddToTail(static_cast<CTFBotHintEngineerNest *>(hint));
+			}
+			
+			FOR_EACH_VEC(nests, i) {
+				if (nests[i]->IsStaleNest()) {
+					nests[i]->DetonateStaleNest();
+				}
+			}
+			
+			this->m_bTriedToDetonateStaleNest = true;
+		}
+	}
 }
 
 
@@ -279,7 +336,7 @@ bool CTFBotMvMEngineerHintFinder::FindHint(bool box_check, bool out_of_range_ok,
 		CBaseTFBotHintEntity *hint = static_cast<CBaseTFBotHintEntity *>(
 			ITFBotHintEntityAutoList::AutoList()[i]);
 		
-		if (hint->GetHintType() == CBaseTFBotHintEntity::HintType::SENTRY_GUN &&
+		if (hint->GetHintType() == CBaseTFBotHintEntity::HintType::ENGINEER_NEST &&
 			!hint->m_bDisabled && hint->GetOwnerEntity() == nullptr) {
 			hints.AddToTail(static_cast<CTFBotHintEngineerNest *>(hint));
 		}
@@ -303,7 +360,7 @@ bool CTFBotMvMEngineerHintFinder::FindHint(bool box_check, bool out_of_range_ok,
 		}
 		
 		float dist = area->m_flBombTargetDistance;
-		if (dist > bomb_info.hatch_dist_back && dist < bomb_info.hatch_dist_fwd) {
+		if (dist > bomb_info.hatch_dist_fwd && dist < bomb_info.hatch_dist_back) {
 			CBaseEntity *pList[256];
 			if (box_check && UTIL_EntitiesInBox(pList, 256,
 				hint->GetAbsOrigin() + VEC_HULL_MIN,
@@ -312,7 +369,7 @@ bool CTFBotMvMEngineerHintFinder::FindHint(bool box_check, bool out_of_range_ok,
 				continue;
 			}
 			
-			if (hint->IsStaleNest) {
+			if (hint->IsStaleNest()) {
 				hints1.AddToTail(hint);
 			} else {
 				if (hint->GetAbsOrigin()->DistTo(bomb_info.closest_pos) >=
@@ -320,7 +377,7 @@ bool CTFBotMvMEngineerHintFinder::FindHint(bool box_check, bool out_of_range_ok,
 					hints2.AddToTail(hint);
 				}
 			}
-		} else if (dist > bomb_info.hatch_dist_fwd) {
+		} else if (dist > bomb_info.hatch_dist_back) {
 			hints3.AddToTail(hint);
 		} else {
 			hints4.AddToTail(hint);
@@ -366,7 +423,7 @@ CTFBotHintEngineerNest *SelectOutOfRangeNest(const CUtlVector<CTFBotHintEngineer
 
 bool GetBombInfo(BombInfo_t *info)
 {
-	float max_hatch_dist = 0.0f;
+	float hatch_dist = 0.0f;
 	
 	FOR_EACH_VEC(TheNavAreas, i) {
 		CTFNavArea *area = static_cast<CTFNavArea *>(TheNavAreas[i]);
@@ -375,7 +432,7 @@ bool GetBombInfo(BombInfo_t *info)
 			continue;
 		}
 		
-		max_hatch_dist = Max(Max(area->m_flBombTargetDistance, max_hatch_dist), 0.0f);
+		hatch_dist = Max(Max(area->m_flBombTargetDistance, hatch_dist), 0.0f);
 	}
 	
 	CCaptureFlag *closest_flag = nullptr;
@@ -396,9 +453,9 @@ bool GetBombInfo(BombInfo_t *info)
 		}
 		
 		CTFNavArea *area = TheNavMesh->GetNearestNavArea(flag_pos);
-		if (area != nullptr && area->m_flBombTargetDistance < max_hatch_dist) {
+		if (area != nullptr && area->m_flBombTargetDistance < hatch_dist) {
 			closest_flag = flag;
-			max_hatch_dist = area->m_flBombTargetDistance;
+			hatch_dist = area->m_flBombTargetDistance;
 			closest_flag_pos = flag_pos;
 		}
 	}
@@ -414,8 +471,8 @@ bool GetBombInfo(BombInfo_t *info)
 			.y = closest_flag_y,
 			.z = closest_flag_z,
 		};
-		info->hatch_dist_back = max_hatch_dist - range_back;
-		info->hatch_dist_fwd  = max_hatch_dist + range_fwd;
+		info->hatch_dist_back = hatch_dist + range_back;
+		info->hatch_dist_fwd  = hatch_dist - range_fwd;
 	}
 	
 	return success;

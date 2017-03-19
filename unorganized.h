@@ -410,3 +410,27 @@ public:
 	CTFPlayer *m_pPlayer = nullptr; // +0x10
 	int m_iTeamNum;                 // +0x14
 };
+
+
+// WTF WTF WTF WTF WTF
+void CBaseObject::UpdateOnRemove()
+{
+	// ...
+	
+	this->DestroyObject();
+	
+	if (TFGameRules() != nullptr && TFGameRules()->IsMannVsMachineMode() && this->GetTeamNumber() == TF_TEAM_BLUE) {
+		for (int i = 0; i < IBaseObjectAutoList::AutoList().Count(); ++i) {
+			CBaseObject *obj = static_cast<CBaseObject *>(IBaseObjectAutoList::AutoList()[i]);
+			if (obj == this) continue;
+			
+			if (obj->GetType() == this->GetType()) {
+				if (!obj->IsDying() && obj->GetBuilder() == nullptr) {
+					obj->DetonateObject();
+				}
+			}
+		}
+	}
+	
+	// ...
+}

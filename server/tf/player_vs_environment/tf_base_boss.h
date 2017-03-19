@@ -30,24 +30,25 @@ public:
 	void ResolvePlayerCollision(CTFPlayer *player);
 	
 private:
-	// 8b8 m_outputOnHealthBelow90Percent
-	// 8d0 m_outputOnHealthBelow80Percent
-	// 8e8 m_outputOnHealthBelow70Percent
-	// 900 m_outputOnHealthBelow60Percent
-	// 918 m_outputOnHealthBelow50Percent
-	// 930 m_outputOnHealthBelow40Percent
-	// 948 m_outputOnHealthBelow30Percent
-	// 960 m_outputOnHealthBelow20Percent
-	// 978 m_outputOnHealthBelow10Percent
-	// 990 m_outputOnKilled
+	COutputEvent m_outputOnHealthBelow90Percent; // +0x8b8
+	COutputEvent m_outputOnHealthBelow80Percent; // +0x8d0
+	COutputEvent m_outputOnHealthBelow70Percent; // +0x8e8
+	COutputEvent m_outputOnHealthBelow60Percent; // +0x900
+	COutputEvent m_outputOnHealthBelow50Percent; // +0x918
+	COutputEvent m_outputOnHealthBelow40Percent; // +0x930
+	COutputEvent m_outputOnHealthBelow30Percent; // +0x948
+	COutputEvent m_outputOnHealthBelow20Percent; // +0x960
+	COutputEvent m_outputOnHealthBelow10Percent; // +0x978
+	COutputEvent m_outputOnKilled;               // +0x990
 	int m_initialHealth;          // +0x9a8
 	float m_lastHealthPercentage; // +0x9ac
-	// 9b0 m_modelString
+	string_t m_modelString;       // +0x9b0
 	float m_speed;                // +0x9b4
-	// 9b8 m_startDisabled
+	int m_startDisabled;          // +0x9b8
 	bool m_bEnabled;              // +0x9bc
 	// 9c0 
-	// ...
+	// 9c4 
+	// 9c8 
 	// 9cc CTFBaseBossLocomotion *
 };
 

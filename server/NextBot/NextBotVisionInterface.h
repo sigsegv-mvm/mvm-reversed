@@ -57,10 +57,11 @@ protected:
 	void UpdateKnownEntities();
 	
 	CountdownTimer m_Timer1;                  // +0x14
+	uint8_t pad[0xb0-0x0c];/*
 	float m_flFOV;                            // +0x20
 	float m_flCosHalfFOV;                     // +0x24
 	CUtlVector<CKnownEntity> m_KnownEntities; // +0x28
 	CHandle<CBaseEntity> m_hPrimaryThreat;    // +0x3c
 	float m_flLastUpdate;                     // +0x40
-	IntervalTimer m_itTeamVisible[32];        // +0x44
+	IntervalTimer m_itTeamVisible[32];        // +0x44*/
 };

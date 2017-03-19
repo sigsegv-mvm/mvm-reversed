@@ -11,5 +11,5 @@ public:
 	CTFBotHintTeleporterExit();
 	virtual ~CTFBotHintTeleporterExit();
 	
-	virtual HintType GetHintType() const;
+	virtual HintType GetHintType() const override;
 };

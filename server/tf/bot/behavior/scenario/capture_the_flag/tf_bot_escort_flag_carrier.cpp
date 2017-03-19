@@ -105,7 +105,7 @@ int GetBotEscortCount(int teamnum)
 		if (action == nullptr) continue;
 		
 		while (action->FirstContainedResponder() != nullptr) {
-			action = static_cast<Action<CTFBot *>(action->FirstContainedResponder());
+			action = static_cast<Action<CTFBot> *>(action->FirstContainedResponder());
 		}
 		
 		if (action->IsNamed("EscortFlagCarrier")) {

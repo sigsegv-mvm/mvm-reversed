@@ -6,7 +6,8 @@
 
 CTFBotHintSentrygun::CTFBotHintSentrygun()
 {
-	// TODO
+	// m_isSticky = false
+	// 370 = 0
 }
 
 CTFBotHintSentrygun::~CTFBotHintSentrygun()
@@ -22,7 +23,13 @@ CBaseTFBotHintEntity::HintType CTFBotHintSentrygun::GetHintType() const
 
 bool CTFBotHintSentrygun::IsAvailableForSelection(CTFPlayer *player) const
 {
-	// TODO
+	if (this->[[handle@0x38c]] != nullptr && this->[[handle@0x38c]]->IsPlayerClass(TF_CLASS_ENGINEER)) {
+		return false;
+	} else if (this->m_bDisabled || this->[[dword@0x370]] != 0) {
+		return false;
+	} else {
+		return this->InSameTeam(player);
+	}
 }
 
 

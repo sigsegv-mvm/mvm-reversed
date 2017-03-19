@@ -15,7 +15,7 @@ public:
 	
 	virtual void Spawn() override;
 	
-	virtual HintType GetHintType() const;
+	virtual HintType GetHintType() const override;
 	
 	void DetonateStateNest();
 	
@@ -33,5 +33,5 @@ private:
 	
 	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_SentryHints; // +0x36c
 	CUtlVector<CHandle<CBaseTFBotHintEntity>> m_TeleHints;   // +0x380
-	bool m_bHasActiveTeleporter;                             // +0x394
+	CNetworkVar(bool, m_bHasActiveTeleporter);               // +0x394
 };

@@ -306,7 +306,7 @@ bool CWave::Parse(KeyValues *kv)
 					for (int i = 0; i < wavespawn->m_iTotalCount; ++i) {
 						unsigned int flags = (wavespawn->m_bSupport ?
 							CLASSFLAG_SUPPORT : CLASSFLAG_NORMAL);
-						if (wavespawn->m_Spawner->IsMiniBoss()) {
+						if (wavespawn->m_Spawner->IsMiniBoss(i)) {
 							flags |= CLASSFLAG_MINIBOSS;
 						}
 						if (wavespawn->m_Spawner->HasAttribute(CTFBot::AttributeType::ALWAYSCRIT, i)) {
@@ -322,7 +322,7 @@ bool CWave::Parse(KeyValues *kv)
 				} else {
 					unsigned int flags = (wavespawn->m_bSupport ?
 						CLASSFLAG_SUPPORT : CLASSFLAG_NORMAL);
-					if (wavespawn->m_Spawner->IsMiniBoss()) {
+					if (wavespawn->m_Spawner->IsMiniBoss(-1)) {
 						flags |= CLASSFLAG_MINIBOSS;
 					}
 					if (wavespawn->m_Spawner->HasAttribute(CTFBot::AttributeType::ALWAYSCRIT, -1)) {

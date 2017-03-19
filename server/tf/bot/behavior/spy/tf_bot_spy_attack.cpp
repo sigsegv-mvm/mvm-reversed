@@ -47,7 +47,7 @@ ActionResult<CTFBot> CTFBotSpyAttack::Update(CTFBot *actor, float dt)
 	// TODO
 	
 	CBaseObject *obj = actor->GetNearestKnownSappableTarget();
-	if (obj != nullptr && actor->IsEntityBetweenTargetAndSelf(obj, victim->GetEntity()) {
+	if (obj != nullptr && actor->IsEntityBetweenTargetAndSelf(obj, victim->GetEntity())) {
 		return ActionResult<CTFBot>::ChangeTo(new CTFBotSpySap(obj,
 			"Opportunistically sapping an enemy object between my victim and I"));
 	}
@@ -104,7 +104,7 @@ EventDesiredResult<CTFBot> CTFBotSpyAttack::OnStuck(CTFBot *actor)
 
 EventDesiredResult<CTFBot> CTFBotSpyAttack::OnInjured(CTFBot *actor, const CTakeDamageInfo& info)
 {
-	if (actor->IsEnemy(info.GetAttacker()) && actor->m_Shared.InCond(TF_COND_DISGUISED)) {
+	if (actor->IsEnemy(info.GetAttacker()) && !actor->m_Shared.InCond(TF_COND_DISGUISED)) {
 		// TODO: weapon switch stuff
 		
 		return ActionResult<CTFBot>::ChangeTo(new CTFBotRetreatToCover(),

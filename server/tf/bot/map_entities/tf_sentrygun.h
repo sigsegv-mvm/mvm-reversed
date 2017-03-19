@@ -11,7 +11,7 @@ public:
 	CTFBotHintSentrygun();
 	virtual ~CTFBotHintSentrygun();
 	
-	virtual HintType GetHintType() const;
+	virtual HintType GetHintType() const override;
 	
 	bool IsAvailableForSelection(CTFPlayer *player) const;
 	
@@ -21,5 +21,5 @@ private:
 	bool m_isSticky; // +0x36c
 	// 370 dword 0
 	COutputEvent m_OnSentryGunDestroyed; // +0x374
-	// 38c CHandle<?>
+	// 38c CHandle<CTFPlayer>
 };

@@ -62,6 +62,7 @@ void CTFBotDeliverFlag::OnEnd(CTFBot *actor, Action<CTFBot> *action)
 	actor->m_nBotAttrs &= ~CTFBot::AttributeType::SUPPRESSFIRE;
 	
 	if (TFGameRules() && TFGameRules()->IsMannVsMachineMode()) {
+		// BUG: doesn't revert TF_COND_CRITBOOSTED_USER_BUFF if gained via flagcarrier upgrade
 		actor->m_Shared.ResetSoldierBuffs();
 	}
 }
@@ -89,6 +90,7 @@ QueryResponse CTFBotDeliverFlag::ShouldRetreat(const INextBot *nextbot) const
 
 QueryResponse CTFBotDeliverFlag::ShouldAttack(const INextBot *nextbot, const CKnownEntity *threat) const
 {
+	// BUG: applies to non-MvM as well!
 	if (tf_mvm_bot_allow_flag_carrier_to_fight.GetBool()) {
 		return QueryResponse::YES;
 	} else {

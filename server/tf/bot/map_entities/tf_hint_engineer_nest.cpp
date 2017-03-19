@@ -6,7 +6,7 @@
 
 CTFBotHintEngineerNest::CTFBotHintEngineerNest()
 {
-	// TODO
+	this->m_bHasActiveTeleporter = false;
 }
 
 CTFBotHintEngineerNest::~CTFBotHintEngineerNest()
@@ -97,7 +97,17 @@ void CTFBotHintEngineerNest::HintThink()
 
 void CTFBotHintEngineerNest::HintTeleporterThink()
 {
-	// TODO
+	bool now_has_active_tele = false;
+	FOR_EACH_VEC(this->m_TeleHints, i) {
+		CTFBotHintTeleporterExit *hint_tele = this->m_TeleHints[i];
+		if (hint_tele == nullptr) continue;
+		
+		CBaseObject *tele = ToBaseObject(hint_tele->GetOwnerEntity());
+		if (tele == nullptr) continue;
+		
+		now_has_active_tele |= !tele->m_bBuilding;
+	}
+	this->m_bHasActiveTeleporter = now_has_active_tele;
 	
 	this->SetNextThink(gpGlobals->curtime + 0.1f);
 }
