@@ -4,6 +4,9 @@
  */
 
 
+template<typename T> class IHotplugAction;
+
+
 template<class T>
 class Behavior : public INextBotEventResponder, public IContextualQuery
 {
@@ -34,7 +37,7 @@ private:
 	T *m_Actor;                                          // +0x38
 	CUtlVectorAutoPurge<Action<T> *> m_DestroyedActions; // +0x3c
 	
-	friend class IHotplugAction;
+	friend class IHotplugAction<T>;
 };
 
 //template<> class Behavior<CBotNPCArcher>;
@@ -394,7 +397,7 @@ private:
 	bool m_bStarted;                // +0x30
 	bool m_bSuspended;              // +0x31
 	
-	friend class IHotplugAction;
+	friend class IHotplugAction<T>;
 	friend class PleaseRemoveThis;
 };
 
